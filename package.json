@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint:client": "eslint --config ./eslintrc.client.js --fix ./client",
-    "lint": "npm run lint:client",
+    "lint:server": "eslint --config ./eslintrc.server.js --fix ./server",
+    "lint:test": "eslint --config ./eslintrc.tests.js --fix ./__tests__",
+    "lint": "concurrently \"npm run lint:client\" \"npm run lint:server\" \"npm run lint:test\"",
     "pretest": "npm run lint",
     "test": "npx jest",
     "eject": "react-scripts eject"
@@ -28,6 +30,7 @@
     "@types/react": "17.0.34",
     "@types/react-dom": "17.0.11",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "concurrently": "^6.3.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard-typescript-prettier": "^4.2.0",
