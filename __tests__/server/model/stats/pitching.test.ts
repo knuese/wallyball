@@ -1,5 +1,5 @@
-import { Outcome } from '../../../../server/model/outcome'
-import { PitchingStats } from '../../../../server/model/stats'
+import { Outcome } from '../../../../src/server/model/outcome'
+import { PitchingStats } from '../../../../src/server/model/stats'
 
 describe('batting stats', () => {
   it.each([
@@ -14,7 +14,7 @@ describe('batting stats', () => {
     [0.999, Outcome.GROUNDER]
   ])('determines the outcome for %s', (rand, expected) => {
     const battingStats = new PitchingStats({
-      single: 0.110,
+      single: 0.11,
       double: 0.202,
       triple: 0.299,
       homeRun: 0.4,

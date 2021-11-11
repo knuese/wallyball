@@ -1,5 +1,5 @@
-import { Outcome } from '../../../../server/model/outcome'
-import { BattingStats } from '../../../../server/model/stats'
+import { Outcome } from '../../../../src/server/model/outcome'
+import { BattingStats } from '../../../../src/server/model/stats'
 
 describe('batting stats', () => {
   it.each([
