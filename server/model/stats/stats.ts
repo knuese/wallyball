@@ -1,17 +1,14 @@
 import { Outcome } from '../outcome'
 
-export class Stats {
+export abstract class Stats {
   protected outcomes: Record<number, Outcome> = {}
 
   constructor(thresholds: Record<string, any>) {
-    Object.entries(thresholds)
-      .slice(1)
-      .forEach(([key, val], i, arr) => {
-        const [prevKey, prevVal] = arr[i - 1]
-        if (val < prevVal) {
-          throw new Error(`${key} cannot be less than ${prevKey}`)
-        }
-      })
+    Object.values(thresholds).forEach((val, i, arr) => {
+      if (i > 0 && val < arr[i - 1]) {
+        throw new Error('thresholds must be increasing')
+      }
+    })
   }
 
   determineOutcome(rand: number): Outcome {
@@ -19,7 +16,11 @@ export class Stats {
       throw new Error('invalid random number provided')
     }
 
-    for (const [threshold, outcome] of Object.entries(this.outcomes)) {
+    const sortedOutcomes = Object.entries(this.outcomes).sort(
+      (one, two) => Number(one[0]) - Number(two[0])
+    )
+
+    for (const [threshold, outcome] of sortedOutcomes) {
       if (rand <= Number(threshold)) {
         return outcome
       }
