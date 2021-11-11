@@ -5,5 +5,9 @@ export enum Outcome {
   HOME_RUN,
   WALK,
   STRIKEOUT,
-  HIT_BY_PITCH
+  HIT_BY_PITCH,
+  FLY,
+  GROUNDER,
+  ERROR,
+  UNKNOWN
 }
