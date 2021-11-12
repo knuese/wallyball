@@ -13,6 +13,7 @@ export class Lineup {
   defense: Defense
   bench: Player[]
   ineligiblePlayers: Player[]
+  private batterIndex: number
 
   constructor(
     starters: Starter[],
@@ -41,5 +42,12 @@ export class Lineup {
 
     this.bench = bench
     this.ineligiblePlayers = ineligiblePlayers
+    this.batterIndex = 0
+  }
+
+  nextBatter(): Player {
+    const i = this.batterIndex % 9
+    this.batterIndex++
+    return this.battingOrder[i]
   }
 }
