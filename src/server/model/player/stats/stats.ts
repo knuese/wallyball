@@ -1,4 +1,4 @@
-import { Outcome } from '../outcome'
+import { Outcome } from '../../enum/outcome'
 
 export abstract class Stats {
   protected outcomes: Record<number, Outcome> = {}

@@ -1,14 +1,13 @@
-import { Outcome } from '../outcome'
+import { Outcome } from '../../enum/outcome'
 import { Stats } from './stats'
 
-export class PitchingStats extends Stats {
+export class BattingStats extends Stats {
   constructor(thresholds: {
     single: number
     double: number
     triple: number
     homeRun: number
     walk: number
-    hitByPitch: number
     strikeout: number
     fly: number
     grounder: number
@@ -21,7 +20,6 @@ export class PitchingStats extends Stats {
       [thresholds.triple]: Outcome.TRIPLE,
       [thresholds.homeRun]: Outcome.HOME_RUN,
       [thresholds.walk]: Outcome.WALK,
-      [thresholds.hitByPitch]: Outcome.HIT_BY_PITCH,
       [thresholds.strikeout]: Outcome.STRIKEOUT,
       [thresholds.fly]: Outcome.FLY,
       [thresholds.grounder]: Outcome.GROUNDER

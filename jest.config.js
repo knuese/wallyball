@@ -1,4 +1,7 @@
 module.exports = {
-  collectCoverage: true
-    // testEnvironment: 'jest-environment-jsdom'
+  collectCoverage: true,
+  coveragePathIgnorePatterns: [
+    'index.ts',
+    'enum'
+  ]
 }

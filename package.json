@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "lint:client": "eslint --config ./eslintrc.client.js --fix ./src/client",
     "lint:server": "eslint --config ./eslintrc.server.js --fix ./src/server",
-    "lint:test": "eslint --config ./eslintrc.tests.js --fix ./__tests__",
+    "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__",
     "lint": "concurrently \"npm run lint:client\" \"npm run lint:server\" \"npm run lint:test\"",
     "pretest": "npm run lint",
     "test": "npx jest",

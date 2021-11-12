@@ -1,5 +1,5 @@
-import { Outcome } from '../../../../src/server/model/outcome'
-import { Stats } from '../../../../src/server/model/stats/stats'
+import { Outcome } from '../../../../../src/server/model'
+import { Stats } from '../../../../../src/server/model/player/stats/stats'
 
 class MockStats extends Stats {}
 
