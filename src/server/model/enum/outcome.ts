@@ -1,13 +1,13 @@
 export enum Outcome {
-  SINGLE = 'single',
-  DOUBLE = 'double',
-  TRIPLE = 'triple',
-  HOME_RUN = 'home run',
-  WALK = 'walk',
-  STRIKEOUT = 'strikeout',
-  HIT_BY_PITCH = 'hit by pitch',
-  FLY = 'fly',
-  GROUNDER = 'grounder',
+  SINGLE = 'singled',
+  DOUBLE = 'doubled',
+  TRIPLE = 'tripled',
+  HOME_RUN = 'hit a home run',
+  WALK = 'walked',
+  STRIKEOUT = 'struck out',
+  HIT_BY_PITCH = 'was hit by a pitch',
+  FLY = 'flew out',
+  GROUNDER = 'grounded out',
   ERROR = 'error',
   UNKNOWN = 'unknown'
 }

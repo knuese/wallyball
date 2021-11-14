@@ -81,41 +81,13 @@ export const players = {
 }
 
 export const starterArray = [
-  {
-    player: firstBaseman,
-    position: Position.FIRST_BASE,
-    battingSpot: 3
-  },
-  { player: pitcher, position: Position.PITCHER, battingSpot: 1 },
-  {
-    player: thirdBaseman,
-    position: Position.THIRD_BASE,
-    battingSpot: 6
-  },
-  { player: catcher, position: Position.CATCHER, battingSpot: 2 },
-  {
-    player: rightFielder,
-    position: Position.RIGHT_FIELD,
-    battingSpot: 9
-  },
-  {
-    player: shortstop,
-    position: Position.SHORTSTOP,
-    battingSpot: 5
-  },
-  {
-    player: secondBaseman,
-    position: Position.SECOND_BASE,
-    battingSpot: 4
-  },
-  {
-    player: leftFielder,
-    position: Position.LEFT_FIELD,
-    battingSpot: 7
-  },
-  {
-    player: centerFielder,
-    position: Position.CENTER_FIELD,
-    battingSpot: 8
-  }
+  { player: firstBaseman, position: Position.FIRST_BASE },
+  { player: pitcher, position: Position.PITCHER },
+  { player: thirdBaseman, position: Position.THIRD_BASE },
+  { player: catcher, position: Position.CATCHER },
+  { player: rightFielder, position: Position.RIGHT_FIELD },
+  { player: shortstop, position: Position.SHORTSTOP },
+  { player: secondBaseman, position: Position.SECOND_BASE },
+  { player: leftFielder, position: Position.LEFT_FIELD },
+  { player: centerFielder, position: Position.CENTER_FIELD }
 ]

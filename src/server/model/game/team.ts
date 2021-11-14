@@ -1,14 +1,14 @@
 import { Player, Position } from '..'
 
-type Starter = {
+export type Starter = {
   player: Player
   position: Position
-  battingSpot: number
 }
 
 type Defense = Record<Position, Player>
 
-export class Lineup {
+export class Team {
+  name: string
   battingOrder: Player[]
   defense: Defense
   bench: Player[]
@@ -16,6 +16,7 @@ export class Lineup {
   private batterIndex: number
 
   constructor(
+    name: string,
     starters: Starter[],
     bench: Player[],
     ineligiblePlayers: Player[]
@@ -24,9 +25,7 @@ export class Lineup {
       throw new Error('must specify nine starters')
     }
 
-    this.battingOrder = starters
-      .sort((one, two) => one.battingSpot - two.battingSpot)
-      .map(({ player }) => player)
+    this.battingOrder = starters.map(({ player }) => player)
 
     this.defense = starters.reduce((acc, { player, position }) => {
       if (!player.canPlay(position)) {
@@ -40,6 +39,7 @@ export class Lineup {
       throw new Error('must specify a player for every position')
     }
 
+    this.name = name
     this.bench = bench
     this.ineligiblePlayers = ineligiblePlayers
     this.batterIndex = 0

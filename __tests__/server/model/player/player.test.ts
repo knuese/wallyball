@@ -7,11 +7,12 @@ import {
 } from '../../../../src/server/model'
 
 describe('player', () => {
+  const stats = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1]
   const player = new Player(
     'Wally',
     [Position.THIRD_BASE, Position.PITCHER],
-    new BattingStats({ single: 1 } as any),
-    new PitchingStats({ strikeout: 1 } as any)
+    new BattingStats(stats),
+    new PitchingStats(stats)
   )
 
   it.each([
@@ -22,15 +23,19 @@ describe('player', () => {
   })
 
   it('can bat', () => {
-    expect(player.bat()).toEqual(Outcome.SINGLE)
+    expect(player.bat()).not.toEqual(Outcome.UNKNOWN)
   })
 
   it('can pitch', () => {
-    expect(player.pitch()).toEqual(Outcome.STRIKEOUT)
+    expect(player.pitch()).not.toEqual(Outcome.UNKNOWN)
   })
 
   it('throws an error if the player cannot pitch', () => {
-    const nonPitcher = new Player('Bo Bo', [Position.FIRST_BASE], {} as any)
+    const nonPitcher = new Player(
+      'Bo Bo',
+      [Position.FIRST_BASE],
+      new BattingStats(stats)
+    )
     expect(() => nonPitcher.pitch()).toThrow(Error('Bo Bo is not a pitcher'))
   })
 })

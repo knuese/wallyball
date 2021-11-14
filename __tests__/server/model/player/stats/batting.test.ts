@@ -11,16 +11,9 @@ describe('batting stats', () => {
     [0.7, Outcome.FLY],
     [0.999, Outcome.GROUNDER]
   ])('determines the outcome for %s', (rand, expected) => {
-    const battingStats = new BattingStats({
-      single: 0.1,
-      double: 0.2,
-      triple: 0.3,
-      homeRun: 0.4,
-      walk: 0.45,
-      strikeout: 0.65,
-      fly: 0.777,
-      grounder: 1.0
-    })
+    const battingStats = new BattingStats([
+      0.1, 0.2, 0.3, 0.4, 0.45, 0.65, 0.777, 1.0
+    ])
 
     expect(battingStats.determineOutcome(rand)).toEqual(expected)
   })

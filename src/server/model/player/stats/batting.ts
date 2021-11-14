@@ -2,27 +2,22 @@ import { Outcome } from '../../enum/outcome'
 import { Stats } from './stats'
 
 export class BattingStats extends Stats {
-  constructor(thresholds: {
-    single: number
-    double: number
-    triple: number
-    homeRun: number
-    walk: number
-    strikeout: number
-    fly: number
-    grounder: number
-  }) {
+  constructor(thresholds: number[]) {
     super(thresholds)
 
+    if (thresholds.length !== 8) {
+      throw new Error('must provide eight thresholds for batting stats')
+    }
+
     this.outcomes = {
-      [thresholds.single]: Outcome.SINGLE,
-      [thresholds.double]: Outcome.DOUBLE,
-      [thresholds.triple]: Outcome.TRIPLE,
-      [thresholds.homeRun]: Outcome.HOME_RUN,
-      [thresholds.walk]: Outcome.WALK,
-      [thresholds.strikeout]: Outcome.STRIKEOUT,
-      [thresholds.fly]: Outcome.FLY,
-      [thresholds.grounder]: Outcome.GROUNDER
+      [thresholds[0]]: Outcome.SINGLE,
+      [thresholds[1]]: Outcome.DOUBLE,
+      [thresholds[2]]: Outcome.TRIPLE,
+      [thresholds[3]]: Outcome.HOME_RUN,
+      [thresholds[4]]: Outcome.WALK,
+      [thresholds[5]]: Outcome.STRIKEOUT,
+      [thresholds[6]]: Outcome.FLY,
+      [thresholds[7]]: Outcome.GROUNDER
     }
   }
 }
