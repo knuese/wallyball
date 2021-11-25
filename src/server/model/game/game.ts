@@ -1,6 +1,8 @@
 import { Bases } from '.'
 import { Outcome, Player, Team } from '..'
 
+const getOrdinal = (n: number) => [,'st','nd','rd'][n/10%10^1&&n%10]||'th'
+
 export class Game {
   awayTeam: Team
   homeTeam: Team
@@ -40,17 +42,19 @@ export class Game {
     this.isBottom = !this.isBottom
     this.bases.clear()
 
+    const inningStr = `${this.inning}${getOrdinal(this.inning)}`
     console.log(
-      `starting the ${this.isBottom ? 'bottom' : 'top'} of the ${this.inning}`
+      `starting the ${this.isBottom ? 'bottom' : 'top'} of the ${inningStr}`
     )
   }
 
   isGameOver(): boolean {
-    const isOver =
-      this.inning >= 9 &&
-      this.isBottom &&
-      (this.score.home > this.score.away ||
-        (this.outs === 3 && this.score.away > this.score.home))
+    const homeTeamWon =
+      (this.isBottom || this.outs === 3) && this.score.home > this.score.away
+    const awayTeamWon =
+      this.isBottom && this.outs === 3 && this.score.away > this.score.home
+
+    const isOver = this.inning >= 9 && (homeTeamWon || awayTeamWon)
 
     if (isOver) {
       console.log(`

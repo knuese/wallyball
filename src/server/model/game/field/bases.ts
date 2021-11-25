@@ -1,5 +1,5 @@
 import { Outcome } from '../..'
-import { GrounderUtil } from './grounder'
+import { GrounderUtil } from './util/grounder'
 
 type BaseMap = {
   first: boolean

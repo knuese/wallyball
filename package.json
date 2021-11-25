@@ -9,6 +9,7 @@
     "lint:server": "eslint --config ./eslintrc.server.js --fix ./src/server",
     "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__",
     "lint": "concurrently \"npm run lint:client\" \"npm run lint:server\" \"npm run lint:test\"",
+    "play": "npx ts-node -O '{\"module\":\"commonjs\"}' z.ts",
     "pretest": "npm run lint",
     "test": "npx jest",
     "eject": "react-scripts eject"

@@ -1,4 +1,4 @@
-import { GrounderUtil } from '../../../../../src/server/model/game/field/grounder'
+import { GrounderUtil } from '../../../../../../src/server/model/game/field/util/grounder'
 
 describe('grounder', () => {
   it.each([
