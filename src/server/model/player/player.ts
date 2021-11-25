@@ -1,22 +1,24 @@
 import { Outcome, Position } from '../enum'
-import { BattingStats, PitchingStats } from './stats'
+import { BattingConfig, PitchingConfig, GameStats } from './stats'
 
 export class Player {
   name: string
   private eligiblePositions: Position[]
-  private battingStats: BattingStats
-  private pitchingStats?: PitchingStats
+  private battingConfig: BattingConfig
+  private pitchingConfig?: PitchingConfig
+  private gameStats: GameStats
 
   constructor(
     name: string,
     eligiblePositions: Position[],
-    battingStats: BattingStats,
-    pitchingStats?: PitchingStats
+    battingConfig: BattingConfig,
+    pitchingConfig?: PitchingConfig
   ) {
     this.name = name
     this.eligiblePositions = eligiblePositions
-    this.battingStats = battingStats
-    this.pitchingStats = pitchingStats
+    this.battingConfig = battingConfig
+    this.pitchingConfig = pitchingConfig
+    this.gameStats = new GameStats()
   }
 
   canPlay(position: Position): boolean {
@@ -24,14 +26,18 @@ export class Player {
   }
 
   bat(): Outcome {
-    return this.battingStats.determineOutcome(Math.random())
+    return this.battingConfig.determineOutcome(Math.random())
+  }
+
+  logAtBat(outcome: Outcome, runsScored: number): void {
+    this.gameStats.logAtBat(outcome, runsScored)
   }
 
   pitch(): Outcome {
-    if (!this.pitchingStats) {
+    if (!this.pitchingConfig) {
       throw new Error(`${this.name} is not a pitcher`)
     }
 
-    return this.pitchingStats.determineOutcome(Math.random())
+    return this.pitchingConfig.determineOutcome(Math.random())
   }
 }

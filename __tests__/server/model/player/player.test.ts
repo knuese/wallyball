@@ -1,7 +1,7 @@
 import {
-  BattingStats,
+  BattingConfig,
   Outcome,
-  PitchingStats,
+  PitchingConfig,
   Player,
   Position
 } from '../../../../src/server/model'
@@ -11,8 +11,8 @@ describe('player', () => {
   const player = new Player(
     'Wally',
     [Position.THIRD_BASE, Position.PITCHER],
-    new BattingStats(stats),
-    new PitchingStats(stats)
+    new BattingConfig(stats),
+    new PitchingConfig(stats)
   )
 
   it.each([
@@ -34,7 +34,7 @@ describe('player', () => {
     const nonPitcher = new Player(
       'Bo Bo',
       [Position.FIRST_BASE],
-      new BattingStats(stats)
+      new BattingConfig(stats)
     )
     expect(() => nonPitcher.pitch()).toThrow(Error('Bo Bo is not a pitcher'))
   })

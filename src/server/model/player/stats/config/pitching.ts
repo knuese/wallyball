@@ -1,7 +1,7 @@
-import { Outcome } from '../../enum/outcome'
-import { Stats } from './stats'
+import { Outcome } from '../../../enum/outcome'
+import { PlayerConfig } from './playerConfig'
 
-export class PitchingStats extends Stats {
+export class PitchingConfig extends PlayerConfig {
   constructor(thresholds: number[]) {
     super(thresholds)
 

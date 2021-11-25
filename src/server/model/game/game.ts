@@ -81,7 +81,7 @@ export class Game {
     `)
   }
 
-  advanceRunners(outcome: Outcome): void {
+  advanceRunners(outcome: Outcome): number {
     const { runsScored, outs } = this.bases.advanceRunners(outcome, this.outs)
 
     if (runsScored > 0) {
@@ -89,5 +89,7 @@ export class Game {
     }
 
     this.outs += outs
+
+    return runsScored
   }
 }

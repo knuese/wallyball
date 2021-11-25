@@ -1,6 +1,6 @@
 import {
-  BattingStats,
-  PitchingStats,
+  BattingConfig,
+  PitchingConfig,
   Player,
   Position
 } from '../src/server/model'
@@ -8,64 +8,64 @@ import {
 const pitcher = new Player(
   'pitcher',
   [Position.PITCHER],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const catcher = new Player(
   'catcher',
   [Position.CATCHER],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const firstBaseman = new Player(
   'first base',
   [Position.FIRST_BASE],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const secondBaseman = new Player(
   'second base',
   [Position.SECOND_BASE],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const shortstop = new Player(
   'shortstop',
   [Position.SHORTSTOP],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const thirdBaseman = new Player(
   'third base',
   [Position.THIRD_BASE],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const leftFielder = new Player(
   'left field',
   [Position.LEFT_FIELD],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const centerFielder = new Player(
   'center field',
   [Position.CENTER_FIELD],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 const rightFielder = new Player(
   'right field',
   [Position.RIGHT_FIELD],
-  {} as BattingStats,
-  {} as PitchingStats
+  {} as BattingConfig,
+  {} as PitchingConfig
 )
 
 export const players = {

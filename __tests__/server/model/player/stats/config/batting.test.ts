@@ -1,6 +1,6 @@
-import { PitchingStats, Outcome } from '../../../../../src/server/model'
+import { BattingConfig, Outcome } from '../../../../../../src/server/model'
 
-describe('batting stats', () => {
+describe('batting config', () => {
   it.each([
     [0.006, Outcome.SINGLE],
     [0.111, Outcome.DOUBLE],
@@ -11,8 +11,8 @@ describe('batting stats', () => {
     [0.7, Outcome.FLY],
     [0.999, Outcome.GROUNDER]
   ])('determines the outcome for %s', (rand, expected) => {
-    const battingStats = new PitchingStats([
-      0.11, 0.202, 0.299, 0.4, 0.5, 0.65, 0.779, 1.0
+    const battingStats = new BattingConfig([
+      0.1, 0.2, 0.3, 0.4, 0.45, 0.65, 0.777, 1.0
     ])
 
     expect(battingStats.determineOutcome(rand)).toEqual(expected)

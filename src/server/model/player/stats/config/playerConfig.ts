@@ -1,6 +1,6 @@
-import { Outcome } from '../../enum/outcome'
+import { Outcome } from '../../../enum/outcome'
 
-export abstract class Stats {
+export abstract class PlayerConfig {
   protected outcomes: Record<number, Outcome> = {}
 
   constructor(thresholds: Record<string, any>) {
