@@ -17,7 +17,8 @@
   "prettier": "./prettier.config",
   "dependencies": {
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/preset-env": "7.16.0",
@@ -30,6 +31,7 @@
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
     "@types/react-dom": "17.0.11",
+    "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "concurrently": "^6.3.0",
     "eslint": "^7.32.0",

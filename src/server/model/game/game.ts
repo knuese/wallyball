@@ -1,5 +1,5 @@
 import { Bases } from '.'
-import { Outcome, Player, Team } from '..'
+import { Outcome, Player, Position, Team } from '..'
 
 const getOrdinal = (n: number) =>
   ['', 'st', 'nd', 'rd'][(n / 10) % 10 ^ 1 && n % 10] || 'th'
@@ -31,7 +31,9 @@ export class Game {
   }
 
   getCurrentPitcher(): Player {
-    return this.isBottom ? this.awayTeam.defense.P : this.homeTeam.defense.P
+    return this.isBottom
+      ? this.awayTeam.defenderAt(Position.PITCHER)
+      : this.homeTeam.defenderAt(Position.PITCHER)
   }
 
   progressInning(): void {
@@ -83,18 +85,23 @@ export class Game {
   }
 
   advanceRunners(batter: Player, outcome: Outcome): number {
-    const { runsScored, outs } = this.bases.advanceRunners(
+    const { runnersScored, outs } = this.bases.advanceRunners(
       batter,
       outcome,
       this.outs
     )
 
-    if (runsScored > 0) {
-      this.addToScore(runsScored)
+    if (runnersScored.length > 0) {
+      this.addToScore(runnersScored.length)
+      runnersScored.forEach((id) =>
+        this.isBottom
+          ? this.homeTeam.players[id].scored()
+          : this.awayTeam.players[id].scored()
+      )
     }
 
     this.outs += outs
 
-    return runsScored
+    return runnersScored.length
   }
 }

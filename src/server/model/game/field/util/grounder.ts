@@ -3,65 +3,71 @@ import { Player } from '../../..'
 
 type GrounderOutput = {
   newBases: BaseMap
-  runs: number
+  runnersScored: string[]
   outs: number
 }
 
 export class GrounderUtil {
-  static calc(batter: Player, bases: BaseMap, numOuts: number): GrounderOutput {
+  static calc(
+    { id: batterId }: Player,
+    bases: BaseMap,
+    numOuts: number
+  ): GrounderOutput {
     const baseStr =
       '' + Number(bases.third) + Number(bases.second) + Number(bases.first)
 
-    let newBases, runs, outs
+    let newBases, outs, runnersScored: string[]
 
     switch (baseStr) {
       case '000':
         newBases = { first: null, second: null, third: null }
-        runs = 0
+        runnersScored = []
         outs = 1
         break
       case '001':
         newBases = { first: null, second: null, third: null }
-        runs = 0
+        runnersScored = []
         outs = 2
         break
       case '010':
         newBases = { ...bases }
-        runs = 0
+        runnersScored = []
         outs = 1
         break
       case '011':
-        newBases = { first: batter, second: null, third: null }
-        runs = 0
+        newBases = { first: { playerId: batterId }, second: null, third: null }
+        runnersScored = []
         outs = 2
         break
       case '100':
         newBases = { first: null, second: null, third: null }
-        runs = 1
+        runnersScored = [bases.third?.playerId as string]
         outs = 1
         break
       case '101':
         newBases = { first: null, second: null, third: null }
-        runs = Number(numOuts === 0)
+        runnersScored = Number(numOuts === 0)
+          ? [bases.third?.playerId as string]
+          : []
         outs = 2
         break
       case '110':
         newBases = { first: null, second: bases.second, third: null }
-        runs = 1
+        runnersScored = [bases.third?.playerId as string]
         outs = 1
         break
       case '111':
         newBases = { first: null, second: bases.first, third: bases.second }
-        runs = 0
+        runnersScored = []
         outs = 2
         break
       default:
         newBases = { ...bases }
-        runs = 0
+        runnersScored = []
         outs = 0
         break
     }
 
-    return { newBases, runs, outs }
+    return { newBases, runnersScored, outs }
   }
 }

@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from 'uuid'
 import { Outcome, Position } from '../enum'
 import { BattingConfig, PitchingConfig, GameStats } from './stats'
 
 export class Player {
+  id: string
   name: string
   private eligiblePositions: Position[]
   private battingConfig: BattingConfig
@@ -14,6 +16,7 @@ export class Player {
     battingConfig: BattingConfig,
     pitchingConfig?: PitchingConfig
   ) {
+    this.id = uuidv4()
     this.name = name
     this.eligiblePositions = eligiblePositions
     this.battingConfig = battingConfig

@@ -1,14 +1,19 @@
 import { Outcome, Player } from '../..'
 import { GrounderUtil } from './util/grounder'
 
+export type Runner = {
+  playerId: string
+  speed?: number
+}
+
 export type BaseMap = {
-  first: Player | null
-  second: Player | null
-  third: Player | null
+  first: Runner | null
+  second: Runner | null
+  third: Runner | null
 }
 
 type RunnerResponse = {
-  runsScored: number
+  runnersScored: string[]
   outs: number
 }
 
@@ -47,52 +52,51 @@ export class Bases {
     outcome: Outcome,
     numOuts: number
   ): RunnerResponse {
-    let runsScored = 0
+    let runnersScored: string[] = []
     let outs = 0
-    let occupied
 
-    const nonNull = (p: Player | null): p is Player => p !== null
+    const nonNull = (r: Runner | null): r is Runner => r !== null
     const basesLoaded = Object.values(this.bases).every((v) => v)
 
     switch (outcome) {
       case Outcome.SINGLE:
         if (this.bases.third) {
-          runsScored = 1
-          this.bases.third.scored()
+          runnersScored = [this.bases.third.playerId]
         }
 
         this.bases = {
-          first: batter,
+          first: { playerId: batter.id },
           second: this.bases.first,
           third: this.bases.second
         }
         break
       case Outcome.DOUBLE:
-        occupied = [this.bases.second, this.bases.third].filter(nonNull)
-        runsScored = occupied.length
-        occupied.forEach((p) => p?.scored())
+        runnersScored = [this.bases.second, this.bases.third]
+          .filter(nonNull)
+          .map(({ playerId }) => playerId)
 
         this.bases = {
           first: null,
-          second: batter,
+          second: { playerId: batter.id },
           third: this.bases.first
         }
         break
       case Outcome.TRIPLE:
-        occupied = Object.values(this.bases).filter(nonNull)
-        runsScored = occupied.length
-        occupied.forEach((p) => p.scored())
+        runnersScored = Object.values(this.bases)
+          .filter(nonNull)
+          .map(({ playerId }) => playerId)
 
         this.bases = {
           first: null,
           second: null,
-          third: batter
+          third: { playerId: batter.id }
         }
         break
       case Outcome.HOME_RUN:
-        occupied = Object.values(this.bases).filter(nonNull)
-        runsScored = occupied.length + 1
-        occupied.forEach((p) => p.scored())
+        runnersScored = Object.values(this.bases)
+          .filter(nonNull)
+          .map(({ playerId }) => playerId)
+        runnersScored.push(batter.id)
 
         this.bases = {
           first: null,
@@ -102,12 +106,11 @@ export class Bases {
         break
       case Outcome.WALK:
         if (basesLoaded) {
-          runsScored = 1
-          this.bases.third?.scored()
+          runnersScored = [this.bases.third?.playerId as string]
         }
 
         this.bases = {
-          first: batter,
+          first: { playerId: batter.id },
           second: this.bases.first || this.bases.second,
           third: (this.bases.first && this.bases.second) || this.bases.third
         }
@@ -117,7 +120,7 @@ export class Bases {
 
         // TODO determine if fly was deep or shallow
         if (this.bases.third && numOuts < 2) {
-          runsScored = 1
+          runnersScored = [this.bases.third.playerId]
         }
 
         this.bases = {
@@ -131,12 +134,12 @@ export class Bases {
         if (numOuts < 2) {
           const {
             newBases,
-            runs,
+            runnersScored: runnersScoredOnGrounder,
             outs: outsRecorded
           } = GrounderUtil.calc(batter, this.bases, numOuts)
 
           this.bases = { ...newBases }
-          runsScored = runs
+          runnersScored = runnersScoredOnGrounder
           outs = outsRecorded
         } else {
           // inning is over
@@ -145,6 +148,6 @@ export class Bases {
         break
     }
 
-    return { runsScored, outs }
+    return { runnersScored, outs }
   }
 }
