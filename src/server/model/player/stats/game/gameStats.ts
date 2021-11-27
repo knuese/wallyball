@@ -23,6 +23,10 @@ export class GameStats {
       this.batting.atBats++
     }
 
+    if (outcomeUtil.isHit(outcome)) {
+      this.batting.hits++
+    }
+
     const key = this.outcomeToStat[outcome]
 
     if (key) {

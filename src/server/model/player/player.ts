@@ -6,7 +6,7 @@ export class Player {
   private eligiblePositions: Position[]
   private battingConfig: BattingConfig
   private pitchingConfig?: PitchingConfig
-  private gameStats: GameStats
+  gameStats: GameStats
 
   constructor(
     name: string,
@@ -39,5 +39,10 @@ export class Player {
     }
 
     return this.pitchingConfig.determineOutcome(Math.random())
+  }
+
+  getBattingStatLine(): any {
+    const { atBats, runs, hits, rbis, walks, strikeouts } = this.gameStats.batting
+    return { atBats, runs, hits, rbis, walks, strikeouts }
   }
 }
