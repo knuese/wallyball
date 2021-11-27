@@ -14,7 +14,10 @@ export class GrounderUtil {
     numOuts: number
   ): GrounderOutput {
     const baseStr =
-      '' + Number(bases.third) + Number(bases.second) + Number(bases.first)
+      '' +
+      Number(Boolean(bases.third)) +
+      Number(Boolean(bases.second)) +
+      Number(Boolean(bases.first))
 
     let newBases, outs, runnersScored: string[]
 
