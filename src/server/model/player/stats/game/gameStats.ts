@@ -18,7 +18,7 @@ export class GameStats {
     this.batting = new BattingStats()
   }
 
-  logAtBat(outcome: Outcome, runsScored: number) {
+  logAtBat(outcome: Outcome, runsScored: number): void {
     if (outcomeUtil.isAtBat(outcome)) {
       this.batting.atBats++
     }

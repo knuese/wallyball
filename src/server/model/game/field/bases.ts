@@ -1,10 +1,10 @@
-import { Outcome } from '../..'
+import { Outcome, Player } from '../..'
 import { GrounderUtil } from './util/grounder'
 
-type BaseMap = {
-  first: boolean
-  second: boolean
-  third: boolean
+export type BaseMap = {
+  first: Player | null
+  second: Player | null
+  third: Player | null
 }
 
 type RunnerResponse = {
@@ -17,9 +17,9 @@ export class Bases {
 
   constructor(
     bases: BaseMap = {
-      first: false,
-      second: false,
-      third: false
+      first: null,
+      second: null,
+      third: null
     }
   ) {
     this.bases = bases
@@ -34,74 +34,80 @@ export class Bases {
     )
   }
 
-  static strToMap(str: string): BaseMap {
-    if (!/^[01]{3}$/.test(str)) {
-      throw new Error('invalid base string provided')
-    }
-
-    return {
-      first: str.charAt(2) === '1',
-      second: str.charAt(1) === '1',
-      third: str.charAt(0) === '1'
-    }
-  }
-
   clear(): void {
     this.bases = {
-      first: false,
-      second: false,
-      third: false
+      first: null,
+      second: null,
+      third: null
     }
   }
 
-  advanceRunners(outcome: Outcome, numOuts: number): RunnerResponse {
+  advanceRunners(
+    batter: Player,
+    outcome: Outcome,
+    numOuts: number
+  ): RunnerResponse {
     let runsScored = 0
     let outs = 0
+    let occupied
+
+    const nonNull = (p: Player | null): p is Player => p !== null
+    const basesLoaded = Object.values(this.bases).every((v) => v)
 
     switch (outcome) {
       case Outcome.SINGLE:
         if (this.bases.third) {
           runsScored = 1
+          this.bases.third.scored()
         }
 
         this.bases = {
-          first: true,
+          first: batter,
           second: this.bases.first,
           third: this.bases.second
         }
         break
       case Outcome.DOUBLE:
-        runsScored = [this.bases.second, this.bases.third].filter(
-          (v) => v
-        ).length
+        occupied = [this.bases.second, this.bases.third].filter(nonNull)
+        runsScored = occupied.length
+        occupied.forEach((p) => p?.scored())
 
         this.bases = {
-          first: false,
-          second: true,
+          first: null,
+          second: batter,
           third: this.bases.first
         }
         break
       case Outcome.TRIPLE:
-        runsScored = Object.values(this.bases).filter((v) => v).length
+        occupied = Object.values(this.bases).filter(nonNull)
+        runsScored = occupied.length
+        occupied.forEach((p) => p.scored())
 
         this.bases = {
-          first: false,
-          second: false,
-          third: true
+          first: null,
+          second: null,
+          third: batter
         }
         break
       case Outcome.HOME_RUN:
-        runsScored = Object.values(this.bases).filter((v) => v).length + 1
+        occupied = Object.values(this.bases).filter(nonNull)
+        runsScored = occupied.length + 1
+        occupied.forEach((p) => p.scored())
+
         this.bases = {
-          first: false,
-          second: false,
-          third: false
+          first: null,
+          second: null,
+          third: null
         }
         break
       case Outcome.WALK:
-        runsScored = Object.values(this.bases).every((v) => v) ? 1 : 0
+        if (basesLoaded) {
+          runsScored = 1
+          this.bases.third?.scored()
+        }
+
         this.bases = {
-          first: true,
+          first: batter,
           second: this.bases.first || this.bases.second,
           third: (this.bases.first && this.bases.second) || this.bases.third
         }
@@ -117,7 +123,7 @@ export class Bases {
         this.bases = {
           first: this.bases.first,
           second: this.bases.second,
-          third: false
+          third: null
         }
 
         break
@@ -127,9 +133,9 @@ export class Bases {
             newBases,
             runs,
             outs: outsRecorded
-          } = GrounderUtil.calc(this.toBinaryStr(), numOuts)
+          } = GrounderUtil.calc(batter, this.bases, numOuts)
 
-          this.bases = Bases.strToMap(newBases)
+          this.bases = { ...newBases }
           runsScored = runs
           outs = outsRecorded
         } else {

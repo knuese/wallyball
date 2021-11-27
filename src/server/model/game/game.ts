@@ -1,7 +1,8 @@
 import { Bases } from '.'
 import { Outcome, Player, Team } from '..'
 
-const getOrdinal = (n: number) => [,'st','nd','rd'][n/10%10^1&&n%10]||'th'
+const getOrdinal = (n: number) =>
+  ['', 'st', 'nd', 'rd'][(n / 10) % 10 ^ 1 && n % 10] || 'th'
 
 export class Game {
   awayTeam: Team
@@ -81,8 +82,12 @@ export class Game {
     `)
   }
 
-  advanceRunners(outcome: Outcome): number {
-    const { runsScored, outs } = this.bases.advanceRunners(outcome, this.outs)
+  advanceRunners(batter: Player, outcome: Outcome): number {
+    const { runsScored, outs } = this.bases.advanceRunners(
+      batter,
+      outcome,
+      this.outs
+    )
 
     if (runsScored > 0) {
       this.addToScore(runsScored)

@@ -11,14 +11,14 @@ export class GameService {
     const batter = this.gameState.getCurrentBatter()
     const pitcher = this.gameState.getCurrentPitcher()
     const outcome = Math.random() < 0.4 ? batter.bat() : pitcher.pitch()
-    
+
     console.log(`${batter.name} -> ${outcome}`)
 
     let runsScored = 0
     if (outcome === Outcome.STRIKEOUT) {
       this.gameState.outs++
     } else {
-      runsScored = this.gameState.advanceRunners(outcome)
+      runsScored = this.gameState.advanceRunners(batter, outcome)
     }
 
     batter.logAtBat(outcome, runsScored)

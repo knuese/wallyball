@@ -33,6 +33,10 @@ export class Player {
     this.gameStats.logAtBat(outcome, runsScored)
   }
 
+  scored(): void {
+    this.gameStats.batting.runs++
+  }
+
   pitch(): Outcome {
     if (!this.pitchingConfig) {
       throw new Error(`${this.name} is not a pitcher`)
@@ -42,7 +46,8 @@ export class Player {
   }
 
   getBattingStatLine(): any {
-    const { atBats, runs, hits, rbis, walks, strikeouts } = this.gameStats.batting
+    const { atBats, runs, hits, rbis, walks, strikeouts } =
+      this.gameStats.batting
     return { atBats, runs, hits, rbis, walks, strikeouts }
   }
 }
