@@ -2,6 +2,7 @@ module.exports = {
   collectCoverage: true,
   coveragePathIgnorePatterns: [
     'index.ts',
-    'enum'
+    'enum',
+    '__test_data__'
   ]
 }

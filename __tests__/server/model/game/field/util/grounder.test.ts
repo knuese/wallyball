@@ -1,23 +1,13 @@
-import { Runner } from '../../../../../../src/server/model'
 import { GrounderUtil } from '../../../../../../src/server/model/game/field/util/grounder'
+import {
+  bases,
+  batter,
+  first,
+  second,
+  third
+} from '../../../../../../__test_data__'
 
 describe('grounder', () => {
-  const batter = { id: 'abc1234' } as Runner
-  const first = { id: 'first' } as Runner
-  const second = { id: 'second' } as Runner
-  const third = { id: 'third' } as Runner
-
-  const bases = {
-    '000': { first: null, second: null, third: null },
-    '001': { first, second: null, third: null },
-    '010': { first: null, second, third: null },
-    '011': { first, second, third: null },
-    '100': { first: null, second: null, third },
-    '101': { first, second: null, third },
-    '110': { first: null, second, third },
-    '111': { first, second, third }
-  }
-
   // only the runner on third can score on a grounder
   // defining this variable to make the test cases below shorter
   const runnersScored = [third.id]

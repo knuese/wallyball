@@ -30,13 +30,8 @@ export class Bases {
     this.bases = bases
   }
 
-  toBinaryStr(): string {
-    return (
-      '' +
-      Number(this.bases.third) +
-      Number(this.bases.second) +
-      Number(this.bases.first)
-    )
+  getBases(): BaseMap {
+    return { ...this.bases }
   }
 
   clear(): void {
@@ -46,6 +41,7 @@ export class Bases {
       third: null
     }
   }
+
 
   advanceRunners(
     { id: batterId }: Player,
