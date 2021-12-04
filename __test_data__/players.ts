@@ -2,7 +2,8 @@ import {
   BattingConfig,
   PitchingConfig,
   Player,
-  Position
+  Position,
+  Starter
 } from '../src/server/model'
 
 const pitcher = new Player(
@@ -80,14 +81,26 @@ export const players = {
   rightFielder
 }
 
+export const idToPlayer = {
+  [pitcher.id]: pitcher,
+  [catcher.id]: catcher,
+  [firstBaseman.id]: firstBaseman,
+  [secondBaseman.id]: secondBaseman,
+  [shortstop.id]: shortstop,
+  [thirdBaseman.id]: thirdBaseman,
+  [leftFielder.id]: leftFielder,
+  [centerFielder.id]: centerFielder,
+  [rightFielder.id]: rightFielder
+}
+
 export const starterArray = [
-  { player: firstBaseman, position: Position.FIRST_BASE },
-  { player: pitcher, position: Position.PITCHER },
-  { player: thirdBaseman, position: Position.THIRD_BASE },
-  { player: catcher, position: Position.CATCHER },
-  { player: rightFielder, position: Position.RIGHT_FIELD },
-  { player: shortstop, position: Position.SHORTSTOP },
-  { player: secondBaseman, position: Position.SECOND_BASE },
-  { player: leftFielder, position: Position.LEFT_FIELD },
-  { player: centerFielder, position: Position.CENTER_FIELD }
-]
+  { playerId: firstBaseman.id, position: Position.FIRST_BASE },
+  { playerId: pitcher.id, position: Position.PITCHER },
+  { playerId: thirdBaseman.id, position: Position.THIRD_BASE },
+  { playerId: catcher.id, position: Position.CATCHER },
+  { playerId: rightFielder.id, position: Position.RIGHT_FIELD },
+  { playerId: shortstop.id, position: Position.SHORTSTOP },
+  { playerId: secondBaseman.id, position: Position.SECOND_BASE },
+  { playerId: leftFielder.id, position: Position.LEFT_FIELD },
+  { playerId: centerFielder.id, position: Position.CENTER_FIELD }
+] as Starter[]
