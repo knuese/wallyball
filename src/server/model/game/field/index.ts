@@ -1,2 +1,2 @@
 export { Bases } from './bases'
-export type { BaseMap } from './bases'
+export type { BaseMap, Runner } from './bases'
