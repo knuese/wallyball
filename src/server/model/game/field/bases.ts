@@ -42,7 +42,6 @@ export class Bases {
     }
   }
 
-
   advanceRunners(
     { id: batterId }: Player,
     outcome: Outcome,

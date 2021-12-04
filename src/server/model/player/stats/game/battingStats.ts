@@ -10,6 +10,8 @@ export class BattingStats {
   walks: number
   hbps: number
   strikeouts: number
+  flies: number
+  grounders: number
 
   constructor() {
     this.atBats = 0
@@ -22,5 +24,7 @@ export class BattingStats {
     this.walks = 0
     this.hbps = 0
     this.strikeouts = 0
+    this.flies = 0
+    this.grounders = 0
   }
 }

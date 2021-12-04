@@ -11,7 +11,9 @@ export class GameStats {
     [Outcome.HOME_RUN]: 'homeRuns',
     [Outcome.WALK]: 'walks',
     [Outcome.HIT_BY_PITCH]: 'hbps',
-    [Outcome.STRIKEOUT]: 'strikeouts'
+    [Outcome.STRIKEOUT]: 'strikeouts',
+    [Outcome.FLY]: 'flies',
+    [Outcome.GROUNDER]: 'grounders'
   }
 
   constructor() {
