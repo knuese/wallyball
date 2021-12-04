@@ -1,4 +1,5 @@
 import { Outcome, Player } from '../..'
+import { FlyUtil } from './util/fly'
 import { GrounderUtil } from './util/grounder'
 
 export type Runner = {
@@ -42,11 +43,21 @@ export class Bases {
     }
   }
 
-  advanceRunners(
-    { id: batterId }: Player,
+  advanceRunners({
+    batter,
+    pitcher,
+    outcome,
+    rawValue,
+    numOuts,
+    useBatterStats
+  }: {
+    batter: Player,
+    pitcher: Player,
     outcome: Outcome,
-    numOuts: number
-  ): RunnerResponse {
+    rawValue: number,
+    numOuts: number,
+    useBatterStats: boolean
+  }): RunnerResponse {
     let runnersScored: string[] = []
     let outs = 0
 
@@ -60,7 +71,7 @@ export class Bases {
         }
 
         this.bases = {
-          first: { id: batterId },
+          first: { id: batter.id },
           second: this.bases.first,
           third: this.bases.second
         }
@@ -72,7 +83,7 @@ export class Bases {
 
         this.bases = {
           first: null,
-          second: { id: batterId },
+          second: { id: batter.id },
           third: this.bases.first
         }
         break
@@ -84,14 +95,14 @@ export class Bases {
         this.bases = {
           first: null,
           second: null,
-          third: { id: batterId }
+          third: { id: batter.id }
         }
         break
       case Outcome.HOME_RUN:
         runnersScored = Object.values(this.bases)
           .filter(nonNull)
           .map(({ id }) => id)
-        runnersScored.push(batterId)
+        runnersScored.push(batter.id)
 
         this.bases = {
           first: null,
@@ -105,7 +116,7 @@ export class Bases {
         }
 
         this.bases = {
-          first: { id: batterId },
+          first: { id: batter.id },
           second: this.bases.first || this.bases.second,
           third: (this.bases.first && this.bases.second) || this.bases.third
         }
@@ -113,17 +124,18 @@ export class Bases {
       case Outcome.FLY:
         outs = 1
 
-        // TODO determine if fly was deep or shallow
-        if (this.bases.third && numOuts < 2) {
-          runnersScored = [this.bases.third.id]
-        }
+        if (numOuts < 2) {
+          const statConfig = useBatterStats
+            ? batter.getBattingThresholds()
+            : pitcher.getPitchingThresholds()
+          const {
+            newBases,
+            runnersScored: runnersScoredOnFly
+          } = FlyUtil.calc(statConfig, rawValue, this.bases)
 
-        this.bases = {
-          first: this.bases.first,
-          second: this.bases.second,
-          third: null
+          runnersScored = [...runnersScoredOnFly]
+          this.bases = { ...newBases }
         }
-
         break
       case Outcome.GROUNDER:
         if (numOuts < 2) {
@@ -131,7 +143,7 @@ export class Bases {
             newBases,
             runnersScored: runnersScoredOnGrounder,
             outs: outsRecorded
-          } = GrounderUtil.calc(batterId, this.bases, numOuts)
+          } = GrounderUtil.calc(batter.id, this.bases, numOuts)
 
           this.bases = { ...newBases }
           runnersScored = runnersScoredOnGrounder

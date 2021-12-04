@@ -84,12 +84,27 @@ export class Game {
     `)
   }
 
-  advanceRunners(batter: Player, outcome: Outcome): number {
-    const { runnersScored, outs } = this.bases.advanceRunners(
+  advanceRunners({
+    batter,
+    pitcher,
+    outcome,
+    rawValue,
+    useBatterStats
+  }: {
+    batter: Player,
+    pitcher: Player,
+    outcome: Outcome,
+    rawValue: number,
+    useBatterStats: boolean
+  }): number {
+    const { runnersScored, outs } = this.bases.advanceRunners({
       batter,
+      pitcher,
       outcome,
-      this.outs
-    )
+      rawValue,
+      numOuts: this.outs,
+      useBatterStats
+    })
 
     if (runnersScored.length > 0) {
       this.addToScore(runnersScored.length)

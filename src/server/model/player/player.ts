@@ -24,12 +24,28 @@ export class Player {
     this.gameStats = new GameStats()
   }
 
+  getBattingThresholds(): Record<number, Outcome> {
+    return { ...this.battingConfig.outcomes }
+  }
+
+  getPitchingThresholds(): Record<number, Outcome> {
+    if (!this.pitchingConfig) {
+      throw new Error(`${this.name} is not a pitcher`)
+    }
+
+    return { ...this.pitchingConfig.outcomes }
+  }
+
   canPlay(position: Position): boolean {
     return this.eligiblePositions.includes(position)
   }
 
-  bat(): Outcome {
-    return this.battingConfig.determineOutcome(Math.random())
+  bat(): { outcome: Outcome, rawValue: number } {
+    const rawValue = Math.random()
+    return {
+      rawValue,
+      outcome: this.battingConfig.determineOutcome(rawValue)
+    }
   }
 
   logAtBat(outcome: Outcome, runsScored: number): void {
@@ -40,12 +56,16 @@ export class Player {
     this.gameStats.batting.runs++
   }
 
-  pitch(): Outcome {
+  pitch(): { outcome: Outcome, rawValue: number } {
     if (!this.pitchingConfig) {
       throw new Error(`${this.name} is not a pitcher`)
     }
 
-    return this.pitchingConfig.determineOutcome(Math.random())
+    const rawValue = Math.random()
+    return {
+      rawValue,
+      outcome: this.pitchingConfig.determineOutcome(rawValue)
+    }
   }
 
   getBattingStatLine(): any {

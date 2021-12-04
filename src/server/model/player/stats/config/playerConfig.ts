@@ -1,7 +1,7 @@
 import { Outcome } from '../../../enum/outcome'
 
 export abstract class PlayerConfig {
-  protected outcomes: Record<number, Outcome> = {}
+  outcomes: Record<number, Outcome> = {}
 
   constructor(thresholds: Record<string, any>) {
     Object.values(thresholds).forEach((val, i, arr) => {

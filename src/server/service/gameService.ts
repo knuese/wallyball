@@ -10,7 +10,9 @@ export class GameService {
   simulateAtBat(): boolean {
     const batter = this.gameState.getCurrentBatter()
     const pitcher = this.gameState.getCurrentPitcher()
-    const outcome = Math.random() < 0.4 ? batter.bat() : pitcher.pitch()
+
+    const useBatterStats = Math.random() < 0.4
+    const { outcome, rawValue } = useBatterStats ? batter.bat() : pitcher.pitch()
 
     console.log(`${batter.name} -> ${outcome}`)
 
@@ -18,7 +20,13 @@ export class GameService {
     if (outcome === Outcome.STRIKEOUT) {
       this.gameState.outs++
     } else {
-      runsScored = this.gameState.advanceRunners(batter, outcome)
+      runsScored = this.gameState.advanceRunners({
+        batter,
+        pitcher,
+        outcome,
+        rawValue,
+        useBatterStats
+      })
     }
 
     batter.logAtBat(outcome, runsScored)
