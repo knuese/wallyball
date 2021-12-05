@@ -1,11 +1,20 @@
-import { Bases, Outcome } from '../../../../../src/server/model'
+import {
+  Bases,
+  BattingConfig,
+  Outcome,
+  PitchingConfig,
+  Player
+} from '../../../../../src/server/model'
 import {
   bases as baseMaps,
   batter,
   first,
+  players,
   second,
   third
 } from '../../../../../__test_data__'
+
+const { pitcher } = players
 
 describe('bases', () => {
   describe('getBases', () => {
@@ -27,11 +36,14 @@ describe('bases', () => {
     describe('single', () => {
       it('puts a runner on first', () => {
         const bases = new Bases()
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.SINGLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.SINGLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(0)
@@ -44,11 +56,14 @@ describe('bases', () => {
 
       it('advances a runner that is on base', () => {
         const bases = new Bases({ ...baseMaps['010'] })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.SINGLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.SINGLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(0)
@@ -61,11 +76,14 @@ describe('bases', () => {
 
       it('scores a run if someone is on third', () => {
         const bases = new Bases({ ...baseMaps['100'] })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.SINGLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.SINGLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([third.id])
         expect(outs).toEqual(0)
@@ -80,11 +98,14 @@ describe('bases', () => {
     describe('double', () => {
       it('puts a runner on second', () => {
         const bases = new Bases()
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.DOUBLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.DOUBLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(0)
@@ -97,11 +118,14 @@ describe('bases', () => {
 
       it('advances a runner that is on base', () => {
         const bases = new Bases({ ...baseMaps['001'] })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.DOUBLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.DOUBLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(0)
@@ -117,11 +141,14 @@ describe('bases', () => {
         [[second.id, third.id], baseMaps['110']]
       ])('%s score runs for runners %s', (runs, baseMap) => {
         const bases = new Bases({ ...baseMap })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.DOUBLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.DOUBLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual(runs)
         expect(outs).toEqual(0)
@@ -136,11 +163,14 @@ describe('bases', () => {
     describe('triple', () => {
       it('puts a runner on third', () => {
         const bases = new Bases()
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.TRIPLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.TRIPLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(0)
@@ -157,11 +187,14 @@ describe('bases', () => {
         [[first.id, second.id, third.id], baseMaps['111']]
       ])('%s score for runners %s', (runs, baseMap) => {
         const bases = new Bases({ ...baseMap })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.TRIPLE,
-          0
-        )
+          pitcher,
+          outcome: Outcome.TRIPLE,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual(runs)
         expect(outs).toEqual(0)
@@ -181,11 +214,14 @@ describe('bases', () => {
         [[batter.id, first.id, second.id, third.id], baseMaps['111']]
       ])('%s score for runners %s', (runs, baseMap) => {
         const bases = new Bases({ ...baseMap })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.HOME_RUN,
-          0
-        )
+          pitcher,
+          outcome: Outcome.HOME_RUN,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored.sort()).toEqual(runs.sort())
         expect(outs).toEqual(0)
@@ -196,11 +232,14 @@ describe('bases', () => {
     describe('walk', () => {
       it('puts a runner on first', () => {
         const bases = new Bases()
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.WALK,
-          0
-        )
+          pitcher,
+          outcome: Outcome.WALK,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(0)
@@ -213,11 +252,14 @@ describe('bases', () => {
 
       it('scores if the bases are loaded', () => {
         const bases = new Bases({ ...baseMaps['111'] })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.WALK,
-          0
-        )
+          pitcher,
+          outcome: Outcome.WALK,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([third.id])
         expect(outs).toEqual(0)
@@ -237,11 +279,14 @@ describe('bases', () => {
         [baseMaps['110'], { first: batter, second, third }]
       ])('determines the runners for bases %s', (baseMap, expected) => {
         const bases = new Bases({ ...baseMap })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.WALK,
-          0
-        )
+          pitcher,
+          outcome: Outcome.WALK,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(0)
@@ -249,14 +294,77 @@ describe('bases', () => {
       })
     })
 
+    describe('fly', () => {
+      const flyBatter = new Player(
+        'batter',
+        [],
+        new BattingConfig([0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 0.6, 1.0])
+      )
+
+      const flyPitcher = new Player(
+        'pitcher',
+        [],
+        {} as any,
+        new PitchingConfig([0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 1.0])
+      )
+
+      it('returns an out if there are already two outs', () => {
+        const bases = new Bases({ ...baseMaps['111'] })
+        const { runnersScored, outs } = bases.advanceRunners({
+          batter: flyBatter,
+          pitcher: flyPitcher,
+          outcome: Outcome.FLY,
+          rawValue: 0,
+          numOuts: 2,
+          useBatterStats: true
+        })
+
+        expect(runnersScored).toEqual([])
+        expect(outs).toEqual(1)
+      })
+
+      it('calculates a fly based on the stats of the batter', () => {
+        const bases = new Bases({ ...baseMaps['100'] })
+        const { runnersScored, outs } = bases.advanceRunners({
+          batter: flyBatter,
+          pitcher: flyPitcher,
+          outcome: Outcome.FLY,
+          rawValue: 0.599,
+          numOuts: 1,
+          useBatterStats: true
+        })
+
+        expect(runnersScored).toEqual([third.id])
+        expect(outs).toEqual(1)
+      })
+
+      it('calculates a fly based on the stats of the pitcher', () => {
+        const bases = new Bases({ ...baseMaps['100'] })
+        const { runnersScored, outs } = bases.advanceRunners({
+          batter: flyBatter,
+          pitcher: flyPitcher,
+          outcome: Outcome.FLY,
+          rawValue: 0.402,
+          numOuts: 1,
+          useBatterStats: false
+        })
+
+        expect(runnersScored).toEqual([])
+        expect(outs).toEqual(1)
+      })
+    })
+
     describe('grounder', () => {
       it('returns an out if there are already two outs', () => {
         const bases = new Bases({ ...baseMaps['111'] })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.GROUNDER,
-          2
-        )
+          pitcher,
+          outcome: Outcome.GROUNDER,
+          rawValue: 0,
+          numOuts: 2,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([])
         expect(outs).toEqual(1)
@@ -264,11 +372,14 @@ describe('bases', () => {
 
       it('uses the GrounderUtil if there are less than two outs', () => {
         const bases = new Bases({ ...baseMaps['101'] })
-        const { runnersScored, outs } = bases.advanceRunners(
+        const { runnersScored, outs } = bases.advanceRunners({
           batter,
-          Outcome.GROUNDER,
-          0
-        )
+          pitcher,
+          outcome: Outcome.GROUNDER,
+          rawValue: 0,
+          numOuts: 0,
+          useBatterStats: true
+        })
 
         expect(runnersScored).toEqual([third.id])
         expect(outs).toEqual(2)

@@ -124,11 +124,11 @@ export class Bases {
         outs = 1
 
         if (numOuts < 2) {
-          const statConfig = useBatterStats
+          const thresholds = useBatterStats
             ? batter.getBattingThresholds()
             : pitcher.getPitchingThresholds()
           const { newBases, runnersScored: runnersScoredOnFly } = FlyUtil.calc(
-            statConfig,
+            thresholds,
             rawValue,
             this.bases
           )

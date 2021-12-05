@@ -16,7 +16,9 @@ export class FlyUtil {
     const newBases = { ...bases }
 
     if (bases.third) {
-      const [kThreshold, flyThreshold] = Object.keys(thresholds).slice(-3, -1)
+      const [kThreshold, flyThreshold] = Object.keys(thresholds)
+        .sort()
+        .slice(-3, -1)
       const flyRange = Number(flyThreshold) - Number(kThreshold)
       const differential = rawValue - Number(kThreshold)
 
