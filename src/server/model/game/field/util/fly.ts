@@ -1,5 +1,5 @@
-import { BaseMap } from "..";
-import { Outcome } from "../../..";
+import { BaseMap } from '..'
+import { Outcome } from '../../..'
 
 type FlyOutput = {
   newBases: BaseMap
@@ -7,16 +7,20 @@ type FlyOutput = {
 }
 
 export class FlyUtil {
-  static calc(outcomes: Record<number, Outcome>, rawValue: number, bases: BaseMap): FlyOutput {
-    let runnersScored = [] as string[]
-    let newBases = { ...bases }
+  static calc(
+    thresholds: Record<number, Outcome>,
+    rawValue: number,
+    bases: BaseMap
+  ): FlyOutput {
+    const runnersScored = [] as string[]
+    const newBases = { ...bases }
 
     if (bases.third) {
-      const [strikeoutThreshold, flyThreshold] = Object.keys(outcomes).slice(-3, -2)
-      const flyRange = Number(flyThreshold) - Number(strikeoutThreshold)
-      const differential = rawValue - Number(strikeoutThreshold)
+      const [kThreshold, flyThreshold] = Object.keys(thresholds).slice(-3, -1)
+      const flyRange = Number(flyThreshold) - Number(kThreshold)
+      const differential = rawValue - Number(kThreshold)
 
-      if ((differential / flyRange) > 0.75) {
+      if (differential / flyRange > 0.75) {
         runnersScored.push(bases.third.id)
         newBases.third = null
       }

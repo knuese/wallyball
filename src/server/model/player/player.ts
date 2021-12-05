@@ -40,7 +40,7 @@ export class Player {
     return this.eligiblePositions.includes(position)
   }
 
-  bat(): { outcome: Outcome, rawValue: number } {
+  bat(): { outcome: Outcome; rawValue: number } {
     const rawValue = Math.random()
     return {
       rawValue,
@@ -56,7 +56,7 @@ export class Player {
     this.gameStats.batting.runs++
   }
 
-  pitch(): { outcome: Outcome, rawValue: number } {
+  pitch(): { outcome: Outcome; rawValue: number } {
     if (!this.pitchingConfig) {
       throw new Error(`${this.name} is not a pitcher`)
     }

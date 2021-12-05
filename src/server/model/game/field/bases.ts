@@ -1,6 +1,5 @@
 import { Outcome, Player } from '../..'
-import { FlyUtil } from './util/fly'
-import { GrounderUtil } from './util/grounder'
+import { FlyUtil, GrounderUtil } from './util'
 
 export type Runner = {
   id: string
@@ -51,11 +50,11 @@ export class Bases {
     numOuts,
     useBatterStats
   }: {
-    batter: Player,
-    pitcher: Player,
-    outcome: Outcome,
-    rawValue: number,
-    numOuts: number,
+    batter: Player
+    pitcher: Player
+    outcome: Outcome
+    rawValue: number
+    numOuts: number
     useBatterStats: boolean
   }): RunnerResponse {
     let runnersScored: string[] = []
@@ -128,10 +127,11 @@ export class Bases {
           const statConfig = useBatterStats
             ? batter.getBattingThresholds()
             : pitcher.getPitchingThresholds()
-          const {
-            newBases,
-            runnersScored: runnersScoredOnFly
-          } = FlyUtil.calc(statConfig, rawValue, this.bases)
+          const { newBases, runnersScored: runnersScoredOnFly } = FlyUtil.calc(
+            statConfig,
+            rawValue,
+            this.bases
+          )
 
           runnersScored = [...runnersScoredOnFly]
           this.bases = { ...newBases }

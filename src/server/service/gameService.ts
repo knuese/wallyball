@@ -12,7 +12,9 @@ export class GameService {
     const pitcher = this.gameState.getCurrentPitcher()
 
     const useBatterStats = Math.random() < 0.4
-    const { outcome, rawValue } = useBatterStats ? batter.bat() : pitcher.pitch()
+    const { outcome, rawValue } = useBatterStats
+      ? batter.bat()
+      : pitcher.pitch()
 
     console.log(`${batter.name} -> ${outcome}`)
 

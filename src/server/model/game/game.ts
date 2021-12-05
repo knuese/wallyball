@@ -91,10 +91,10 @@ export class Game {
     rawValue,
     useBatterStats
   }: {
-    batter: Player,
-    pitcher: Player,
-    outcome: Outcome,
-    rawValue: number,
+    batter: Player
+    pitcher: Player
+    outcome: Outcome
+    rawValue: number
     useBatterStats: boolean
   }): number {
     const { runnersScored, outs } = this.bases.advanceRunners({
