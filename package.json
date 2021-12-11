@@ -3,21 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build:client": "npx webpack",
+    "build:server": "npx tsc --project ./tsconfig.server.json",
+    "build": "npm run build:server && npm run build:client",
     "lint:client": "eslint --config ./eslintrc.client.js --fix ./src/client",
     "lint:server": "eslint --config ./eslintrc.server.js --fix ./src/server",
     "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__",
     "lint": "concurrently \"npm run lint:client\" \"npm run lint:server\" \"npm run lint:test\"",
     "play": "npx ts-node -O '{\"module\":\"commonjs\"}' z.ts",
+    "start": "npm run build:server && concurrently \"npm run build:client\" \"NODE_ENV=local nodemon\"",
     "pretest": "npm run lint",
-    "test": "npx jest",
-    "eject": "react-scripts eject"
+    "test": "npx jest"
   },
   "prettier": "./prettier.config",
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hot-loader": "^4.13.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -27,11 +31,14 @@
     "@testing-library/jest-dom": "5.15.0",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
+    "@types/express": "^4.17.13",
     "@types/jest": "26.0.24",
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
     "@types/react-dom": "17.0.11",
     "@types/uuid": "^8.3.3",
+    "@types/webpack-dev-middleware": "^5.0.2",
+    "@types/webpack-hot-middleware": "^2.25.5",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "concurrently": "^6.3.0",
     "eslint": "^7.32.0",
@@ -43,12 +50,20 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.1.1",
     "jest": "26.6.3",
-    "jest-config": "26.6.3",
+    "jest-config": "^26.6.3",
+    "nodemon": "^2.0.15",
     "prettier": "^2.4.1",
     "prettier-config-standard": "^4.0.0",
     "prettier-standard": "^16.4.1",
     "react-scripts": "4.0.3",
-    "typescript": "^4.4.4"
+    "ts-jest": "^26.5.6",
+    "ts-node": "^10.4.0",
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.4.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-middleware": "^5.2.2",
+    "webpack-hot-middleware": "^2.25.1"
   },
   "eslintConfig": {
     "extends": [

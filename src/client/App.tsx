@@ -1,12 +1,11 @@
 import React from 'react'
+import { hot } from 'react-hot-loader/root'
 
 const App = (): JSX.Element => {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <p>Hello, world!</p>
         <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Learn React
         </a>
@@ -15,4 +14,4 @@ const App = (): JSX.Element => {
   )
 }
 
-export default App
+export default hot(App)
