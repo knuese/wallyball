@@ -1,4 +1,6 @@
-export const GameScreen = () => (
+import { FC } from 'react'
+
+export const GameScreen: FC = () => (
   <div>
     <h1>Game</h1>
   </div>

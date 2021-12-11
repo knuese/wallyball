@@ -6,6 +6,8 @@ module.exports = {
     jest: true
   },
   extends: [
+    'react-app',
+    'react-app/jest',
     'standard-typescript-prettier'
   ],
   parserOptions: {

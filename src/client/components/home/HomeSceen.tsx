@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export const HomeScreen = () => {
+export const HomeScreen: FC = () => {
   const navigate = useNavigate()
 
   const newGame = () => {
