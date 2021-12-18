@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Dropzone } from '..'
 import { readTeamFile } from '../../store/actions/team/team'
 import { RootState } from '../../store/reducers'
+import { Dropzone, PlayerContainer } from '..'
 
 export type TeamViewProps = {
   isHome?: boolean
@@ -38,9 +38,7 @@ export const TeamView: FC<TeamViewProps> = ({ isHome }) => {
         instructionMessage={fileUploadMsg}
       />
       <p>{teamName}</p>
-      {players.map((p) => (
-        <p key={p.name}>{JSON.stringify(p)}</p>
-      ))}
+      <PlayerContainer players={players.map((p, i) => ({ name: p.name, id: i }))}/>
     </div>
   )
 }
