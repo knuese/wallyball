@@ -1,18 +1,28 @@
-import { combineReducers, Reducer } from 'redux'
-import { TeamState } from '../../types'
+import { CombinedState, combineReducers, Reducer } from 'redux'
+import { Side, TeamActionTypes, TeamState } from '../../types/team'
 
 import teamReducer from './team'
 
+type CombinedTeamReducer = Reducer<
+  CombinedState<{
+    away: TeamState
+    home: TeamState
+  }>,
+  TeamActionTypes
+>
+
 const createTeamReducer =
-  (name: string, reducerFn: Reducer<TeamState>) =>
-  (state: TeamState, action: any) => {
+  (side: Side, reducerFn: Reducer<TeamState>) =>
+  (state: TeamState, action: TeamActionTypes) => {
     const isInitCall = state === undefined
-    return action.name === name && !isInitCall
+    return action.side !== side && !isInitCall
       ? state
       : reducerFn(state, action)
   }
 
-export default combineReducers({
-  away: createTeamReducer('away', teamReducer),
-  home: createTeamReducer('home', teamReducer)
+const combined = combineReducers({
+  [Side.AWAY]: createTeamReducer(Side.AWAY, teamReducer),
+  [Side.HOME]: createTeamReducer(Side.HOME, teamReducer)
 })
+
+export default combined as CombinedTeamReducer
