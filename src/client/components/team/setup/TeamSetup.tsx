@@ -12,9 +12,10 @@ export const TeamSetup: FC<TeamSetupProps> = ({ players }) => {
   ))
 
   return players?.length ? (
-    <div className='flex-column'>
+    <div className="flex-column">
       <AvailablePlayers players={players} />
-      <div>
+      <div className="starters">
+        <span className="sub-label">Starting Lineup</span>
         {starters}
       </div>
     </div>

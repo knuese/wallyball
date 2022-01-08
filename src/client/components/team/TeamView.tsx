@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { readTeamFile } from '../../store/actions/team/team'
+import { clearTeam, readTeamFile } from '../../store/actions/team/team'
 import { RootState } from '../../store/reducers'
 import { Dropzone, TeamSetup } from '..'
 
@@ -10,12 +10,19 @@ export type TeamViewProps = {
 
 export const TeamView: FC<TeamViewProps> = ({ isHome }) => {
   const dispatch = useDispatch()
-  const { name: teamName, players } = useSelector(
-    (state: RootState) => state.teams[isHome ? 'home' : 'away']
-  )
+  const {
+    name: teamName,
+    primaryColor,
+    secondaryColor,
+    players
+  } = useSelector((state: RootState) => state.teams[isHome ? 'home' : 'away'])
 
   const onFileLoaded = (file: File) => {
     dispatch(readTeamFile(file, isHome))
+  }
+
+  const onFileRemoved = () => {
+    dispatch(clearTeam(isHome))
   }
 
   const fileUploadMsg = (
@@ -25,12 +32,18 @@ export const TeamView: FC<TeamViewProps> = ({ isHome }) => {
   )
 
   return (
-    <div className='team-view solid-border'>
+    <div className="team-view margin-1 solid-border">
       <Dropzone
         onFileLoaded={onFileLoaded}
+        onFileRemoved={onFileRemoved}
         instructionMessage={fileUploadMsg}
       />
-      <p>{teamName}</p>
+      <p
+        className="team-title"
+        style={{ color: secondaryColor, backgroundColor: primaryColor }}
+      >
+        {teamName}
+      </p>
       <TeamSetup players={players} />
     </div>
   )

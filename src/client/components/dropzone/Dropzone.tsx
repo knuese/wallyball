@@ -1,17 +1,22 @@
 import React, { FC, useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { IconContext } from 'react-icons'
-import { MdCancel as RemoveFileIcon, MdUpload as UploadIcon } from 'react-icons/md'
+import {
+  MdCancel as RemoveFileIcon,
+  MdUpload as UploadIcon
+} from 'react-icons/md'
 import classnames from 'classnames'
 
 export type DropzoneProps = {
   instructionMessage?: string | JSX.Element
   onFileLoaded: (file: File) => void
+  onFileRemoved: () => void
 }
 
 export const Dropzone: FC<DropzoneProps> = ({
   instructionMessage = 'Select a file to upload.',
-  onFileLoaded
+  onFileLoaded,
+  onFileRemoved
 }) => {
   const [file, setFile] = useState<File | null>(null)
 
@@ -45,15 +50,19 @@ export const Dropzone: FC<DropzoneProps> = ({
       )
   }
 
-  const icon =
-    <IconContext.Provider value={{ color: file ? 'red' : 'black', size: '1.25em' }}>
+  const icon = (
+    <IconContext.Provider
+      value={{ color: file ? 'red' : 'black', size: '1.25em' }}
+    >
       {file ? <RemoveFileIcon /> : <UploadIcon />}
     </IconContext.Provider>
+  )
 
   const onIconClick = (e: React.MouseEvent) => {
     if (file) {
-      setFile(null)
       e.preventDefault()
+      setFile(null)
+      onFileRemoved()
     }
   }
 
@@ -65,8 +74,16 @@ export const Dropzone: FC<DropzoneProps> = ({
   }
 
   return (
-    <div {...rootProps} onClick={dropzoneClickHandler} className={classnames('dropzone', 'flex-row', 'center', {'with-file': file})}>
-      <span className='dropzone-icon' onClick={onIconClick}>{icon}</span>
+    <div
+      {...rootProps}
+      onClick={dropzoneClickHandler}
+      className={classnames('dropzone', 'flex-row', 'center', {
+        'with-file': file
+      })}
+    >
+      <span className="dropzone-icon" onClick={onIconClick}>
+        {icon}
+      </span>
       <input {...getInputProps()} />
       {msg}
     </div>

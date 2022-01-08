@@ -1,10 +1,40 @@
 .team-view {
   width: 50%;
-  margin: 1rem;
   border: 1px solid black;
   text-align: center;
 }
 
 .player-list {
   columns: 2;
+  text-align: left;
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+.player-list li {
+  margin-right: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.team-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+}
+
+.sub-label {
+  margin: 0.5rem;
+  text-decoration: underline;
+  opacity: 0.75;
+}
+
+.starters {
+  margin: 1rem;
+  padding: 1rem;
+  border-top: 1px dashed black;
+}
+
+.starters div {
+  margin: 1rem;
 }

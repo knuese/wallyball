@@ -7,7 +7,7 @@ export type StarterProps = {
 export const Starter: FC<StarterProps> = ({ index }) => {
   return (
     <div>
-      <span>{index + 1}</span>
+      <span>{`${index + 1}.`}</span>
       <input />
       <select />
     </div>
