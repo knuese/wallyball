@@ -25,14 +25,7 @@ export const TeamView: FC<TeamViewProps> = ({ isHome }) => {
   )
 
   return (
-    <div
-      style={{
-        width: '50%',
-        textAlign: 'center',
-        border: '1px solid black',
-        margin: '1rem'
-      }}
-    >
+    <div className='team-view solid-border'>
       <Dropzone
         onFileLoaded={onFileLoaded}
         instructionMessage={fileUploadMsg}

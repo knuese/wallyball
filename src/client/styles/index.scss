@@ -1,0 +1,11 @@
+html, body {
+  height: 100%;
+}
+
+* {
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+@import "_dropzone";
+@import "_layout";
+@import "_teamSetup";

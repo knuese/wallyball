@@ -1,26 +1,21 @@
 import { FC } from 'react'
 import { Player } from '../../../store/types/team'
-import { Starter } from '.'
+import { AvailablePlayers, Starter } from '.'
 
 export type TeamSetupProps = {
   players: Player[]
 }
 
 export const TeamSetup: FC<TeamSetupProps> = ({ players }) => {
+  const starters = [...new Array(9).keys()].map((_, i) => (
+    <Starter key={i} index={i} />
+  ))
+
   return players?.length ? (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className='flex-column'>
+      <AvailablePlayers players={players} />
       <div>
-        <p>Available Players</p>
-        <ul style={{ columns: 2 }}>
-          {players.map((p, i) => (
-            <li key={p.name + i}>{p.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {[...new Array(9).keys()].map((_, i) => (
-          <Starter index={i} />
-        ))}
+        {starters}
       </div>
     </div>
   ) : (
