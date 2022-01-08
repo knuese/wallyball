@@ -1,14 +1,14 @@
 import { FC } from 'react'
 import { Player } from '../../../store/types/team'
 
-export type AvailablePlayerProps = {
+export type RosterProps = {
   players: Player[]
 }
 
-export const AvailablePlayers: FC<AvailablePlayerProps> = ({ players }) => {
+export const Roster: FC<RosterProps> = ({ players }) => {
   return (
     <div>
-      <p className="sub-label">Available Players</p>
+      <p className="sub-label">Roster</p>
       <ul className="player-list">
         {players.map((p, i) => (
           <li key={p.name + i}>{p.name}</li>
@@ -18,4 +18,4 @@ export const AvailablePlayers: FC<AvailablePlayerProps> = ({ players }) => {
   )
 }
 
-export default AvailablePlayers
+export default Roster

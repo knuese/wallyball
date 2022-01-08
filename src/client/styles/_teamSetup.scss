@@ -35,6 +35,22 @@
   border-top: 1px dashed black;
 }
 
-.starters div {
-  margin: 1rem;
+.starter-table {
+  margin: 1rem auto;
+  border: 1px solid black;
+}
+
+.starter-table th {
+  padding: 0.5rem;
+  border: 1px solid black;
+}
+
+.starter-table td {
+  border: 1px solid black;
+}
+
+.select-position {
+  padding: 6px 8px;
+  width: 4rem;
+  border-color: rgb(206, 212, 218);
 }

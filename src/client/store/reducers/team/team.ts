@@ -1,7 +1,9 @@
 import { AnyAction, Reducer } from 'redux'
+import { v4 as uuidv4 } from 'uuid'
 import {
   CLEAR_TEAM,
   LOAD_TEAM,
+  Player,
   TeamActionTypes,
   TeamState
 } from '../../types/team'
@@ -24,7 +26,10 @@ const reducer: Reducer<TeamState> = (
         name: payload.name,
         primaryColor: payload.primaryColor,
         secondaryColor: payload.secondaryColor,
-        players: payload.players
+        players: payload.players.map((player: Player[]) => ({
+          ...player,
+          id: uuidv4()
+        }))
       }
     case CLEAR_TEAM:
       return {

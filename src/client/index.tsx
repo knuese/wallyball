@@ -4,6 +4,7 @@ import 'react-hot-loader'
 import App from './App'
 
 import './styles/index.scss'
+import 'react-bootstrap-typeahead/css/Typeahead.css'
 
 ReactDOM.render(
   <React.StrictMode>
