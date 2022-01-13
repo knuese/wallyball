@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import { TeamView } from '../..'
+import { TeamSetup } from '../..'
 
 export const InitGame: FC = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <TeamView />
-      <TeamView isHome />
+      <TeamSetup />
+      <TeamSetup isHome />
     </div>
   )
 }

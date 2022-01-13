@@ -2,13 +2,14 @@ import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearTeam, readTeamFile } from '../../store/actions/team/team'
 import { RootState } from '../../store/reducers'
-import { Dropzone, TeamSetup } from '..'
+import { Dropzone } from '..'
+import { Roster, StarterTable } from '.'
 
-export type TeamViewProps = {
+export type TeamSetupProps = {
   isHome?: boolean
 }
 
-export const TeamView: FC<TeamViewProps> = ({ isHome }) => {
+export const TeamSetup: FC<TeamSetupProps> = ({ isHome }) => {
   const dispatch = useDispatch()
   const {
     name: teamName,
@@ -44,9 +45,17 @@ export const TeamView: FC<TeamViewProps> = ({ isHome }) => {
       >
         {teamName}
       </p>
-      <TeamSetup players={players} />
+      {Boolean(players?.length) && 
+        <div className="flex-column">
+        <Roster players={players} />
+        <div className="starters">
+          <span className="sub-label">Starting Lineup</span>
+          <StarterTable players={players} />
+        </div>
+      </div>
+      }
     </div>
   )
 }
 
-export default TeamView
+export default TeamSetup
