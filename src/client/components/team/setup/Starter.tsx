@@ -31,7 +31,7 @@ export const Starter: FC<StarterProps> = ({
     if (selectedPlayer) {
       selectPosition(selectedPlayer.id, selectedPlayer.positions[0])
     }
-  }, [selectedPlayer, selectPosition])
+  }, [selectedPlayer])
 
   return (
     <tr>

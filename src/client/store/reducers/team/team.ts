@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import {
   CLEAR_TEAM,
   LOAD_TEAM,
+  SET_TEAM,
   Player,
   TeamActionTypes,
   TeamState
@@ -12,7 +13,9 @@ export const initialState: TeamState = {
   name: '',
   primaryColor: '#FFF',
   secondaryColor: '#000',
-  players: []
+  players: [],
+  lineup: {},
+  defense: {}
 }
 
 const reducer: Reducer<TeamState> = (
@@ -30,6 +33,12 @@ const reducer: Reducer<TeamState> = (
           ...player,
           id: uuidv4()
         }))
+      }
+    case SET_TEAM:
+      return {
+        ...state,
+        lineup: payload.lineup,
+        defense: payload.defense
       }
     case CLEAR_TEAM:
       return {

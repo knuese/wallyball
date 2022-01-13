@@ -1,7 +1,10 @@
 import { Dispatch } from 'react'
 import {
   CLEAR_TEAM,
+  Defense,
+  Lineup,
   LOAD_TEAM,
+  SET_TEAM,
   Side,
   TeamActionTypes,
   TeamFileContents
@@ -22,6 +25,16 @@ export const readTeamFile =
         secondaryColor,
         players
       }
+    })
+  }
+
+export const setTeam =
+  (lineup: Lineup, defense: Defense, isHome?: boolean) =>
+  (dispatch: Dispatch<TeamActionTypes>): void => {
+    dispatch({
+      type: SET_TEAM,
+      side: isHome ? Side.HOME : Side.AWAY,
+      payload: { lineup, defense }
     })
   }
 

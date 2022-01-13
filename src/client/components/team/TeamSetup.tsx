@@ -45,15 +45,15 @@ export const TeamSetup: FC<TeamSetupProps> = ({ isHome }) => {
       >
         {teamName}
       </p>
-      {Boolean(players?.length) && 
+      {Boolean(players?.length) && (
         <div className="flex-column">
-        <Roster players={players} />
-        <div className="starters">
-          <span className="sub-label">Starting Lineup</span>
-          <StarterTable players={players} />
+          <Roster players={players} />
+          <div className="starters">
+            <span className="sub-label">Starting Lineup</span>
+            <StarterTable players={players} isHome={isHome} />
+          </div>
         </div>
-      </div>
-      }
+      )}
     </div>
   )
 }

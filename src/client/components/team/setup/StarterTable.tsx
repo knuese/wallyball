@@ -1,15 +1,16 @@
 import { FC, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Starter } from '.'
-import { Player } from '../../../store/types/team'
-
-type Lineup = Record<string, Player>
-type Defense = Record<string, string>
+import { setTeam } from '../../../store/actions/team/team'
+import { Defense, Lineup, Player } from '../../../store/types/team'
 
 export type StarterTableProps = {
   players: Player[]
+  isHome?: boolean
 }
 
-export const StarterTable: FC<StarterTableProps> = ({ players }) => {
+export const StarterTable: FC<StarterTableProps> = ({ players, isHome }) => {
+  const dispatch = useDispatch()
   const [unassignedPlayers, setUnassignedPlayers] = useState(players)
   const [lineup, setLineup] = useState<Lineup>({})
   const [defense, setDefense] = useState<Defense>({})
@@ -28,16 +29,20 @@ export const StarterTable: FC<StarterTableProps> = ({ players }) => {
       index={i}
       players={unassignedPlayers}
       selectPlayer={(playerId?: string) => {
-        setLineup({
+        const newLineup = {
           ...lineup,
           [i]: playerId ? players.find(({ id }) => id === playerId) : undefined
-        })
+        }
+        dispatch(setTeam(newLineup, defense, isHome))
+        setLineup(newLineup)
       }}
       selectPosition={(playerId: string, position: string) => {
-        setDefense({
+        const newDefense = {
           ...defense,
           [playerId]: position
-        })
+        }
+        dispatch(setTeam(lineup, newDefense, isHome))
+        setDefense(newDefense)
       }}
     />
   ))

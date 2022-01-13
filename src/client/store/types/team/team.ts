@@ -5,11 +5,16 @@ export enum Side {
   AWAY = 'away'
 }
 
+export type Lineup = Record<string, Player>
+export type Defense = Record<string, string>
+
 export type TeamState = {
   name: string
   primaryColor: string
   secondaryColor: string
   players: Player[]
+  lineup: Lineup
+  defense: Defense
 }
 
 export type TeamFileContents = {
@@ -21,6 +26,7 @@ export type TeamFileContents = {
 
 export const CLEAR_TEAM = 'CLEAR_TEAM'
 export const LOAD_TEAM = 'LOAD_TEAM'
+export const SET_TEAM = 'SET_TEAM'
 
 interface ClearTeamAction {
   type: typeof CLEAR_TEAM
@@ -34,4 +40,13 @@ interface LoadTeamAction {
   payload: TeamFileContents
 }
 
-export type TeamActionTypes = ClearTeamAction | LoadTeamAction
+interface SetTeamAction {
+  type: typeof SET_TEAM
+  side: Side
+  payload: {
+    lineup: Lineup
+    defense: Defense
+  }
+}
+
+export type TeamActionTypes = ClearTeamAction | LoadTeamAction | SetTeamAction
