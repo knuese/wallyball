@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import { Player } from '../../../store/types/team'
 
@@ -8,9 +8,15 @@ export type StarterProps = {
   index: number
   players: Player[]
   selectPlayer: (playerId?: string) => void
+  selectPosition: (playerId: string, position: string) => void
 }
 
-export const Starter: FC<StarterProps> = ({ index, players, selectPlayer }) => {
+export const Starter: FC<StarterProps> = ({
+  index,
+  players,
+  selectPlayer,
+  selectPosition
+}) => {
   const [selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(
     undefined
   )
@@ -18,6 +24,14 @@ export const Starter: FC<StarterProps> = ({ index, players, selectPlayer }) => {
     label: name,
     value: id
   }))
+
+  // auto-select the first position since no event is fired
+  // when the <select /> first becomes enabled
+  useEffect(() => {
+    if (selectedPlayer) {
+      selectPosition(selectedPlayer.id, selectedPlayer.positions[0])
+    }
+  }, [selectedPlayer, selectPosition])
 
   return (
     <tr>
@@ -41,7 +55,15 @@ export const Starter: FC<StarterProps> = ({ index, players, selectPlayer }) => {
         />
       </td>
       <td>
-        <select disabled={!selectedPlayer} className="select-position">
+        <select
+          disabled={!selectedPlayer}
+          className="select-position"
+          onChange={({ target: { value } }) => {
+            if (selectedPlayer) {
+              selectPosition(selectedPlayer.id, value)
+            }
+          }}
+        >
           {selectedPlayer?.positions.map((pos) => (
             <option key={`player${index}-${pos}`} value={pos}>
               {pos}

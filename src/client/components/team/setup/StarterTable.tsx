@@ -3,6 +3,7 @@ import { Starter } from '.'
 import { Player } from '../../../store/types/team'
 
 type Lineup = Record<string, Player>
+type Defense = Record<string, string>
 
 export type StarterTableProps = {
   players: Player[]
@@ -11,15 +12,15 @@ export type StarterTableProps = {
 export const StarterTable: FC<StarterTableProps> = ({ players }) => {
   const [unassignedPlayers, setUnassignedPlayers] = useState(players)
   const [lineup, setLineup] = useState<Lineup>({})
+  const [defense, setDefense] = useState<Defense>({})
 
   useEffect(() => {
     setUnassignedPlayers(
       players.filter(
-        ({ id }) =>
-          !Object.values(lineup).find((player) => player?.id === id)
+        ({ id }) => !Object.values(lineup).find((player) => player?.id === id)
       )
     )
-  }, [lineup])
+  }, [lineup, players])
 
   const starters = [...new Array(9).keys()].map((_, i) => (
     <Starter
@@ -30,6 +31,12 @@ export const StarterTable: FC<StarterTableProps> = ({ players }) => {
         setLineup({
           ...lineup,
           [i]: playerId ? players.find(({ id }) => id === playerId) : undefined
+        })
+      }}
+      selectPosition={(playerId: string, position: string) => {
+        setDefense({
+          ...defense,
+          [playerId]: position
         })
       }}
     />
