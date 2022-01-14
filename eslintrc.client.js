@@ -16,6 +16,7 @@ module.exports = {
   },
   rules: {
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-decline": "off"
+    "@typescript-eslint/no-use-before-decline": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

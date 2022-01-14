@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Starter } from '.'
 import { setTeam } from '../../../store/actions/team/team'
@@ -23,27 +23,31 @@ export const StarterTable: FC<StarterTableProps> = ({ players, isHome }) => {
     )
   }, [lineup, players])
 
+  const selectPlayer = (i: number) => (playerId?: string) => {
+    const newLineup = {
+      ...lineup,
+      [i]: playerId ? players.find(({ id }) => id === playerId) : undefined
+    }
+    dispatch(setTeam(newLineup, defense, isHome))
+    setLineup(newLineup)
+  }
+
+  const selectPosition = (playerId: string, position: string) => {
+    const newDefense = {
+      ...defense,
+      [playerId]: position
+    }
+    dispatch(setTeam(lineup, newDefense, isHome))
+    setDefense(newDefense)
+  }
+
   const starters = [...new Array(9).keys()].map((_, i) => (
     <Starter
       key={i}
       index={i}
       players={unassignedPlayers}
-      selectPlayer={(playerId?: string) => {
-        const newLineup = {
-          ...lineup,
-          [i]: playerId ? players.find(({ id }) => id === playerId) : undefined
-        }
-        dispatch(setTeam(newLineup, defense, isHome))
-        setLineup(newLineup)
-      }}
-      selectPosition={(playerId: string, position: string) => {
-        const newDefense = {
-          ...defense,
-          [playerId]: position
-        }
-        dispatch(setTeam(lineup, newDefense, isHome))
-        setDefense(newDefense)
-      }}
+      selectPlayer={selectPlayer(i)}
+      selectPosition={selectPosition}
     />
   ))
 
