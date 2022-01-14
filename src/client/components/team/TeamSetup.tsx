@@ -7,9 +7,10 @@ import { Roster, StarterTable } from '.'
 
 export type TeamSetupProps = {
   isHome?: boolean
+  invalid?: boolean
 }
 
-export const TeamSetup: FC<TeamSetupProps> = ({ isHome }) => {
+export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid }) => {
   const dispatch = useDispatch()
   const {
     name: teamName,
@@ -54,6 +55,7 @@ export const TeamSetup: FC<TeamSetupProps> = ({ isHome }) => {
           </div>
         </div>
       )}
+      {invalid && 'Please ensure all positions are filled before starting the game!'}
     </div>
   )
 }
