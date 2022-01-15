@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Player } from '../../../store/types/team'
+import { Player } from '../../../../store/types/team'
 
 export type RosterProps = {
   players: Player[]

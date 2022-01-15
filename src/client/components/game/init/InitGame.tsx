@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
-import { TeamSetup } from '../..'
 import { useTeam } from '../../../../hooks'
 import { Side } from '../../../store/types/team'
+import { TeamSetup } from '.'
 
 export const InitGame: FC = () => {
   const [awayLineup, awayDefense] = useTeam(Side.AWAY)

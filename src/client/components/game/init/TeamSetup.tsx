@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearTeam, readTeamFile } from '../../store/actions/team/team'
-import { RootState } from '../../store/reducers'
-import { Dropzone } from '..'
+import { clearTeam, readTeamFile } from '../../../store/actions/team/team'
+import { RootState } from '../../../store/reducers'
+import { Dropzone } from '../..'
 import { Roster, StarterTable } from '.'
 
 export type TeamSetupProps = {

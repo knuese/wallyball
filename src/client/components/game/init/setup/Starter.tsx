@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import { Typeahead } from 'react-bootstrap-typeahead'
-import { Player } from '../../../store/types/team'
+import { Player } from '../../../../store/types/team'
 
 type TypeaheadOption = Record<string, any> | string
 
