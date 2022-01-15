@@ -9,6 +9,34 @@
   border: 1px solid black;
 }
 
+.base {
+  position: absolute;
+  background-color: white;
+  border: 2px solid black;
+  width: 1.5vw;
+  height: 1.5vw;
+  transform: rotate(45deg);
+}
+
+.occupied {
+  background-color: #F4CA16;
+}
+
+#first-base {
+  top: 29.5vw;
+  left: 30vw;
+}
+
+#second-base {
+  top: 20vw;
+  left: 21.75vw;
+}
+
+#third-base {
+  top: 29.5vw;
+  left: 13.4vw;
+}
+
 .fielder {
   width: 100%;
   position: absolute;
