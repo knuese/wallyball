@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { useTeam } from '../../../../hooks'
+import { useTeam } from '../../../hooks'
 import { Side } from '../../../store/types/team'
 import { TeamSetup } from '.'
 

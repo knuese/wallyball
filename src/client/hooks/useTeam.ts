@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../client/store/reducers";
-import { Side } from "../client/store/types/team";
+import { RootState } from "../store/reducers";
+import { Side } from "../store/types/team";
 
 export const useTeam = (side: Side) => {
   const key = side === Side.AWAY ? 'away' : 'home'
