@@ -1,3 +1,3 @@
 export { Dropzone } from './dropzone'
-export { GameScreen, InitGame } from './game'
+export { GameScreen, InitGame, PlayGame } from './game'
 export { HomeScreen } from './home'

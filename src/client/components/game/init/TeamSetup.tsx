@@ -55,7 +55,8 @@ export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid }) => {
           </div>
         </div>
       )}
-      {invalid && 'Please ensure all positions are filled before starting the game!'}
+      {invalid &&
+        'Please ensure all positions are filled before starting the game!'}
     </div>
   )
 }

@@ -1,0 +1,61 @@
+.field-container {
+  position: relative;
+  text-align: center;
+}
+
+#field-img {
+  height: 45vw;
+  width: 45vw;
+  border: 1px solid black;
+}
+
+.fielder {
+  width: 100%;
+  position: absolute;
+  font-weight: 600;
+}
+
+#p {
+  top: 28.5vw;
+  left: 0vw;
+}
+
+#c {
+  top: 42vw;
+  left: 0vw;
+}
+
+#first {
+  top: 25vw;
+  left: 10vw;
+}
+
+#second {
+  top: 20vw;
+  left: 5vw;
+}
+
+#ss {
+  top: 20vw;
+  left: -5vw;
+}
+
+#third {
+  top: 25vw;
+  left: -10vw;
+}
+
+#lf {
+  top: 12.5vw;
+  left: -15vw;
+}
+
+#cf {
+  top: 6.25vw;
+  left: 0vw;
+}
+
+#rf {
+  top: 12.5vw;
+  left: 15vw;
+}

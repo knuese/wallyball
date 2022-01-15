@@ -1,2 +1,12 @@
+import { FC } from 'react'
+import { Field } from '.'
 
-export default <></>
+export const PlayGame: FC = () => {
+  return (
+    <div className="flex-row">
+      <Field />
+    </div>
+  )
+}
+
+export default PlayGame
