@@ -1,5 +1,5 @@
 .innings-table {
-  border: 1px solid black;
+  border: 2px solid black;
   height: 2rem;
   border-collapse: collapse;
   font-size: 1.2em;
@@ -13,6 +13,30 @@
 
 .innings-table td {
   padding: 0.25rem 0.5rem;
-  border: 1px solid black;
+  border: 2px solid black;
   text-align: center;
+}
+
+.team-toggles {
+  margin: 1rem 0;
+}
+
+.team-toggle {
+  position: relative;
+  width: 50%;
+  text-align: center;
+  padding: 0.5rem 0;
+  border-style: solid;
+  border-color: black;
+  border: 2px solid black;
+  font-weight: bold;
+  user-select: none;
+}
+
+.team-toggle-active {
+  opacity: 1;
+}
+
+.team-toggle-inactive {
+  opacity: 0.5;
 }

@@ -4,8 +4,8 @@ import { Side } from '../../../store/types/team'
 import { TeamSetup } from '.'
 
 export const InitGame: FC = () => {
-  const [awayLineup, awayDefense] = useTeam(Side.AWAY)
-  const [homeLineup, homeDefense] = useTeam(Side.HOME)
+  const { lineup: awayLineup, defense: awayDefense } = useTeam(Side.AWAY)
+  const { lineup: homeLineup, defense: homeDefense } = useTeam(Side.HOME)
   const [awayInvalid, setAwayInvalid] = useState(false)
   const [homeInvalid, setHomeInvalid] = useState(false)
 

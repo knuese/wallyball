@@ -1,11 +1,13 @@
 import { FC } from 'react'
-import { Field, Innings } from '.'
+import { BoxScore, Field } from '.'
 
 export const PlayGame: FC = () => {
   return (
     <div className="flex-row">
-      <span className='margin-right-full'><Field /></span>
-      <Innings />
+      <span className="margin-right-full">
+        <Field />
+      </span>
+      <BoxScore />
     </div>
   )
 }
