@@ -1,0 +1,71 @@
+import { FC } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../../store/reducers'
+
+export const Innings: FC = () => {
+  const { away, home } = useSelector((state: RootState) => state.teams)
+  
+  return (
+    <table className='innings-table'>
+      <thead>
+        <th></th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>7</th>
+        <th>8</th>
+        <th>9</th>
+        <th>R</th>
+        <th>H</th>
+        <th>E</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td style={{
+            color: "#DEB887", // away.secondaryColor,
+            backgroundColor: "#841B2D" // away.primaryColor
+          }}>
+            <b>Bears</b>
+          </td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2</td>
+          <td>5</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td style={{
+            color: "#A7FC00", // home.secondaryColor,
+            backgroundColor: "#007F5C" // home.primaryColor
+          }}>
+            <b>Turtles</b>
+          </td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>X</td>
+          <td>3</td>
+          <td>8</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+  )
+}
+
+export default Innings

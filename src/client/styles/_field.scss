@@ -1,12 +1,14 @@
 .field-container {
   position: relative;
   text-align: center;
+  background-color: #C0E8D5;
+  border: 1px solid black;
+  padding: 0.5rem;
 }
 
 #field-img {
   height: 45vw;
   width: 45vw;
-  border: 1px solid black;
 }
 
 .base {
@@ -16,6 +18,7 @@
   width: 1.5vw;
   height: 1.5vw;
   transform: rotate(45deg);
+  z-index: 10;
 }
 
 .occupied {
@@ -23,18 +26,18 @@
 }
 
 #first-base {
-  top: 29.5vw;
-  left: 30vw;
+  top: 30vw;
+  left: 30.25vw;
 }
 
 #second-base {
-  top: 20vw;
-  left: 21.75vw;
+  top: 20.5vw;
+  left: 22vw;
 }
 
 #third-base {
-  top: 29.5vw;
-  left: 13.4vw;
+  top: 30vw;
+  left: 14vw;
 }
 
 .fielder {
@@ -44,46 +47,46 @@
 }
 
 #p {
-  top: 28.5vw;
+  top: 29vw;
   left: 0vw;
 }
 
 #c {
-  top: 42vw;
+  top: 42.5vw;
   left: 0vw;
 }
 
 #first {
-  top: 25vw;
-  left: 10vw;
+  top: 26vw;
+  left: 9vw;
 }
 
 #second {
-  top: 20vw;
+  top: 21vw;
   left: 5vw;
 }
 
 #ss {
-  top: 20vw;
+  top: 21vw;
   left: -5vw;
 }
 
 #third {
-  top: 25vw;
-  left: -10vw;
+  top: 26vw;
+  left: -9vw;
 }
 
 #lf {
-  top: 12.5vw;
-  left: -15vw;
+  top: 13vw;
+  left: -13vw;
 }
 
 #cf {
-  top: 6.25vw;
+  top: 7vw;
   left: 0vw;
 }
 
 #rf {
-  top: 12.5vw;
-  left: 15vw;
+  top: 13vw;
+  left: 13vw;
 }

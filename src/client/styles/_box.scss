@@ -1,0 +1,18 @@
+.innings-table {
+  border: 1px solid black;
+  height: 2rem;
+  border-collapse: collapse;
+  font-size: 1.2em;
+}
+
+.innings-table th {
+  color: white;
+  background-color: black;
+  padding: 0.1rem 0.25rem;
+}
+
+.innings-table td {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid black;
+  text-align: center;
+}
