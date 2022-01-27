@@ -1,5 +1,14 @@
-.innings-table {
+.box-score {
+  background-color: white;
   border: 2px solid black;
+  height: 46.5vw;
+  overflow: scroll;
+}
+
+.innings-table {
+  border-width: 2px 0;
+  border-style: solid;
+  border-color: black;
   height: 2rem;
   border-collapse: collapse;
   font-size: 1.2em;
@@ -13,8 +22,53 @@
 
 .innings-table td {
   padding: 0.25rem 0.5rem;
-  border: 2px solid black;
+  border-width: 2px 0;
+  border-style: solid;
+  border-color: black;
   text-align: center;
+  background-color: white;
+}
+
+.team-stats-table {
+  border-width: 2px 0;
+  border-style: solid;
+  border-color: black;
+  border-collapse: collapse;
+}
+
+.team-stats-table thead {
+  border-width: 2px 0;
+  border-style: solid;
+  border-color: black;
+}
+
+.team-stats-table td {
+  padding: 0.25rem 0rem;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+
+.stat-cell {
+  width: 10%;
+}
+
+.odd-row {
+  background-color: #E3E3E3;
+}
+
+.even-row {
+  background-color: white;
+}
+
+.batting-extra {
+  background-color: white;
+  border-bottom: 2px solid black;
+  padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+}
+
+.batting-extra-line {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
 }
 
 .team-toggles {
@@ -26,11 +80,9 @@
   width: 50%;
   text-align: center;
   padding: 0.5rem 0;
-  border-style: solid;
-  border-color: black;
-  border: 2px solid black;
   font-weight: bold;
   user-select: none;
+  cursor: pointer;
 }
 
 .team-toggle-active {

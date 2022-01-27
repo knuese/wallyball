@@ -26,9 +26,11 @@ export const Innings: FC = () => {
       <tbody>
         <tr>
           <td
+            className="border-right"
             style={{
               color: '#DEB887', // away.secondaryColor,
-              backgroundColor: '#841B2D' // away.primaryColor
+              backgroundColor: '#841B2D', // away.primaryColor
+              borderRight: '2px solid black'
             }}
           >
             <b>Bears</b>
@@ -41,7 +43,7 @@ export const Innings: FC = () => {
           <td>1</td>
           <td>0</td>
           <td>0</td>
-          <td>0</td>
+          <td style={{ borderRight: '2px solid black' }}>0</td>
           <td>2</td>
           <td>5</td>
           <td>0</td>
@@ -50,7 +52,8 @@ export const Innings: FC = () => {
           <td
             style={{
               color: '#A7FC00', // home.secondaryColor,
-              backgroundColor: '#007F5C' // home.primaryColor
+              backgroundColor: '#007F5C', // home.primaryColor
+              borderRight: '2px solid black'
             }}
           >
             <b>Turtles</b>
@@ -63,7 +66,7 @@ export const Innings: FC = () => {
           <td>0</td>
           <td>0</td>
           <td>1</td>
-          <td>X</td>
+          <td style={{ borderRight: '2px solid black' }}>X</td>
           <td>3</td>
           <td>8</td>
           <td>1</td>

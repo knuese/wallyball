@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/reducers'
-import { Side } from '../store/types/team'
+import { Side, TeamState } from '../store/types/team'
 
-export const useTeam = (side: Side) => {
+export const useTeam = (side: Side): TeamState => {
   const key = side === Side.AWAY ? 'away' : 'home'
-  const { name, lineup, defense, primaryColor, secondaryColor } = useSelector(
-    (state: RootState) => state.teams[key]
-  )
-  return { name, lineup, defense, primaryColor, secondaryColor }
+  const teamState = useSelector((state: RootState) => state.teams[key])
+  return teamState
 }
