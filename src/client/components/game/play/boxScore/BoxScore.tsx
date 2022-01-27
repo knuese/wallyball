@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { Innings, TeamStats, TeamToggle } from '.'
+import { Innings, TeamStats, TeamToggles } from '.'
 import { Side } from '../../../../store/types/team'
 
 export const BoxScore: FC = () => {
@@ -8,7 +8,7 @@ export const BoxScore: FC = () => {
   return (
     <div className="flex-column box-score">
       <Innings />
-      <TeamToggle activeSide={activeSide} setActiveSide={setActiveSide} />
+      <TeamToggles activeSide={activeSide} setActiveSide={setActiveSide} />
       <TeamStats side={activeSide} />
     </div>
   )

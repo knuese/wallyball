@@ -6,7 +6,7 @@ export type TeamToggleProps = {
   setActiveSide: (side: Side) => void
 }
 
-export const TeamToggle: FC<TeamToggleProps> = ({
+export const TeamToggles: FC<TeamToggleProps> = ({
   activeSide,
   setActiveSide
 }) => {
@@ -44,4 +44,4 @@ export const TeamToggle: FC<TeamToggleProps> = ({
   )
 }
 
-export default TeamToggle
+export default TeamToggles
