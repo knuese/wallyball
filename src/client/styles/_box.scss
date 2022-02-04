@@ -12,6 +12,7 @@
   height: 2rem;
   border-collapse: collapse;
   font-size: 1.2em;
+  user-select: none;
 }
 
 .innings-table th {
@@ -27,6 +28,11 @@
   border-color: black;
   text-align: center;
   background-color: white;
+}
+
+.innings {
+  width: 15rem;
+  overflow-x: auto;
 }
 
 .team-stats-table {
@@ -72,7 +78,7 @@
 }
 
 .team-toggles {
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
 }
 
 .team-toggle {

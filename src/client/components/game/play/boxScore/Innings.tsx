@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { InningColumns, StatColumns, TeamColumn } from '.'
 import { useTeam } from '../../../../hooks'
 import { Side } from '../../../../store/types/team'
 
@@ -7,72 +8,36 @@ export const Innings: FC = () => {
   const home = useTeam(Side.HOME)
 
   return (
-    <table className="innings-table">
-      <thead>
-        <th></th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-        <th>5</th>
-        <th>6</th>
-        <th>7</th>
-        <th>8</th>
-        <th>9</th>
-        <th>R</th>
-        <th>H</th>
-        <th>E</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td
-            className="border-right"
-            style={{
-              color: '#DEB887', // away.secondaryColor,
-              backgroundColor: '#841B2D', // away.primaryColor
-              borderRight: '2px solid black'
-            }}
-          >
-            <b>Bears</b>
-          </td>
-          <td>0</td>
-          <td>0</td>
-          <td>1</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1</td>
-          <td>0</td>
-          <td>0</td>
-          <td style={{ borderRight: '2px solid black' }}>0</td>
-          <td>2</td>
-          <td>5</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td
-            style={{
-              color: '#A7FC00', // home.secondaryColor,
-              backgroundColor: '#007F5C', // home.primaryColor
-              borderRight: '2px solid black'
-            }}
-          >
-            <b>Turtles</b>
-          </td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>2</td>
-          <td>0</td>
-          <td>0</td>
-          <td>1</td>
-          <td style={{ borderRight: '2px solid black' }}>X</td>
-          <td>3</td>
-          <td>8</td>
-          <td>1</td>
-        </tr>
-      </tbody>
-    </table>
+    <div className="flex-row">
+      <TeamColumn
+        away={{
+          name: 'Bears',
+          color: '#DEB887',
+          background: '#841B2D'
+        }}
+        home={{
+          name: 'Turtles',
+          color: '#A7FC00',
+          background: '#007F5C'
+        }}
+      />
+      <InningColumns
+        awayScores={[0, 0, 1, 0, 0, 1, 0, 0, 0]}
+        homeScores={[0, 0, 0, 2, 0, 1, 0, 0, 0]}
+      />
+      <StatColumns
+        away={{
+          runs: 2,
+          hits: 5,
+          errors: 0
+        }}
+        home={{
+          runs: 3,
+          hits: 8,
+          errors: 1
+        }}
+      />
+    </div>
   )
 }
 

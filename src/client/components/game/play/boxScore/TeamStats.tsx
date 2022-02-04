@@ -101,7 +101,7 @@ export const TeamStats: FC<TeamStatProps> = ({ side }) => {
           <p className="batting-extra-line">{`HR: ${homeRuns?.join(', ')}`}</p>
         )}
       </div>
-      <br />
+      <div style={{ height: '0.5rem' }} />
       <table className="team-stats-table">
         <thead style={headerStyle}>
           <th></th>
