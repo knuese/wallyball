@@ -1,4 +1,4 @@
-import { Player, Runner } from '../src/server/model'
+import { Player, Runner } from '../../src/server/model'
 
 export const batter = { id: 'batter' } as Player
 export const first = { id: 'first' } as Runner

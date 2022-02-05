@@ -1,5 +1,9 @@
 import { Team, Position } from '../../../../src/server/model'
-import { idToPlayer, players, starterArray } from '../../../../__test_data__'
+import {
+  idToPlayer,
+  players,
+  starterArray
+} from '../../../../__test_data__/server'
 
 describe('Team', () => {
   describe('initialization', () => {

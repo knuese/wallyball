@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import { Player } from '../../../../store/types/team'
+import { PlayerConfig } from '../../../../store/types/team'
 
 export type RosterProps = {
-  players: Player[]
+  players: PlayerConfig[]
 }
 
 export const Roster: FC<RosterProps> = ({ players }) => {

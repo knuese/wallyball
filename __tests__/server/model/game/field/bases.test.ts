@@ -12,7 +12,7 @@ import {
   players,
   second,
   third
-} from '../../../../../__test_data__'
+} from '../../../../../__test_data__/server'
 
 const { pitcher } = players
 

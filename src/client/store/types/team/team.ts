@@ -1,18 +1,18 @@
-import { Player } from '.'
+import { PlayerConfig } from '.'
 
 export enum Side {
   HOME = 'home',
   AWAY = 'away'
 }
 
-export type Lineup = Record<string, Player>
+export type Lineup = Record<string, PlayerConfig>
 export type Defense = Record<string, string>
 
 export type TeamState = {
   name: string
   primaryColor: string
   secondaryColor: string
-  players: Player[]
+  players: PlayerConfig[]
   lineup: Lineup
   defense: Defense
 }
@@ -21,7 +21,7 @@ export type TeamFileContents = {
   name: string
   primaryColor: string
   secondaryColor: string
-  players: Player[]
+  players: PlayerConfig[]
 }
 
 export const CLEAR_TEAM = 'CLEAR_TEAM'

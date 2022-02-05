@@ -1,6 +1,6 @@
 import { Outcome } from '../../../../../../src/server/model'
 import { FlyUtil } from '../../../../../../src/server/model/game/field/util'
-import { first, third } from '../../../../../../__test_data__'
+import { first, third } from '../../../../../../__test_data__/server'
 
 describe('fly util', () => {
   const thresholds = {

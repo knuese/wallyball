@@ -4,7 +4,7 @@ import {
   Player,
   Position,
   Starter
-} from '../src/server/model'
+} from '../../src/server/model'
 
 const pitcher = new Player(
   'pitcher',
