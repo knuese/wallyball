@@ -15,7 +15,7 @@ export type TeamColumnProps = {
 
 export const TeamColumn: FC<TeamColumnProps> = ({ away, home }) => {
   const rows = [away, home].map(({ name, color, background }) => (
-    <tr>
+    <tr key={name}>
       <td
         className="border-right"
         style={{
@@ -31,7 +31,9 @@ export const TeamColumn: FC<TeamColumnProps> = ({ away, home }) => {
   return (
     <table className="innings-table border-right">
       <thead>
-        <th style={{ color: 'black' }}>_</th>
+        <tr>
+          <th style={{ color: 'black' }}>_</th>
+        </tr>
       </thead>
       <tbody>{rows}</tbody>
     </table>

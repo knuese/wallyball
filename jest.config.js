@@ -5,6 +5,7 @@ module.exports = {
   globals: {
     'ts-jest': {
       compiler: 'ttypescript',
+      isolatedModules: true,
       diagnostics: false
     }
   },
@@ -13,6 +14,11 @@ module.exports = {
   coveragePathIgnorePatterns: [
     ...defaults.coveragePathIgnorePatterns,
     'enum',
-    '__test_data__'
-  ]
+    '__test_data__',
+    '__test_utils__',
+    'index.ts'
+  ],
+  moduleNameMapper: {
+    '.+\\.png$': '<rootDir>/__mocks__/png.ts'
+  }
 }

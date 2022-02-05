@@ -14,9 +14,9 @@ export type StatColumnProps = {
 }
 
 export const StatColumns: FC<StatColumnProps> = ({ away, home }) => {
-  const headers = ['R', 'H', 'E'].map((h) => <th>{h}</th>)
-  const rows = [away, home].map(({ runs, hits, errors }) => (
-    <tr>
+  const headers = ['R', 'H', 'E'].map((h) => <th key={h}>{h}</th>)
+  const rows = [away, home].map(({ runs, hits, errors }, i) => (
+    <tr key={`stats:${i}`}>
       <td>{runs}</td>
       <td>{hits}</td>
       <td>{errors}</td>
@@ -25,7 +25,9 @@ export const StatColumns: FC<StatColumnProps> = ({ away, home }) => {
 
   return (
     <table className="innings-table">
-      <thead>{headers}</thead>
+      <thead>
+        <tr>{headers}</tr>
+      </thead>
       <tbody>{rows}</tbody>
     </table>
   )

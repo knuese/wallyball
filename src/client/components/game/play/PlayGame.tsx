@@ -10,7 +10,7 @@ export const PlayGame: FC = () => {
         </span>
         <BoxScore />
       </div>
-      <PlayDescriptor text='Bo Bo doubled.' />
+      <PlayDescriptor text="Bo Bo doubled." />
     </div>
   )
 }

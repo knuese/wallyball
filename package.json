@@ -8,7 +8,7 @@
     "build": "npm run build:server && npm run build:client",
     "lint:client": "eslint --config ./eslintrc.client.js --fix ./src/client",
     "lint:server": "eslint --config ./eslintrc.server.js --fix ./src/server",
-    "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__",
+    "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__ __test_utils__",
     "lint": "concurrently \"npm run lint:client\" \"npm run lint:server\" \"npm run lint:test\"",
     "play": "npx ts-node -O '{\"module\":\"commonjs\"}' z.ts",
     "start": "npm run build:server && concurrently \"npm run build:client\" \"NODE_ENV=local nodemon\"",
