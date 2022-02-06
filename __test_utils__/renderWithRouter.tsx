@@ -9,7 +9,7 @@ type RenderProps = {
 
 export const renderWithRouter = (
   ui: JSX.Element,
-  { route }: RenderProps
+  { route }: RenderProps = { route: '/' }
 ): RenderResult =>
   render(<MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>)
 
