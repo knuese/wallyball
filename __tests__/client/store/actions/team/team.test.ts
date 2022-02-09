@@ -1,5 +1,6 @@
+import { AnyAction } from 'redux'
 import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import thunk, { ThunkDispatch } from 'redux-thunk'
 import {
   clearTeam,
   readTeamFile,
@@ -9,11 +10,15 @@ import {
   CLEAR_TEAM,
   LOAD_TEAM,
   SET_TEAM,
-  Side
+  Side,
+  TeamState
 } from '../../../../../src/client/store/types/team'
 import { defense, lineup } from '../../../../../__test_data__/client'
 
-const mockStore = configureMockStore([thunk])
+const mockStore = configureMockStore<
+  TeamState,
+  ThunkDispatch<TeamState, void, AnyAction>
+>([thunk])
 
 describe('team actions', () => {
   describe('readTeamFile', () => {
@@ -36,7 +41,7 @@ describe('team actions', () => {
         } as any as File
 
         const store = mockStore()
-        await store.dispatch(readTeamFile(mockFile, isHome) as any)
+        await store.dispatch(readTeamFile(mockFile, isHome))
 
         expect(store.getActions()).toEqual([
           {
@@ -60,7 +65,7 @@ describe('team actions', () => {
       ['home', true, Side.HOME]
     ])('sets %s team data', (_desc, isHome, expectedSide) => {
       const store = mockStore()
-      store.dispatch(setTeam(lineup, defense, isHome) as any)
+      store.dispatch(setTeam(lineup, defense, isHome))
       expect(store.getActions()).toEqual([
         {
           type: SET_TEAM,
@@ -77,7 +82,7 @@ describe('team actions', () => {
       ['home', true, Side.HOME]
     ])('clears the %s team data', (_desc, isHome, expectedSide) => {
       const store = mockStore()
-      store.dispatch(clearTeam(isHome) as any)
+      store.dispatch(clearTeam(isHome))
       expect(store.getActions()).toEqual([
         {
           type: CLEAR_TEAM,

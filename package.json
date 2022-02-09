@@ -13,7 +13,9 @@
     "play": "npx ts-node -O '{\"module\":\"commonjs\"}' z.ts",
     "start": "npm run build:server && concurrently \"npm run build:client\" \"NODE_ENV=local nodemon\"",
     "pretest": "npm run lint",
-    "test": "npx jest"
+    "prettierOne": "prettier -w",
+    "test": "npx jest",
+    "testOne": "sh testOne.sh"
   },
   "prettier": "./prettier.config",
   "dependencies": {
