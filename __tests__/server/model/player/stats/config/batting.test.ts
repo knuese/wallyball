@@ -17,4 +17,10 @@ describe('batting config', () => {
 
     expect(battingStats.determineOutcome(rand)).toEqual(expected)
   })
+
+  it('throws an error if there are not 8 thresholds', () => {
+    expect(() => new BattingConfig([])).toThrow(
+      Error('must provide eight thresholds for batting stats')
+    )
+  })
 })
