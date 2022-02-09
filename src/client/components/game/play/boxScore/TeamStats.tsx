@@ -63,9 +63,17 @@ export const TeamStats: FC<TeamStatProps> = ({ side }) => {
   }
 
   const getRows = (stats: Array<string | number>, i: number) => (
-    <tr className={i % 2 === 0 ? 'even-row' : 'odd-row'}>
+    <tr
+      key={`${side}:${stats[0]}`}
+      className={i % 2 === 0 ? 'even-row' : 'odd-row'}
+    >
       {stats.map((stat, i) => (
-        <td className={i === 0 ? 'border-right' : 'stat-cell'}>{stat}</td>
+        <td
+          key={`${side}:${stats[0]}:${i}`}
+          className={i === 0 ? 'border-right' : 'stat-cell'}
+        >
+          {stat}
+        </td>
       ))}
     </tr>
   )
@@ -80,13 +88,15 @@ export const TeamStats: FC<TeamStatProps> = ({ side }) => {
     <div className="flex-column">
       <table className="team-stats-table">
         <thead style={headerStyle}>
-          <th></th>
-          <th>AB</th>
-          <th>R</th>
-          <th>H</th>
-          <th>RBI</th>
-          <th>BB</th>
-          <th>SO</th>
+          <tr>
+            <th></th>
+            <th>AB</th>
+            <th>R</th>
+            <th>H</th>
+            <th>RBI</th>
+            <th>BB</th>
+            <th>SO</th>
+          </tr>
         </thead>
         <tbody>{battingRows}</tbody>
       </table>
@@ -104,13 +114,15 @@ export const TeamStats: FC<TeamStatProps> = ({ side }) => {
       <div style={{ height: '0.5rem' }} />
       <table className="team-stats-table">
         <thead style={headerStyle}>
-          <th></th>
-          <th>IP</th>
-          <th>H</th>
-          <th>R</th>
-          <th>ER</th>
-          <th>BB</th>
-          <th>SO</th>
+          <tr>
+            <th></th>
+            <th>IP</th>
+            <th>H</th>
+            <th>R</th>
+            <th>ER</th>
+            <th>BB</th>
+            <th>SO</th>
+          </tr>
         </thead>
         <tbody>{pitchingRows}</tbody>
       </table>

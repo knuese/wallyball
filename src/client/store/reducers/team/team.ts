@@ -4,7 +4,7 @@ import {
   CLEAR_TEAM,
   LOAD_TEAM,
   SET_TEAM,
-  Player,
+  PlayerConfig,
   TeamActionTypes,
   TeamState
 } from '../../types/team'
@@ -29,7 +29,7 @@ const reducer: Reducer<TeamState> = (
         name: payload.name,
         primaryColor: payload.primaryColor,
         secondaryColor: payload.secondaryColor,
-        players: payload.players.map((player: Player[]) => ({
+        players: payload.players.map((player: PlayerConfig[]) => ({
           ...player,
           id: uuidv4()
         }))
