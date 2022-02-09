@@ -1,75 +1,41 @@
 import { FC } from 'react'
-// import { useTeam } from "../../../../hooks";
-import { Side } from '../../../../store/types/team'
 
-export type TeamStatProps = {
-  side: Side
-}
-
-type ExtraStats = {
+type BattingExtra = {
   doubles?: string[]
   triples?: string[]
   homeRuns?: string[]
 }
 
-const bearsBatting = [
-  ['Sammy', 4, 0, 0, 0, 0, 0],
-  ['Buster', 3, 1, 1, 0, 1, 1],
-  ['Tush', 4, 0, 2, 1, 0, 2],
-  ['Bo Bo', 4, 0, 0, 0, 0, 2],
-  ['Spanky', 4, 0, 1, 0, 0, 2],
-  ['Sparey', 4, 1, 1, 1, 0, 0],
-  ['Cappy', 3, 0, 0, 0, 0, 1],
-  ['Cupcake', 3, 0, 0, 0, 0, 1],
-  ['September', 3, 0, 0, 0, 0, 1]
-]
-
-const bearsExtra = {
-  doubles: ['Buster'],
-  homeRuns: ['Sparey']
+export type TeamStatProps = {
+  name: string
+  color: string
+  background: string
+  batting: Array<string | number>[]
+  battingExtra: BattingExtra
+  pitching: Array<string | number>[]
 }
 
-const bearsPitching = [['September', '8.0', 8, 3, 2, 2, 9]]
-
-const turtlesBatting = [
-  ['Zoona', 4, 1, 2, 0, 0, 0],
-  ['Chan', 3, 0, 1, 1, 1, 1],
-  ['Guss', 4, 0, 0, 0, 0, 2],
-  ['Browny', 3, 0, 0, 0, 1, 3],
-  ['Shells', 4, 1, 1, 1, 0, 1],
-  ['Glen', 4, 0, 2, 0, 0, 0],
-  ['Cookie', 4, 1, 0, 0, 0, 1],
-  ['George', 3, 0, 1, 0, 0, 1],
-  ['Gary', 3, 0, 1, 0, 0, 0]
-]
-
-const turtlesExtra = {
-  doubles: ['Chan', 'Glen'],
-  triples: ['Zoona']
-}
-
-const turtlesPitching = [
-  ['Gary', '8.0', 4, 2, 2, 1, 8],
-  ['Shells', '1.0', 1, 0, 0, 0, 2]
-]
-
-export const TeamStats: FC<TeamStatProps> = ({ side }) => {
-  // const { primaryColor } = useTeam(side)
-  const isAway = side === Side.AWAY
-
+export const TeamStats: FC<TeamStatProps> = ({
+  name,
+  color,
+  background,
+  batting,
+  battingExtra,
+  pitching
+}) => {
   const headerStyle = {
-    color: isAway ? '#DEB887' : '#A7FC00',
-    backgroundColor: isAway ? '#841B2D' : '#007F5C' // primaryColor
+    color,
+    background
   }
 
   const getRows = (stats: Array<string | number>, i: number) => (
     <tr
-      key={`${side}:${stats[0]}`}
+      key={`${name}:${stats[0]}`}
       className={i % 2 === 0 ? 'even-row' : 'odd-row'}
     >
       {stats.map((stat, i) => (
         <td
-          key={`${side}:${stats[0]}:${i}`}
+          key={`${name}:${stats[0]}:${i}`}
           className={i === 0 ? 'border-right' : 'stat-cell'}
         >
           {stat}
@@ -78,11 +44,7 @@ export const TeamStats: FC<TeamStatProps> = ({ side }) => {
     </tr>
   )
 
-  const battingRows = (isAway ? bearsBatting : turtlesBatting).map(getRows)
-  const { doubles, triples, homeRuns } = (
-    isAway ? bearsExtra : turtlesExtra
-  ) as ExtraStats
-  const pitchingRows = (isAway ? bearsPitching : turtlesPitching).map(getRows)
+  const { doubles, triples, homeRuns } = battingExtra
 
   return (
     <div className="flex-column">
@@ -98,7 +60,7 @@ export const TeamStats: FC<TeamStatProps> = ({ side }) => {
             <th>SO</th>
           </tr>
         </thead>
-        <tbody>{battingRows}</tbody>
+        <tbody>{batting.map(getRows)}</tbody>
       </table>
       <div className="batting-extra">
         {doubles?.length && (
@@ -124,7 +86,7 @@ export const TeamStats: FC<TeamStatProps> = ({ side }) => {
             <th>SO</th>
           </tr>
         </thead>
-        <tbody>{pitchingRows}</tbody>
+        <tbody>{pitching.map(getRows)}</tbody>
       </table>
     </div>
   )
