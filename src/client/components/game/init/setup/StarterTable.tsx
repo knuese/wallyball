@@ -2,10 +2,10 @@ import { FC, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Starter } from '.'
 import { setTeam } from '../../../../store/actions/team/team'
-import { Defense, Lineup, Player } from '../../../../store/types/team'
+import { Defense, Lineup, PlayerConfig } from '../../../../store/types/team'
 
 export type StarterTableProps = {
-  players: Player[]
+  players: PlayerConfig[]
   isHome?: boolean
 }
 

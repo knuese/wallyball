@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react'
 import { Typeahead } from 'react-bootstrap-typeahead'
-import { Player } from '../../../../store/types/team'
+import { PlayerConfig } from '../../../../store/types/team'
 
 type TypeaheadOption = Record<string, any> | string
 
 export type StarterProps = {
   index: number
-  players: Player[]
+  players: PlayerConfig[]
   selectPlayer: (playerId?: string) => void
   selectPosition: (playerId: string, position: string) => void
 }
@@ -17,9 +17,9 @@ export const Starter: FC<StarterProps> = ({
   selectPlayer,
   selectPosition
 }) => {
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(
-    undefined
-  )
+  const [selectedPlayer, setSelectedPlayer] = useState<
+    PlayerConfig | undefined
+  >(undefined)
   const playerItems = players?.map(({ id, name }) => ({
     label: name,
     value: id
@@ -59,9 +59,8 @@ export const Starter: FC<StarterProps> = ({
           disabled={!selectedPlayer}
           className="select-position"
           onChange={({ target: { value } }) => {
-            if (selectedPlayer) {
-              selectPosition(selectedPlayer.id, value)
-            }
+            // selectedPlayer always defined if here
+            selectPosition((selectedPlayer as PlayerConfig).id, value)
           }}
         >
           {selectedPlayer?.positions.map((pos) => (
