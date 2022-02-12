@@ -4,8 +4,18 @@ import { Defense, Lineup, Side } from '../../../store/types/team'
 import { TeamSetup } from '.'
 
 export const InitGame: FC = () => {
-  const { lineup: awayLineup, defense: awayDefense } = useTeam(Side.AWAY)
-  const { lineup: homeLineup, defense: homeDefense } = useTeam(Side.HOME)
+  const {
+    lineup: awayLineup,
+    defense: awayDefense,
+    ...awayRest
+  } = useTeam(Side.AWAY)
+
+  const {
+    lineup: homeLineup,
+    defense: homeDefense,
+    ...homeRest
+  } = useTeam(Side.HOME)
+
   const [awayInvalid, setAwayInvalid] = useState(false)
   const [homeInvalid, setHomeInvalid] = useState(false)
 
@@ -27,8 +37,8 @@ export const InitGame: FC = () => {
   return (
     <div className="flex-column center">
       <div className="flex-row">
-        <TeamSetup invalid={awayInvalid} />
-        <TeamSetup isHome invalid={homeInvalid} />
+        <TeamSetup invalid={awayInvalid} teamData={awayRest} />
+        <TeamSetup isHome invalid={homeInvalid} teamData={homeRest} />
       </div>
       <button disabled={!canSubmit} className="submit-button" onClick={submit}>
         Submit

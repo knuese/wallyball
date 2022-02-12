@@ -1,23 +1,24 @@
 import { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { TeamFileContents } from '../../../store/types/team'
 import { clearTeam, readTeamFile } from '../../../store/actions/team/team'
-import { RootState } from '../../../store/reducers'
 import { Dropzone } from '../..'
 import { Roster, StarterTable } from '.'
 
 export type TeamSetupProps = {
   isHome?: boolean
   invalid?: boolean
+  teamData?: TeamFileContents
 }
 
-export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid }) => {
+export const TeamSetup: FC<TeamSetupProps> = ({
+  isHome,
+  invalid,
+  teamData: { name: teamName, primaryColor, secondaryColor, players } = {
+    players: []
+  }
+}) => {
   const dispatch = useDispatch()
-  const {
-    name: teamName,
-    primaryColor,
-    secondaryColor,
-    players
-  } = useSelector((state: RootState) => state.teams[isHome ? 'home' : 'away'])
 
   const onFileLoaded = (file: File) => {
     dispatch(readTeamFile(file, isHome))
@@ -29,7 +30,8 @@ export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid }) => {
 
   const fileUploadMsg = (
     <p>
-      Select a file for the <b>{`${isHome ? 'Home' : 'Away'}`}</b> team.
+      Select a file for the{' '}
+      <b data-testid="upload-team">{`${isHome ? 'Home' : 'Away'}`}</b> team.
     </p>
   )
 
