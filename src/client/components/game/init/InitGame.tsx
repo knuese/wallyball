@@ -1,7 +1,8 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useTeam } from '../../../hooks'
-import { Defense, Lineup, Side } from '../../../store/types/team'
+import { Side } from '../../../store/types/team'
 import { TeamSetup } from '.'
+import { isLineupFull, isDefenseValid } from '../../../util'
 
 export const InitGame: FC = () => {
   const {
@@ -18,16 +19,15 @@ export const InitGame: FC = () => {
 
   const [awayInvalid, setAwayInvalid] = useState(false)
   const [homeInvalid, setHomeInvalid] = useState(false)
+  const [canSubmit, setCanSubmit] = useState(false)
 
-  const isFull = (lineup: Lineup) =>
-    Object.values(lineup).filter((v) => v).length === 9
-  const canSubmit = isFull(awayLineup) && isFull(homeLineup)
+  useEffect(() => {
+    setCanSubmit(isLineupFull(awayLineup) && isLineupFull(homeLineup))
+  }, [awayLineup, homeLineup])
 
   const submit = () => {
-    const isValidDefense = (defense: Defense) =>
-      new Set(Object.values(defense)).size === 9
-    setAwayInvalid(isValidDefense(awayDefense))
-    setHomeInvalid(isValidDefense(homeDefense))
+    setAwayInvalid(!isDefenseValid(awayDefense))
+    setHomeInvalid(!isDefenseValid(homeDefense))
 
     if (!awayInvalid && !homeInvalid) {
       console.log('submitting!')
