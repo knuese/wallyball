@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { BoxScore, Field, PlayDescriptor } from '.'
+import { BoxScore, ControlPanel, Field, PlayDescriptor } from '.'
 
 export const PlayGame: FC = () => {
   return (
@@ -7,6 +7,9 @@ export const PlayGame: FC = () => {
       <div className="flex-row" style={{ display: 'inline-flex' }}>
         <span className="margin-right-full">
           <Field />
+        </span>
+        <span className="margin-right-full">
+          <ControlPanel />
         </span>
         <BoxScore />
       </div>

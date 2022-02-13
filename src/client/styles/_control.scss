@@ -1,0 +1,40 @@
+.batter-pitcher {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 0.8em;
+  padding: 0.5rem 0 0.1rem 0;
+}
+
+.current-player-name {
+  width: 6rem;
+  padding-left: 0.5rem;
+}
+
+.current-player-stat {
+  margin: 0.15rem;
+  border: 1px solid black;
+}
+
+.current-player-table {
+  border-collapse: collapse;
+  margin: 0.5rem;
+}
+
+.current-player-table tr {
+  border: 2px solid black;
+}
+
+.current-player-table th {
+  opacity: 0.7;
+  font-weight: bold;
+  padding: 0.25rem;
+}
+
+.current-player-table td {
+  padding: 0.25rem;
+}
+
+.current-player-text {
+  padding: 0.25rem;
+  opacity: 0.7;
+}
