@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 export type AutoplayToggleProps = {
   checked?: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (checked: boolean) => void
 }
 
 export const AutoplayToggle: FC<AutoplayToggleProps> = ({
@@ -12,7 +12,13 @@ export const AutoplayToggle: FC<AutoplayToggleProps> = ({
   <div className="flex-row center control-item">
     <span className="switch-label">Autoplay</span>
     <label className="switch">
-      <input type="checkbox" checked={checked} onChange={onChange} />
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={({
+          target: { checked }
+        }: React.ChangeEvent<HTMLInputElement>) => onChange(checked)}
+      />
       <span className="slider round" />
     </label>
   </div>

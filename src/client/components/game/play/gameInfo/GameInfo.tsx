@@ -26,22 +26,20 @@ const pitcherStats = {
 export const GameInfo: FC = () => {
   return (
     <div className="flex-column game-info">
-      <div className="flex-column border-all">
-        <CurrentPlayer
-          isBatting
-          name="Sparey"
-          color={bears.color}
-          background={bears.background}
-          stats={batterStats}
-        />
-        <div className="border-bottom" />
-        <CurrentPlayer
-          name="Shells"
-          color={turtles.color}
-          background={turtles.background}
-          stats={pitcherStats}
-        />
-      </div>
+      <CurrentPlayer
+        isBatting
+        name="Sparey"
+        color={bears.color}
+        background={bears.background}
+        stats={batterStats}
+      />
+      <br />
+      <CurrentPlayer
+        name="Shells"
+        color={turtles.color}
+        background={turtles.background}
+        stats={pitcherStats}
+      />
       <br />
       <PlayDescriptor text="Bo Bo doubled." />
       <br />

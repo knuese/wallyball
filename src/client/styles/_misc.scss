@@ -3,8 +3,13 @@ button {
   border: 1px solid black;
   border-radius: 8px;
   background-color: #EEE;
+  cursor: pointer;
 }
 
 button:active {
   background-color: #CCC;
+}
+
+button:disabled {
+  cursor: default;
 }
