@@ -25,7 +25,7 @@ const pitcherStats = {
 
 export const GameInfo: FC = () => {
   return (
-    <div className="flex-column">
+    <div className="flex-column game-info">
       <div className="flex-column border-all">
         <CurrentPlayer
           isBatting
