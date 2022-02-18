@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { BoxScore, ControlPanel, Field, PlayDescriptor } from '.'
+import { BoxScore, Field, GameInfo } from '.'
 
 export const PlayGame: FC = () => {
   return (
@@ -9,11 +9,10 @@ export const PlayGame: FC = () => {
           <Field />
         </span>
         <span className="margin-right-full">
-          <ControlPanel />
+          <GameInfo />
         </span>
         <BoxScore />
       </div>
-      <PlayDescriptor text="Bo Bo doubled." />
     </div>
   )
 }

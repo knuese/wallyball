@@ -1,9 +1,10 @@
 import { FC } from 'react'
 
 export type BattingStatsSeason = {
-  AVG: string
+  H: string
   HR: string
   RBI: string
+  AVG: string
 }
 
 export type PitchingStatsSeason = {
@@ -32,7 +33,7 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
   isBatting
 }) => (
   <div className="flex-column">
-    <div className="center batter-pitcher" style={{ color, background }}>
+    <div className="center game-info-title" style={{ color, background }}>
       CURRENT {isBatting ? 'BATTER' : 'PITCHER'}
     </div>
     <div className="flex-row" style={{ background }}>

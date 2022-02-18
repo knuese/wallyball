@@ -1,13 +1,15 @@
-.batter-pitcher {
+.game-info-title {
   font-weight: bold;
   font-style: italic;
   font-size: 0.8em;
   padding: 0.5rem 0 0.1rem 0;
+  text-decoration: underline;
 }
 
 .current-player-name {
   width: 6rem;
   padding-left: 0.5rem;
+  font-size: 1.25em;
 }
 
 .current-player-stat {
@@ -37,4 +39,21 @@
 .current-player-text {
   padding: 0.25rem;
   opacity: 0.7;
+}
+
+.play-descriptor {
+  background-color: white;
+  height: 8rem;
+  padding: 0 0.6rem;
+  font-size: 0.9em;
+  overflow-y: scroll;
+}
+
+.control-panel {
+  background-color: cornsilk;
+  height: 15.3rem;
+}
+
+.control-item {
+  margin-bottom: 1.5rem;
 }

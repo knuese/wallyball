@@ -89,6 +89,9 @@
   font-weight: bold;
   user-select: none;
   cursor: pointer;
+  // this is needed to prevent flickering from the autoplay toggle
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .team-toggle-active {

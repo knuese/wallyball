@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
-import { PlayDescriptor } from '../../../../../src/client/components/game'
+import { PlayDescriptor } from '../../../../../../src/client/components/game'
 
 describe('<PlayDescriptor />', () => {
   it('renders the component', () => {
