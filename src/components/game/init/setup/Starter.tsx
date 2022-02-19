@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import { Player } from '../../../../model'
-import { PlayerConfig } from '../../../../store/types/team'
 
 type TypeaheadOption = Record<string, any> | string
 
@@ -41,7 +40,7 @@ export const Starter: FC<StarterProps> = ({
         <Typeahead
           id={`typeahead-${index}`}
           options={playerItems}
-          size="small"
+          size="sm"
           onChange={([option]: Array<TypeaheadOption>) => {
             if (option) {
               const playerId =

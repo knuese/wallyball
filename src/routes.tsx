@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import {
   GameScreen,
   HomeScreen,
@@ -9,14 +9,14 @@ import {
 } from './components'
 
 export const AppRouter: FC = () => (
-  <BrowserRouter basename="/wb">
+  <HashRouter>
     <Routes>
       <Route path="/" element={withHeader(<HomeScreen />)} />
       <Route path="/game" element={withHeader(<GameScreen />)} />
       <Route path="/game/init" element={withHeader(<InitGame />)} />
       <Route path="/game/play" element={withHeader(<PlayGame />)} />
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 )
 
 export default AppRouter
