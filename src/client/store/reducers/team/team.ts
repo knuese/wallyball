@@ -1,21 +1,17 @@
 import { AnyAction, Reducer } from 'redux'
-import { v4 as uuidv4 } from 'uuid'
 import {
   CLEAR_TEAM,
   LOAD_TEAM,
-  SET_TEAM,
-  PlayerConfig,
+  SET_STARTERS_FAILURE,
+  SET_STARTERS_SUCCESS,
   TeamActionTypes,
   TeamState
 } from '../../types/team'
 
 export const initialState: TeamState = {
-  name: '',
-  primaryColor: '#FFF',
-  secondaryColor: '#000',
-  players: [],
-  lineup: {},
-  defense: {}
+  team: null,
+  isSet: false,
+  error: null
 }
 
 const reducer: Reducer<TeamState> = (
@@ -26,19 +22,17 @@ const reducer: Reducer<TeamState> = (
     case LOAD_TEAM:
       return {
         ...state,
-        name: payload.name,
-        primaryColor: payload.primaryColor,
-        secondaryColor: payload.secondaryColor,
-        players: payload.players.map((player: PlayerConfig[]) => ({
-          ...player,
-          id: uuidv4()
-        }))
+        team: payload
       }
-    case SET_TEAM:
+    case SET_STARTERS_SUCCESS:
       return {
         ...state,
-        lineup: payload.lineup,
-        defense: payload.defense
+        isSet: true
+      }
+    case SET_STARTERS_FAILURE:
+      return {
+        ...state,
+        error: payload
       }
     case CLEAR_TEAM:
       return {

@@ -1,45 +1,47 @@
-import { Game, Outcome, Team } from '../model'
+export default {}
 
-export class GameService {
-  gameState: Game
+// import { Game, Outcome, Team } from '../model'
 
-  constructor(awayTeam: Team, homeTeam: Team) {
-    this.gameState = new Game(awayTeam, homeTeam)
-  }
+// export class GameService {
+//   gameState: Game
 
-  simulateAtBat(): boolean {
-    const batter = this.gameState.getCurrentBatter()
-    const pitcher = this.gameState.getCurrentPitcher()
+//   constructor(awayTeam: Team, homeTeam: Team) {
+//     this.gameState = new Game(awayTeam, homeTeam)
+//   }
 
-    const useBatterStats = Math.random() < 0.4
-    const { outcome, rawValue } = useBatterStats
-      ? batter.bat()
-      : pitcher.pitch()
+//   simulateAtBat(): boolean {
+//     const batter = this.gameState.getCurrentBatter()
+//     const pitcher = this.gameState.getCurrentPitcher()
 
-    console.log(`${batter.name} -> ${outcome}`)
+//     const useBatterStats = Math.random() < 0.4
+//     const { outcome, rawValue } = useBatterStats
+//       ? batter.bat()
+//       : pitcher.pitch()
 
-    let runsScored = 0
-    if (outcome === Outcome.STRIKEOUT) {
-      this.gameState.outs++
-    } else {
-      runsScored = this.gameState.advanceRunners({
-        batter,
-        pitcher,
-        outcome,
-        rawValue,
-        useBatterStats
-      })
-    }
+//     console.log(`${batter.name} -> ${outcome}`)
 
-    batter.logAtBat(outcome, runsScored)
+//     let runsScored = 0
+//     if (outcome === Outcome.STRIKEOUT) {
+//       this.gameState.outs++
+//     } else {
+//       runsScored = this.gameState.advanceRunners({
+//         batter,
+//         pitcher,
+//         outcome,
+//         rawValue,
+//         useBatterStats
+//       })
+//     }
 
-    const isOver = this.gameState.isGameOver()
+//     batter.logAtBat(outcome, runsScored)
 
-    if (!isOver && this.gameState.outs === 3) {
-      console.log('three outs, changing sides\n')
-      this.gameState.progressInning()
-    }
+//     const isOver = this.gameState.isGameOver()
 
-    return isOver
-  }
-}
+//     if (!isOver && this.gameState.outs === 3) {
+//       console.log('three outs, changing sides\n')
+//       this.gameState.progressInning()
+//     }
+
+//     return isOver
+//   }
+// }

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { TeamFileContents } from '../../../store/types/team'
+import { Team } from '../../../model'
 import { clearTeam, readTeamFile } from '../../../store/actions/team/team'
 import { Dropzone } from '../..'
 import { Roster, StarterTable } from '.'
@@ -8,15 +8,13 @@ import { Roster, StarterTable } from '.'
 export type TeamSetupProps = {
   isHome?: boolean
   invalid?: boolean
-  teamData?: TeamFileContents
+  team: Team | null
 }
 
 export const TeamSetup: FC<TeamSetupProps> = ({
   isHome,
   invalid,
-  teamData: { name: teamName, primaryColor, secondaryColor, players } = {
-    players: []
-  }
+  team
 }) => {
   const dispatch = useDispatch()
 
@@ -44,16 +42,16 @@ export const TeamSetup: FC<TeamSetupProps> = ({
       />
       <p
         className="team-title"
-        style={{ color: secondaryColor, backgroundColor: primaryColor }}
+        style={{ color: team?.secondaryColor, backgroundColor: team?.primaryColor }}
       >
-        {teamName}
+        {team?.name}
       </p>
-      {Boolean(players?.length) && (
+      {team && team?.getPlayerList().length && (
         <div className="flex-column">
-          <Roster players={players} />
+          <Roster players={team.getPlayerList()} />
           <div className="starters">
             <span className="sub-label">Starting Lineup</span>
-            <StarterTable players={players} isHome={isHome} />
+            <StarterTable players={team.getPlayerList()} isHome={isHome} />
           </div>
         </div>
       )}

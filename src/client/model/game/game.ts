@@ -106,14 +106,14 @@ export class Game {
       useBatterStats
     })
 
-    if (runnersScored.length > 0) {
-      this.addToScore(runnersScored.length)
-      runnersScored.forEach((id) =>
-        this.isBottom
-          ? this.homeTeam.players[id].scored()
-          : this.awayTeam.players[id].scored()
-      )
-    }
+    // if (runnersScored.length > 0) {
+    //   this.addToScore(runnersScored.length)
+    //   runnersScored.forEach((id) =>
+    //     this.isBottom
+    //       ? this.homeTeam.players[id].scored()
+    //       : this.awayTeam.players[id].scored()
+    //   )
+    // }
 
     this.outs += outs
 

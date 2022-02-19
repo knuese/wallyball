@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from 'react'
 import { Typeahead } from 'react-bootstrap-typeahead'
+import { Player } from '../../../../model'
 import { PlayerConfig } from '../../../../store/types/team'
 
 type TypeaheadOption = Record<string, any> | string
 
 export type StarterProps = {
   index: number
-  players: PlayerConfig[]
+  players: Player[]
   selectPlayer: (playerId?: string) => void
   selectPosition: (playerId: string, position: string) => void
 }
@@ -18,7 +19,7 @@ export const Starter: FC<StarterProps> = ({
   selectPosition
 }) => {
   const [selectedPlayer, setSelectedPlayer] = useState<
-    PlayerConfig | undefined
+    Player | undefined
   >(undefined)
   const playerItems = players?.map(({ id, name }) => ({
     label: name,
@@ -29,7 +30,7 @@ export const Starter: FC<StarterProps> = ({
   // when the <select /> first becomes enabled
   useEffect(() => {
     if (selectedPlayer) {
-      selectPosition(selectedPlayer.id, selectedPlayer.positions[0])
+      selectPosition(selectedPlayer.id, selectedPlayer.eligiblePositions[0])
     }
   }, [selectedPlayer])
 
@@ -60,10 +61,10 @@ export const Starter: FC<StarterProps> = ({
           className="select-position"
           onChange={({ target: { value } }) => {
             // selectedPlayer always defined if here
-            selectPosition((selectedPlayer as PlayerConfig).id, value)
+            selectPosition((selectedPlayer as Player).id, value)
           }}
         >
-          {selectedPlayer?.positions.map((pos) => (
+          {selectedPlayer?.eligiblePositions.map((pos) => (
             <option key={`player${index}-${pos}`} value={pos}>
               {pos}
             </option>

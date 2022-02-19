@@ -1,14 +1,14 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Outcome, Position } from '../enum'
-import { BattingConfig, PitchingConfig, GameStats } from './stats'
+import { BattingConfig, PitchingConfig } from './stats'
 
 export class Player {
   id: string
   name: string
-  private eligiblePositions: Position[]
+  eligiblePositions: Position[]
   private battingConfig: BattingConfig
   private pitchingConfig?: PitchingConfig
-  gameStats: GameStats
+  // gameStats: GameStats
 
   constructor(
     name: string,
@@ -21,7 +21,7 @@ export class Player {
     this.eligiblePositions = eligiblePositions
     this.battingConfig = battingConfig
     this.pitchingConfig = pitchingConfig
-    this.gameStats = new GameStats()
+    // this.gameStats = new GameStats()
   }
 
   getBattingThresholds(): Record<number, Outcome> {
@@ -48,13 +48,13 @@ export class Player {
     }
   }
 
-  logAtBat(outcome: Outcome, runsScored: number): void {
-    this.gameStats.logAtBat(outcome, runsScored)
-  }
+  // logAtBat(outcome: Outcome, runsScored: number): void {
+  //   this.gameStats.logAtBat(outcome, runsScored)
+  // }
 
-  scored(): void {
-    this.gameStats.batting.runs++
-  }
+  // scored(): void {
+  //   this.gameStats.batting.runs++
+  // }
 
   pitch(): { outcome: Outcome; rawValue: number } {
     if (!this.pitchingConfig) {
@@ -68,9 +68,9 @@ export class Player {
     }
   }
 
-  getBattingStatLine(): any {
-    const { atBats, runs, hits, rbis, walks, strikeouts } =
-      this.gameStats.batting
-    return { atBats, runs, hits, rbis, walks, strikeouts }
-  }
+  // getBattingStatLine(): any {
+  //   const { atBats, runs, hits, rbis, walks, strikeouts } =
+  //     this.gameStats.batting
+  //   return { atBats, runs, hits, rbis, walks, strikeouts }
+  // }
 }

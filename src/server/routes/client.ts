@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { config } from '../../util'
+import { config } from '../util'
 
 const router = express.Router()
 

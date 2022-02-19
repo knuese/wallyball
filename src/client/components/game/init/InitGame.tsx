@@ -2,43 +2,25 @@ import { FC, useEffect, useState } from 'react'
 import { useTeam } from '../../../hooks'
 import { Side } from '../../../store/types/team'
 import { TeamSetup } from '.'
-import { isLineupFull, isDefenseValid } from '../../../util'
 
 export const InitGame: FC = () => {
-  const {
-    lineup: awayLineup,
-    defense: awayDefense,
-    ...awayRest
-  } = useTeam(Side.AWAY)
-
-  const {
-    lineup: homeLineup,
-    defense: homeDefense,
-    ...homeRest
-  } = useTeam(Side.HOME)
-
-  const [awayInvalid, setAwayInvalid] = useState(false)
-  const [homeInvalid, setHomeInvalid] = useState(false)
+  const { isSet: isAwaySet, team: away } = useTeam(Side.AWAY)
+  const { isSet: isHomeSet, team: home } = useTeam(Side.HOME)
   const [canSubmit, setCanSubmit] = useState(false)
 
   useEffect(() => {
-    setCanSubmit(isLineupFull(awayLineup) && isLineupFull(homeLineup))
-  }, [awayLineup, homeLineup])
+    setCanSubmit(isAwaySet && isHomeSet)
+  }, [isAwaySet, isHomeSet])
 
   const submit = () => {
-    setAwayInvalid(!isDefenseValid(awayDefense))
-    setHomeInvalid(!isDefenseValid(homeDefense))
-
-    if (!awayInvalid && !homeInvalid) {
-      console.log('submitting!')
-    }
+    console.log('submitting!')
   }
 
   return (
     <div className="flex-column center">
       <div className="flex-row">
-        <TeamSetup invalid={awayInvalid} teamData={awayRest} />
-        <TeamSetup isHome invalid={homeInvalid} teamData={homeRest} />
+        <TeamSetup team={away} />
+        <TeamSetup isHome team={home} />
       </div>
       <button disabled={!canSubmit} className="submit-button" onClick={submit}>
         Submit
