@@ -3,6 +3,7 @@
 html, body {
   height: 100%;
   background-color: #C0E8D5;
+  margin: 0;
 }
 
 * {
@@ -14,6 +15,7 @@ html, body {
 @import "_dropzone";
 @import "_field";
 @import "_gameInfo";
+@import "_header";
 @import "_init";
 @import "_layout";
 @import "_misc";
