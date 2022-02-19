@@ -47,6 +47,7 @@ export const DelaySlider: FC<DelaySliderProps> = ({ disabled, onChange }) => {
           renderThumb={({ props }) => (
             <div
               {...props}
+              data-testid="delay-slider-thumb"
               style={{
                 ...props.style,
                 height: '12px',

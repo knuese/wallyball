@@ -47,4 +47,31 @@ describe('<StarterTable />', () => {
     expect(getByDisplayValue(player.name)).toBeInTheDocument()
     expect(getByText(position)).toBeInTheDocument()
   })
+
+  it('handles a player being cleared', async () => {
+    const { name } = playerConfigs.pitcher
+    const { container, getByText, queryByDisplayValue } = render(
+      <StarterTable players={Object.values(playerConfigs)} />
+    )
+
+    // first need to have a player/position selected so that it can be cleared later
+    fireEvent.focus(container.querySelector('.rbt-input-main') as Element)
+
+    await act(async () => {
+      fireEvent.click(getByText(name))
+    })
+
+    // player should be in the document
+    expect(queryByDisplayValue(name)).toBeInTheDocument()
+
+    // now, enter some non-existent value
+    await act(async () => {
+      fireEvent.change(queryByDisplayValue(name) as Element, {
+        target: { value: 'foo' }
+      })
+    })
+
+    // player should have been removed
+    expect(queryByDisplayValue(name)).not.toBeInTheDocument()
+  })
 })

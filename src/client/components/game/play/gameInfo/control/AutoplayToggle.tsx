@@ -13,6 +13,7 @@ export const AutoplayToggle: FC<AutoplayToggleProps> = ({
     <span className="switch-label">Autoplay</span>
     <label className="switch">
       <input
+        data-testid="autoplay-toggle"
         type="checkbox"
         checked={checked}
         onChange={({
