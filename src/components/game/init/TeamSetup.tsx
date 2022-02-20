@@ -8,7 +8,7 @@ import { Roster, StarterTable } from '.'
 export type TeamSetupProps = {
   isHome?: boolean
   invalid?: boolean
-  team?: Team
+  team: Team | null | undefined
 }
 
 export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid, team }) => {

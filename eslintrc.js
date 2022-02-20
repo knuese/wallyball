@@ -11,7 +11,7 @@ module.exports = {
     'standard-typescript-prettier'
   ],
   parserOptions: {
-    project: 'tsconfig.client.json',
+    project: 'tsconfig.json',
     ecmaVersion: 12
   },
   rules: {

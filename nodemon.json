@@ -1,5 +1,0 @@
-{
-  "watch": ["src", "webpack.config.js"],
-  "ext": ".ts,.js",
-  "exec": "ts-node ./src/server/index.ts"
-}

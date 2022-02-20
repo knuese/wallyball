@@ -6,7 +6,7 @@
   "scripts": {
     "build": "react-scripts start",
     "electron": "npx electron .",
-    "lint:src": "eslint --config ./eslintrc.src.js --fix ./src",
+    "lint:src": "eslint --config ./eslintrc.js --fix ./src",
     "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__ __test_utils__",
     "lint": "concurrently \"npm run lint:src\" \"npm run lint:test\"",
     "play": "npx ts-node -O '{\"module\":\"commonjs\"}' z.ts",
@@ -18,10 +18,8 @@
   },
   "prettier": "./prettier.config",
   "dependencies": {
-    "body-parser": "^1.19.1",
     "bootstrap-scss": "^4.6.1",
     "classnames": "^2.3.1",
-    "express": "^4.17.1",
     "react": "17.0.2",
     "react-bootstrap-typeahead": "^6.0.0-alpha.6",
     "react-dom": "17.0.2",
