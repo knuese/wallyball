@@ -32,6 +32,7 @@ const reducer: Reducer<TeamState> = (
     case SET_STARTERS_FAILURE:
       return {
         ...state,
+        isSet: false,
         error: payload
       }
     case CLEAR_TEAM:

@@ -8,14 +8,10 @@ import { Roster, StarterTable } from '.'
 export type TeamSetupProps = {
   isHome?: boolean
   invalid?: boolean
-  team: Team | null
+  team?: Team
 }
 
-export const TeamSetup: FC<TeamSetupProps> = ({
-  isHome,
-  invalid,
-  team
-}) => {
+export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid, team }) => {
   const dispatch = useDispatch()
 
   const onFileLoaded = (file: File) => {
@@ -42,7 +38,10 @@ export const TeamSetup: FC<TeamSetupProps> = ({
       />
       <p
         className="team-title"
-        style={{ color: team?.secondaryColor, backgroundColor: team?.primaryColor }}
+        style={{
+          color: team?.secondaryColor,
+          backgroundColor: team?.primaryColor
+        }}
       >
         {team?.name}
       </p>

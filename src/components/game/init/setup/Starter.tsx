@@ -17,9 +17,9 @@ export const Starter: FC<StarterProps> = ({
   selectPlayer,
   selectPosition
 }) => {
-  const [selectedPlayer, setSelectedPlayer] = useState<
-    Player | undefined
-  >(undefined)
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(
+    undefined
+  )
   const playerItems = players?.map(({ id, name }) => ({
     label: name,
     value: id

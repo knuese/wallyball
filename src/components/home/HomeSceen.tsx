@@ -5,7 +5,7 @@ export const HomeScreen: FC = () => {
   const navigate = useNavigate()
 
   const newGame = () => {
-    navigate('/game/play')
+    navigate('/game/init')
   }
 
   return (

@@ -31,7 +31,10 @@ export const StarterTable: FC<StarterTableProps> = ({ players, isHome }) => {
     }
     setLineup(newLineup)
 
-    if (Object.values(lineup).filter(l => l).length === 9 && Object.values(defense).filter(d => d).length === 9) {
+    if (
+      Object.values(lineup).filter((l) => l).length === 9 &&
+      Object.values(defense).filter((d) => d).length === 9
+    ) {
       dispatch(setTeam(newLineup, defense, isHome))
     }
   }
@@ -44,7 +47,10 @@ export const StarterTable: FC<StarterTableProps> = ({ players, isHome }) => {
 
     setDefense(newDefense)
 
-    if (Object.values(lineup).filter(l => l).length === 9 && Object.values(defense).filter(d => d).length === 9) {
+    if (
+      Object.values(lineup).filter((l) => l).length === 9 &&
+      Object.values(defense).filter((d) => d).length === 9
+    ) {
       dispatch(setTeam(lineup, newDefense, isHome))
     }
   }

@@ -1,5 +1,11 @@
 import { Dispatch } from 'react'
-import { BattingConfig, PitchingConfig, Player, Position, Team } from '../../../model'
+import {
+  BattingConfig,
+  PitchingConfig,
+  Player,
+  Position,
+  Team
+} from '../../../model'
 import { RootState } from '../../reducers'
 import {
   CLEAR_TEAM,
@@ -44,6 +50,7 @@ export const readTeamFile =
     })
   }
 
+// TODO rename
 export const setTeam =
   (lineup: Lineup, defense: Defense, isHome?: boolean) =>
   (dispatch: Dispatch<TeamActionTypes>, getState: () => RootState): void => {
@@ -63,7 +70,11 @@ export const setTeam =
         }))
       )
 
-      dispatch({ type: SET_STARTERS_SUCCESS, side: isHome ? Side.HOME : Side.AWAY, payload: {} as never })
+      dispatch({
+        type: SET_STARTERS_SUCCESS,
+        side: isHome ? Side.HOME : Side.AWAY,
+        payload: {} as never
+      })
     } catch (e) {
       dispatch({
         type: SET_STARTERS_FAILURE,

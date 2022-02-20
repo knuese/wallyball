@@ -18,7 +18,7 @@ export type PlayerConfig = {
 }
 
 export type TeamState = {
-  team: Team | null
+  team: Team | null | undefined
   isSet: boolean
   error: Error | null
 }
@@ -59,4 +59,8 @@ interface SetStartersFailureAction {
   payload: Error
 }
 
-export type TeamActionTypes = ClearTeamAction | LoadTeamAction | SetStartersSuccessAction | SetStartersFailureAction
+export type TeamActionTypes =
+  | ClearTeamAction
+  | LoadTeamAction
+  | SetStartersSuccessAction
+  | SetStartersFailureAction

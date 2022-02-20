@@ -5,14 +5,14 @@ import { BattingConfig, PitchingConfig } from './stats'
 export class Player {
   id: string
   name: string
-  eligiblePositions: Position[]
+  eligiblePositions: Position[] | string[]
   private battingConfig: BattingConfig
   private pitchingConfig?: PitchingConfig
   // gameStats: GameStats
 
   constructor(
     name: string,
-    eligiblePositions: Position[],
+    eligiblePositions: Position[] | string[],
     battingConfig: BattingConfig,
     pitchingConfig?: PitchingConfig
   ) {
@@ -34,6 +34,10 @@ export class Player {
     }
 
     return { ...this.pitchingConfig.outcomes }
+  }
+
+  isPitcher(): boolean {
+    return !!this.pitchingConfig
   }
 
   canPlay(position: Position): boolean {

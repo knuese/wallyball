@@ -2,6 +2,7 @@ import { Outcome } from '../../..'
 import { isAtBat, isHit } from '../../../../util'
 // import { BattingStats } from './battingStats'
 
+// TODO
 export class GameStats {
   // batting: BattingStats
 
