@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import { useTeam } from '../../../hooks'
-import { Side } from '../../../store/types/team'
+import { Side } from '../../../model'
 import { TeamSetup } from '.'
 
 export const InitGame: FC = () => {

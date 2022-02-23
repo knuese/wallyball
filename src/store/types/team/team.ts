@@ -1,9 +1,4 @@
-import { Position, Team } from '../../../model'
-
-export enum Side {
-  HOME = 'home',
-  AWAY = 'away'
-}
+import { Position, Side, Team } from '../../../model'
 
 export type PlayerId = string
 export type Lineup = Record<string, PlayerId>
@@ -17,17 +12,17 @@ export type PlayerConfig = {
   pitching?: number[]
 }
 
-export type TeamState = {
-  team: Team | null | undefined
-  isSet: boolean
-  error: Error | null
-}
-
 export type TeamFileContents = {
   name: string
   primaryColor: string
   secondaryColor: string
   players: PlayerConfig[]
+}
+
+export type TeamState = {
+  team: Team | null | undefined
+  isSet: boolean
+  error: Error | null
 }
 
 export const CLEAR_TEAM = 'CLEAR_TEAM'

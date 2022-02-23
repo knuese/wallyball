@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
+import { Side } from '../../../../model'
 import { Innings, TeamStats, TeamToggles } from '.'
-import { Side } from '../../../../store/types/team'
 import { bears, turtles } from './sample'
 
 export const BoxScore: FC = () => {

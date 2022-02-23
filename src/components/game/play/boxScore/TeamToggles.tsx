@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Side } from '../../../../store/types/team'
+import { Side } from '../../../../model'
 
 export type TeamToggleProps = {
   activeSide: Side

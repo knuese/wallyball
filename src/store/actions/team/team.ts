@@ -4,6 +4,7 @@ import {
   PitchingConfig,
   Player,
   Position,
+  Side,
   Team
 } from '../../../model'
 import { RootState } from '../../reducers'
@@ -14,7 +15,6 @@ import {
   LOAD_TEAM,
   SET_STARTERS_FAILURE,
   SET_STARTERS_SUCCESS,
-  Side,
   TeamActionTypes,
   TeamFileContents
 } from '../../types/team'

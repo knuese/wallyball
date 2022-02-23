@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux'
 import configureMockStore from 'redux-mock-store'
 import thunk, { ThunkDispatch } from 'redux-thunk'
-import { Team } from '../../../../src/model'
+import { Side, Team } from '../../../../src/model'
 import {
   clearTeam,
   readTeamFile,
@@ -12,7 +12,6 @@ import {
   CLEAR_TEAM,
   LOAD_TEAM,
   SET_STARTERS_SUCCESS,
-  Side,
   TeamState
 } from '../../../../src/store/types/team'
 import { defense, lineup, playersFromFile } from '../../../../__test_data__'

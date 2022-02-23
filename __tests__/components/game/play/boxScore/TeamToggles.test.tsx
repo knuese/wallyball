@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { TeamToggles } from '../../../../../src/components/game'
-import { Side } from '../../../../../src/store/types/team'
+import { Side } from '../../../../../src/model'
 
 describe('<TeamToggles />', () => {
   const away = { name: 'Bears', color: 'red', background: 'brown' }

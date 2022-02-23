@@ -1,5 +1,6 @@
 import { CombinedState, combineReducers, Reducer } from 'redux'
-import { Side, TeamActionTypes, TeamState } from '../../types/team'
+import { Side } from '../../../model'
+import { TeamActionTypes, TeamState } from '../../types/team'
 
 import teamReducer from './team'
 
