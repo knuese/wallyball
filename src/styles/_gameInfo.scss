@@ -6,17 +6,23 @@
   user-select: none;
 }
 
-.control-panel {
-  background-color: lightcyan;
-  height: 14.05rem;
-}
-
 .game-info-title {
   font-weight: bold;
   font-style: italic;
   font-size: 0.8em;
   padding: 0.5rem 0 0.1rem 0;
   text-decoration: underline;
+}
+
+.game-info-item {
+  margin-bottom: 0.5rem;
+}
+
+.inning-status {
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  padding: 0.4rem 0;
 }
 
 .current-player-name {
@@ -56,11 +62,16 @@
 
 .play-descriptor {
   background-color: white;
-  height: 8rem;
+  height: 10.25rem;
   padding: 0 0.6rem;
   overflow-y: scroll;
 }
 
+.control-panel {
+  background-color: lightcyan;
+  height: 11.25rem;
+}
+
 .control-item {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }

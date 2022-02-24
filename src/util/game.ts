@@ -1,3 +1,6 @@
+export const getOrdinal = (n: number) =>
+  ['', 'st', 'nd', 'rd'][(n / 10) % 10 ^ 1 && n % 10] || 'th'
+
 export const getTotalScore = (innings: number[]): number =>
   innings.reduce((acc, cur) => acc + cur, 0)
 

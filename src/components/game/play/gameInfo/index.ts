@@ -1,5 +1,6 @@
 export { default as Controls } from './Controls'
 export { default as CurrentPlayer } from './CurrentPlayer'
 export { default as GameInfo } from './GameInfo'
+export { default as InningStatus } from './InningStatus'
 export { default as PlayDescriptor } from './PlayDescriptor'
 export * from './control'
