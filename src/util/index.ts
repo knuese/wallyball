@@ -1,3 +1,3 @@
 export * from './game'
-export * from './teamUtil'
-export * from './outcomeUtil'
+export * from './team'
+export * from './outcome'
