@@ -72,8 +72,7 @@ export const setTeam =
 
       dispatch({
         type: SET_STARTERS_SUCCESS,
-        side: isHome ? Side.HOME : Side.AWAY,
-        payload: {} as never
+        side: isHome ? Side.HOME : Side.AWAY
       })
     } catch (e) {
       dispatch({
@@ -89,7 +88,6 @@ export const clearTeam =
   (dispatch: Dispatch<TeamActionTypes>): void => {
     dispatch({
       type: CLEAR_TEAM,
-      side: isHome ? Side.HOME : Side.AWAY,
-      payload: {} as never
+      side: isHome ? Side.HOME : Side.AWAY
     })
   }

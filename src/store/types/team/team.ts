@@ -33,7 +33,7 @@ export const SET_STARTERS_FAILURE = 'SET_STARTERS_FAILURE'
 interface ClearTeamAction {
   type: typeof CLEAR_TEAM
   side: Side
-  payload: never
+  payload?: never
 }
 
 interface LoadTeamAction {
@@ -45,7 +45,7 @@ interface LoadTeamAction {
 interface SetStartersSuccessAction {
   type: typeof SET_STARTERS_SUCCESS
   side: Side
-  payload: never
+  payload?: never
 }
 
 interface SetStartersFailureAction {
