@@ -1,9 +1,19 @@
 import { FC } from 'react'
+import { useSelector } from 'react-redux'
 import classnames from 'classnames'
 import ReactTooltip from 'react-tooltip'
 import field from '../../../assets/field.png'
+import { RootState } from '../../../store/reducers'
+import { Position } from '../../../model'
 
 export const Field: FC = () => {
+  const { away, home, isBottom } = useSelector((state: RootState) => state.game)
+  const teamToUse = isBottom ? away : home
+
+  if (!teamToUse) {
+    throw new Error()
+  }
+
   const tooltips = {
     first: 'Tush',
     second: 'Bo Bo',
@@ -30,31 +40,31 @@ export const Field: FC = () => {
         data-tip={tooltips.third}
       />
       <span className="fielder" id="p">
-        Gary
+        {teamToUse.defenderAt(Position.PITCHER).name}
       </span>
       <span className="fielder" id="c">
-        Shells
+        {teamToUse.defenderAt(Position.CATCHER).name}
       </span>
       <span className="fielder" id="first">
-        Browny
+        {teamToUse.defenderAt(Position.FIRST_BASE).name}
       </span>
       <span className="fielder" id="second">
-        Glen
+      {teamToUse.defenderAt(Position.SECOND_BASE).name}
       </span>
       <span className="fielder" id="ss">
-        George
+        {teamToUse.defenderAt(Position.SHORTSTOP).name}
       </span>
       <span className="fielder" id="third">
-        Guss
+        {teamToUse.defenderAt(Position.THIRD_BASE).name}
       </span>
       <span className="fielder" id="lf">
-        Chan
+        {teamToUse.defenderAt(Position.LEFT_FIELD).name}
       </span>
       <span className="fielder" id="cf">
-        Zoona
+        {teamToUse.defenderAt(Position.CENTER_FIELD).name}
       </span>
       <span className="fielder" id="rf">
-        Cookie
+        {teamToUse.defenderAt(Position.RIGHT_FIELD).name}
       </span>
     </div>
   )

@@ -12,6 +12,7 @@ export type GameState = {
     away: number[]
     home: number[]
   }
+  playsForInning: string[]
 }
 
 export const RECORD_OUT = 'RECORD_OUT'

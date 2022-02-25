@@ -30,7 +30,8 @@ export const GameInfo: FC = () => {
     home,
     inning,
     isBottom,
-    outs
+    outs,
+    playsForInning
   } = useSelector((state: RootState) => state.game)
 
   if (!home || !away) {
@@ -63,13 +64,7 @@ export const GameInfo: FC = () => {
         />
       </div>
       <div className="game-info-item">
-        <PlayHistory
-          plays={[
-            'Jingle grounded out.',
-            'September struck out.',
-            'Sammy singled.'
-          ]}
-        />
+        <PlayHistory plays={playsForInning} />
       </div>
       <Controls />
     </div>

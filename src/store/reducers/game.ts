@@ -20,7 +20,13 @@ export const initialState: GameState = {
   scores: {
     away: [],
     home: []
-  }
+  },
+  playsForInning: [
+    'Jingle grounded out.',
+    'September struck out.',
+    'Sammy singled.',
+    'Buster doubled. Sammy scored.'
+  ]
 }
 
 export const addRuns = (
@@ -60,7 +66,8 @@ const reducer: Reducer<GameState> = (
         inning: state.isBottom ? state.inning + 1 : state.inning,
         isBottom: !state.isBottom,
         outs: 0,
-        bases: new Bases()
+        bases: new Bases(),
+        playsForInning: []
       }
     case GAME_OVER:
       return {
