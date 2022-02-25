@@ -1,5 +1,6 @@
 import { AnyAction, Reducer } from 'redux'
 import { Bases } from '../../model'
+import { tempBears, tempTurtles } from './sampleTeam'
 import {
   GameState,
   GAME_OVER,
@@ -9,8 +10,8 @@ import {
 } from '../types/game'
 
 export const initialState: GameState = {
-  away: null,
-  home: null,
+  away: tempBears,
+  home: tempTurtles,
   inning: 1,
   isBottom: false,
   outs: 0,

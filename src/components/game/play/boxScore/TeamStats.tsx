@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { TeamLabel } from '../../../../model/game/team'
 
 type BattingExtra = {
   doubles?: string[]
@@ -7,30 +8,26 @@ type BattingExtra = {
 }
 
 export type TeamStatProps = {
-  name: string
-  color: string
-  background: string
+  label: TeamLabel
   batting: Array<string | number>[]
   battingExtra: BattingExtra
   pitching: Array<string | number>[]
 }
 
 export const TeamStats: FC<TeamStatProps> = ({
-  name,
-  color,
-  background,
+  label,
   batting,
   battingExtra,
   pitching
 }) => {
   const headerStyle = {
-    color,
-    background
+    color: label.color,
+    background: label.background
   }
 
   const getRows = (stats: Array<string | number>, i: number) => (
     <tr
-      key={`${name}:${stats[0]}`}
+      key={`${label.name}:${stats[0]}`}
       className={i % 2 === 0 ? 'even-row' : 'odd-row'}
     >
       {stats.map((stat, i) => (
@@ -62,7 +59,7 @@ export const TeamStats: FC<TeamStatProps> = ({
         </thead>
         <tbody>{batting.map(getRows)}</tbody>
       </table>
-      <div className="batting-extra">
+      {(doubles || triples || homeRuns) && <div className="batting-extra">
         {doubles?.length && (
           <p className="batting-extra-line">{`2B: ${doubles?.join(', ')}`}</p>
         )}
@@ -72,7 +69,7 @@ export const TeamStats: FC<TeamStatProps> = ({
         {homeRuns?.length && (
           <p className="batting-extra-line">{`HR: ${homeRuns?.join(', ')}`}</p>
         )}
-      </div>
+      </div>}
       <div style={{ height: '0.5rem' }} />
       <table className="team-stats-table">
         <thead style={headerStyle}>

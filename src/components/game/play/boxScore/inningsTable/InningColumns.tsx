@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 
 export type InningColumnProps = {
   awayScores: number[]
@@ -15,8 +14,14 @@ export const InningColumns: FC<InningColumnProps> = ({
   ))
   const rows = [awayScores, homeScores].map((scores, i) => (
     <tr key={`scores:${i}`}>
-      {scores.map((score, j) => (
-        <td key={`scores:${i}:${j}`}>{score}</td>
+      {Array.from({ ...scores, length: 9 }).map((score, j) => (
+        // if there isn't a score, add a hidden underscore so that the cell renders
+        <td
+          key={`scores:${i}:${j}`}
+          style={{ color: score ? 'black' : 'white' }}
+        >
+          {score || '_'}
+        </td>
       ))}
     </tr>
   ))
