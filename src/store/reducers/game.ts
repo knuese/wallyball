@@ -6,7 +6,8 @@ import {
   GAME_OVER,
   PROGRESS_INNING,
   RECORD_OUT,
-  RUN_SCORED
+  RUN_SCORED,
+  Scores
 } from '../types/game'
 
 export const initialState: GameState = {
@@ -18,7 +19,7 @@ export const initialState: GameState = {
   bases: new Bases(),
   isOver: false,
   scores: {
-    away: [],
+    away: [0],
     home: []
   },
   playsForInning: [
@@ -27,6 +28,24 @@ export const initialState: GameState = {
     'Sammy singled.',
     'Buster doubled. Sammy scored.'
   ]
+}
+
+export const updateScoreInningEnd = ({ isBottom, scores }: GameState): Scores => {
+  let updatedScores
+
+  if (isBottom) {
+    updatedScores = {
+      away: [...scores.away, 0],
+      home: scores.home
+    }
+  } else {
+    updatedScores = {
+      away: scores.away,
+      home: [...scores.home, 0]
+    }
+  }
+
+  return updatedScores
 }
 
 export const addRuns = (
@@ -67,6 +86,7 @@ const reducer: Reducer<GameState> = (
         isBottom: !state.isBottom,
         outs: 0,
         bases: new Bases(),
+        scores: updateScoreInningEnd(state),
         playsForInning: []
       }
     case GAME_OVER:

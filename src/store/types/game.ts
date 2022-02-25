@@ -1,5 +1,10 @@
 import { Bases, Team } from '../../model'
 
+export type Scores = {
+  away: number[]
+  home: number[]
+}
+
 export type GameState = {
   away: Team | null
   home: Team | null
@@ -8,10 +13,7 @@ export type GameState = {
   outs: number
   isOver: boolean
   bases: Bases
-  scores: {
-    away: number[]
-    home: number[]
-  }
+  scores: Scores
   playsForInning: string[]
 }
 

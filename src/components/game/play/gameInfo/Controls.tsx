@@ -1,13 +1,20 @@
 import { FC, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { simulateAtBat } from '../../../../store/actions/game'
 import { AutoplayToggle, DelaySlider } from './control'
 
 export const Controls: FC = () => {
+  const dispatch = useDispatch()
   const [intervalRef, setIntervalRef] = useState<NodeJS.Timeout>()
   const [autoplay, setAutoplay] = useState(false)
   const [delay, setDelay] = useState(5)
 
+  const simulate = () => {
+    dispatch(simulateAtBat())
+  }
+
   const onInterval = (timeout: number) => {
-    console.log('hi')
+    simulate()
     setIntervalRef(setTimeout(() => onInterval(timeout), timeout))
   }
 
@@ -29,7 +36,7 @@ export const Controls: FC = () => {
         <AutoplayToggle checked={autoplay} onChange={setAutoplay} />
         <DelaySlider disabled={!autoplay} onChange={setDelay} />
         <div className="flex-row center control-item">
-          <button disabled={autoplay} style={{ marginRight: '1rem' }}>
+          <button onClick={simulate} disabled={autoplay} style={{ marginRight: '1rem' }}>
             Simulate At Bat
           </button>
           <button disabled={autoplay}>Substitute</button>
