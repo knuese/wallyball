@@ -85,12 +85,38 @@ export class Team {
     return this.players[playerId]
   }
 
+  peekNextBatter(): Player {
+    if (!this.battingOrder) {
+      throw new Error('batting order not defined!')
+    }
+
+    const i = this.batterIndex % 9
+    const playerId = this.battingOrder[i]
+    return this.players[playerId]
+  }
+
   defenderAt(position: Position): Player {
     if (!this.defense) {
       throw new Error('batting order not defined!')
     }
 
     return this.players[this.defense[position]]
+  }
+
+  getBattingLines(): string[][] {
+    if (!this.battingOrder) {
+      throw new Error('batting order not defined')
+    }
+
+    return this.battingOrder.map((playerId) => [this.players[playerId].name, '0', '0', '0', '0', '0', '0'])
+  }
+
+  getPitchingLines(): string[][] {
+    if (!this.defense) {
+      throw new Error('defense not defined')
+    }
+
+    return [[this.defenderAt(Position.PITCHER).name, '0.0', '0', '0', '0', '0', '0']]
   }
 
   // getBoxScore(): BoxScore {

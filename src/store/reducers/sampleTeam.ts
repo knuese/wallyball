@@ -13,6 +13,9 @@ type PlayerJson = {
   pitching?: number[]
 }
 
+const idForName = (players: Player[], name: string): string =>
+  (players.find(p => p.name === name) as Player).id
+
 const bearsJson = {
   name: 'Bears',
   primaryColor: '#841B2D',
@@ -138,6 +141,18 @@ const bearMap = bearPlayers.reduce(
 
 export const tempBears = new Team('Bears', '#841B2D', '#DEB887', bearMap)
 
+tempBears.setStarters([
+  { playerId: idForName(bearPlayers, 'Sammy'), position: Position.LEFT_FIELD },
+  { playerId: idForName(bearPlayers, 'Buster'), position: Position.RIGHT_FIELD },
+  { playerId: idForName(bearPlayers, 'Tush'), position: Position.CATCHER },
+  { playerId: idForName(bearPlayers, 'Bo Bo'), position: Position.FIRST_BASE },
+  { playerId: idForName(bearPlayers, 'Spanky'), position: Position.THIRD_BASE },
+  { playerId: idForName(bearPlayers, 'Sparey'), position: Position.SECOND_BASE },
+  { playerId: idForName(bearPlayers, 'Cappy'), position: Position.SHORTSTOP },
+  { playerId: idForName(bearPlayers, 'Cupcake'), position: Position.CENTER_FIELD },
+  { playerId: idForName(bearPlayers, 'September'), position: Position.PITCHER }
+])
+
 const turtlePlayers = turtlesJson.players.map(
   (p: PlayerJson) =>
     new Player(
@@ -154,3 +169,15 @@ const turtleMap = turtlePlayers.reduce(
 ) as Record<string, Player>
 
 export const tempTurtles = new Team('Turtles', '#007F5C', '#A7FC00', turtleMap)
+
+tempTurtles.setStarters([
+  { playerId: idForName(turtlePlayers, 'Zoona'), position: Position.CENTER_FIELD },
+  { playerId: idForName(turtlePlayers, 'Chan'), position: Position.LEFT_FIELD },
+  { playerId: idForName(turtlePlayers, 'Shells'), position: Position.CATCHER },
+  { playerId: idForName(turtlePlayers, 'Guss'), position: Position.THIRD_BASE },
+  { playerId: idForName(turtlePlayers, 'Browny'), position: Position.FIRST_BASE },
+  { playerId: idForName(turtlePlayers, 'Glen'), position: Position.SECOND_BASE },
+  { playerId: idForName(turtlePlayers, 'Cookie'), position: Position.RIGHT_FIELD },
+  { playerId: idForName(turtlePlayers, 'George'), position: Position.SHORTSTOP },
+  { playerId: idForName(turtlePlayers, 'Gary'), position: Position.PITCHER }
+])

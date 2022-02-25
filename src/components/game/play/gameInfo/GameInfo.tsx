@@ -1,6 +1,8 @@
 import { FC } from 'react'
+import { useSelector } from 'react-redux'
 import { Controls, CurrentPlayer, InningStatus, PlayHistory } from '.'
-import { bears, turtles } from '../boxScore/sample'
+import { Position } from '../../../../model'
+import { RootState } from '../../../../store/reducers'
 
 const batterStats = {
   today: '1-4, HR, RBI',
@@ -23,25 +25,40 @@ const pitcherStats = {
 }
 
 export const GameInfo: FC = () => {
+  const {
+    away,
+    home,
+    inning,
+    isBottom,
+    outs
+  } = useSelector((state: RootState) => state.game)
+
+  if (!home || !away) {
+    throw new Error()
+  }
+
+  const battingTeam = isBottom ? home : away
+  const pitchingTeam = isBottom ? away: home
+
   return (
     <div className="flex-column game-info">
       <div className="game-info-item">
-        <InningStatus inning={5} isBottom={false} outs={2} />
+        <InningStatus inning={inning} isBottom={isBottom} outs={outs} />
       </div>
       <div className="game-info-item">
         <CurrentPlayer
           isBatting
-          name="Sparey"
-          color={bears.color}
-          background={bears.background}
+          name={battingTeam.peekNextBatter().name}
+          color={battingTeam.secondaryColor}
+          background={battingTeam.primaryColor}
           stats={batterStats}
         />
       </div>
       <div className="game-info-item">
         <CurrentPlayer
-          name="Shells"
-          color={turtles.color}
-          background={turtles.background}
+          name={pitchingTeam.defenderAt(Position.PITCHER).name}
+          color={pitchingTeam.secondaryColor}
+          background={pitchingTeam.primaryColor}
           stats={pitcherStats}
         />
       </div>

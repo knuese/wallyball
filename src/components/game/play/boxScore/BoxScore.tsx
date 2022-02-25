@@ -41,12 +41,12 @@ export const BoxScore: FC = () => {
         ...(activeSide === Side.AWAY
           ? {
             label: away.label,
-            batting: Object.values(away.players).map(({ name }) => [name, 0, 0, 0, 0, 0, 0]),
+            batting: away.getBattingLines(),
             battingExtra: {},
             pitching: [['September', '0.0', 0, 0, 0, 0, 0]]
           } : {
             label: home.label,
-            batting: Object.values(home.players).map(({ name }) => [name, 0, 0, 0, 0, 0, 0]),
+            batting: home.getBattingLines(),
             battingExtra: {},
             pitching: [['Gary', '0.0', 0, 0, 0, 0, 0]]
           }
