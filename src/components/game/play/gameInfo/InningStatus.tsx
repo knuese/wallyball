@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { getOrdinal } from "../../../../util";
+import { FC } from 'react'
+import { getOrdinal } from '../../../../util'
 
 export type InningStatusProps = {
-  inning: number,
-  isBottom: boolean,
+  inning: number
+  isBottom: boolean
   outs: number
 }
 
@@ -18,8 +18,8 @@ export const InningStatus: FC<InningStatusProps> = ({
 
   return (
     <div className="inning-status flex-row center">
-      <span style={{paddingRight: '0.75rem'}}>{`${topBottom} ${inningText}`}</span>
-      <span style={{paddingRight: '0.75rem'}}>|</span>
+      <span className="margin-right-75">{`${topBottom} ${inningText}`}</span>
+      <span className="margin-right-75">|</span>
       <span>{`${outText}`}</span>
     </div>
   )

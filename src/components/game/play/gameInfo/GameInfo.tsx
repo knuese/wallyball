@@ -1,6 +1,5 @@
 import { FC } from 'react'
-import { Controls, CurrentPlayer, InningStatus } from '.'
-import { PlayDescriptor } from '..'
+import { Controls, CurrentPlayer, InningStatus, PlayHistory } from '.'
 import { bears, turtles } from '../boxScore/sample'
 
 const batterStats = {
@@ -26,10 +25,10 @@ const pitcherStats = {
 export const GameInfo: FC = () => {
   return (
     <div className="flex-column game-info">
-      <div className='game-info-item'>
+      <div className="game-info-item">
         <InningStatus inning={5} isBottom={false} outs={2} />
       </div>
-      <div className='game-info-item'>
+      <div className="game-info-item">
         <CurrentPlayer
           isBatting
           name="Sparey"
@@ -38,7 +37,7 @@ export const GameInfo: FC = () => {
           stats={batterStats}
         />
       </div>
-      <div className='game-info-item'>
+      <div className="game-info-item">
         <CurrentPlayer
           name="Shells"
           color={turtles.color}
@@ -46,8 +45,14 @@ export const GameInfo: FC = () => {
           stats={pitcherStats}
         />
       </div>
-      <div className='game-info-item'>
-        <PlayDescriptor text="Bo Bo doubled." />
+      <div className="game-info-item">
+        <PlayHistory
+          plays={[
+            'Jingle grounded out.',
+            'September struck out.',
+            'Sammy singled.'
+          ]}
+        />
       </div>
       <Controls />
     </div>

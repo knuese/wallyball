@@ -60,11 +60,20 @@
   opacity: 0.7;
 }
 
-.play-descriptor {
+.play-history {
   background-color: white;
   height: 10.25rem;
-  padding: 0 0.6rem;
+  position: relative;
+}
+
+.play-history-list {
   overflow-y: scroll;
+  text-align: left;
+  margin-top: 1.5rem;
+}
+
+.play-history-list * {
+  padding: 0.5rem 1rem;
 }
 
 .control-panel {

@@ -57,7 +57,8 @@ export const advanceRunners =
   }
 
 export const simulateAtBat =
-  () => (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
+  () =>
+  (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
     const { game } = getState()
 
     if (!game.away || !game.home) {
