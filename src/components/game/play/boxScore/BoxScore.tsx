@@ -37,20 +37,20 @@ export const BoxScore: FC = () => {
         away={away.label}
         home={home.label}
       />
-      <TeamStats {
-        ...(activeSide === Side.AWAY
+      <TeamStats
+        {...(activeSide === Side.AWAY
           ? {
-            label: away.label,
-            batting: away.getBattingLines(),
-            battingExtra: {},
-            pitching: [['September', '0.0', 0, 0, 0, 0, 0]]
-          } : {
-            label: home.label,
-            batting: home.getBattingLines(),
-            battingExtra: {},
-            pitching: [['Gary', '0.0', 0, 0, 0, 0, 0]]
-          }
-        )}
+              label: away.label,
+              batting: away.getBattingLines(),
+              battingExtra: {},
+              pitching: [['September', '0.0', 0, 0, 0, 0, 0]]
+            }
+          : {
+              label: home.label,
+              batting: home.getBattingLines(),
+              battingExtra: {},
+              pitching: [['Gary', '0.0', 0, 0, 0, 0, 0]]
+            })}
       />
     </div>
   )

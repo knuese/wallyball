@@ -25,21 +25,16 @@ const pitcherStats = {
 }
 
 export const GameInfo: FC = () => {
-  const {
-    away,
-    home,
-    inning,
-    isBottom,
-    outs,
-    playsForInning
-  } = useSelector((state: RootState) => state.game)
+  const { away, home, inning, isBottom, outs, playsForInning } = useSelector(
+    (state: RootState) => state.game
+  )
 
   if (!home || !away) {
     throw new Error()
   }
 
   const battingTeam = isBottom ? home : away
-  const pitchingTeam = isBottom ? away: home
+  const pitchingTeam = isBottom ? away : home
 
   return (
     <div className="flex-column game-info">

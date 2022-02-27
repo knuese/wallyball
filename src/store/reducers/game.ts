@@ -30,7 +30,10 @@ export const initialState: GameState = {
   ]
 }
 
-export const updateScoreInningEnd = ({ isBottom, scores }: GameState): Scores => {
+export const updateScoreInningEnd = ({
+  isBottom,
+  scores
+}: GameState): Scores => {
   let updatedScores
 
   if (isBottom) {

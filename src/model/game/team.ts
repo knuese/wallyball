@@ -108,7 +108,15 @@ export class Team {
       throw new Error('batting order not defined')
     }
 
-    return this.battingOrder.map((playerId) => [this.players[playerId].name, '0', '0', '0', '0', '0', '0'])
+    return this.battingOrder.map((playerId) => [
+      this.players[playerId].name,
+      '0',
+      '0',
+      '0',
+      '0',
+      '0',
+      '0'
+    ])
   }
 
   getPitchingLines(): string[][] {
@@ -116,7 +124,9 @@ export class Team {
       throw new Error('defense not defined')
     }
 
-    return [[this.defenderAt(Position.PITCHER).name, '0.0', '0', '0', '0', '0', '0']]
+    return [
+      [this.defenderAt(Position.PITCHER).name, '0.0', '0', '0', '0', '0', '0']
+    ]
   }
 
   // getBoxScore(): BoxScore {

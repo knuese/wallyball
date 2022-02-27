@@ -49,7 +49,7 @@ export const Field: FC = () => {
         {teamToUse.defenderAt(Position.FIRST_BASE).name}
       </span>
       <span className="fielder" id="second">
-      {teamToUse.defenderAt(Position.SECOND_BASE).name}
+        {teamToUse.defenderAt(Position.SECOND_BASE).name}
       </span>
       <span className="fielder" id="ss">
         {teamToUse.defenderAt(Position.SHORTSTOP).name}

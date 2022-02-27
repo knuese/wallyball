@@ -36,7 +36,11 @@ export const Controls: FC = () => {
         <AutoplayToggle checked={autoplay} onChange={setAutoplay} />
         <DelaySlider disabled={!autoplay} onChange={setDelay} />
         <div className="flex-row center control-item">
-          <button onClick={simulate} disabled={autoplay} style={{ marginRight: '1rem' }}>
+          <button
+            onClick={simulate}
+            disabled={autoplay}
+            style={{ marginRight: '1rem' }}
+          >
             Simulate At Bat
           </button>
           <button disabled={autoplay}>Substitute</button>

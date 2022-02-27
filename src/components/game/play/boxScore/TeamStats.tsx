@@ -32,7 +32,7 @@ export const TeamStats: FC<TeamStatProps> = ({
     >
       {stats.map((stat, i) => (
         <td
-          key={`${name}:${stats[0]}:${i}`}
+          key={`${label.name}:${stats[0]}:${i}`}
           className={i === 0 ? 'border-right' : 'stat-cell'}
         >
           {stat}
@@ -59,17 +59,21 @@ export const TeamStats: FC<TeamStatProps> = ({
         </thead>
         <tbody>{batting.map(getRows)}</tbody>
       </table>
-      {(doubles || triples || homeRuns) && <div className="batting-extra">
-        {doubles?.length && (
-          <p className="batting-extra-line">{`2B: ${doubles?.join(', ')}`}</p>
-        )}
-        {triples?.length && (
-          <p className="batting-extra-line">{`3B: ${triples?.join(', ')}`}</p>
-        )}
-        {homeRuns?.length && (
-          <p className="batting-extra-line">{`HR: ${homeRuns?.join(', ')}`}</p>
-        )}
-      </div>}
+      {(doubles || triples || homeRuns) && (
+        <div className="batting-extra">
+          {doubles?.length && (
+            <p className="batting-extra-line">{`2B: ${doubles?.join(', ')}`}</p>
+          )}
+          {triples?.length && (
+            <p className="batting-extra-line">{`3B: ${triples?.join(', ')}`}</p>
+          )}
+          {homeRuns?.length && (
+            <p className="batting-extra-line">{`HR: ${homeRuns?.join(
+              ', '
+            )}`}</p>
+          )}
+        </div>
+      )}
       <div style={{ height: '0.5rem' }} />
       <table className="team-stats-table">
         <thead style={headerStyle}>
