@@ -10,6 +10,7 @@ module.exports = {
     }
   },
   testMatch: ['**/__tests__/**/*.+(ts|tsx|js|jsx)'],
+  testEnvironment: 'jsdom',
   collectCoverage: true,
   coveragePathIgnorePatterns: [
     ...defaults.coveragePathIgnorePatterns,
