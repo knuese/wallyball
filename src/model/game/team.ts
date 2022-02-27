@@ -2,7 +2,7 @@ import { Player, Position } from '..'
 
 export type Starter = {
   playerId: string
-  position: Position
+  position: Position | string
 }
 
 type Defense = Record<Position, string>
@@ -27,20 +27,23 @@ export class Team {
     name: string,
     primaryColor: string,
     secondaryColor: string,
-    players: Record<string, Player>
+    players: Record<string, Player>,
+    starters: Starter[]
   ) {
     this.name = name
     this.primaryColor = primaryColor
     this.secondaryColor = secondaryColor
     this.players = players
     this.batterIndex = 0
+
+    this.setStarters(starters)
   }
 
   getPlayerList(): Player[] {
     return Object.values(this.players)
   }
 
-  setStarters(starters: Starter[]): void {
+  private setStarters(starters: Starter[]): void {
     if (starters.length !== 9) {
       throw new Error('must specify nine starters')
     }

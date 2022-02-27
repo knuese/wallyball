@@ -139,9 +139,7 @@ const bearMap = bearPlayers.reduce(
   {}
 ) as Record<string, Player>
 
-export const tempBears = new Team('Bears', '#841B2D', '#DEB887', bearMap)
-
-tempBears.setStarters([
+export const tempBears = new Team('Bears', '#841B2D', '#DEB887', bearMap, [
   { playerId: idForName(bearPlayers, 'Sammy'), position: Position.LEFT_FIELD },
   {
     playerId: idForName(bearPlayers, 'Buster'),
@@ -177,31 +175,44 @@ const turtleMap = turtlePlayers.reduce(
   {}
 ) as Record<string, Player>
 
-export const tempTurtles = new Team('Turtles', '#007F5C', '#A7FC00', turtleMap)
-
-tempTurtles.setStarters([
-  {
-    playerId: idForName(turtlePlayers, 'Zoona'),
-    position: Position.CENTER_FIELD
-  },
-  { playerId: idForName(turtlePlayers, 'Chan'), position: Position.LEFT_FIELD },
-  { playerId: idForName(turtlePlayers, 'Shells'), position: Position.CATCHER },
-  { playerId: idForName(turtlePlayers, 'Guss'), position: Position.THIRD_BASE },
-  {
-    playerId: idForName(turtlePlayers, 'Browny'),
-    position: Position.FIRST_BASE
-  },
-  {
-    playerId: idForName(turtlePlayers, 'Glen'),
-    position: Position.SECOND_BASE
-  },
-  {
-    playerId: idForName(turtlePlayers, 'Cookie'),
-    position: Position.RIGHT_FIELD
-  },
-  {
-    playerId: idForName(turtlePlayers, 'George'),
-    position: Position.SHORTSTOP
-  },
-  { playerId: idForName(turtlePlayers, 'Gary'), position: Position.PITCHER }
-])
+export const tempTurtles = new Team(
+  'Turtles',
+  '#007F5C',
+  '#A7FC00',
+  turtleMap,
+  [
+    {
+      playerId: idForName(turtlePlayers, 'Zoona'),
+      position: Position.CENTER_FIELD
+    },
+    {
+      playerId: idForName(turtlePlayers, 'Chan'),
+      position: Position.LEFT_FIELD
+    },
+    {
+      playerId: idForName(turtlePlayers, 'Shells'),
+      position: Position.CATCHER
+    },
+    {
+      playerId: idForName(turtlePlayers, 'Guss'),
+      position: Position.THIRD_BASE
+    },
+    {
+      playerId: idForName(turtlePlayers, 'Browny'),
+      position: Position.FIRST_BASE
+    },
+    {
+      playerId: idForName(turtlePlayers, 'Glen'),
+      position: Position.SECOND_BASE
+    },
+    {
+      playerId: idForName(turtlePlayers, 'Cookie'),
+      position: Position.RIGHT_FIELD
+    },
+    {
+      playerId: idForName(turtlePlayers, 'George'),
+      position: Position.SHORTSTOP
+    },
+    { playerId: idForName(turtlePlayers, 'Gary'), position: Position.PITCHER }
+  ]
+)

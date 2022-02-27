@@ -1,5 +1,9 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render } from '@testing-library/react'
+import {
+  act,
+  fireEvent,
+  renderWithState as render
+} from '../../../../../__test_utils__'
 import { Controls } from '../../../../../src/components/game'
 
 describe('<Controls />', () => {
@@ -17,13 +21,15 @@ describe('<Controls />', () => {
   })
 
   it('toggles autoplay', async () => {
-    const { getByTestId } = render(<Controls />)
+    const setTimoutSpy = jest.spyOn(global, 'setTimeout')
+    const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout')
 
+    const { getByTestId } = render(<Controls />)
     const toggle = getByTestId('autoplay-toggle')
 
     // turn autoplay on
     fireEvent.click(toggle)
-    expect(setTimeout).toHaveBeenCalledTimes(1)
+    expect(setTimoutSpy).toHaveBeenCalledTimes(1)
 
     // advance timers
     await act(async () => {
@@ -32,6 +38,6 @@ describe('<Controls />', () => {
 
     // turn autoplay off
     fireEvent.click(toggle)
-    expect(clearTimeout).toHaveBeenCalledTimes(1)
+    expect(clearTimeoutSpy).toHaveBeenCalledTimes(1)
   })
 })

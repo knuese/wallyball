@@ -15,13 +15,13 @@ export const BoxScore: FC = () => {
   const awayDisplayProps = {
     name: away.name,
     color: away.secondaryColor,
-    background: away.primaryColor,
+    background: away.primaryColor
   }
 
   const homeDisplayProps = {
     name: home.name,
     color: home.secondaryColor,
-    background: home.primaryColor,
+    background: home.primaryColor
   }
 
   return (

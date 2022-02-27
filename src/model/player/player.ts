@@ -6,8 +6,8 @@ export class Player {
   id: string
   name: string
   eligiblePositions: Position[] | string[]
-  private battingConfig: BattingConfig
-  private pitchingConfig?: PitchingConfig
+  battingConfig: BattingConfig
+  pitchingConfig?: PitchingConfig
   // gameStats: GameStats
 
   constructor(
@@ -40,8 +40,8 @@ export class Player {
     return !!this.pitchingConfig
   }
 
-  canPlay(position: Position): boolean {
-    return this.eligiblePositions.includes(position)
+  canPlay(position: Position | string): boolean {
+    return this.eligiblePositions.includes(position as any)
   }
 
   bat(): { outcome: Outcome; rawValue: number } {

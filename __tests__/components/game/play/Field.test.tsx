@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
+import { renderWithState as render } from '../../../../__test_utils__'
 import { Field } from '../../../../src/components/game'
 
 describe('<Field />', () => {

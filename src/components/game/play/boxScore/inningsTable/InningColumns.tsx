@@ -12,7 +12,6 @@ export const InningColumns: FC<InningColumnProps> = ({
   const headers = [...new Array(9).keys()].map((i) => (
     <th key={`inning:${i}`}>{i + 1}</th>
   ))
-  console.log('INNINGS!!!', awayScores, homeScores)
   const rows = [awayScores, homeScores].map((scores, i) => (
     <tr key={`scores:${i}`}>
       {Array.from({ ...scores, length: 9 }).map((score, j) => (

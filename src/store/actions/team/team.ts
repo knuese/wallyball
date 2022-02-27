@@ -19,6 +19,7 @@ import {
   TeamFileContents
 } from '../../types/team'
 
+// TODO update?
 export const readTeamFile =
   (file: File, isHome?: boolean) =>
   async (dispatch: Dispatch<TeamActionTypes>): Promise<void> => {
@@ -45,12 +46,13 @@ export const readTeamFile =
           )
 
           return { ...acc, [player.id]: player }
-        }, {})
+        }, {}),
+        []
       )
     })
   }
 
-// TODO rename
+// TODO fix
 export const setTeam =
   (lineup: Lineup, defense: Defense, isHome?: boolean) =>
   (dispatch: Dispatch<TeamActionTypes>, getState: () => RootState): void => {
@@ -63,12 +65,12 @@ export const setTeam =
         throw new Error('team not defined')
       }
 
-      team.setStarters(
-        Object.values(lineup).map((playerId) => ({
-          playerId,
-          position: defense[playerId]
-        }))
-      )
+      // team.setStarters(
+      //   Object.values(lineup).map((playerId) => ({
+      //     playerId,
+      //     position: defense[playerId]
+      //   }))
+      // )
 
       dispatch({
         type: SET_STARTERS_SUCCESS,

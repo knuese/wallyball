@@ -1,8 +1,10 @@
-import { team } from './team'
+import game from './game'
+import { away, home } from './team'
 
 export default {
+  game,
   teams: {
-    away: { team },
-    home: { team }
+    away: { team: away },
+    home: { team: home }
   }
 }
