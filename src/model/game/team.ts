@@ -1,11 +1,5 @@
 import { Player, Position } from '..'
 
-export type TeamLabel = {
-  name: string
-  color: string
-  background: string
-}
-
 export type Starter = {
   playerId: string
   position: Position
@@ -25,7 +19,6 @@ export class Team {
   players: Record<string, Player>
   primaryColor: string
   secondaryColor: string
-  label: TeamLabel
   private battingOrder?: string[]
   private defense?: Defense
   private batterIndex: number
@@ -41,12 +34,6 @@ export class Team {
     this.secondaryColor = secondaryColor
     this.players = players
     this.batterIndex = 0
-
-    this.label = {
-      name,
-      color: secondaryColor,
-      background: primaryColor
-    }
   }
 
   getPlayerList(): Player[] {

@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import { InningColumns, StatColumns, TeamColumn } from '.'
-import { TeamLabel } from '../../../../model/game/team'
 
 type PropsForSide = {
-  label: TeamLabel
+  name: string
+  color: string
+  background: string
   scores: number[]
   runs: number
   hits: number
@@ -17,7 +18,7 @@ export type InningProps = {
 
 export const Innings: FC<InningProps> = ({ away, home }) => (
   <div className="flex-row">
-    <TeamColumn away={away.label} home={home.label} />
+    <TeamColumn away={{ ...away }} home={{ ...home }} />
     <InningColumns awayScores={away.scores} homeScores={home.scores} />
     <StatColumns away={away} home={home} />
   </div>

@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { TeamLabel } from '../../../../model/game/team'
 
 type BattingExtra = {
   doubles?: string[]
@@ -8,31 +7,32 @@ type BattingExtra = {
 }
 
 export type TeamStatProps = {
-  label: TeamLabel
+  name: string
+  color: string
+  background: string
   batting: Array<string | number>[]
   battingExtra: BattingExtra
   pitching: Array<string | number>[]
 }
 
 export const TeamStats: FC<TeamStatProps> = ({
-  label,
+  name,
+  color,
+  background,
   batting,
   battingExtra,
   pitching
 }) => {
-  const headerStyle = {
-    color: label.color,
-    background: label.background
-  }
+  const headerStyle = { color, background }
 
   const getRows = (stats: Array<string | number>, i: number) => (
     <tr
-      key={`${label.name}:${stats[0]}`}
+      key={`${name}:${stats[0]}`}
       className={i % 2 === 0 ? 'even-row' : 'odd-row'}
     >
       {stats.map((stat, i) => (
         <td
-          key={`${label.name}:${stats[0]}:${i}`}
+          key={`${name}:${stats[0]}:${i}`}
           className={i === 0 ? 'border-right' : 'stat-cell'}
         >
           {stat}

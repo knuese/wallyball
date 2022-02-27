@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Side } from '../../../../model'
 import { Innings, TeamStats, TeamToggles } from '.'
 import { RootState } from '../../../../store/reducers'
-import { bears, turtles } from './sample'
 
 export const BoxScore: FC = () => {
   const [activeSide, setActiveSide] = useState<Side>(Side.AWAY)
@@ -13,18 +12,30 @@ export const BoxScore: FC = () => {
     throw new Error('fail!')
   }
 
+  const awayDisplayProps = {
+    name: away.name,
+    color: away.secondaryColor,
+    background: away.primaryColor,
+  }
+
+  const homeDisplayProps = {
+    name: home.name,
+    color: home.secondaryColor,
+    background: home.primaryColor,
+  }
+
   return (
     <div className="flex-column box-score">
       <Innings
         away={{
-          label: away.label,
+          ...awayDisplayProps,
           scores: scores.away,
           runs: 0,
           hits: 0,
           errors: 0
         }}
         home={{
-          label: home.label,
+          ...homeDisplayProps,
           scores: scores.home,
           runs: 0,
           hits: 0,
@@ -34,19 +45,19 @@ export const BoxScore: FC = () => {
       <TeamToggles
         activeSide={activeSide}
         setActiveSide={setActiveSide}
-        away={away.label}
-        home={home.label}
+        away={awayDisplayProps}
+        home={homeDisplayProps}
       />
       <TeamStats
         {...(activeSide === Side.AWAY
           ? {
-              label: away.label,
+              ...awayDisplayProps,
               batting: away.getBattingLines(),
               battingExtra: {},
               pitching: [['September', '0.0', 0, 0, 0, 0, 0]]
             }
           : {
-              label: home.label,
+              ...homeDisplayProps,
               batting: home.getBattingLines(),
               battingExtra: {},
               pitching: [['Gary', '0.0', 0, 0, 0, 0, 0]]

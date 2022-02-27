@@ -17,9 +17,9 @@ export class GameStats {
     [Outcome.GROUNDER]: 'grounders'
   }
 
-  constructor() {
-    // this.batting = new BattingStats()
-  }
+  // constructor() {
+  // this.batting = new BattingStats()
+  // }
 
   // logAtBat(outcome: Outcome, runsScored: number): void {
   //   if (isAtBat(outcome)) {

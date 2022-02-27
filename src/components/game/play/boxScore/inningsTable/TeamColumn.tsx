@@ -1,9 +1,16 @@
 import { FC } from 'react'
-import { TeamLabel } from '../../../../../model/game/team'
 
 export type TeamColumnProps = {
-  away: TeamLabel
-  home: TeamLabel
+  away: {
+    name: string
+    color: string
+    background: string
+  }
+  home: {
+    name: string
+    color: string
+    background: string
+  }
 }
 
 export const TeamColumn: FC<TeamColumnProps> = ({ away, home }) => {

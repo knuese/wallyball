@@ -30,4 +30,5 @@
 //   }
 // }
 
-export default {}
+const stats = {}
+export default stats
