@@ -63,6 +63,15 @@ export class Team {
     }
   }
 
+  currentBatter(): Player {
+    if (!this.battingOrder) {
+      throw new Error('batting order not defined!')
+    }
+
+    const playerId = this.battingOrder[this.batterIndex]
+    return this.players[playerId]
+  }
+
   nextBatter(): Player {
     if (!this.battingOrder) {
       throw new Error('batting order not defined!')
