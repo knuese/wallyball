@@ -61,7 +61,7 @@ export const GameInfo: FC = () => {
       <div className="game-info-item">
         <PlayHistory plays={playsForInning} />
       </div>
-      <Controls />
+      <Controls outs={outs} />
     </div>
   )
 }

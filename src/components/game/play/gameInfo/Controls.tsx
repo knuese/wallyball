@@ -1,16 +1,20 @@
 import { FC, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { simulateAtBat } from '../../../../store/actions/game'
+import { requestSimulation } from '../../../../store/actions/game'
 import { AutoplayToggle, DelaySlider } from './control'
 
-export const Controls: FC = () => {
+export type ControlsProps = {
+  outs: number
+}
+
+export const Controls: FC<ControlsProps> = ({ outs }) => {
   const dispatch = useDispatch()
   const [intervalRef, setIntervalRef] = useState<NodeJS.Timeout>()
   const [autoplay, setAutoplay] = useState(false)
   const [delay, setDelay] = useState(5)
 
   const simulate = () => {
-    dispatch(simulateAtBat())
+    dispatch(requestSimulation())
   }
 
   const onInterval = (timeout: number) => {
@@ -41,7 +45,7 @@ export const Controls: FC = () => {
             disabled={autoplay}
             style={{ marginRight: '1rem' }}
           >
-            Simulate At Bat
+            {outs === 3 ? 'Switch Sides' : 'Simulate At Bat'}
           </button>
           <button disabled={autoplay}>Substitute</button>
         </div>

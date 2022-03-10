@@ -3,6 +3,7 @@ import { Bases, Outcome, Player, Position, Team } from '../../model'
 import { getTotalScore, isOver } from '../../util'
 import { RootState } from '../reducers'
 import {
+  ADD_TO_PLAY_HISTORY,
   GameActionTypes,
   GameState,
   GAME_OVER,
@@ -56,28 +57,6 @@ export const advanceRunners =
     return runnersScored.length
   }
 
-export const checkForInningEnd =
-  () =>
-  (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
-    const { game } = getState()
-
-    const awayScore = getTotalScore(game.scores.away)
-    const homeScore = getTotalScore(game.scores.home)
-    const isGameOver = isOver({
-      inning: game.inning,
-      isBottom: game.isBottom,
-      outs: game.outs,
-      homeScore,
-      awayScore
-    })
-
-    if (isGameOver) {
-      dispatch({ type: GAME_OVER })
-    } else if (game.outs === 3) {
-      dispatch({ type: PROGRESS_INNING })
-    }
-  }
-
 export const simulateAtBat =
   () =>
   (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
@@ -96,7 +75,10 @@ export const simulateAtBat =
       ? batter.bat()
       : pitcher.pitch()
 
-    console.log(`${batter.name} -> ${outcome}`)
+    dispatch({
+      type: ADD_TO_PLAY_HISTORY,
+      payload: `${batter.name} ${outcome}.`
+    })
 
     let runsScored = 0
     if (outcome === Outcome.STRIKEOUT) {
@@ -119,6 +101,33 @@ export const simulateAtBat =
       console.log('scored:', runsScored)
       // TODO batter.logAtBat(outcome, runsScored)
     }
+  }
 
-    dispatch(checkForInningEnd() as any)
+export const switchSides =
+  () =>
+  (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
+    const { game } = getState()
+
+    const awayScore = getTotalScore(game.scores.away)
+    const homeScore = getTotalScore(game.scores.home)
+    const isGameOver = isOver({
+      inning: game.inning,
+      isBottom: game.isBottom,
+      outs: game.outs,
+      homeScore,
+      awayScore
+    })
+
+    if (isGameOver) {
+      dispatch({ type: GAME_OVER })
+    } else if (game.outs === 3) {
+      dispatch({ type: PROGRESS_INNING })
+    }
+  }
+
+export const requestSimulation =
+  () =>
+  (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
+    const { outs } = getState().game
+    dispatch((outs < 3 ? simulateAtBat : switchSides)() as any)
   }

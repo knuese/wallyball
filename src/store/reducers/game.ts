@@ -2,6 +2,7 @@ import { AnyAction, Reducer } from 'redux'
 import { Bases } from '../../model'
 import { tempBears, tempTurtles } from './sampleTeam'
 import {
+  ADD_TO_PLAY_HISTORY,
   GameState,
   GAME_OVER,
   PROGRESS_INNING,
@@ -22,12 +23,7 @@ export const initialState: GameState = {
     away: [0],
     home: []
   },
-  playsForInning: [
-    'Jingle grounded out.',
-    'September struck out.',
-    'Sammy singled.',
-    'Buster doubled. Sammy scored.'
-  ]
+  playsForInning: []
 }
 
 export const updateScoreInningEnd = ({
@@ -72,6 +68,11 @@ const reducer: Reducer<GameState> = (
   { type, payload }: AnyAction
 ): GameState => {
   switch (type) {
+    case ADD_TO_PLAY_HISTORY:
+      return {
+        ...state,
+        playsForInning: [payload, ...state.playsForInning]
+      }
     case RECORD_OUT:
       return {
         ...state,
