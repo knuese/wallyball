@@ -56,6 +56,28 @@ export const advanceRunners =
     return runnersScored.length
   }
 
+export const checkForInningEnd =
+  () =>
+  (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
+    const { game } = getState()
+
+    const awayScore = getTotalScore(game.scores.away)
+    const homeScore = getTotalScore(game.scores.home)
+    const isGameOver = isOver({
+      inning: game.inning,
+      isBottom: game.isBottom,
+      outs: game.outs,
+      homeScore,
+      awayScore
+    })
+
+    if (isGameOver) {
+      dispatch({ type: GAME_OVER })
+    } else if (game.outs === 3) {
+      dispatch({ type: PROGRESS_INNING })
+    }
+  }
+
 export const simulateAtBat =
   () =>
   (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
@@ -98,19 +120,5 @@ export const simulateAtBat =
       // TODO batter.logAtBat(outcome, runsScored)
     }
 
-    const awayScore = getTotalScore(game.scores.away)
-    const homeScore = getTotalScore(game.scores.home)
-    const isGameOver = isOver({
-      inning: game.inning,
-      isBottom: game.isBottom,
-      outs: game.outs,
-      homeScore,
-      awayScore
-    })
-
-    if (isGameOver) {
-      dispatch({ type: GAME_OVER })
-    } else if (game.outs === 3) {
-      dispatch({ type: PROGRESS_INNING })
-    }
+    dispatch(checkForInningEnd() as any)
   }
