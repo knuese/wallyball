@@ -1,8 +1,13 @@
+import { Team } from "../model"
+
 export const getOrdinal = (n: number) =>
   ['', 'st', 'nd', 'rd'][(n / 10) % 10 ^ 1 && n % 10] || 'th'
 
 export const getTotalScore = (innings: number[]): number =>
   innings.reduce((acc, cur) => acc + cur, 0)
+
+export const getNumHits = (team: Team): number =>
+  Object.values(team.players).reduce((acc, cur) => acc + cur.getGameStats().batting.hits, 0)
 
 export const isOver = ({
   inning,

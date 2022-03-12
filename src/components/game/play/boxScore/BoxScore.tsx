@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Side } from '../../../../model'
 import { Innings, TeamStats, TeamToggles } from '.'
 import { RootState } from '../../../../store/reducers'
+import { getNumHits, getTotalScore } from '../../../../util'
 
 export const BoxScore: FC = () => {
   const [activeSide, setActiveSide] = useState<Side>(Side.AWAY)
@@ -30,15 +31,15 @@ export const BoxScore: FC = () => {
         away={{
           ...awayDisplayProps,
           scores: scores.away,
-          runs: 0,
-          hits: 0,
+          runs: getTotalScore(scores.away),
+          hits: getNumHits(away),
           errors: 0
         }}
         home={{
           ...homeDisplayProps,
           scores: scores.home,
-          runs: 0,
-          hits: 0,
+          runs: getTotalScore(scores.home),
+          hits: getNumHits(home),
           errors: 0
         }}
       />
