@@ -99,8 +99,9 @@ export const simulateAtBat =
 
     if (runsScored) {
       console.log('scored:', runsScored)
-      // TODO batter.logAtBat(outcome, runsScored)
     }
+
+    batter.logAtBat(outcome, runsScored)
   }
 
 export const switchSides =

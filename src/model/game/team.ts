@@ -102,20 +102,25 @@ export class Team {
     return this.players[this.defense[position]]
   }
 
-  getBattingLines(): string[][] {
+  getBattingLines(): Array<string | number>[] {
     if (!this.battingOrder) {
       throw new Error('batting order not defined')
     }
 
-    return this.battingOrder.map((playerId) => [
-      this.players[playerId].name,
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0'
-    ])
+    return this.battingOrder.map((playerId) => {
+      const player = this.players[playerId]
+      const { batting } = player.getGameStats()
+
+      return [
+        player.name,
+        batting.atBats,
+        batting.runs,
+        batting.hits,
+        batting.rbis,
+        batting.walks,
+        batting.strikeouts
+      ]
+    })
   }
 
   getPitchingLines(): string[][] {

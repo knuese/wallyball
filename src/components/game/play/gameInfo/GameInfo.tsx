@@ -2,31 +2,17 @@ import { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Controls, CurrentPlayer, InningStatus, PlayHistory } from '.'
 import { useTeams } from '../../../../hooks'
-import { Position } from '../../../../model'
+import { Player, Position } from '../../../../model'
 import { RootState } from '../../../../store/reducers'
 
-const batterStats = {
-  today: '1-4, HR, RBI',
-  season: {
-    H: '12',
-    HR: '4',
-    RBI: '16',
-    AVG: '0.265'
-  }
-}
-
 const pitcherStats = {
-  today: '0.2 IP, 0 R, 0 ER, 2 K',
-  season: {
-    IP: '14.0',
-    BB: '2',
-    K: '14',
-    ERA: '1.07'
-  }
+  today: '0.2 IP, 0 R, 0 ER, 2 K'
 }
 
 export const GameInfo: FC = () => {
-  const [batterName, setBatterName] = useState('')
+  const [currentBatter, setCurrentBatter] = useState<Player | null>(null)
+  const [currentPitcher, setCurrentPitcher] = useState<Player | null>(null)
+
   const { inning, isBottom, outs, playsForInning } = useSelector(
     (state: RootState) => state.game
   )
@@ -36,9 +22,13 @@ export const GameInfo: FC = () => {
   useEffect(() => {
     // prevent next batter from showing when there are three outs
     if (outs < 3) {
-      setBatterName(batting.peekNextBatter().name)
+      setCurrentBatter(batting.peekNextBatter())
     }
   }, [outs, batting.currentBatter()])
+
+  useEffect(() => {
+    setCurrentPitcher(pitching.defenderAt(Position.PITCHER))
+  }, [pitching.defenderAt(Position.PITCHER)])
 
   return (
     <div className="flex-column game-info">
@@ -48,18 +38,34 @@ export const GameInfo: FC = () => {
       <div className="game-info-item">
         <CurrentPlayer
           isBatting
-          name={batterName}
+          name={currentBatter?.name || ''}
           color={batting.secondaryColor}
           background={batting.primaryColor}
-          stats={batterStats}
+          stats={{
+            today: currentBatter?.getBattingStatLine() || '',
+            season: {
+              H: '--',
+              HR: '--',
+              RBI: '--',
+              AVG: '--'
+            }
+          }}
         />
       </div>
       <div className="game-info-item">
         <CurrentPlayer
-          name={pitching.defenderAt(Position.PITCHER).name}
+          name={currentPitcher?.name || ''}
           color={pitching.secondaryColor}
           background={pitching.primaryColor}
-          stats={pitcherStats}
+          stats={{
+            ...pitcherStats,
+            season: {
+              IP: '--',
+              BB: '--',
+              K: '--',
+              ERA: '--'
+            }
+          }}
         />
       </div>
       <div className="game-info-item">

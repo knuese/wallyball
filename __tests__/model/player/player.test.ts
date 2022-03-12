@@ -26,6 +26,11 @@ describe('player', () => {
     expect(player.bat()).not.toEqual(Outcome.UNKNOWN)
   })
 
+  it('logs an at bat and gets the stat line', () => {
+    player.logAtBat(Outcome.DOUBLE, 0)
+    expect(player.getBattingStatLine()).toEqual('1-1, 2B')
+  })
+
   it('can pitch', () => {
     expect(player.pitch()).not.toEqual(Outcome.UNKNOWN)
   })

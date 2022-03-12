@@ -43,8 +43,8 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
       <table className="center current-player-table">
         <thead>
           <tr>
-            {Object.keys(stats.season).map((k) => (
-              <th key={k} style={{ backgroundColor: color }}>
+            {Object.keys(stats.season).map((k, i) => (
+              <th key={`${i}:${k}`} style={{ backgroundColor: color }}>
                 {k}
               </th>
             ))}
@@ -52,8 +52,8 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
         </thead>
         <tbody>
           <tr>
-            {Object.values(stats.season).map((v) => (
-              <td key={v} style={{ backgroundColor: color }}>
+            {Object.values(stats.season).map((v, i) => (
+              <td key={`${i}:${v}`} style={{ backgroundColor: color }}>
                 {v}
               </td>
             ))}

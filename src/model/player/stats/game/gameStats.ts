@@ -1,10 +1,10 @@
 import { Outcome } from '../../..'
 import { isAtBat, isHit } from '../../../../util'
-// import { BattingStats } from './battingStats'
+import BattingStats from './battingStats'
 
 // TODO
 export class GameStats {
-  // batting: BattingStats
+  batting: BattingStats
 
   private outcomeToStat: Record<string, string> = {
     [Outcome.DOUBLE]: 'doubles',
@@ -17,25 +17,27 @@ export class GameStats {
     [Outcome.GROUNDER]: 'grounders'
   }
 
-  // constructor() {
-  // this.batting = new BattingStats()
-  // }
+  constructor() {
+    this.batting = new BattingStats()
+  }
 
-  // logAtBat(outcome: Outcome, runsScored: number): void {
-  //   if (isAtBat(outcome)) {
-  //     this.batting.atBats++
-  //   }
+  logAtBat(outcome: Outcome, runsScored: number): void {
+    this.batting.plateAppearances++
 
-  //   if (isHit(outcome)) {
-  //     this.batting.hits++
-  //   }
+    if (isAtBat(outcome)) {
+      this.batting.atBats++
+    }
 
-  //   const key = this.outcomeToStat[outcome]
+    if (isHit(outcome)) {
+      this.batting.hits++
+    }
 
-  //   if (key) {
-  //     this.batting[key]++
-  //   }
+    const key = this.outcomeToStat[outcome]
 
-  //   this.batting.rbis += runsScored
-  // }
+    if (key) {
+      this.batting[key]++
+    }
+
+    this.batting.rbis += runsScored
+  }
 }

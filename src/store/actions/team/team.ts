@@ -57,21 +57,17 @@ export const setTeam =
   (lineup: Lineup, defense: Defense, isHome?: boolean) =>
   (dispatch: Dispatch<TeamActionTypes>, getState: () => RootState): void => {
     // const { teams } = getState()
-
     // try {
     //   const { team } = teams[isHome ? 'home' : 'away']
-
     //   if (!team) {
     //     throw new Error('team not defined')
     //   }
-
     //   // team.setStarters(
     //   //   Object.values(lineup).map((playerId) => ({
     //   //     playerId,
     //   //     position: defense[playerId]
     //   //   }))
     //   // )
-
     //   dispatch({
     //     type: SET_STARTERS_SUCCESS,
     //     side: isHome ? Side.HOME : Side.AWAY

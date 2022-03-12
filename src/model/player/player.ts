@@ -1,6 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
+import { statToStr } from '../../util'
 import { Outcome, Position } from '../enum'
-import { BattingConfig, PitchingConfig } from './stats'
+import { BattingConfig, BattingStats, GameStats, PitchingConfig } from './stats'
+
+type PlayerGameStats = {
+  batting: BattingStats
+}
 
 export class Player {
   id: string
@@ -8,7 +13,7 @@ export class Player {
   eligiblePositions: Position[] | string[]
   battingConfig: BattingConfig
   pitchingConfig?: PitchingConfig
-  // gameStats: GameStats
+  private gameStats: GameStats
 
   constructor(
     name: string,
@@ -21,7 +26,7 @@ export class Player {
     this.eligiblePositions = eligiblePositions
     this.battingConfig = battingConfig
     this.pitchingConfig = pitchingConfig
-    // this.gameStats = new GameStats()
+    this.gameStats = new GameStats()
   }
 
   getBattingThresholds(): Record<number, Outcome> {
@@ -34,6 +39,32 @@ export class Player {
     }
 
     return { ...this.pitchingConfig.outcomes }
+  }
+
+  getGameStats(): PlayerGameStats {
+    return {
+      batting: { ...this.gameStats.batting }
+    }
+  }
+
+  getBattingStatLine(): string {
+    const { batting } = this.gameStats
+
+    if (batting.plateAppearances === 0) {
+      return 'first plate appearance'
+    }
+
+    const line =
+      `${batting.hits}-${batting.atBats}, ` +
+      statToStr(batting.doubles, '2B') +
+      statToStr(batting.triples, '3B') +
+      statToStr(batting.homeRuns, 'HR') +
+      statToStr(batting.rbis, 'RBI') +
+      statToStr(batting.walks, 'BB') +
+      statToStr(batting.strikeouts, 'SO')
+
+    // chop off the last comma
+    return line.replace(/, $/, '')
   }
 
   isPitcher(): boolean {
@@ -52,9 +83,9 @@ export class Player {
     }
   }
 
-  // logAtBat(outcome: Outcome, runsScored: number): void {
-  //   this.gameStats.logAtBat(outcome, runsScored)
-  // }
+  logAtBat(outcome: Outcome, runsScored: number): void {
+    this.gameStats.logAtBat(outcome, runsScored)
+  }
 
   // scored(): void {
   //   this.gameStats.batting.runs++
@@ -71,10 +102,4 @@ export class Player {
       outcome: this.pitchingConfig.determineOutcome(rawValue)
     }
   }
-
-  // getBattingStatLine(): any {
-  //   const { atBats, runs, hits, rbis, walks, strikeouts } =
-  //     this.gameStats.batting
-  //   return { atBats, runs, hits, rbis, walks, strikeouts }
-  // }
 }
