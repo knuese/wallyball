@@ -76,7 +76,7 @@ const reducer: Reducer<GameState> = (
     case RECORD_OUT:
       return {
         ...state,
-        outs: state.outs + 1
+        outs: state.outs + payload
       }
     case RUN_SCORED:
       return {

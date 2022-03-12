@@ -80,7 +80,7 @@ export const simulateAtBat =
       payload: `${batter.name} ${outcome}.`
     })
 
-    let runnersScored
+    let runnersScored = []
 
     if (outcome === Outcome.STRIKEOUT) {
       dispatch({ type: RECORD_OUT, payload: 1 })
