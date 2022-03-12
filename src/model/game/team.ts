@@ -14,6 +14,12 @@ export type BoxScore = {
   homeRuns: string
 }
 
+export type BattingExtra = {
+  doubles?: string[]
+  triples?: string[]
+  homeRuns?: string[]
+}
+
 export class Team {
   name: string
   players: Record<string, Player>
@@ -121,6 +127,35 @@ export class Team {
         batting.strikeouts
       ]
     })
+  }
+
+  getBattingExtra(): BattingExtra {
+    const doubles: string[] = []
+    const triples: string[] = []
+    const homeRuns: string[] = []
+
+    for (const player of Object.values(this.players)) {
+      const { batting: battingStats } = player.getGameStats()
+      const doubleCount = battingStats.doubles
+      const tripleCount = battingStats.triples
+      const homeRunCount = battingStats.homeRuns
+
+      const extras = [
+        [doubleCount, doubles],
+        [tripleCount, triples],
+        [homeRunCount, homeRuns]
+      ]
+
+      for (const [count, array] of extras) {
+        if (count > 0) {
+          ;(array as string[]).push(
+            `${player.name}${count > 1 ? ` (${count})` : ''}`
+          )
+        }
+      }
+    }
+
+    return { doubles, triples, homeRuns }
   }
 
   getPitchingLines(): string[][] {

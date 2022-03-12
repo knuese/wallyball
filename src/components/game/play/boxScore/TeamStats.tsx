@@ -1,10 +1,5 @@
 import { FC } from 'react'
-
-type BattingExtra = {
-  doubles?: string[]
-  triples?: string[]
-  homeRuns?: string[]
-}
+import { BattingExtra } from '../../../../model/game/team'
 
 export type TeamStatProps = {
   name: string
@@ -61,13 +56,13 @@ export const TeamStats: FC<TeamStatProps> = ({
       </table>
       {(doubles || triples || homeRuns) && (
         <div className="batting-extra">
-          {doubles?.length && (
+          {!!doubles?.length && (
             <p className="batting-extra-line">{`2B: ${doubles?.join(', ')}`}</p>
           )}
-          {triples?.length && (
+          {!!triples?.length && (
             <p className="batting-extra-line">{`3B: ${triples?.join(', ')}`}</p>
           )}
-          {homeRuns?.length && (
+          {!!homeRuns?.length && (
             <p className="batting-extra-line">{`HR: ${homeRuns?.join(
               ', '
             )}`}</p>

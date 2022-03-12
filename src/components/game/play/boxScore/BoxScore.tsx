@@ -53,13 +53,13 @@ export const BoxScore: FC = () => {
           ? {
               ...awayDisplayProps,
               batting: away.getBattingLines(),
-              battingExtra: {},
+              battingExtra: away.getBattingExtra(),
               pitching: [['September', '0.0', 0, 0, 0, 0, 0]]
             }
           : {
               ...homeDisplayProps,
               batting: home.getBattingLines(),
-              battingExtra: {},
+              battingExtra: home.getBattingExtra(),
               pitching: [['Gary', '0.0', 0, 0, 0, 0, 0]]
             })}
       />
