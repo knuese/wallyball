@@ -17,7 +17,7 @@ export const GameInfo: FC = () => {
     (state: RootState) => state.game
   )
 
-  const { batting, pitching } = useTeams()
+  const { batting, fielding } = useTeams()
 
   useEffect(() => {
     // prevent next batter from showing when there are three outs
@@ -27,8 +27,8 @@ export const GameInfo: FC = () => {
   }, [outs, batting.currentBatter()])
 
   useEffect(() => {
-    setCurrentPitcher(pitching.defenderAt(Position.PITCHER))
-  }, [pitching.defenderAt(Position.PITCHER)])
+    setCurrentPitcher(fielding.defenderAt(Position.PITCHER))
+  }, [fielding.defenderAt(Position.PITCHER)])
 
   return (
     <div className="flex-column game-info">
@@ -55,8 +55,8 @@ export const GameInfo: FC = () => {
       <div className="game-info-item">
         <CurrentPlayer
           name={currentPitcher?.name || ''}
-          color={pitching.secondaryColor}
-          background={pitching.primaryColor}
+          color={fielding.secondaryColor}
+          background={fielding.primaryColor}
           stats={{
             ...pitcherStats,
             season: {

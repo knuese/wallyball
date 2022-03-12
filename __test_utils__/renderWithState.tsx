@@ -6,6 +6,7 @@ import { CombinedState } from 'redux'
 import thunk from 'redux-thunk'
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store'
 import { sampleState } from '../__test_data__'
+import { RootState } from '../src/store/reducers'
 
 export const createStoreWithMockDispatch = (
   initialState: any = sampleState
@@ -24,7 +25,7 @@ export const createMockStore = (
 
 export const renderWithState = (
   ui: JSX.Element,
-  state: CombinedState<any> = sampleState,
+  state: Partial<RootState> = sampleState,
   store: MockStoreEnhanced = createMockStore(state)
 ): RenderResult => render(<Provider store={store}>{ui}</Provider>)
 

@@ -1,4 +1,4 @@
-export default class {
+export default class BattingStats {
   [k: string]: number
   plateAppearances: number
   atBats: number

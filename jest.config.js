@@ -17,7 +17,8 @@ module.exports = {
     'enum',
     '__test_data__',
     '__test_utils__',
-    'index.ts'
+    'index.ts',
+    'src/store/types'
   ],
   moduleNameMapper: {
     '.+\\.png$': '<rootDir>/__mocks__/png.ts'

@@ -1,70 +1,70 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import classnames from 'classnames'
 import ReactTooltip from 'react-tooltip'
-import field from '../../../assets/field.png'
+import classnames from 'classnames'
 import { RootState } from '../../../store/reducers'
 import { Position } from '../../../model'
+import { useTeams } from '../../../hooks'
+import field from '../../../assets/field.png'
 
 export const Field: FC = () => {
-  const { away, home, isBottom } = useSelector((state: RootState) => state.game)
-  const teamToUse = isBottom ? away : home
+  const { bases } = useSelector((state: RootState) => state.game)
+  const { batting, fielding } = useTeams()
 
-  if (!teamToUse) {
-    throw new Error()
-  }
+  const { first, second, third } = bases.getBases()
+  const runnerFirst = first?.id && batting.players[first.id].name
+  const runnerSecond = second?.id && batting.players[second.id].name
+  const runnerThird = third?.id && batting.players[third.id].name
 
-  const tooltips = {
-    first: 'Tush',
-    second: 'Bo Bo',
-    third: 'Cupcake'
-  }
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  }, [runnerFirst, runnerSecond, runnerThird])
 
   return (
     <div className="field-container">
       <ReactTooltip effect="solid" />
       <img id="field-img" src={field} alt="field" />
       <span
-        className={classnames('base', { occupied: false })}
         id="first-base"
-        data-tip={tooltips.first}
+        className={classnames('base', { occupied: runnerFirst })}
+        data-tip={runnerFirst}
       />
       <span
-        className={classnames('base', { occupied: true })}
         id="second-base"
-        data-tip={tooltips.second}
+        className={classnames('base', { occupied: runnerSecond })}
+        data-tip={runnerSecond}
       />
       <span
-        className={classnames('base', { occupied: false })}
         id="third-base"
-        data-tip={tooltips.third}
+        className={classnames('base', { occupied: runnerThird })}
+        data-tip={runnerThird}
       />
       <span className="fielder" id="p">
-        {teamToUse.defenderAt(Position.PITCHER).name}
+        {fielding.defenderAt(Position.PITCHER).name}
       </span>
       <span className="fielder" id="c">
-        {teamToUse.defenderAt(Position.CATCHER).name}
+        {fielding.defenderAt(Position.CATCHER).name}
       </span>
       <span className="fielder" id="first">
-        {teamToUse.defenderAt(Position.FIRST_BASE).name}
+        {fielding.defenderAt(Position.FIRST_BASE).name}
       </span>
       <span className="fielder" id="second">
-        {teamToUse.defenderAt(Position.SECOND_BASE).name}
+        {fielding.defenderAt(Position.SECOND_BASE).name}
       </span>
       <span className="fielder" id="ss">
-        {teamToUse.defenderAt(Position.SHORTSTOP).name}
+        {fielding.defenderAt(Position.SHORTSTOP).name}
       </span>
       <span className="fielder" id="third">
-        {teamToUse.defenderAt(Position.THIRD_BASE).name}
+        {fielding.defenderAt(Position.THIRD_BASE).name}
       </span>
       <span className="fielder" id="lf">
-        {teamToUse.defenderAt(Position.LEFT_FIELD).name}
+        {fielding.defenderAt(Position.LEFT_FIELD).name}
       </span>
       <span className="fielder" id="cf">
-        {teamToUse.defenderAt(Position.CENTER_FIELD).name}
+        {fielding.defenderAt(Position.CENTER_FIELD).name}
       </span>
       <span className="fielder" id="rf">
-        {teamToUse.defenderAt(Position.RIGHT_FIELD).name}
+        {fielding.defenderAt(Position.RIGHT_FIELD).name}
       </span>
     </div>
   )
