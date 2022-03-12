@@ -87,9 +87,9 @@ export class Player {
     this.gameStats.logAtBat(outcome, runsScored)
   }
 
-  // scored(): void {
-  //   this.gameStats.batting.runs++
-  // }
+  scored(): void {
+    this.gameStats.batting.runs++
+  }
 
   pitch(): { outcome: Outcome; rawValue: number } {
     if (!this.pitchingConfig) {
