@@ -13,7 +13,7 @@ export const GameInfo: FC = () => {
   const [currentBatter, setCurrentBatter] = useState<Player | null>(null)
   const [currentPitcher, setCurrentPitcher] = useState<Player | null>(null)
 
-  const { inning, isBottom, outs, playsForInning } = useSelector(
+  const { inning, isBottom, isOver, outs, playsForInning } = useSelector(
     (state: RootState) => state.game
   )
 
@@ -71,7 +71,7 @@ export const GameInfo: FC = () => {
       <div className="game-info-item">
         <PlayHistory plays={playsForInning} />
       </div>
-      <Controls outs={outs} />
+      <Controls outs={outs} isOver={isOver} />
     </div>
   )
 }

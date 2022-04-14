@@ -2,11 +2,13 @@ import React, { FC } from 'react'
 
 export type AutoplayToggleProps = {
   checked?: boolean
+  disabled?: boolean
   onChange: (checked: boolean) => void
 }
 
 export const AutoplayToggle: FC<AutoplayToggleProps> = ({
   checked,
+  disabled,
   onChange
 }) => (
   <div className="flex-row center control-item">
@@ -16,6 +18,7 @@ export const AutoplayToggle: FC<AutoplayToggleProps> = ({
         data-testid="autoplay-toggle"
         type="checkbox"
         checked={checked}
+        disabled={disabled}
         onChange={({
           target: { checked }
         }: React.ChangeEvent<HTMLInputElement>) => onChange(checked)}

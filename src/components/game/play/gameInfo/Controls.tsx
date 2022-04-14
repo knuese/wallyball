@@ -5,9 +5,10 @@ import { AutoplayToggle, DelaySlider } from './control'
 
 export type ControlsProps = {
   outs: number
+  isOver?: boolean
 }
 
-export const Controls: FC<ControlsProps> = ({ outs }) => {
+export const Controls: FC<ControlsProps> = ({ outs, isOver }) => {
   const dispatch = useDispatch()
   const [intervalRef, setIntervalRef] = useState<NodeJS.Timeout>()
   const [autoplay, setAutoplay] = useState(false)
@@ -37,8 +38,12 @@ export const Controls: FC<ControlsProps> = ({ outs }) => {
       <div className="center game-info-title">CONTROLS</div>
       <div className="center">
         <br />
-        <AutoplayToggle checked={autoplay} onChange={setAutoplay} />
-        <DelaySlider disabled={!autoplay} onChange={setDelay} />
+        <AutoplayToggle
+          checked={autoplay && !isOver}
+          disabled={isOver}
+          onChange={setAutoplay}
+        />
+        <DelaySlider disabled={!autoplay || isOver} onChange={setDelay} />
         <div className="flex-row center control-item">
           <button
             onClick={simulate}
