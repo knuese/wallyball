@@ -1,17 +1,17 @@
 import { FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { Team } from '../../../model'
+// import { Team } from '../../../model'
 import { clearTeam, readTeamFile } from '../../../store/actions/team/team'
 import { Dropzone } from '../..'
-import { Roster, StarterTable } from '.'
+// import { Roster, StarterTable } from '.'
 
 export type TeamSetupProps = {
   isHome?: boolean
   invalid?: boolean
-  team?: Team | null
+  // team?: Team | null
 }
 
-export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid, team }) => {
+export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid/*, team*/ }) => {
   const dispatch = useDispatch()
 
   const onFileLoaded = (file: File) => {
@@ -38,14 +38,15 @@ export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid, team }) => {
       />
       <p
         className="team-title"
-        style={{
-          color: team?.secondaryColor,
-          backgroundColor: team?.primaryColor
-        }}
+        // style={{
+        //   color: team?.secondaryColor,
+        //   backgroundColor: team?.primaryColor
+        // }}
       >
-        {team?.name}
+        Name
+        {/* {team?.name} */}
       </p>
-      {team && team?.getPlayerList().length && (
+      {/* {team && team?.getPlayerList().length && (
         <div className="flex-column">
           <Roster players={team.getPlayerList()} />
           <div className="starters">
@@ -53,7 +54,7 @@ export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid, team }) => {
             <StarterTable players={team.getPlayerList()} isHome={isHome} />
           </div>
         </div>
-      )}
+      )} */}
       {invalid &&
         'Please ensure all positions are filled before starting the game!'}
     </div>
