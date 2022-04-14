@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron'
+import path from 'path'
 
 const createWindow = () => {
   // Create the browser window.
@@ -10,8 +11,13 @@ const createWindow = () => {
     }
   })
 
-  //load the index.html from a url
-  win.loadURL('http://localhost:3000');
+  if (!!process.env.IS_DEV) {
+    // load index.html from the vite server
+    win.loadURL('http://localhost:3000')
+  } else {
+    // load index.html from the dist folder
+    win.loadURL(`file://${path.join(__dirname, '..', 'dist', 'index.html')}`)
+  }
 }
 
 // This method will be called when Electron has finished
