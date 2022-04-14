@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "electron": "npx electron .",
     "electron:dev": "npm run esbuild-electron && IS_DEV=true npm run electron",
-    "electron:build": "npm run esbuild-electron && npx electron-packager --overwrite --out=release .",
+    "electron:release": "npm run esbuild-electron && npx electron-packager --overwrite --out=release .",
     "esbuild-electron": "esbuild main.js --format=cjs --outfile=./dist/main.js",
     "lint:src": "eslint --config ./eslintrc.js --fix ./src",
     "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__ __test_utils__",
