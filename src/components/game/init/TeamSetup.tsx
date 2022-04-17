@@ -11,7 +11,10 @@ export type TeamSetupProps = {
   // team?: Team | null
 }
 
-export const TeamSetup: FC<TeamSetupProps> = ({ isHome, invalid/*, team*/ }) => {
+export const TeamSetup: FC<TeamSetupProps> = ({
+  isHome,
+  invalid /*, team */
+}) => {
   const dispatch = useDispatch()
 
   const onFileLoaded = (file: File) => {

@@ -36,7 +36,9 @@ export const advanceRunners =
     rawValue: number
     useBatterStats: boolean
   }) =>
-  (dispatch: Dispatch<GameActionTypes>): string[] => {
+  (
+    dispatch: Dispatch<GameActionTypes>
+  ): { runnersScored: string[]; outs: number } => {
     const { runnersScored, outs } = bases.advanceRunners({
       batter,
       pitcher,
@@ -54,7 +56,7 @@ export const advanceRunners =
       dispatch({ type: RECORD_OUT, payload: outs })
     }
 
-    return runnersScored
+    return { runnersScored, outs }
   }
 
 export const simulateAtBat =
@@ -81,11 +83,13 @@ export const simulateAtBat =
     })
 
     let runnersScored = []
+    let outsRecorded = 0
 
     if (outcome === Outcome.STRIKEOUT) {
       dispatch({ type: RECORD_OUT, payload: 1 })
+      outsRecorded = 1
     } else {
-      runnersScored = dispatch(
+      const { runnersScored: runs, outs } = dispatch(
         advanceRunners({
           bases: game.bases,
           batter,
@@ -96,9 +100,13 @@ export const simulateAtBat =
           useBatterStats
         }) as any
       )
+
+      runnersScored = runs
+      outsRecorded = outs
     }
 
     batter.logAtBat(outcome, runnersScored.length)
+    pitcher.logBatterFaced(outcome, outsRecorded, runnersScored.length)
 
     for (const runnerId of runnersScored) {
       batting.players[runnerId].scored()

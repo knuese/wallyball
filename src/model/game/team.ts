@@ -158,53 +158,24 @@ export class Team {
     return { doubles, triples, homeRuns }
   }
 
-  getPitchingLines(): string[][] {
+  getPitchingLines(): Array<string | number>[] {
     if (!this.defense) {
       throw new Error('defense not defined')
     }
 
+    const pitcher = this.defenderAt(Position.PITCHER)
+    const { pitching } = pitcher.getGameStats()
+
     return [
-      [this.defenderAt(Position.PITCHER).name, '0.0', '0', '0', '0', '0', '0']
+      [
+        pitcher.name,
+        pitching.inningsPitched,
+        pitching.hits,
+        pitching.runs,
+        pitching.earnedRuns,
+        pitching.walks,
+        pitching.strikeouts
+      ]
     ]
   }
-
-  // getBoxScore(): BoxScore {
-  //   if (!this.battingOrder) {
-  //     throw new Error('batting order not defined!')
-  //   }
-
-  //   const box = this.battingOrder.map((playerId) => {
-  //     const player = this.players[playerId]
-  //     return {
-  //       name: player.name,
-  //       ...player.getBattingStatLine()
-  //     }
-  //   }) as Record<string, string>[]
-
-  //   const playersForHitType = (key: string): string => {
-  //     if (!this.battingOrder) {
-  //       throw new Error('batting order not defined!')
-  //     }
-
-  //     return this.battingOrder
-  //       .map((playerId) => this.players[playerId])
-  //       .filter((p) => p.gameStats.batting[key] > 0)
-  //       .map(
-  //         (p) =>
-  //           `${p.name}${
-  //             p.gameStats.batting[key] > 1
-  //               ? ` (${p.gameStats.batting[key]})`
-  //               : ''
-  //           }`
-  //       )
-  //       .join(', ')
-  //   }
-
-  //   return {
-  //     box,
-  //     doubles: playersForHitType('doubles'),
-  //     triples: playersForHitType('triples'),
-  //     homeRuns: playersForHitType('homeRuns')
-  //   }
-  // }
 }

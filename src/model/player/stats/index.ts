@@ -1,2 +1,2 @@
 export { BattingConfig, PitchingConfig } from './config'
-export { BattingStats, GameStats } from './game'
+export { BattingStats, GameStats, PitchingStats } from './game'

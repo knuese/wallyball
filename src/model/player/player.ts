@@ -1,10 +1,17 @@
 import { v4 as uuidv4 } from 'uuid'
 import { statToStr } from '../../util'
 import { Outcome, Position } from '../enum'
-import { BattingConfig, BattingStats, GameStats, PitchingConfig } from './stats'
+import {
+  BattingConfig,
+  BattingStats,
+  GameStats,
+  PitchingConfig,
+  PitchingStats
+} from './stats'
 
 type PlayerGameStats = {
   batting: BattingStats
+  pitching: PitchingStats
 }
 
 export class Player {
@@ -43,7 +50,8 @@ export class Player {
 
   getGameStats(): PlayerGameStats {
     return {
-      batting: { ...this.gameStats.batting }
+      batting: { ...this.gameStats.batting },
+      pitching: { ...this.gameStats.pitching }
     }
   }
 
@@ -101,5 +109,13 @@ export class Player {
       rawValue,
       outcome: this.pitchingConfig.determineOutcome(rawValue)
     }
+  }
+
+  logBatterFaced(
+    outcome: Outcome,
+    outsRecorded: number,
+    runsScored: number
+  ): void {
+    this.gameStats.logBatterFaced(outcome, outsRecorded, runsScored)
   }
 }

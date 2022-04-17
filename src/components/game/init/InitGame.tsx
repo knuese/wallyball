@@ -15,8 +15,8 @@ export const InitGame: FC = () => {
   return (
     <div className="flex-column center">
       <div className="flex-row">
-        <TeamSetup /*team={away}*/ />
-        <TeamSetup isHome /*team={home}*/ />
+        <TeamSetup /* team={away} */ />
+        <TeamSetup isHome /* team={home} */ />
       </div>
       <button disabled={!canSubmit} className="submit-button" onClick={submit}>
         Submit

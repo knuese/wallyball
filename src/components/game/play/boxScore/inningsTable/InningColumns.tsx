@@ -9,12 +9,14 @@ export const InningColumns: FC<InningColumnProps> = ({
   awayScores,
   homeScores
 }) => {
-  const headers = [...new Array(9).keys()].map((i) => (
+  const arrLength = awayScores.length < 9 ? 9 : awayScores.length
+
+  const headers = [...new Array(arrLength).keys()].map((i) => (
     <th key={`inning:${i}`}>{i + 1}</th>
   ))
   const rows = [awayScores, homeScores].map((scores, i) => (
     <tr key={`scores:${i}`}>
-      {Array.from({ ...scores, length: 9 }).map((score, j) => (
+      {Array.from({ ...scores, length: arrLength }).map((score, j) => (
         // if there isn't a score, add a hidden underscore so that the cell renders
         <td
           key={`scores:${i}:${j}`}
