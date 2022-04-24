@@ -27,6 +27,6 @@ export const renderWithState = (
   ui: JSX.Element,
   state: Partial<RootState> = sampleState,
   store: MockStoreEnhanced = createMockStore(state)
-): RenderResult => render(<Provider store={store}>{ui}</Provider>)
+): RenderResult => render((() => <Provider store={store}>{ui}</Provider>)())
 
 export * from '@testing-library/react'
