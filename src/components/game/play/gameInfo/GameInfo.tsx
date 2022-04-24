@@ -5,10 +5,6 @@ import { useTeams } from '../../../../hooks'
 import { Player, Position } from '../../../../model'
 import { RootState } from '../../../../store/reducers'
 
-const pitcherStats = {
-  today: '0.2 IP, 0 R, 0 ER, 2 K'
-}
-
 export const GameInfo: FC = () => {
   const [currentBatter, setCurrentBatter] = useState<Player | null>(null)
   const [currentPitcher, setCurrentPitcher] = useState<Player | null>(null)
@@ -42,7 +38,7 @@ export const GameInfo: FC = () => {
           color={batting.secondaryColor}
           background={batting.primaryColor}
           stats={{
-            today: currentBatter?.getBattingStatLine() || '',
+            today: currentBatter?.getBattingStatLine(),
             season: {
               H: '--',
               HR: '--',
@@ -58,7 +54,7 @@ export const GameInfo: FC = () => {
           color={fielding.secondaryColor}
           background={fielding.primaryColor}
           stats={{
-            ...pitcherStats,
+            today: currentPitcher?.getPitchingStatLine(),
             season: {
               IP: '--',
               BB: '--',

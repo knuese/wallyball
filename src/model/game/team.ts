@@ -124,7 +124,8 @@ export class Team {
         batting.hits,
         batting.rbis,
         batting.walks,
-        batting.strikeouts
+        batting.strikeouts,
+        '.000'
       ]
     })
   }
@@ -174,7 +175,8 @@ export class Team {
         pitching.runs,
         pitching.earnedRuns,
         pitching.walks,
-        pitching.strikeouts
+        pitching.strikeouts,
+        '0.00'
       ]
     ]
   }

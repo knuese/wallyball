@@ -18,19 +18,19 @@ export type CurrentPlayerProps = {
   name: string
   color: string
   background: string
+  isBatting?: boolean
   stats: {
-    today: string
+    today?: string
     season: BattingStatsSeason | PitchingStatsSeason
   }
-  isBatting?: boolean
 }
 
 export const CurrentPlayer: FC<CurrentPlayerProps> = ({
   name,
   color,
   background,
-  stats,
-  isBatting
+  isBatting,
+  stats: { today = '', season }
 }) => (
   <div className="flex-column border-all">
     <div className="center game-info-title" style={{ color, background }}>
@@ -43,7 +43,7 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
       <table className="center current-player-table">
         <thead>
           <tr>
-            {Object.keys(stats.season).map((k, i) => (
+            {Object.keys(season).map((k, i) => (
               <th key={`${i}:${k}`} style={{ backgroundColor: color }}>
                 {k}
               </th>
@@ -52,7 +52,7 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
         </thead>
         <tbody>
           <tr>
-            {Object.values(stats.season).map((v, i) => (
+            {Object.values(season).map((v, i) => (
               <td key={`${i}:${v}`} style={{ backgroundColor: color }}>
                 {v}
               </td>
@@ -62,7 +62,7 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
       </table>
     </div>
     <div className="current-player-text" style={{ color, background }}>
-      Today: {stats.today}
+      Today: {today}
     </div>
   </div>
 )

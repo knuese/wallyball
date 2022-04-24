@@ -50,6 +50,7 @@ export const TeamStats: FC<TeamStatProps> = ({
             <th>RBI</th>
             <th>BB</th>
             <th>SO</th>
+            <th>AVG</th>
           </tr>
         </thead>
         <tbody>{batting.map(getRows)}</tbody>
@@ -80,6 +81,7 @@ export const TeamStats: FC<TeamStatProps> = ({
             <th>ER</th>
             <th>BB</th>
             <th>SO</th>
+            <th>ERA</th>
           </tr>
         </thead>
         <tbody>{pitching.map(getRows)}</tbody>

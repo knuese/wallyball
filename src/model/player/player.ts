@@ -63,7 +63,7 @@ export class Player {
     }
 
     const line =
-      `${batting.hits}-${batting.atBats}, ` +
+      `${batting.hits} - ${batting.atBats}, ` +
       statToStr(batting.doubles, '2B') +
       statToStr(batting.triples, '3B') +
       statToStr(batting.homeRuns, 'HR') +
@@ -73,6 +73,17 @@ export class Player {
 
     // chop off the last comma
     return line.replace(/, $/, '')
+  }
+
+  getPitchingStatLine(): string {
+    const { pitching } = this.gameStats
+
+    return (
+      `${pitching.inningsPitched} IP, ` +
+      `${pitching.runs} R, ` +
+      `${pitching.earnedRuns} ER, ` +
+      `${pitching.strikeouts} K`
+    )
   }
 
   isPitcher(): boolean {
