@@ -3,7 +3,7 @@ import { FC } from 'react'
 export const Header: FC = () => {
   return (
     <div className="header">
-      <b>WallyBall</b>
+      <b className='header-title'>WallyBall</b>
     </div>
   )
 }
