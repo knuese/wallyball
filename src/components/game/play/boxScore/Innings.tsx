@@ -12,14 +12,16 @@ type PropsForSide = {
 }
 
 export type InningProps = {
+  currentInning: number
+  isBottom: boolean
   away: PropsForSide
   home: PropsForSide
 }
 
-export const Innings: FC<InningProps> = ({ away, home }) => (
+export const Innings: FC<InningProps> = ({ currentInning, isBottom, away, home }) => (
   <div className="flex-row">
     <TeamColumn away={{ ...away }} home={{ ...home }} />
-    <InningColumns awayScores={away.scores} homeScores={home.scores} />
+    <InningColumns currentInning={currentInning} isBottom={isBottom} awayScores={away.scores} homeScores={home.scores} />
     <StatColumns away={away} home={home} />
   </div>
 )

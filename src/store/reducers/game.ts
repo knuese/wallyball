@@ -20,7 +20,7 @@ export const initialState: GameState = {
   bases: new Bases(),
   isOver: false,
   scores: {
-    away: [0],
+    away: [],
     home: []
   },
   playsForInning: []
@@ -28,23 +28,21 @@ export const initialState: GameState = {
 
 export const updateScoreInningEnd = ({
   isBottom,
+  inning,
   scores
 }: GameState): Scores => {
-  let updatedScores
+  const awayScores = [...scores.away]
+  const homeScores = [...scores.home]
 
-  if (isBottom) {
-    updatedScores = {
-      away: [...scores.away, 0],
-      home: scores.home
-    }
-  } else {
-    updatedScores = {
-      away: scores.away,
-      home: [...scores.home, 0]
-    }
+  const arr = isBottom ? homeScores : awayScores
+  if (!arr[inning - 1]) {
+    arr.push(0)
   }
 
-  return updatedScores
+  return {
+    away: awayScores,
+    home: homeScores
+  }
 }
 
 export const addRuns = (

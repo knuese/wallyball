@@ -7,7 +7,7 @@ import { getNumHits, getTotalScore } from '../../../../util'
 
 export const BoxScore: FC = () => {
   const [activeSide, setActiveSide] = useState<Side>(Side.AWAY)
-  const { away, home, scores } = useSelector((state: RootState) => state.game)
+  const { away, home, scores, inning, isBottom } = useSelector((state: RootState) => state.game)
 
   if (!away || !home) {
     throw new Error('fail!')
@@ -28,6 +28,8 @@ export const BoxScore: FC = () => {
   return (
     <div className="flex-column box-score">
       <Innings
+        currentInning={inning}
+        isBottom={isBottom}
         away={{
           ...awayDisplayProps,
           scores: scores.away,

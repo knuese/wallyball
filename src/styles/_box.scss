@@ -5,6 +5,11 @@
   overflow: scroll;
 }
 
+.innings {
+  width: 15rem;
+  overflow-x: auto;
+}
+
 .innings-table {
   border-width: 2px 0;
   border-style: solid;
@@ -13,26 +18,35 @@
   border-collapse: collapse;
   font-size: 1.2em;
   user-select: none;
-}
 
-.innings-table th {
-  color: white;
-  background-color: black;
-  padding: 0.1rem 0.25rem;
-}
+  th {
+    color: white;
+    background-color: black;
+    padding: 0.1rem 0.25rem;
+  }
 
-.innings-table td {
-  padding: 0.25rem 0.5rem;
-  border-width: 2px 0;
-  border-style: solid;
-  border-color: black;
-  text-align: center;
-  background-color: white;
-}
+  td {
+    padding: 0.25rem 0.5rem;
+    border-width: 2px 0;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+    background-color: white;
+  }
 
-.innings {
-  width: 15rem;
-  overflow-x: auto;
+  .current-inning {
+    // color is transparent since it is just a placeholder
+    color: rgba(0, 0, 0, 0); 
+    background-color: rgba(255, 170, 0, 0.5) !important;
+  }
+
+  .with-score {
+    color: black;
+  }
+
+  .without-score {
+    color: white;
+  }
 }
 
 .team-stats-table {
@@ -40,30 +54,30 @@
   border-style: solid;
   border-color: black;
   border-collapse: collapse;
-}
 
-.team-stats-table thead {
-  border-width: 2px 0;
-  border-style: solid;
-  border-color: black;
-}
+  thead {
+    border-width: 2px 0;
+    border-style: solid;
+    border-color: black;
+  }
 
-.team-stats-table td {
-  padding: 0.25rem 0rem;
-  border-bottom: 2px solid black;
-  text-align: center;
-}
+  td {
+    padding: 0.25rem 0rem;
+    border-bottom: 2px solid black;
+    text-align: center;
+  }
 
-.stat-cell {
-  width: 10%;
-}
-
-.odd-row {
-  background-color: #E3E3E3;
-}
-
-.even-row {
-  background-color: white;
+  .stat-cell {
+    width: 10%;
+  }
+  
+  .odd-row {
+    background-color: #E3E3E3;
+  }
+  
+  .even-row {
+    background-color: white;
+  }
 }
 
 .batting-extra {
