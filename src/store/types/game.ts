@@ -1,8 +1,10 @@
 import { Bases, Team } from '../../model'
 
+export type ScoreArray = Array<number | string>
+
 export type Scores = {
-  away: number[]
-  home: number[]
+  away: ScoreArray
+  home: ScoreArray
 }
 
 export type GameState = {

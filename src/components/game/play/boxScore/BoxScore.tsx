@@ -7,7 +7,9 @@ import { getNumHits, getTotalScore } from '../../../../util'
 
 export const BoxScore: FC = () => {
   const [activeSide, setActiveSide] = useState<Side>(Side.AWAY)
-  const { away, home, scores, inning, isBottom } = useSelector((state: RootState) => state.game)
+  const { away, home, scores, inning, isBottom, isOver } = useSelector(
+    (state: RootState) => state.game
+  )
 
   if (!away || !home) {
     throw new Error('fail!')
@@ -30,6 +32,7 @@ export const BoxScore: FC = () => {
       <Innings
         currentInning={inning}
         isBottom={isBottom}
+        isOver={isOver}
         away={{
           ...awayDisplayProps,
           scores: scores.away,

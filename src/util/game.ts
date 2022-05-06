@@ -1,10 +1,14 @@
 import { Team } from '../model'
+import { ScoreArray } from '../store/types/game'
 
 export const getOrdinal = (n: number) =>
   ['', 'st', 'nd', 'rd'][(n / 10) % 10 ^ 1 && n % 10] || 'th'
 
-export const getTotalScore = (innings: number[]): number =>
-  innings.reduce((acc, cur) => acc + cur, 0)
+export const getTotalScore = (scores: ScoreArray): number =>
+  (scores.filter((x) => typeof x === 'number') as number[]).reduce(
+    (acc, cur) => acc + cur,
+    0
+  )
 
 export const getNumHits = (team: Team): number =>
   Object.values(team.players).reduce(

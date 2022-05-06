@@ -8,6 +8,7 @@ import {
   PROGRESS_INNING,
   RECORD_OUT,
   RUN_SCORED,
+  ScoreArray,
   Scores
 } from '../types/game'
 
@@ -26,17 +27,25 @@ export const initialState: GameState = {
   playsForInning: []
 }
 
-export const updateScoreInningEnd = ({
-  isBottom,
-  inning,
-  scores
-}: GameState): Scores => {
+export const updateScoreInningEnd = (
+  { isBottom, inning, scores }: GameState,
+  isOver?: boolean
+): Scores => {
   const awayScores = [...scores.away]
   const homeScores = [...scores.home]
 
-  const arr = isBottom ? homeScores : awayScores
-  if (!arr[inning - 1]) {
-    arr.push(0)
+  if (isOver) {
+    if (!isBottom) {
+      awayScores.push(0)
+      homeScores.push('X')
+    } else if (homeScores.length !== awayScores.length) {
+      homeScores.push(0)
+    }
+  } else {
+    const arr = isBottom ? homeScores : awayScores
+    if (!arr[inning - 1]) {
+      arr.push(0)
+    }
   }
 
   return {
@@ -48,7 +57,7 @@ export const updateScoreInningEnd = ({
 export const addRuns = (
   state: GameState,
   numRuns: number
-): { away: number[]; home: number[] } => {
+): { away: ScoreArray; home: ScoreArray } => {
   const index = state.inning - 1
   const key = state.isBottom ? 'home' : 'away'
 
@@ -56,7 +65,7 @@ export const addRuns = (
     ...state.scores,
     [key]: [
       ...state.scores[key].slice(0, index),
-      (state.scores[key][index] || 0) + numRuns
+      Number(state.scores[key][index] || 0) + numRuns
     ]
   }
 }
@@ -94,7 +103,8 @@ const reducer: Reducer<GameState> = (
     case GAME_OVER:
       return {
         ...state,
-        isOver: true
+        isOver: true,
+        scores: updateScoreInningEnd(state, true)
       }
     default:
       return initialState

@@ -1,19 +1,30 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import classNames from 'classnames'
+import { ScoreArray } from '../../../../../store/types/game'
 
 export type InningColumnProps = {
   currentInning: number
   isBottom: boolean
-  awayScores: number[]
-  homeScores: number[]
+  isOver: boolean
+  awayScores: ScoreArray
+  homeScores: ScoreArray
 }
 
 export const InningColumns: FC<InningColumnProps> = ({
   currentInning,
   isBottom,
+  isOver,
   awayScores,
   homeScores
 }) => {
+  const inningsRef = useRef(null)
+
+  useEffect(() => {
+    if (inningsRef.current) {
+      (inningsRef.current as any).scrollLeft += 100
+    }
+  }, [currentInning])
+
   const arrLength = currentInning <= 9 ? 9 : currentInning
 
   const headers = [...new Array(arrLength).keys()].map((i) => (
@@ -22,7 +33,8 @@ export const InningColumns: FC<InningColumnProps> = ({
   const rows = [awayScores, homeScores].map((scores, i) => (
     <tr key={`scores:${i}`}>
       {Array.from({ ...scores, length: arrLength }).map((score, j) => {
-        const isCurrentInningCell = i === Number(isBottom) && j + 1 === currentInning
+        const isCurrentInningCell =
+          !isOver && i === Number(isBottom) && j + 1 === currentInning
         const cellHasScore = score != null
         return (
           // if there isn't a score, add a hidden underscore so that the cell renders
@@ -36,12 +48,13 @@ export const InningColumns: FC<InningColumnProps> = ({
           >
             {score ?? '_'}
           </td>
-      )})}
+        )
+      })}
     </tr>
   ))
 
   return (
-    <div className="innings border-right">
+    <div ref={inningsRef} className="innings border-right">
       <table className="innings-table">
         <thead>
           <tr>{headers}</tr>
