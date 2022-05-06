@@ -20,33 +20,41 @@ export type BattingExtra = {
   homeRuns?: string[]
 }
 
-export class Team {
+export type TeamProps = {
   name: string
-  players: Record<string, Player>
   primaryColor: string
   secondaryColor: string
+  roster: Record<string, Player>
+  starters: Starter[]
+}
+
+export class Team {
+  name: string
+  primaryColor: string
+  secondaryColor: string
+  roster: Record<string, Player>
   private battingOrder?: string[]
   private defense?: Defense
   private batterIndex: number
 
-  constructor(
-    name: string,
-    primaryColor: string,
-    secondaryColor: string,
-    players: Record<string, Player>,
-    starters: Starter[]
-  ) {
+  constructor({
+    name,
+    primaryColor,
+    secondaryColor,
+    roster,
+    starters
+  }: TeamProps) {
     this.name = name
     this.primaryColor = primaryColor
     this.secondaryColor = secondaryColor
-    this.players = players
+    this.roster = roster
     this.batterIndex = 0
 
     this.setStarters(starters)
   }
 
-  getPlayerList(): Player[] {
-    return Object.values(this.players)
+  getRoster(): Player[] {
+    return Object.values(this.roster)
   }
 
   private setStarters(starters: Starter[]): void {
@@ -56,7 +64,7 @@ export class Team {
 
     this.battingOrder = starters.map(({ playerId }) => playerId)
     this.defense = starters.reduce((acc, { playerId, position }) => {
-      const player = this.players[playerId]
+      const player = this.roster[playerId]
       if (!player.canPlay(position)) {
         throw new Error(`${player.name} cannot play ${position}`)
       }
@@ -75,7 +83,7 @@ export class Team {
     }
 
     const playerId = this.battingOrder[this.batterIndex]
-    return this.players[playerId]
+    return this.roster[playerId]
   }
 
   nextBatter(): Player {
@@ -87,7 +95,7 @@ export class Team {
     this.batterIndex++
 
     const playerId = this.battingOrder[i]
-    return this.players[playerId]
+    return this.roster[playerId]
   }
 
   peekNextBatter(): Player {
@@ -97,7 +105,7 @@ export class Team {
 
     const i = this.batterIndex % 9
     const playerId = this.battingOrder[i]
-    return this.players[playerId]
+    return this.roster[playerId]
   }
 
   defenderAt(position: Position): Player {
@@ -105,7 +113,7 @@ export class Team {
       throw new Error('batting order not defined!')
     }
 
-    return this.players[this.defense[position]]
+    return this.roster[this.defense[position]]
   }
 
   getBattingLines(): Array<string | number>[] {
@@ -114,7 +122,7 @@ export class Team {
     }
 
     return this.battingOrder.map((playerId) => {
-      const player = this.players[playerId]
+      const player = this.roster[playerId]
       const { batting } = player.getGameStats()
 
       return [
@@ -135,7 +143,7 @@ export class Team {
     const triples: string[] = []
     const homeRuns: string[] = []
 
-    for (const player of Object.values(this.players)) {
+    for (const player of Object.values(this.roster)) {
       const { batting: battingStats } = player.getGameStats()
       const doubleCount = battingStats.doubles
       const tripleCount = battingStats.triples

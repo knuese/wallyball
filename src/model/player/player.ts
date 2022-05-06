@@ -14,6 +14,19 @@ type PlayerGameStats = {
   pitching: PitchingStats
 }
 
+type PlayerProps = {
+  name: string
+  positions: Position[] | string[]
+  batting: {
+    thresholds: number[]
+    starPower?: number
+  }
+  pitching?: {
+    thresholds: number[]
+    starPower?: number
+  }
+}
+
 export class Player {
   id: string
   name: string
@@ -22,17 +35,12 @@ export class Player {
   pitchingConfig?: PitchingConfig
   private gameStats: GameStats
 
-  constructor(
-    name: string,
-    eligiblePositions: Position[] | string[],
-    battingConfig: BattingConfig,
-    pitchingConfig?: PitchingConfig
-  ) {
+  constructor({ name, positions, batting, pitching }: PlayerProps) {
     this.id = uuidv4()
     this.name = name
-    this.eligiblePositions = eligiblePositions
-    this.battingConfig = battingConfig
-    this.pitchingConfig = pitchingConfig
+    this.eligiblePositions = positions
+    this.battingConfig = new BattingConfig(batting)
+    this.pitchingConfig = pitching && new PitchingConfig(pitching)
     this.gameStats = new GameStats()
   }
 

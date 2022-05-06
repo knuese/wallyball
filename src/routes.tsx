@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import {
-  GameScreen,
   HomeScreen,
   InitGame,
   PlayGame,

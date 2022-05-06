@@ -11,15 +11,15 @@ describe('pitching config', () => {
     [0.7, Outcome.FLY],
     [0.999, Outcome.GROUNDER]
   ])('determines the outcome for %s', (rand, expected) => {
-    const battingStats = new PitchingConfig([
-      0.11, 0.202, 0.299, 0.4, 0.5, 0.65, 0.779, 1.0
-    ])
+    const battingStats = new PitchingConfig({
+      thresholds: [0.11, 0.202, 0.299, 0.4, 0.5, 0.65, 0.779, 1.0]
+    })
 
     expect(battingStats.determineOutcome(rand)).toEqual(expected)
   })
 
   it('throws an error if there are not 8 thresholds', () => {
-    expect(() => new PitchingConfig([])).toThrow(
+    expect(() => new PitchingConfig({ thresholds: [] })).toThrow(
       Error('must provide eight thresholds for pitching stats')
     )
   })

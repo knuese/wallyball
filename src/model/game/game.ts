@@ -110,8 +110,8 @@ export class Game {
     //   this.addToScore(runnersScored.length)
     //   runnersScored.forEach((id) =>
     //     this.isBottom
-    //       ? this.homeTeam.players[id].scored()
-    //       : this.awayTeam.players[id].scored()
+    //       ? this.homeTeam.roster[id].scored()
+    //       : this.awayTeam.roster[id].scored()
     //   )
     // }
 

@@ -1,21 +1,16 @@
 import { Player, Position, Starter, Team } from '../src/model'
 import { PlayerId } from '../src/store/types/team'
-import { mappedPlayers, players } from './player'
+import { players, roster } from './player'
 
 const updatePlayerNamesForTeam = (
   idToPlayer: Record<string, Player>,
   prefix: string
 ): Record<string, Player> =>
   Object.values(idToPlayer).reduce((acc, player) => {
-    const newPlayer = new Player(
-      `${prefix} ${player.name}`,
-      player.eligiblePositions,
-      player.battingConfig,
-      player.pitchingConfig
-    )
+    player.name = `${prefix} ${player.name}`
     return {
       ...acc,
-      [newPlayer.id]: newPlayer
+      [player.id]: player
     }
   }, {})
 
@@ -25,24 +20,24 @@ export const buildStarters = (idToPlayer: Record<string, Player>): Starter[] =>
     position: eligiblePositions[0]
   }))
 
-const awayPlayers = updatePlayerNamesForTeam(mappedPlayers, 'Away')
-const homePlayers = updatePlayerNamesForTeam(mappedPlayers, 'Home')
+const awayPlayers = updatePlayerNamesForTeam(roster, 'Away')
+const homePlayers = updatePlayerNamesForTeam(roster, 'Home')
 
-export const away = new Team(
-  'Away Team',
-  'red',
-  'blue',
-  awayPlayers,
-  buildStarters(awayPlayers)
-)
+export const away = new Team({
+  name: 'Away Team',
+  primaryColor: 'red',
+  secondaryColor: 'blue',
+  roster: awayPlayers,
+  starters: buildStarters(awayPlayers)
+})
 
-export const home = new Team(
-  'Home Team',
-  'green',
-  'yellow',
-  homePlayers,
-  buildStarters(homePlayers)
-)
+export const home = new Team({
+  name: 'Home Team',
+  primaryColor: 'green',
+  secondaryColor: 'yellow',
+  roster: homePlayers,
+  starters: buildStarters(homePlayers)
+})
 
 export const lineup: Record<string, PlayerId> = players.reduce(
   (acc, cur, i) => ({

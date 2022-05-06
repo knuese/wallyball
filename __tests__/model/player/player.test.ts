@@ -7,13 +7,15 @@ import {
 } from '../../../src/model'
 
 describe('player', () => {
-  const stats = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1]
-  const player = new Player(
-    'Wally',
-    [Position.THIRD_BASE, Position.PITCHER],
-    new BattingConfig(stats),
-    new PitchingConfig(stats)
-  )
+  const batting = { thresholds: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1] }
+  const pitching = { thresholds: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1] }
+
+  const player = new Player({
+    name: 'Wally',
+    positions: [Position.THIRD_BASE, Position.PITCHER],
+    batting,
+    pitching
+  })
 
   it.each([
     [true, 'can', Position.THIRD_BASE],
@@ -36,11 +38,11 @@ describe('player', () => {
   })
 
   it('throws an error if the player cannot pitch', () => {
-    const nonPitcher = new Player(
-      'Bo Bo',
-      [Position.FIRST_BASE],
-      new BattingConfig(stats)
-    )
+    const nonPitcher = new Player({
+      name: 'Bo Bo',
+      positions: [Position.FIRST_BASE],
+      batting
+    })
     expect(() => nonPitcher.pitch()).toThrow(Error('Bo Bo is not a pitcher'))
   })
 })

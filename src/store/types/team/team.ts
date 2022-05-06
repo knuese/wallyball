@@ -8,8 +8,8 @@ export type PlayerConfig = {
   id: string
   name: string
   positions: string[]
-  batting: number[]
-  pitching?: number[]
+  batting: { thresholds: number[]; starPower?: number }
+  pitching?: { thresholds: number[]; starPower?: number }
 }
 
 export type TeamFileContents = {

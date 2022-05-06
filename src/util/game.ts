@@ -14,10 +14,9 @@ export const getTotalScore = (scores: ScoreArray): number =>
   )
 
 export const getNumHits = (team: Team): number =>
-  Object.values(team.players).reduce(
-    (acc, cur) => acc + cur.getGameStats().batting.hits,
-    0
-  )
+  team
+    .getRoster()
+    .reduce((acc, cur) => acc + cur.getGameStats().batting.hits, 0)
 
 export const incrementInningsPitched = (
   old: string,

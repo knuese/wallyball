@@ -191,15 +191,7 @@ const turtlesJson = {
 }
 
 const bearPlayers = bearsJson.players.map(
-  (p: PlayerJson) =>
-    new Player(
-      p.name,
-      p.positions,
-      new BattingConfig(p.batting.thresholds, p.batting.starPower),
-      p.pitching
-        ? new PitchingConfig(p.pitching.thresholds, p.pitching.starPower)
-        : ([] as any)
-    )
+  (config: PlayerJson) => new Player(config)
 ) as Player[]
 
 const bearMap = bearPlayers.reduce(
@@ -207,37 +199,47 @@ const bearMap = bearPlayers.reduce(
   {}
 ) as Record<string, Player>
 
-export const tempBears = new Team('Bears', '#841B2D', '#DEB887', bearMap, [
-  { playerId: idForName(bearPlayers, 'Sammy'), position: Position.LEFT_FIELD },
-  {
-    playerId: idForName(bearPlayers, 'Buster'),
-    position: Position.RIGHT_FIELD
-  },
-  { playerId: idForName(bearPlayers, 'Tush'), position: Position.CATCHER },
-  { playerId: idForName(bearPlayers, 'Bo Bo'), position: Position.FIRST_BASE },
-  { playerId: idForName(bearPlayers, 'Spanky'), position: Position.THIRD_BASE },
-  {
-    playerId: idForName(bearPlayers, 'Sparey'),
-    position: Position.SECOND_BASE
-  },
-  { playerId: idForName(bearPlayers, 'Cappy'), position: Position.SHORTSTOP },
-  {
-    playerId: idForName(bearPlayers, 'Cupcake'),
-    position: Position.CENTER_FIELD
-  },
-  { playerId: idForName(bearPlayers, 'September'), position: Position.PITCHER }
-])
+export const tempBears = new Team({
+  name: 'Bears',
+  primaryColor: '#841B2D',
+  secondaryColor: '#DEB887',
+  roster: bearMap,
+  starters: [
+    {
+      playerId: idForName(bearPlayers, 'Sammy'),
+      position: Position.LEFT_FIELD
+    },
+    {
+      playerId: idForName(bearPlayers, 'Buster'),
+      position: Position.RIGHT_FIELD
+    },
+    { playerId: idForName(bearPlayers, 'Tush'), position: Position.CATCHER },
+    {
+      playerId: idForName(bearPlayers, 'Bo Bo'),
+      position: Position.FIRST_BASE
+    },
+    {
+      playerId: idForName(bearPlayers, 'Spanky'),
+      position: Position.THIRD_BASE
+    },
+    {
+      playerId: idForName(bearPlayers, 'Sparey'),
+      position: Position.SECOND_BASE
+    },
+    { playerId: idForName(bearPlayers, 'Cappy'), position: Position.SHORTSTOP },
+    {
+      playerId: idForName(bearPlayers, 'Cupcake'),
+      position: Position.CENTER_FIELD
+    },
+    {
+      playerId: idForName(bearPlayers, 'September'),
+      position: Position.PITCHER
+    }
+  ]
+})
 
 const turtlePlayers = turtlesJson.players.map(
-  (p: PlayerJson) =>
-    new Player(
-      p.name,
-      p.positions,
-      new BattingConfig(p.batting.thresholds, p.batting.starPower),
-      p.pitching
-        ? new PitchingConfig(p.pitching.thresholds, p.pitching.starPower)
-        : ([] as any)
-    )
+  (config: PlayerJson) => new Player(config)
 ) as Player[]
 
 const turtleMap = turtlePlayers.reduce(
@@ -245,12 +247,12 @@ const turtleMap = turtlePlayers.reduce(
   {}
 ) as Record<string, Player>
 
-export const tempTurtles = new Team(
-  'Turtles',
-  '#007F5C',
-  '#A7FC00',
-  turtleMap,
-  [
+export const tempTurtles = new Team({
+  name: 'Turtles',
+  primaryColor: '#007F5C',
+  secondaryColor: '#A7FC00',
+  roster: turtleMap,
+  starters: [
     {
       playerId: idForName(turtlePlayers, 'Zoona'),
       position: Position.CENTER_FIELD
@@ -285,4 +287,4 @@ export const tempTurtles = new Team(
     },
     { playerId: idForName(turtlePlayers, 'Gary'), position: Position.PITCHER }
   ]
-)
+})

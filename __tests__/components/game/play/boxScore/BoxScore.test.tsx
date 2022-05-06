@@ -17,7 +17,7 @@ describe('<BoxScore />', () => {
     const { getByTestId, getByText, getAllByText } = render(<BoxScore />)
     fireEvent.click(getByTestId('home-toggle'))
 
-    const playerList = Object.values(home.players)
+    const playerList = home.getRoster()
     const nonPitcher = playerList.filter((p) => !p.canPlay('P'))
     const pitcher = playerList.filter((p) => p.canPlay('P'))[0]
 

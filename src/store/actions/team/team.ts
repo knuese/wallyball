@@ -1,12 +1,5 @@
 import { Dispatch } from 'react'
-import {
-  BattingConfig,
-  PitchingConfig,
-  Player,
-  Position,
-  Side,
-  Team
-} from '../../../model'
+import { Player, Side, Team } from '../../../model'
 import { RootState } from '../../reducers'
 import {
   CLEAR_TEAM,
@@ -33,22 +26,17 @@ export const readTeamFile =
     dispatch({
       type: LOAD_TEAM,
       side: isHome ? Side.HOME : Side.AWAY,
-      payload: new Team(
+      payload: new Team({
         name,
         primaryColor,
         secondaryColor,
-        playersFromFile.reduce((acc, config) => {
-          const player = new Player(
-            config.name,
-            config.positions as Position[],
-            new BattingConfig(config.batting),
-            config.pitching && new PitchingConfig(config.pitching)
-          )
+        roster: playersFromFile.reduce((acc, config) => {
+          const player = new Player(config)
 
           return { ...acc, [player.id]: player }
         }, {}),
-        []
-      )
+        starters: []
+      })
     })
   }
 

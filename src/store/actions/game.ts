@@ -109,7 +109,7 @@ export const simulateAtBat =
     pitcher.logBatterFaced(outcome, outsRecorded, runnersScored.length)
 
     for (const runnerId of runnersScored) {
-      batting.players[runnerId].scored()
+      batting.roster[runnerId].scored()
     }
   }
 

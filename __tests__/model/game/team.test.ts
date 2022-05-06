@@ -1,46 +1,35 @@
 import { Team, Position, Player } from '../../../src/model'
-import { buildStarters, mappedPlayers, players } from '../../../__test_data__'
+import { buildStarters, roster, players } from '../../../__test_data__'
 
 describe('Team', () => {
-  const name = 'Test Team'
-  const primaryColor = 'red'
-  const secondaryColor = 'blue'
+  const props = {
+    name: 'Test Team',
+    primaryColor: 'red',
+    secondaryColor: 'blue',
+    roster: roster,
+    starters: buildStarters(roster)
+  }
 
   describe('initialization', () => {
-    it('gets the player list', () => {
-      const team = new Team(
-        'Test Team',
-        primaryColor,
-        secondaryColor,
-        mappedPlayers,
-        buildStarters(mappedPlayers)
-      )
-      expect(team.getPlayerList()).toEqual(Object.values(mappedPlayers))
+    it('gets the roster', () => {
+      const team = new Team(props)
+      expect(team.getRoster()).toEqual(Object.values(roster))
     })
 
     it('throws an error if there are too few starters', () => {
-      expect(
-        () => new Team(name, primaryColor, secondaryColor, mappedPlayers, [])
-      ).toThrow('must specify nine starters')
+      expect(() => new Team({ ...props, starters: [] })).toThrow(
+        'must specify nine starters'
+      )
     })
 
     it('throws an error if someone is playing a position they cannot play', () => {
       // make everyone start at catcher
-      const badStarters = Object.values(mappedPlayers).map((p) => ({
+      const badStarters = Object.values(roster).map((p) => ({
         playerId: p.id,
         position: Position.CATCHER
       }))
 
-      expect(
-        () =>
-          new Team(
-            name,
-            primaryColor,
-            secondaryColor,
-            mappedPlayers,
-            badStarters
-          )
-      ).toThrow(
+      expect(() => new Team({ ...props, starters: badStarters })).toThrow(
         expect.objectContaining({
           message: expect.stringContaining(`cannot play ${Position.CATCHER}`)
         })
@@ -49,26 +38,18 @@ describe('Team', () => {
 
     it('throws an error if there is a duplicated position', () => {
       // make all players only eligible to catch
-      const duplicatePositionPlayers = players.reduce((acc, player) => {
-        const newPlayer = new Player(
-          player.name,
-          [Position.CATCHER],
-          player.battingConfig,
-          player.pitchingConfig
-        )
-
-        return { ...acc, [newPlayer.id]: newPlayer }
+      const badRoster = players.reduce((acc, player) => {
+        player.eligiblePositions = [Position.CATCHER]
+        return { ...acc, [player.id]: player }
       }, {})
 
       expect(
         () =>
-          new Team(
-            name,
-            primaryColor,
-            secondaryColor,
-            duplicatePositionPlayers,
-            buildStarters(duplicatePositionPlayers)
-          )
+          new Team({
+            ...props,
+            roster: badRoster,
+            starters: buildStarters(badRoster)
+          })
       ).toThrow('must specify a player for every position')
     })
 
