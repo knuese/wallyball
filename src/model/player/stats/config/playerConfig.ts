@@ -2,13 +2,16 @@ import { Outcome } from '../../../enum/outcome'
 
 export abstract class PlayerConfig {
   outcomes: Record<number, Outcome> = {}
+  starPower: number
 
-  constructor(thresholds: Record<string, any>) {
+  constructor(thresholds: Record<string, any>, starPower: number) {
     Object.values(thresholds).forEach((val, i, arr) => {
       if (i > 0 && val < arr[i - 1]) {
         throw new Error('thresholds must be increasing')
       }
     })
+
+    this.starPower = starPower
   }
 
   determineOutcome(rand: number): Outcome {

@@ -1,5 +1,8 @@
-import { Team } from '../model'
+import { Player, Team } from '../model'
 import { ScoreArray } from '../store/types/game'
+
+export const calcOffset = (batter: Player, pitcher: Player): number =>
+  (batter.getBattingStarPower() - pitcher.getPitchingStarPower()) / 100
 
 export const getOrdinal = (n: number) =>
   ['', 'st', 'nd', 'rd'][(n / 10) % 10 ^ 1 && n % 10] || 'th'

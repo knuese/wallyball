@@ -40,12 +40,24 @@ export class Player {
     return { ...this.battingConfig.outcomes }
   }
 
+  getBattingStarPower(): number {
+    return this.battingConfig.starPower
+  }
+
   getPitchingThresholds(): Record<number, Outcome> {
     if (!this.pitchingConfig) {
       throw new Error(`${this.name} is not a pitcher`)
     }
 
     return { ...this.pitchingConfig.outcomes }
+  }
+
+  getPitchingStarPower(): number {
+    if (!this.pitchingConfig) {
+      throw new Error(`${this.name} is not a pitcher`)
+    }
+
+    return this.pitchingConfig?.starPower
   }
 
   getGameStats(): PlayerGameStats {

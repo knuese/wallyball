@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 import { Bases, Outcome, Player, Position, Team } from '../../model'
-import { getTotalScore, isOver } from '../../util'
+import { calcOffset, getTotalScore, isOver } from '../../util'
 import { RootState } from '../reducers'
 import {
   ADD_TO_PLAY_HISTORY,
@@ -72,7 +72,7 @@ export const simulateAtBat =
     const batter = batting.nextBatter()
     const pitcher = fielding.defenderAt(Position.PITCHER)
 
-    const useBatterStats = Math.random() < 0.4
+    const useBatterStats = Math.random() < 0.4 + calcOffset(batter, pitcher)
     const { outcome, rawValue } = useBatterStats
       ? batter.bat()
       : pitcher.pitch()
