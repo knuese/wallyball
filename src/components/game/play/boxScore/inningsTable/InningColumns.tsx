@@ -5,7 +5,7 @@ import { ScoreArray } from '../../../../../store/types/game'
 export type InningColumnProps = {
   currentInning: number
   isBottom: boolean
-  isOver: boolean
+  isOver?: boolean
   awayScores: ScoreArray
   homeScores: ScoreArray
 }
@@ -21,7 +21,7 @@ export const InningColumns: FC<InningColumnProps> = ({
 
   useEffect(() => {
     if (inningsRef.current) {
-      (inningsRef.current as any).scrollLeft += 100
+      ;(inningsRef.current as any).scrollLeft += 100
     }
   }, [currentInning])
 

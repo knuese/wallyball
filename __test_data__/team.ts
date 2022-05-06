@@ -1,4 +1,4 @@
-import { Player, Position, Team } from '../src/model'
+import { Player, Position, Starter, Team } from '../src/model'
 import { PlayerId } from '../src/store/types/team'
 import { mappedPlayers, players } from './player'
 
@@ -19,7 +19,7 @@ const updatePlayerNamesForTeam = (
     }
   }, {})
 
-const buildStarters = (idToPlayer: Record<string, Player>) =>
+export const buildStarters = (idToPlayer: Record<string, Player>): Starter[] =>
   Object.values(idToPlayer).map(({ id, eligiblePositions }) => ({
     playerId: id,
     position: eligiblePositions[0]

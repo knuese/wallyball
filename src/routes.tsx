@@ -12,7 +12,6 @@ export const AppRouter: FC = () => (
   <HashRouter>
     <Routes>
       <Route path="/" element={withHeader(<HomeScreen />)} />
-      <Route path="/game" element={withHeader(<GameScreen />)} />
       <Route path="/game/init" element={withHeader(<InitGame />)} />
       <Route path="/game/play" element={withHeader(<PlayGame />)} />
     </Routes>

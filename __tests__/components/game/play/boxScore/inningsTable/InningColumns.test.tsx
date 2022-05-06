@@ -9,7 +9,12 @@ describe('<InningColumns />', () => {
     const homeScores = ['E', 'F', 'G', 'H'] as any[]
 
     const { getByText } = render(
-      <InningColumns awayScores={awayScores} homeScores={homeScores} />
+      <InningColumns
+        currentInning={5}
+        isBottom
+        awayScores={awayScores}
+        homeScores={homeScores}
+      />
     )
 
     // inning headers

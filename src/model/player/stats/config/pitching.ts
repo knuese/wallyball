@@ -2,7 +2,7 @@ import { Outcome } from '../../../enum/outcome'
 import { PlayerConfig } from './playerConfig'
 
 export class PitchingConfig extends PlayerConfig {
-  constructor(thresholds: number[], starPower: number = 0) {
+  constructor(thresholds: number[], starPower = 0) {
     super(thresholds, starPower)
 
     if (thresholds.length !== 8) {

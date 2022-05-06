@@ -14,11 +14,18 @@ describe('<BoxScore />', () => {
   })
 
   it('toggles the stats', () => {
-    const { getByTestId, getByText } = render(<BoxScore />)
+    const { getByTestId, getByText, getAllByText } = render(<BoxScore />)
     fireEvent.click(getByTestId('home-toggle'))
 
-    Object.values(home.players).forEach(({ name }) => {
+    const playerList = Object.values(home.players)
+    const nonPitcher = playerList.filter((p) => !p.canPlay('P'))
+    const pitcher = playerList.filter((p) => p.canPlay('P'))[0]
+
+    nonPitcher.forEach(({ name }) => {
       expect(getByText(name)).toBeInTheDocument()
     })
+
+    // pitcher appears in both the batting order and the pitching stats
+    expect(getAllByText(pitcher.name)).toHaveLength(2)
   })
 })

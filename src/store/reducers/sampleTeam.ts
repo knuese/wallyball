@@ -196,7 +196,9 @@ const bearPlayers = bearsJson.players.map(
       p.name,
       p.positions,
       new BattingConfig(p.batting.thresholds, p.batting.starPower),
-      p.pitching ? new PitchingConfig(p.pitching.thresholds, p.pitching.starPower) : ([] as any)
+      p.pitching
+        ? new PitchingConfig(p.pitching.thresholds, p.pitching.starPower)
+        : ([] as any)
     )
 ) as Player[]
 
@@ -232,7 +234,9 @@ const turtlePlayers = turtlesJson.players.map(
       p.name,
       p.positions,
       new BattingConfig(p.batting.thresholds, p.batting.starPower),
-      p.pitching ? new PitchingConfig(p.pitching.thresholds, p.pitching.starPower) : ([] as any)
+      p.pitching
+        ? new PitchingConfig(p.pitching.thresholds, p.pitching.starPower)
+        : ([] as any)
     )
 ) as Player[]
 
