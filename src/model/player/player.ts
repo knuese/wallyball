@@ -44,6 +44,21 @@ export class Player {
     this.gameStats = new GameStats()
   }
 
+  clone(): Player {
+    return new Player({
+      name: this.name,
+      positions: this.eligiblePositions,
+      batting: {
+        thresholds: this.battingConfig.getThresholds(),
+        starPower: this.battingConfig.starPower
+      },
+      pitching: this.pitchingConfig && {
+        thresholds: this.pitchingConfig.getThresholds(),
+        starPower: this.pitchingConfig.starPower
+      }
+    })
+  }
+
   getBattingThresholds(): Record<number, Outcome> {
     return { ...this.battingConfig.outcomes }
   }

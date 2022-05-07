@@ -15,9 +15,9 @@ export type BoxScore = {
 }
 
 export type BattingExtra = {
-  doubles?: string[]
-  triples?: string[]
-  homeRuns?: string[]
+  doubles: string[]
+  triples: string[]
+  homeRuns: string[]
 }
 
 export type TeamProps = {
@@ -25,7 +25,6 @@ export type TeamProps = {
   primaryColor: string
   secondaryColor: string
   roster: Record<string, Player>
-  starters: Starter[]
 }
 
 export class Team {
@@ -33,31 +32,26 @@ export class Team {
   primaryColor: string
   secondaryColor: string
   roster: Record<string, Player>
-  private battingOrder?: string[]
-  private defense?: Defense
+  private battingOrder: string[]
+  private defense: Defense
   private batterIndex: number
 
-  constructor({
-    name,
-    primaryColor,
-    secondaryColor,
-    roster,
-    starters
-  }: TeamProps) {
+  constructor({ name, primaryColor, secondaryColor, roster }: TeamProps) {
     this.name = name
     this.primaryColor = primaryColor
     this.secondaryColor = secondaryColor
     this.roster = roster
     this.batterIndex = 0
 
-    this.setStarters(starters)
+    this.battingOrder = []
+    this.defense = {} as any
   }
 
   getRoster(): Player[] {
     return Object.values(this.roster)
   }
 
-  private setStarters(starters: Starter[]): void {
+  setStarters(starters: Starter[]): void {
     if (starters.length !== 9) {
       throw new Error('must specify nine starters')
     }
@@ -78,49 +72,54 @@ export class Team {
   }
 
   currentBatter(): Player {
-    if (!this.battingOrder) {
-      throw new Error('batting order not defined!')
+    const playerId = this.battingOrder[this.batterIndex]
+    const player = this.roster[playerId]
+
+    if (!player) {
+      throw new Error('current batter not defined!')
     }
 
-    const playerId = this.battingOrder[this.batterIndex]
-    return this.roster[playerId]
+    return player
   }
 
   nextBatter(): Player {
-    if (!this.battingOrder) {
-      throw new Error('batting order not defined!')
-    }
-
     const i = this.batterIndex % 9
     this.batterIndex++
 
     const playerId = this.battingOrder[i]
-    return this.roster[playerId]
-  }
+    const player = this.roster[playerId]
 
-  peekNextBatter(): Player {
-    if (!this.battingOrder) {
-      throw new Error('batting order not defined!')
+    if (!player) {
+      throw new Error('next batter not defined!')
     }
 
+    return player
+  }
+
+  // TODO
+  peekNextBatter(): Player {
     const i = this.batterIndex % 9
     const playerId = this.battingOrder[i]
-    return this.roster[playerId]
+    const player = this.roster[playerId]
+
+    if (!player) {
+      throw new Error('next batter not defined!')
+    }
+
+    return player
   }
 
   defenderAt(position: Position): Player {
-    if (!this.defense) {
-      throw new Error('batting order not defined!')
+    const player = this.roster[this.defense[position]]
+
+    if (!player) {
+      throw new Error(`no player found at position ${position}`)
     }
 
-    return this.roster[this.defense[position]]
+    return player
   }
 
   getBattingLines(): Array<string | number>[] {
-    if (!this.battingOrder) {
-      throw new Error('batting order not defined')
-    }
-
     return this.battingOrder.map((playerId) => {
       const player = this.roster[playerId]
       const { batting } = player.getGameStats()
@@ -168,10 +167,6 @@ export class Team {
   }
 
   getPitchingLines(): Array<string | number>[] {
-    if (!this.defense) {
-      throw new Error('defense not defined')
-    }
-
     const pitcher = this.defenderAt(Position.PITCHER)
     const { pitching } = pitcher.getGameStats()
 

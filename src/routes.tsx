@@ -1,11 +1,6 @@
 import { FC } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import {
-  HomeScreen,
-  InitGame,
-  PlayGame,
-  withHeader
-} from './components'
+import { HomeScreen, InitGame, PlayGame, withHeader } from './components'
 
 export const AppRouter: FC = () => (
   <HashRouter>

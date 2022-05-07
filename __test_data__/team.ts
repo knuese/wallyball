@@ -27,17 +27,19 @@ export const away = new Team({
   name: 'Away Team',
   primaryColor: 'red',
   secondaryColor: 'blue',
-  roster: awayPlayers,
-  starters: buildStarters(awayPlayers)
+  roster: awayPlayers
 })
+
+away.setStarters(buildStarters(awayPlayers))
 
 export const home = new Team({
   name: 'Home Team',
   primaryColor: 'green',
   secondaryColor: 'yellow',
-  roster: homePlayers,
-  starters: buildStarters(homePlayers)
+  roster: homePlayers
 })
+
+home.setStarters(buildStarters(homePlayers))
 
 export const lineup: Record<string, PlayerId> = players.reduce(
   (acc, cur, i) => ({

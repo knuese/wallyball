@@ -203,40 +203,41 @@ export const tempBears = new Team({
   name: 'Bears',
   primaryColor: '#841B2D',
   secondaryColor: '#DEB887',
-  roster: bearMap,
-  starters: [
-    {
-      playerId: idForName(bearPlayers, 'Sammy'),
-      position: Position.LEFT_FIELD
-    },
-    {
-      playerId: idForName(bearPlayers, 'Buster'),
-      position: Position.RIGHT_FIELD
-    },
-    { playerId: idForName(bearPlayers, 'Tush'), position: Position.CATCHER },
-    {
-      playerId: idForName(bearPlayers, 'Bo Bo'),
-      position: Position.FIRST_BASE
-    },
-    {
-      playerId: idForName(bearPlayers, 'Spanky'),
-      position: Position.THIRD_BASE
-    },
-    {
-      playerId: idForName(bearPlayers, 'Sparey'),
-      position: Position.SECOND_BASE
-    },
-    { playerId: idForName(bearPlayers, 'Cappy'), position: Position.SHORTSTOP },
-    {
-      playerId: idForName(bearPlayers, 'Cupcake'),
-      position: Position.CENTER_FIELD
-    },
-    {
-      playerId: idForName(bearPlayers, 'September'),
-      position: Position.PITCHER
-    }
-  ]
+  roster: bearMap
 })
+
+tempBears.setStarters([
+  {
+    playerId: idForName(bearPlayers, 'Sammy'),
+    position: Position.LEFT_FIELD
+  },
+  {
+    playerId: idForName(bearPlayers, 'Buster'),
+    position: Position.RIGHT_FIELD
+  },
+  { playerId: idForName(bearPlayers, 'Tush'), position: Position.CATCHER },
+  {
+    playerId: idForName(bearPlayers, 'Bo Bo'),
+    position: Position.FIRST_BASE
+  },
+  {
+    playerId: idForName(bearPlayers, 'Spanky'),
+    position: Position.THIRD_BASE
+  },
+  {
+    playerId: idForName(bearPlayers, 'Sparey'),
+    position: Position.SECOND_BASE
+  },
+  { playerId: idForName(bearPlayers, 'Cappy'), position: Position.SHORTSTOP },
+  {
+    playerId: idForName(bearPlayers, 'Cupcake'),
+    position: Position.CENTER_FIELD
+  },
+  {
+    playerId: idForName(bearPlayers, 'September'),
+    position: Position.PITCHER
+  }
+])
 
 const turtlePlayers = turtlesJson.players.map(
   (config: PlayerJson) => new Player(config)
@@ -251,40 +252,41 @@ export const tempTurtles = new Team({
   name: 'Turtles',
   primaryColor: '#007F5C',
   secondaryColor: '#A7FC00',
-  roster: turtleMap,
-  starters: [
-    {
-      playerId: idForName(turtlePlayers, 'Zoona'),
-      position: Position.CENTER_FIELD
-    },
-    {
-      playerId: idForName(turtlePlayers, 'Chan'),
-      position: Position.LEFT_FIELD
-    },
-    {
-      playerId: idForName(turtlePlayers, 'Guss'),
-      position: Position.THIRD_BASE
-    },
-    {
-      playerId: idForName(turtlePlayers, 'Browny'),
-      position: Position.FIRST_BASE
-    },
-    {
-      playerId: idForName(turtlePlayers, 'Shells'),
-      position: Position.CATCHER
-    },
-    {
-      playerId: idForName(turtlePlayers, 'Glen'),
-      position: Position.SECOND_BASE
-    },
-    {
-      playerId: idForName(turtlePlayers, 'Cookie'),
-      position: Position.RIGHT_FIELD
-    },
-    {
-      playerId: idForName(turtlePlayers, 'George'),
-      position: Position.SHORTSTOP
-    },
-    { playerId: idForName(turtlePlayers, 'Gary'), position: Position.PITCHER }
-  ]
+  roster: turtleMap
 })
+
+tempTurtles.setStarters([
+  {
+    playerId: idForName(turtlePlayers, 'Zoona'),
+    position: Position.CENTER_FIELD
+  },
+  {
+    playerId: idForName(turtlePlayers, 'Chan'),
+    position: Position.LEFT_FIELD
+  },
+  {
+    playerId: idForName(turtlePlayers, 'Guss'),
+    position: Position.THIRD_BASE
+  },
+  {
+    playerId: idForName(turtlePlayers, 'Browny'),
+    position: Position.FIRST_BASE
+  },
+  {
+    playerId: idForName(turtlePlayers, 'Shells'),
+    position: Position.CATCHER
+  },
+  {
+    playerId: idForName(turtlePlayers, 'Glen'),
+    position: Position.SECOND_BASE
+  },
+  {
+    playerId: idForName(turtlePlayers, 'Cookie'),
+    position: Position.RIGHT_FIELD
+  },
+  {
+    playerId: idForName(turtlePlayers, 'George'),
+    position: Position.SHORTSTOP
+  },
+  { playerId: idForName(turtlePlayers, 'Gary'), position: Position.PITCHER }
+])
