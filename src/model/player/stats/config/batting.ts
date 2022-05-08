@@ -2,14 +2,8 @@ import { Outcome } from '../../../enum/outcome'
 import { PlayerConfig } from './playerConfig'
 
 export class BattingConfig extends PlayerConfig {
-  constructor({
-    thresholds,
-    starPower = 0
-  }: {
-    thresholds: number[]
-    starPower?: number
-  }) {
-    super(thresholds, starPower)
+  constructor(thresholds: number[]) {
+    super(thresholds)
 
     if (thresholds.length !== 8) {
       throw new Error('must provide eight thresholds for batting stats')

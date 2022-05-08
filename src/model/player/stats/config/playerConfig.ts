@@ -3,9 +3,8 @@ import { Outcome } from '../../../enum/outcome'
 export abstract class PlayerConfig {
   thresholds: number[]
   outcomes: Record<number, Outcome> = {}
-  starPower: number
 
-  constructor(thresholds: number[], starPower: number) {
+  constructor(thresholds: number[]) {
     this.thresholds = thresholds
 
     thresholds.forEach((val, i, arr) => {
@@ -13,8 +12,6 @@ export abstract class PlayerConfig {
         throw new Error('thresholds must be increasing')
       }
     })
-
-    this.starPower = starPower
   }
 
   getThresholds(): number[] {

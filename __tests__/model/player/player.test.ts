@@ -7,12 +7,13 @@ import {
 } from '../../../src/model'
 
 describe('player', () => {
-  const batting = { thresholds: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1] }
-  const pitching = { thresholds: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1] }
+  const batting = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1]
+  const pitching = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1]
 
   const player = new Player({
     name: 'Wally',
     positions: [Position.THIRD_BASE, Position.PITCHER],
+    attributes: {} as any,
     batting,
     pitching
   })
@@ -41,6 +42,7 @@ describe('player', () => {
     const nonPitcher = new Player({
       name: 'Bo Bo',
       positions: [Position.FIRST_BASE],
+      attributes: {} as any,
       batting
     })
     expect(() => nonPitcher.pitch()).toThrow(Error('Bo Bo is not a pitcher'))

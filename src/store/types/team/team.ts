@@ -8,8 +8,9 @@ export type PlayerConfig = {
   id: string
   name: string
   positions: string[]
-  batting: { thresholds: number[]; starPower?: number }
-  pitching?: { thresholds: number[]; starPower?: number }
+  attributes: Record<string, any>
+  batting: number[]
+  pitching?: number[]
 }
 
 export type TeamFileContents = {

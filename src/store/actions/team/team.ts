@@ -34,8 +34,7 @@ export const readTeamFile =
           const player = new Player(config)
 
           return { ...acc, [player.id]: player }
-        }, {}),
-        starters: []
+        }, {})
       })
     })
   }

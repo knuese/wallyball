@@ -296,14 +296,16 @@ describe('bases', () => {
       const flyBatter = new Player({
         name: 'batter',
         positions: [],
-        batting: { thresholds: [0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 0.6, 1.0] }
+        attributes: {},
+        batting: [0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 0.6, 1.0]
       })
 
       const flyPitcher = new Player({
         name: 'pitcher',
         positions: [],
-        batting: { thresholds: [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 1.0] },
-        pitching: { thresholds: [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 1.0] }
+        attributes: {},
+        batting: [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 1.0],
+        pitching: [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 1.0]
       })
 
       it('returns an out if there are already two outs', () => {

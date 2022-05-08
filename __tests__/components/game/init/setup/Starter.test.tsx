@@ -8,9 +8,8 @@ describe('<Starter />', () => {
   const player = new Player({
     name: 'Player to Select',
     positions,
-    batting: {
-      thresholds: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
-    }
+    attributes: {},
+    batting: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
   })
 
   // get around DOM nesting violations

@@ -9,62 +9,77 @@ import {
   PitchingStats
 } from './stats'
 
-type PlayerGameStats = {
-  batting: BattingStats
-  pitching: PitchingStats
+type PlayerAttributes = {
+  speed: number
+  fieldingPct: number
+  battingStarPower: number
+  pitchingStarPower: number
+  fatigue: (ip: number) => number
 }
 
 type PlayerProps = {
   name: string
   positions: Position[] | string[]
-  batting: {
-    thresholds: number[]
-    starPower?: number
-  }
-  pitching?: {
-    thresholds: number[]
-    starPower?: number
-  }
+  attributes: Partial<PlayerAttributes>
+  batting: number[]
+  pitching?: number[]
+}
+
+type PlayerGameStats = {
+  batting: BattingStats
+  pitching: PitchingStats
 }
 
 export class Player {
   id: string
   name: string
   eligiblePositions: Position[] | string[]
+  attributes: PlayerAttributes
   battingConfig: BattingConfig
   pitchingConfig?: PitchingConfig
   private gameStats: GameStats
 
-  constructor({ name, positions, batting, pitching }: PlayerProps) {
+  constructor({
+    name,
+    positions,
+    batting,
+    pitching,
+    attributes: {
+      speed = 1,
+      fieldingPct = 0.9,
+      battingStarPower = 0,
+      pitchingStarPower = 0,
+      fatigue = (ip: number) => ip
+    }
+  }: PlayerProps) {
     this.id = uuidv4()
     this.name = name
     this.eligiblePositions = positions
     this.battingConfig = new BattingConfig(batting)
     this.pitchingConfig = pitching && new PitchingConfig(pitching)
     this.gameStats = new GameStats()
+
+    this.attributes = {
+      speed,
+      fieldingPct,
+      battingStarPower,
+      pitchingStarPower,
+      fatigue
+    }
   }
 
   clone(): Player {
     return new Player({
       name: this.name,
       positions: this.eligiblePositions,
-      batting: {
-        thresholds: this.battingConfig.getThresholds(),
-        starPower: this.battingConfig.starPower
-      },
-      pitching: this.pitchingConfig && {
-        thresholds: this.pitchingConfig.getThresholds(),
-        starPower: this.pitchingConfig.starPower
-      }
+      attributes: this.attributes,
+      batting: this.battingConfig.getThresholds(),
+      pitching: this.pitchingConfig && this.pitchingConfig.getThresholds()
     })
   }
 
   getBattingThresholds(): Record<number, Outcome> {
     return { ...this.battingConfig.outcomes }
-  }
-
-  getBattingStarPower(): number {
-    return this.battingConfig.starPower
   }
 
   getPitchingThresholds(): Record<number, Outcome> {
@@ -73,14 +88,6 @@ export class Player {
     }
 
     return { ...this.pitchingConfig.outcomes }
-  }
-
-  getPitchingStarPower(): number {
-    if (!this.pitchingConfig) {
-      throw new Error(`${this.name} is not a pitcher`)
-    }
-
-    return this.pitchingConfig?.starPower
   }
 
   getGameStats(): PlayerGameStats {
