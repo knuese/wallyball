@@ -15,7 +15,7 @@ export const Controls: FC<ControlsProps> = ({ outs, isOver }) => {
   const [delay, setDelay] = useState(5)
 
   const simulate = () => {
-    dispatch(requestSimulation())
+    dispatch(requestSimulation() as any)
   }
 
   const onInterval = (timeout: number) => {
@@ -47,12 +47,12 @@ export const Controls: FC<ControlsProps> = ({ outs, isOver }) => {
         <div className="flex-row center control-item">
           <button
             onClick={simulate}
-            disabled={autoplay}
+            disabled={autoplay || isOver}
             style={{ marginRight: '1rem' }}
           >
             {outs === 3 ? 'Switch Sides' : 'Simulate At Bat'}
           </button>
-          <button disabled={autoplay}>Substitute</button>
+          <button disabled={autoplay || isOver}>Substitute</button>
         </div>
       </div>
     </div>

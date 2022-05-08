@@ -20,7 +20,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "types": []
+    "types": ["node"]
   },
   "include": ["src"]
 }

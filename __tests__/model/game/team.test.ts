@@ -99,23 +99,6 @@ describe('Team', () => {
       })
     })
 
-    describe('peekNextBatter', () => {
-      it('looks at the next batter', () => {
-        const starters = buildStarters(roster)
-        team.setStarters(starters)
-
-        expect(team.peekNextBatter()).toEqual(
-          expect.objectContaining({
-            id: starters[0].playerId
-          })
-        )
-      })
-
-      it('throws an error if the next batter is not found', () => {
-        expect(() => team.peekNextBatter()).toThrow('next batter not defined')
-      })
-    })
-
     describe('defenderAt', () => {
       const position = Position.CATCHER
 

@@ -111,13 +111,16 @@ export const simulateAtBat =
     for (const runnerId of runnersScored) {
       batting.roster[runnerId].scored()
     }
+
+    if (game.inning >= 9) {
+      dispatch(checkEnd() as any)
+    }
   }
 
-export const switchSides =
+export const checkEnd =
   () =>
   (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
     const { game } = getState()
-
     const awayScore = getTotalScore(game.scores.away)
     const homeScore = getTotalScore(game.scores.home)
     const isGameOver = isOver({
@@ -130,14 +133,21 @@ export const switchSides =
 
     if (isGameOver) {
       dispatch({ type: GAME_OVER })
-    } else if (game.outs === 3) {
-      dispatch({ type: PROGRESS_INNING })
     }
+  }
+
+export const switchSides =
+  () =>
+  (dispatch: Dispatch<GameActionTypes>): void => {
+    dispatch({ type: PROGRESS_INNING })
   }
 
 export const requestSimulation =
   () =>
   (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
-    const { outs } = getState().game
-    dispatch((outs < 3 ? simulateAtBat : switchSides)() as any)
+    const { outs, isOver } = getState().game
+
+    if (!isOver) {
+      dispatch((outs < 3 ? simulateAtBat : switchSides)() as any)
+    }
   }

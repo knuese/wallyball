@@ -18,7 +18,7 @@ export const GameInfo: FC = () => {
   useEffect(() => {
     // prevent next batter from showing when there are three outs
     if (outs < 3) {
-      setCurrentBatter(batting.peekNextBatter())
+      setCurrentBatter(batting.currentBatter())
     }
   }, [outs, batting.currentBatter()])
 

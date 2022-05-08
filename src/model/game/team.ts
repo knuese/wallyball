@@ -72,7 +72,7 @@ export class Team {
   }
 
   currentBatter(): Player {
-    const playerId = this.battingOrder[this.batterIndex]
+    const playerId = this.battingOrder[this.batterIndex % 9]
     const player = this.roster[playerId]
 
     if (!player) {
@@ -86,19 +86,6 @@ export class Team {
     const i = this.batterIndex % 9
     this.batterIndex++
 
-    const playerId = this.battingOrder[i]
-    const player = this.roster[playerId]
-
-    if (!player) {
-      throw new Error('next batter not defined!')
-    }
-
-    return player
-  }
-
-  // TODO
-  peekNextBatter(): Player {
-    const i = this.batterIndex % 9
     const playerId = this.battingOrder[i]
     const player = this.roster[playerId]
 
