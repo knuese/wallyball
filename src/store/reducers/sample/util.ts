@@ -1,6 +1,7 @@
 import { Player, Position } from '../../../model'
 
 export type PlayerJson = {
+  id: string
   name: string
   positions: Position[]
   attributes: Record<string, any>

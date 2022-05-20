@@ -7,54 +7,63 @@ const bamboosJson = {
   secondaryColor: '#1B1B1B',
   players: [
     {
+      id: 'bamboo1',
       name: 'BAMBOO 1',
       positions: ['1B'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo2',
       name: 'BAMBOO 2',
       positions: ['2B'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo3',
       name: 'BAMBOO 3',
       positions: ['3B'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo4',
       name: 'BAMBOO 4',
       positions: ['SS'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo5',
       name: 'BAMBOO 5',
       positions: ['CF'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo6',
       name: 'BAMBOO 6',
       positions: ['LF'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo7',
       name: 'BAMBOO 7',
       positions: ['RF'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo8',
       name: 'BAMBOO 8',
       positions: ['C'],
       attributes: { battingStarPower: 0 },
       batting: [0.066, 0.071, 0.072, 0.074, 0.117, 0.374, 0.687, 1.0]
     },
     {
+      id: 'bamboo9',
       name: 'BAMBOO 9',
       positions: ['P'],
       attributes: {

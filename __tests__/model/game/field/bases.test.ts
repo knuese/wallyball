@@ -294,6 +294,7 @@ describe('bases', () => {
 
     describe('fly', () => {
       const flyBatter = new Player({
+        id: 'batter',
         name: 'batter',
         positions: [],
         attributes: {},
@@ -301,6 +302,7 @@ describe('bases', () => {
       })
 
       const flyPitcher = new Player({
+        id: 'pitcher',
         name: 'pitcher',
         positions: [],
         attributes: {},

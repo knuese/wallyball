@@ -7,54 +7,63 @@ const bjsJson = {
   secondaryColor: '#DE6FA1',
   players: [
     {
+      id: 'bj1',
       name: 'BJ 1',
       positions: ['1B'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'bj2',
       name: 'BJ 2',
       positions: ['2B'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'bj3',
       name: 'BJ 3',
       positions: ['3B'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'bj4',
       name: 'BJ 4',
       positions: ['SS'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'bj5',
       name: 'BJ 5',
       positions: ['CF'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'bj6',
       name: 'BJ 6',
       positions: ['LF'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'bj7',
       name: 'BJ 7',
       positions: ['RF'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'bj8',
       name: 'BJ 8',
       positions: ['C'],
       attributes: { battingStarPower: 0 },
       batting: [0.046, 0.048, 0.049, 0.05, 0.067, 0.276, 0.638, 1.0]
     },
     {
+      id: 'paul',
       name: 'Paul',
       positions: ['P'],
       attributes: {

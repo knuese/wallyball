@@ -6,6 +6,7 @@ import { Player } from '../../../../../src/model'
 describe('<Starter />', () => {
   const positions = ['P', 'C']
   const player = new Player({
+    id: 'player',
     name: 'Player to Select',
     positions,
     attributes: {},

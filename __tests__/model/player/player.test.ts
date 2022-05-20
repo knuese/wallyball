@@ -11,6 +11,7 @@ describe('player', () => {
   const pitching = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1]
 
   const player = new Player({
+    id: 'wally',
     name: 'Wally',
     positions: [Position.THIRD_BASE, Position.PITCHER],
     attributes: {} as any,
@@ -40,6 +41,7 @@ describe('player', () => {
 
   it('throws an error if the player cannot pitch', () => {
     const nonPitcher = new Player({
+      id: 'bobo',
       name: 'Bo Bo',
       positions: [Position.FIRST_BASE],
       attributes: {} as any,

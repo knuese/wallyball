@@ -5,6 +5,7 @@ const batting = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1]
 const pitching = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1]
 
 export const pitcher = new Player({
+  id: 'pitcher',
   name: 'Pitcher',
   positions: [Position.PITCHER],
   attributes,
@@ -13,6 +14,7 @@ export const pitcher = new Player({
 })
 
 export const catcher = new Player({
+  id: 'catcher',
   name: 'Catcher',
   positions: [Position.CATCHER],
   attributes,
@@ -20,6 +22,7 @@ export const catcher = new Player({
 })
 
 export const firstBase = new Player({
+  id: 'firstBase',
   name: 'First Baseman',
   positions: [Position.FIRST_BASE],
   attributes,
@@ -27,6 +30,7 @@ export const firstBase = new Player({
 })
 
 export const secondBase = new Player({
+  id: 'secondBase',
   name: 'Second Baseman',
   positions: [Position.SECOND_BASE],
   attributes,
@@ -34,6 +38,7 @@ export const secondBase = new Player({
 })
 
 export const shortstop = new Player({
+  id: 'shortstop',
   name: 'Shortstop',
   positions: [Position.SHORTSTOP],
   attributes,
@@ -41,6 +46,7 @@ export const shortstop = new Player({
 })
 
 export const thirdBase = new Player({
+  id: 'thirdBase',
   name: 'Third Baseman',
   positions: [Position.THIRD_BASE],
   attributes,
@@ -48,6 +54,7 @@ export const thirdBase = new Player({
 })
 
 export const leftField = new Player({
+  id: 'leftField',
   name: 'Left Field',
   positions: [Position.LEFT_FIELD],
   attributes,
@@ -55,6 +62,7 @@ export const leftField = new Player({
 })
 
 export const centerField = new Player({
+  id: 'centerField',
   name: 'Center Field',
   positions: [Position.CENTER_FIELD],
   attributes,
@@ -62,6 +70,7 @@ export const centerField = new Player({
 })
 
 export const rightField = new Player({
+  id: 'rightField',
   name: 'Right Field',
   positions: [Position.RIGHT_FIELD],
   attributes,

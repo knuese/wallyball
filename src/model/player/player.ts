@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import { statToStr } from '../../util'
 import { Outcome, Position } from '../enum'
 import {
@@ -18,6 +17,7 @@ type PlayerAttributes = {
 }
 
 type PlayerProps = {
+  id: string
   name: string
   positions: Position[] | string[]
   attributes: Partial<PlayerAttributes>
@@ -40,6 +40,7 @@ export class Player {
   private gameStats: GameStats
 
   constructor({
+    id,
     name,
     positions,
     batting,
@@ -52,7 +53,7 @@ export class Player {
       fatigue = (ip: number) => ip
     }
   }: PlayerProps) {
-    this.id = uuidv4()
+    this.id = id
     this.name = name
     this.eligiblePositions = positions
     this.battingConfig = new BattingConfig(batting)
@@ -68,8 +69,9 @@ export class Player {
     }
   }
 
-  clone(): Player {
+  clone(newId: string): Player {
     return new Player({
+      id: newId,
       name: this.name,
       positions: this.eligiblePositions,
       attributes: this.attributes,

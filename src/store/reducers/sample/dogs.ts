@@ -7,18 +7,21 @@ const dogsJson = {
   secondaryColor: '#E3DAC9',
   players: [
     {
+      id: 'cocker',
       name: 'Cocker',
       positions: ['2B', 'SS', '3B'],
       attributes: { battingStarPower: 1.1 },
       batting: [0.164, 0.2, 0.201, 0.237, 0.316, 0.543, 0.825, 1.0]
     },
     {
+      id: 'cocoa',
       name: 'Cocoa',
       positions: ['2B', 'SS', '3B'],
       attributes: { battingStarPower: 1 },
       batting: [0.182, 0.22, 0.221, 0.249, 0.341, 0.548, 0.831, 1.0]
     },
     {
+      id: 'puppy',
       name: 'Puppy',
       positions: ['P'],
       attributes: {
@@ -30,30 +33,35 @@ const dogsJson = {
       pitching: [0.173, 0.194, 0.195, 0.22, 0.282, 0.515, 0.721, 1.0]
     },
     {
+      id: 'ralphie',
       name: 'Ralphie',
       positions: ['LF', 'CF', 'RF'],
       attributes: { battingStarPower: 0.25 },
       batting: [0.194, 0.22, 0.234, 0.242, 0.291, 0.474, 0.777, 1.0]
     },
     {
+      id: 'rocky',
       name: 'Rocky',
       positions: ['LF', 'CF', 'RF'],
       attributes: { battingStarPower: 2.5 },
       batting: [0.189, 0.24, 0.257, 0.279, 0.356, 0.521, 0.799, 1.0]
     },
     {
+      id: 'snoopy',
       name: 'Snoopy',
       positions: ['2B', 'SS', 'RF'],
       attributes: { battingStarPower: 3 },
       batting: [0.177, 0.224, 0.225, 0.269, 0.394, 0.626, 0.846, 1.0]
     },
     {
+      id: 'spot',
       name: 'Spot',
       positions: ['1B'],
       attributes: { battingStarPower: 4.3 },
       batting: [0.139, 0.175, 0.176, 0.256, 0.426, 0.731, 0.901, 1.0]
     },
     {
+      id: 'stoutland',
       name: 'Stoutland',
       positions: ['C'],
       attributes: {
@@ -62,6 +70,7 @@ const dogsJson = {
       batting: [0.149, 0.169, 0.17, 0.209, 0.261, 0.531, 0.812, 1.0]
     },
     {
+      id: 'sweetness',
       name: 'Sweetness',
       positions: ['C', '1B', '3B'],
       attributes: { battingStarPower: 4 },

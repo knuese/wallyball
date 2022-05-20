@@ -48,7 +48,7 @@ describe('Team', () => {
       it('throws an error if there is a duplicated position', () => {
         // make all players only eligible to catch
         const badRoster = players.reduce((acc, player) => {
-          const clone = player.clone()
+          const clone = player.clone(`clone-${player.id}`)
           clone.eligiblePositions = [Position.CATCHER]
           return { ...acc, [clone.id]: clone }
         }, {})
