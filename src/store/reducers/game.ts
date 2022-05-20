@@ -1,6 +1,13 @@
 import { AnyAction, Reducer } from 'redux'
 import { Bases } from '../../model'
-import { tempBears, tempTurtles } from './sampleTeam'
+import {
+  tempBears,
+  tempBirds,
+  tempCats,
+  tempDogs,
+  tempSeals,
+  tempTurtles
+} from './sample'
 import {
   ADD_TO_PLAY_HISTORY,
   GameState,
@@ -13,8 +20,20 @@ import {
 } from '../types/game'
 
 export const initialState: GameState = {
-  away: tempBears,
-  home: tempTurtles,
+  ...(() => {
+    const teams = [
+      tempBears,
+      tempTurtles,
+      tempCats,
+      tempDogs,
+      tempBirds,
+      tempSeals
+    ]
+    return {
+      away: teams.splice(Math.floor(Math.random() * teams.length), 1)[0],
+      home: teams.splice(Math.floor(Math.random() * teams.length), 1)[0]
+    }
+  })(),
   inning: 1,
   isBottom: false,
   outs: 0,

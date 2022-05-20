@@ -1,0 +1,8 @@
+export { tempBamboos } from './bamboo'
+export { tempBjs } from './bj'
+export { tempBears } from './bears'
+export { tempBirds } from './birds'
+export { tempCats } from './cats'
+export { tempDogs } from './dogs'
+export { tempSeals } from './seals'
+export { tempTurtles } from './turtles'
