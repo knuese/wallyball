@@ -12,9 +12,9 @@ export const Field: FC = () => {
   const { batting, fielding } = useTeams()
 
   const { first, second, third } = bases.getBases()
-  const runnerFirst = first?.id && batting.roster[first.id].name
-  const runnerSecond = second?.id && batting.roster[second.id].name
-  const runnerThird = third?.id && batting.roster[third.id].name
+  const runnerFirst = first?.id && batting.getPlayer(first.id).name
+  const runnerSecond = second?.id && batting.getPlayer(second.id).name
+  const runnerThird = third?.id && batting.getPlayer(third.id).name
 
   useEffect(() => {
     ReactTooltip.rebuild()

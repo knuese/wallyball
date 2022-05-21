@@ -1,0 +1,6 @@
+export { default as bears } from './bears'
+export { default as birds } from './birds'
+export { default as cats } from './cats'
+export { default as dogs } from './dogs'
+export { default as seals } from './seals'
+export { default as turtles } from './turtles'

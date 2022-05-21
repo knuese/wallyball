@@ -81,16 +81,11 @@ const bearPlayers = bearsJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const bearMap = bearPlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempBears = new Team({
   name: 'Bears',
   primaryColor: '#841B2D',
   secondaryColor: '#DEB887',
-  roster: bearMap
+  roster: bearPlayers
 })
 
 tempBears.setStarters([

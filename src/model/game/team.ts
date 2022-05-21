@@ -24,14 +24,14 @@ export type TeamProps = {
   name: string
   primaryColor: string
   secondaryColor: string
-  roster: Record<string, Player>
+  roster: Player[]
 }
 
 export class Team {
-  name: string
-  primaryColor: string
-  secondaryColor: string
-  roster: Record<string, Player>
+  readonly name: string
+  readonly primaryColor: string
+  readonly secondaryColor: string
+  private roster: Record<string, Player>
   private battingOrder: string[]
   private defense: Defense
   private batterIndex: number
@@ -40,7 +40,7 @@ export class Team {
     this.name = name
     this.primaryColor = primaryColor
     this.secondaryColor = secondaryColor
-    this.roster = roster
+    this.roster = roster.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
     this.batterIndex = 0
 
     this.battingOrder = []
@@ -49,6 +49,10 @@ export class Team {
 
   getRoster(): Player[] {
     return Object.values(this.roster)
+  }
+
+  getPlayer(playerId: string): Player {
+    return this.roster[playerId].clone(playerId)
   }
 
   setStarters(starters: Starter[]): void {
@@ -104,6 +108,10 @@ export class Team {
     }
 
     return player
+  }
+
+  playerScored(playerId: string): void {
+    this.roster[playerId].scored()
   }
 
   getBattingLines(): Array<string | number>[] {

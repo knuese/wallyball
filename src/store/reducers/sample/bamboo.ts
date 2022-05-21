@@ -81,16 +81,11 @@ const bambooPlayers = bamboosJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const bambooMap = bambooPlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempBamboos = new Team({
   name: 'Bamboos',
   primaryColor: '#A50B5E',
   secondaryColor: '#1B1B1B',
-  roster: bambooMap
+  roster: bambooPlayers
 })
 
 tempBamboos.setStarters([

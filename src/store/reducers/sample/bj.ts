@@ -81,16 +81,11 @@ const bjPlayers = bjsJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const bjMap = bjPlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempBjs = new Team({
   name: 'Bjs',
   primaryColor: '#856088',
   secondaryColor: '#DE6FA1',
-  roster: bjMap
+  roster: bjPlayers
 })
 
 tempBjs.setStarters([

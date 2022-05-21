@@ -83,16 +83,11 @@ const birdPlayers = birdsJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const birdMap = birdPlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempBirds = new Team({
   name: 'Birds',
   primaryColor: '#007FFF',
   secondaryColor: '#89CFF0',
-  roster: birdMap
+  roster: birdPlayers
 })
 
 tempBirds.setStarters([

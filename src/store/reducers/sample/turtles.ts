@@ -81,16 +81,11 @@ const turtlePlayers = turtlesJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const turtleMap = turtlePlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempTurtles = new Team({
   name: 'Turtles',
   primaryColor: '#007F5C',
   secondaryColor: '#A7FC00',
-  roster: turtleMap
+  roster: turtlePlayers
 })
 
 tempTurtles.setStarters([

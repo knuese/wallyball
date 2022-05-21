@@ -83,16 +83,11 @@ const dogPlayers = dogsJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const dogMap = dogPlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempDogs = new Team({
   name: 'Dogs',
   primaryColor: '#79443B',
   secondaryColor: '#E3DAC9',
-  roster: dogMap
+  roster: dogPlayers
 })
 
 tempDogs.setStarters([

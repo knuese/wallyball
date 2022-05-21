@@ -18,6 +18,8 @@ module.exports = {
     '__test_data__',
     '__test_utils__',
     'index.ts',
+    'src/config',
+    'src/store/reducers/sample',
     'src/store/types'
   ],
   moduleNameMapper: {

@@ -11,7 +11,7 @@ describe('<Field />', () => {
   })
 
   it('registers bases as occupied', () => {
-    const [first, second, third] = Object.values(away.roster).slice(0, 3)
+    const [first, second, third] = away.getRoster().slice(0, 3)
 
     const { container } = render(<Field />, {
       game: {

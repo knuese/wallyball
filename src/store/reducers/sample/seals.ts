@@ -83,16 +83,11 @@ const sealPlayers = sealsJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const sealMap = sealPlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempSeals = new Team({
   name: 'Seals',
   primaryColor: '#BBB477',
   secondaryColor: '#444C38',
-  roster: sealMap
+  roster: sealPlayers
 })
 
 tempSeals.setStarters([

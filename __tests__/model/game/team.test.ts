@@ -1,11 +1,9 @@
-import { Team, Position, Player } from '../../../src/model'
+import { Team, Position } from '../../../src/model'
 import {
   buildStarters,
   catcher,
-  roster,
   players,
-  pitcher,
-  shortstop
+  pitcher
 } from '../../../__test_data__'
 
 describe('Team', () => {
@@ -14,7 +12,7 @@ describe('Team', () => {
     name: 'Test Team',
     primaryColor: 'red',
     secondaryColor: 'blue',
-    roster
+    roster: players
   }
 
   beforeEach(() => {
@@ -23,7 +21,7 @@ describe('Team', () => {
 
   describe('initialization', () => {
     it('gets the roster', () => {
-      expect(team.getRoster()).toEqual(Object.values(roster))
+      expect(team.getRoster()).toEqual(players)
     })
 
     describe('starters', () => {
@@ -33,7 +31,7 @@ describe('Team', () => {
 
       it('throws an error if someone is playing a position they cannot play', () => {
         // make everyone start at catcher
-        const badStarters = Object.values(roster).map((p) => ({
+        const badStarters = players.map((p) => ({
           playerId: p.id,
           position: Position.CATCHER
         }))
@@ -47,11 +45,11 @@ describe('Team', () => {
 
       it('throws an error if there is a duplicated position', () => {
         // make all players only eligible to catch
-        const badRoster = players.reduce((acc, player) => {
+        const badRoster = players.map((player) => {
           const clone = player.clone(`clone-${player.id}`)
           clone.eligiblePositions = [Position.CATCHER]
-          return { ...acc, [clone.id]: clone }
-        }, {})
+          return clone
+        })
 
         const badTeam = new Team({ ...props, roster: badRoster })
 
@@ -65,7 +63,7 @@ describe('Team', () => {
   describe('gameplay', () => {
     describe('currentBatter', () => {
       it('gets the current batter', () => {
-        const starters = buildStarters(roster)
+        const starters = buildStarters(players)
         team.setStarters(starters)
 
         expect(team.currentBatter()).toEqual(
@@ -82,7 +80,7 @@ describe('Team', () => {
 
     describe('next batter', () => {
       it('gets the next batter', () => {
-        const starters = buildStarters(roster)
+        const starters = buildStarters(players)
         team.setStarters(starters)
 
         for (const starter of starters) {
@@ -103,7 +101,7 @@ describe('Team', () => {
       const position = Position.CATCHER
 
       it('looks up the defender at a position', () => {
-        team.setStarters(buildStarters(roster))
+        team.setStarters(buildStarters(players))
         expect(team.defenderAt(position)).toEqual(catcher)
       })
 
@@ -117,12 +115,12 @@ describe('Team', () => {
 
   describe('box score', () => {
     beforeEach(() => {
-      team.setStarters(buildStarters(roster))
+      team.setStarters(buildStarters(players))
     })
 
     it('gets the batting lines', () => {
       const lines = team.getBattingLines()
-      for (const player of Object.values(roster)) {
+      for (const player of players) {
         const lineForPlayer = lines.find((l) => l[0] === player.name)
         expect(lineForPlayer).toHaveLength(8)
       }
@@ -130,7 +128,7 @@ describe('Team', () => {
 
     describe('batting extra', () => {
       it('gets the stats', () => {
-        const [player1, player2] = Object.values(roster)
+        const [player1, player2] = Object.values(players)
         const spy1 = jest.spyOn(player1, 'getGameStats')
         const spy2 = jest.spyOn(player2, 'getGameStats')
 

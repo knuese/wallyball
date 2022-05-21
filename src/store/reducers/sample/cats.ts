@@ -81,16 +81,11 @@ const catPlayers = catsJson.players.map(
   (config: PlayerJson) => new Player(config)
 ) as Player[]
 
-const catMap = catPlayers.reduce(
-  (acc, cur: Player) => ({ ...acc, [cur.id]: cur }),
-  {}
-) as Record<string, Player>
-
 export const tempCats = new Team({
   name: 'Cats',
   primaryColor: '#54626F',
   secondaryColor: '#FFE4C4',
-  roster: catMap
+  roster: catPlayers
 })
 
 tempCats.setStarters([

@@ -1,22 +1,15 @@
 import { Player, Position, Starter, Team } from '../src/model'
 import { PlayerId } from '../src/store/types/team'
-import { players, roster } from './player'
+import { players } from './player'
 
-export const buildStarters = (roster: Record<string, Player>): Starter[] =>
-  Object.values(roster).map(({ id, eligiblePositions }) => ({
+export const buildStarters = (roster: Array<Player>): Starter[] =>
+  roster.map(({ id, eligiblePositions }) => ({
     playerId: id,
     position: eligiblePositions[0]
   }))
 
-const awayPlayers = Object.entries(roster).reduce((acc, [id, player]) => {
-  const newId = `away-${id}`
-  return { ...acc, [newId]: player.clone(newId) }
-}, {})
-
-const homePlayers = Object.entries(roster).reduce((acc, [id, player]) => {
-  const newId = `home-${id}`
-  return { ...acc, [newId]: player.clone(newId) }
-}, {})
+const awayPlayers = players.map((player) => player.clone(`away-${player.id}`))
+const homePlayers = players.map((player) => player.clone(`home-${player.id}`))
 
 export const away = new Team({
   name: 'Away Team',

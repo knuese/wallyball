@@ -96,9 +96,3 @@ export const playersFromFile = players.map((player) => ({
   batting,
   pitching: player.isPitcher() ? pitching : null
 }))
-
-// as expected by Team constructor
-export const roster: Record<string, Player> = players.reduce(
-  (acc, cur) => ({ ...acc, [cur.id]: cur }),
-  {}
-)
