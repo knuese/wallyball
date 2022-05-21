@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from 'redux'
 import { Bases } from '../../model'
-// import { randomTeams } from './sample'
+import { randomTeams } from './sample'
 import {
   ADD_TO_PLAY_HISTORY,
   GameState,
@@ -13,9 +13,9 @@ import {
 } from '../types/game'
 
 export const initialState: GameState = {
-  // ...randomTeams(),
-  away: null,
-  home: null,
+  // away: null,
+  // home: null,
+  ...randomTeams(),
   inning: 1,
   isBottom: false,
   outs: 0,

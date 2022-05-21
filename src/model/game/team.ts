@@ -47,6 +47,11 @@ export class Team {
     this.defense = {} as any
   }
 
+  isReady(): boolean {
+    return this.battingOrder.length === 9 &&
+      Object.keys(this.defense).length === 9
+  }
+
   getRoster(): Player[] {
     return Object.values(this.roster)
   }

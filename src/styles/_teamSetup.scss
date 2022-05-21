@@ -4,16 +4,33 @@
   text-align: center;
 }
 
+.team-selects {
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.team-select {
+  width: 16rem;
+  font-size: 1.25rem;
+  user-select: none;
+  background-color: lightcyan;
+  border-color: black;
+}
+
+.switch-sides {
+  cursor: pointer;
+}
+
 .player-list {
   columns: 2;
   text-align: left;
   display: inline-block;
   margin: 0.5rem;
-}
 
-.player-list li {
-  margin-right: 1rem;
-  margin-bottom: 0.25rem;
+  li {
+    margin-right: 1rem;
+    margin-bottom: 0.25rem;
+  }
 }
 
 .team-title {
@@ -38,15 +55,15 @@
 .starter-table {
   margin: 1rem auto;
   border: 1px solid black;
-}
 
-.starter-table th {
-  padding: 0.5rem;
-  border: 1px solid black;
-}
+  th {
+    padding: 0.5rem;
+    border: 1px solid black;
+  }
 
-.starter-table td {
-  border: 1px solid black;
+  td {
+    border: 1px solid black;
+  }
 }
 
 .select-position {
