@@ -1,8 +1,8 @@
 import { Outcome } from '../../../enum/outcome'
 
 export abstract class PlayerConfig {
-  thresholds: number[]
-  outcomes: Record<number, Outcome> = {}
+  private thresholds: ReadonlyArray<number>
+  protected outcomes: Record<number, Outcome> = {}
 
   constructor(thresholds: number[]) {
     this.thresholds = thresholds
@@ -16,6 +16,10 @@ export abstract class PlayerConfig {
 
   getThresholds(): number[] {
     return [...this.thresholds]
+  }
+
+  getOutcomes(): Record<number, Outcome> {
+    return { ...this.outcomes }
   }
 
   determineOutcome(rand: number): Outcome {

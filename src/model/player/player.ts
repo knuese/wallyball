@@ -9,11 +9,11 @@ import {
 } from './stats'
 
 type PlayerAttributes = {
-  speed: number
-  fieldingPct: number
-  battingStarPower: number
-  pitchingStarPower: number
-  fatigue: (ip: number) => number
+  readonly speed: number
+  readonly fieldingPct: number
+  readonly battingStarPower: number
+  readonly pitchingStarPower: number
+  readonly fatigue: (ip: number) => number
 }
 
 type PlayerProps = {
@@ -31,12 +31,12 @@ type PlayerGameStats = {
 }
 
 export class Player {
-  id: string
-  name: string
-  eligiblePositions: Position[] | string[]
-  attributes: PlayerAttributes
-  battingConfig: BattingConfig
-  pitchingConfig?: PitchingConfig
+  readonly id: string
+  readonly name: string
+  readonly eligiblePositions: ReadonlyArray<Position | string>
+  readonly attributes: PlayerAttributes
+  readonly battingConfig: BattingConfig
+  readonly pitchingConfig?: PitchingConfig
   private gameStats: GameStats
 
   constructor({
@@ -73,7 +73,7 @@ export class Player {
     return new Player({
       id: newId,
       name: this.name,
-      positions: this.eligiblePositions,
+      positions: this.eligiblePositions.slice(),
       attributes: this.attributes,
       batting: this.battingConfig.getThresholds(),
       pitching: this.pitchingConfig && this.pitchingConfig.getThresholds()
@@ -81,7 +81,7 @@ export class Player {
   }
 
   getBattingThresholds(): Record<number, Outcome> {
-    return { ...this.battingConfig.outcomes }
+    return this.battingConfig.getOutcomes()
   }
 
   getPitchingThresholds(): Record<number, Outcome> {
@@ -89,7 +89,7 @@ export class Player {
       throw new Error(`${this.name} is not a pitcher`)
     }
 
-    return { ...this.pitchingConfig.outcomes }
+    return this.pitchingConfig.getOutcomes()
   }
 
   getGameStats(): PlayerGameStats {
