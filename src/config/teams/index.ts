@@ -1,15 +1,10 @@
-import { default as bears } from './bears'
-import { default as birds } from './birds'
-import { default as cats } from './cats'
-import { default as dogs } from './dogs'
-import { default as seals } from './seals'
-import { default as turtles } from './turtles'
+import bears from './bears'
+import birds from './birds'
+import cats from './cats'
+import dogs from './dogs'
+import seals from './seals'
+import turtles from './turtles'
 
-export default [
-  bears,
-  birds,
-  cats,
-  dogs,
-  seals,
-  turtles
-]
+const teams = [bears, birds, cats, dogs, seals, turtles]
+
+export default teams

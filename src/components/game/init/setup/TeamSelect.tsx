@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { uniqBy } from 'lodash'
 import { Team } from '../../../../model'
 
 export type TeamSelectProps = {
@@ -16,11 +17,15 @@ export const TeamSelect: FC<TeamSelectProps> = ({
   value,
   onSelect
 }) => {
-  const allOptions = [...teams, ...(value ? [value] : [])].sort((one, two) =>
-    one.name.localeCompare(two.name)
+  const allOptions = uniqBy([...teams, ...(value ? [value] : [])], 'name').sort(
+    (one, two) => one.name.localeCompare(two.name)
   )
 
-  const options = [<option value={PROMPT_VALUE}>{prompt}</option>].concat(
+  const options = [
+    <option key="prompt" value={PROMPT_VALUE}>
+      {prompt}
+    </option>
+  ].concat(
     allOptions
       .filter((t) => t)
       .map(({ name }) => (
@@ -32,11 +37,14 @@ export const TeamSelect: FC<TeamSelectProps> = ({
 
   return (
     <select
+      data-testid="team-select"
       className="team-select"
       value={value?.name || PROMPT_VALUE}
       onChange={({ target: { value } }) =>
         onSelect(
-          value ? (teams.find((t) => t.name === value) as Team) : undefined
+          value === PROMPT_VALUE
+            ? undefined
+            : (teams.find((t) => t.name === value) as Team)
         )
       }
     >

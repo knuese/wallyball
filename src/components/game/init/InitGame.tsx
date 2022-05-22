@@ -14,7 +14,9 @@ export const InitGame: FC = () => {
   const [canSubmit, setCanSubmit] = useState(false)
 
   useEffect(() => {
-    setAvailableTeams(teams.filter((t) => ![away?.name, home?.name].includes(t.name)))
+    setAvailableTeams(
+      teams.filter((t) => ![away?.name, home?.name].includes(t.name))
+    )
     setCanSubmit(Boolean(away?.isReady() && home?.isReady()))
   }, [hash(away || {}), hash(home || {})])
 
@@ -29,19 +31,21 @@ export const InitGame: FC = () => {
   }
 
   return (
-    <div className='flex-column center'>
-      <div className='flex-row team-selects'>
+    <div className="flex-column center">
+      <div className="flex-row team-selects">
         <TeamSelect
-          prompt='Select the away team...'
+          prompt="Select the away team..."
           teams={availableTeams}
           value={away}
           onSelect={(t: Team | undefined) => setAway(t)}
         />
-        <IconContext.Provider value={{ className: 'switch-sides', size: '2em' }}>
+        <IconContext.Provider
+          value={{ className: 'switch-sides', size: '2em' }}
+        >
           <SwapIcon onClick={switchSides} />
         </IconContext.Provider>
         <TeamSelect
-          prompt='Select the home team...'
+          prompt="Select the home team..."
           teams={availableTeams}
           value={home}
           onSelect={(t: Team | undefined) => setHome(t)}
