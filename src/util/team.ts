@@ -1,4 +1,4 @@
-import { Defense, Lineup } from '../store/types/team'
+import { Defense, Lineup } from '../model'
 
 export const isLineupFull = (lineup: Lineup): boolean =>
   Object.values(lineup).filter((v) => v).length === 9

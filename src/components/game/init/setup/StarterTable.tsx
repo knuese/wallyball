@@ -1,17 +1,17 @@
 import { FC, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import hash from 'object-hash'
 import { Starter } from '.'
-import { Player, Position } from '../../../../model'
-import { setTeam } from '../../../../store/actions/team/team'
-import { Defense, Lineup } from '../../../../store/types/team'
+import { Defense, Lineup, Player, Position } from '../../../../model'
 
 export type StarterTableProps = {
   players: Player[]
-  isHome?: boolean
+  onLineupChanged: (lineup: Lineup, defense: Defense) => void
 }
 
-export const StarterTable: FC<StarterTableProps> = ({ players, isHome }) => {
-  const dispatch = useDispatch()
+export const StarterTable: FC<StarterTableProps> = ({
+  players,
+  onLineupChanged
+}) => {
   const [unassignedPlayers, setUnassignedPlayers] = useState(players)
   const [lineup, setLineup] = useState<Lineup>({})
   const [defense, setDefense] = useState<Defense>({})
@@ -24,44 +24,27 @@ export const StarterTable: FC<StarterTableProps> = ({ players, isHome }) => {
     )
   }, [lineup, players])
 
-  const selectPlayer = (i: number) => (playerId?: string) => {
-    const newLineup = {
-      ...lineup,
-      [i]: playerId || undefined
-    }
-    setLineup(newLineup)
-
-    if (
-      Object.values(lineup).filter((l) => l).length === 9 &&
-      Object.values(defense).filter((d) => d).length === 9
-    ) {
-      dispatch(setTeam(newLineup, defense, isHome))
-    }
-  }
-
-  const selectPosition = (playerId: string, position: string) => {
-    const newDefense = {
-      ...defense,
-      [playerId]: position as Position
-    }
-
-    setDefense(newDefense)
-
-    if (
-      Object.values(lineup).filter((l) => l).length === 9 &&
-      Object.values(defense).filter((d) => d).length === 9
-    ) {
-      dispatch(setTeam(lineup, newDefense, isHome))
-    }
-  }
+  useEffect(() => {
+    onLineupChanged(lineup, defense)
+  }, [hash(defense)])
 
   const starters = [...new Array(9).keys()].map((_, i) => (
     <Starter
-      key={i}
+      key={`starter:${i}`}
       index={i}
       players={unassignedPlayers}
-      selectPlayer={selectPlayer(i)}
-      selectPosition={selectPosition}
+      selectPlayer={(playerId?: string) =>
+        setLineup({
+          ...lineup,
+          [i]: playerId || undefined
+        })
+      }
+      selectPosition={(playerId: string, position: string) =>
+        setDefense({
+          ...defense,
+          [playerId]: position as Position
+        })
+      }
     />
   ))
 

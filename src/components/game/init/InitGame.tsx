@@ -10,13 +10,11 @@ export const InitGame: FC = () => {
   const [availableTeams, setAvailableTeams] = useState<Team[]>(getTeams())
   const [away, setAway] = useState<Team>()
   const [home, setHome] = useState<Team>()
-  const [canSubmit, setCanSubmit] = useState(false)
 
   useEffect(() => {
     setAvailableTeams(
       getTeams().filter((t) => ![away?.name, home?.name].includes(t.name))
     )
-    setCanSubmit(Boolean(away?.isReady() && home?.isReady()))
   }, [hash(away || {}), hash(home || {})])
 
   const switchSides = () => {
@@ -26,7 +24,11 @@ export const InitGame: FC = () => {
   }
 
   const submit = () => {
-    console.log('submitting!')
+    if (!away?.isReady() || !home?.isReady()) {
+      alert('both teams must have valid lineups to start the game')
+    } else {
+      console.log('submitting!')
+    }
   }
 
   return (
@@ -50,21 +52,17 @@ export const InitGame: FC = () => {
           onSelect={(t: Team | undefined) => setHome(t)}
         />
       </div>
-      <div className="flex-column center">
-        <div className="flex-row">
-          <TeamSetup team={away} />
-          <TeamSetup isHome team={home} />
-        </div>
-        {away && home && (
-          <button
-            disabled={!canSubmit}
-            className="submit-button"
-            onClick={submit}
-          >
+      {away && home && (
+        <div className="flex-column center">
+          <div className="flex-row">
+            <TeamSetup team={away} />
+            <TeamSetup team={home} />
+          </div>
+          <button className="submit-button" onClick={submit}>
             Submit
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

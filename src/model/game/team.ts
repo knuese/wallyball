@@ -5,7 +5,9 @@ export type Starter = {
   position: Position | string
 }
 
-type Defense = Record<Position, string>
+export type PlayerId = string
+export type Lineup = Record<string, PlayerId>
+export type Defense = Record<PlayerId, Position>
 
 export type BoxScore = {
   box: Record<string, string>[]
@@ -61,6 +63,7 @@ export class Team {
     return this.roster[playerId].clone(playerId)
   }
 
+  // YODO get rid of Starter and just use lineup, defense
   setStarters(starters: Starter[]): void {
     if (starters.length !== 9) {
       throw new Error('must specify nine starters')
@@ -74,11 +77,16 @@ export class Team {
       }
 
       return { ...acc, [position]: playerId }
-    }, {} as Defense)
+    }, {} as any)
 
     if (Object.keys(this.defense).length !== 9) {
       throw new Error('must specify a player for every position')
     }
+  }
+
+  clearStarters(): void {
+    this.battingOrder = []
+    this.defense = {} as any
   }
 
   currentBatter(): Player {
