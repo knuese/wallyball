@@ -2,20 +2,19 @@ import { FC, useEffect, useState } from 'react'
 import hash from 'object-hash'
 import { IconContext } from 'react-icons'
 import { MdSwapHoriz as SwapIcon } from 'react-icons/md'
-import { TeamSetup } from '.'
+import { TeamSelect, TeamSetup } from '.'
 import { Team } from '../../../model'
-import { teams } from '../../../config'
-import { TeamSelect } from './setup'
+import { getTeams } from '../../../config'
 
 export const InitGame: FC = () => {
-  const [availableTeams, setAvailableTeams] = useState<Team[]>(teams)
+  const [availableTeams, setAvailableTeams] = useState<Team[]>(getTeams())
   const [away, setAway] = useState<Team>()
   const [home, setHome] = useState<Team>()
   const [canSubmit, setCanSubmit] = useState(false)
 
   useEffect(() => {
     setAvailableTeams(
-      teams.filter((t) => ![away?.name, home?.name].includes(t.name))
+      getTeams().filter((t) => ![away?.name, home?.name].includes(t.name))
     )
     setCanSubmit(Boolean(away?.isReady() && home?.isReady()))
   }, [hash(away || {}), hash(home || {})])

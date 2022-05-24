@@ -1,3 +1,3 @@
-export { default as teams } from './teams'
+export { getTeams } from './teams'
 
 export const STATS_DIR = ''
