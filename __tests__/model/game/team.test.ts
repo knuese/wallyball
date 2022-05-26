@@ -45,11 +45,7 @@ describe('Team', () => {
 
       it('throws an error if there is a duplicated position', () => {
         // make all players only eligible to catch
-        const badRoster = players.map((player) => {
-          const clone = player.clone(`clone-${player.id}`)
-          clone.eligiblePositions = [Position.CATCHER]
-          return clone
-        })
+        const badRoster = players.map((_p, i) => players[0].clone(`clone-${i}`))
 
         const badTeam = new Team({ ...props, roster: badRoster })
 

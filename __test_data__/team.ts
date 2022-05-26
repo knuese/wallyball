@@ -29,17 +29,11 @@ export const home = new Team({
 home.setStarters(buildStarters(homePlayers))
 
 export const lineup: Record<string, string> = players.reduce(
-  (acc, cur, i) => ({
-    ...acc,
-    [i]: cur.id
-  }),
+  (acc, cur, i) => ({ ...acc, [i]: cur.id }),
   {}
 )
 
 export const defense: Record<string, Position> = players.reduce(
-  (acc, cur) => ({
-    ...acc,
-    [cur.id]: cur.eligiblePositions[0]
-  }),
+  (acc, cur) => ({ ...acc, [cur.id]: cur.eligiblePositions[0] }),
   {}
 )

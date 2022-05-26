@@ -63,7 +63,6 @@ export class Team {
     return this.roster[playerId].clone(playerId)
   }
 
-  // YODO get rid of Starter and just use lineup, defense
   setStarters(starters: Starter[]): void {
     if (starters.length !== 9) {
       throw new Error('must specify nine starters')

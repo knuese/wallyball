@@ -1,4 +1,5 @@
-import { isDefenseValid, isLineupFull } from '../../src/util'
+import { Position } from '../../src/model'
+import { buildStarters, isDefenseValid, isLineupFull } from '../../src/util'
 
 describe('teamUtil', () => {
   // object with nine key/value pairs
@@ -30,6 +31,32 @@ describe('teamUtil', () => {
           ) as any
         )
       ).toBe(false)
+    })
+  })
+
+  describe('buildStarters', () => {
+    it('returns the starter array', () => {
+      const player1 = { id: 'player1' }
+      const player2 = { id: 'player2' }
+      const player3 = { id: 'player3' }
+
+      const lineup = {
+        '0': player2.id,
+        '2': player1.id,
+        '1': player3.id
+      }
+
+      const defense = {
+        [player1.id]: Position.CATCHER,
+        [player2.id]: Position.CENTER_FIELD,
+        [player3.id]: Position.PITCHER
+      }
+
+      expect(buildStarters({ lineup, defense })).toEqual([
+        { playerId: player2.id, position: Position.CENTER_FIELD },
+        { playerId: player3.id, position: Position.PITCHER },
+        { playerId: player1.id, position: Position.CATCHER }
+      ])
     })
   })
 })

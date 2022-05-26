@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Defense, Lineup, Team } from '../../../model'
 import { Roster, StarterTable } from '.'
+import { buildStarters } from '../../../util'
 
 export type TeamSetupProps = {
   team: Team
@@ -11,14 +12,7 @@ export const TeamSetup: FC<TeamSetupProps> = ({ team }) => {
     if (new Set(Object.values(defense)).size < 9) {
       team.clearStarters()
     } else {
-      team.setStarters(
-        Object.entries(lineup)
-          .sort(([one, _o], [two, _t]) => Number(one) - Number(two))
-          .map(([_, playerId]) => ({
-            playerId,
-            position: defense[playerId]
-          }))
-      )
+      team.setStarters(buildStarters({ lineup, defense }))
     }
   }
 
