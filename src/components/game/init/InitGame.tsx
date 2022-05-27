@@ -1,19 +1,28 @@
 import { FC, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import hash from 'object-hash'
 import { IconContext } from 'react-icons'
 import { MdSwapHoriz as SwapIcon } from 'react-icons/md'
 import { TeamSelect, TeamSetup } from '.'
 import { Team } from '../../../model'
 import { getTeams } from '../../../config'
+import { RootState } from '../../../store/reducers'
+import { loadStats } from '../../../store/actions/stats'
 
 export const InitGame: FC = () => {
-  const [availableTeams, setAvailableTeams] = useState<Team[]>(getTeams())
+  const dispatch = useDispatch()
+  const stats = useSelector((state: RootState) => state.stats)
+  const [availableTeams, setAvailableTeams] = useState<Team[]>(getTeams(stats))
   const [away, setAway] = useState<Team>()
   const [home, setHome] = useState<Team>()
 
   useEffect(() => {
+    dispatch(loadStats() as any)
+  }, [])
+
+  useEffect(() => {
     setAvailableTeams(
-      getTeams().filter((t) => ![away?.name, home?.name].includes(t.name))
+      availableTeams.filter((t) => ![away?.name, home?.name].includes(t.name))
     )
   }, [hash(away || {}), hash(home || {})])
 

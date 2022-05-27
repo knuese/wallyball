@@ -1,3 +1,4 @@
+import { PlayerStats } from '../../store/types/stats'
 import { statToStr } from '../../util'
 import { Outcome, Position } from '../enum'
 import {
@@ -23,6 +24,7 @@ type PlayerProps = {
   attributes: Partial<PlayerAttributes>
   batting: number[]
   pitching?: number[]
+  stats?: PlayerStats
 }
 
 type PlayerGameStats = {
@@ -38,6 +40,7 @@ export class Player {
   readonly battingConfig: BattingConfig
   readonly pitchingConfig?: PitchingConfig
   private gameStats: GameStats
+  private seasonStats?: PlayerStats
 
   constructor({
     id,
@@ -45,6 +48,7 @@ export class Player {
     positions,
     batting,
     pitching,
+    stats,
     attributes: {
       speed = 1,
       fieldingPct = 0.9,
@@ -59,6 +63,7 @@ export class Player {
     this.battingConfig = new BattingConfig(batting)
     this.pitchingConfig = pitching && new PitchingConfig(pitching)
     this.gameStats = new GameStats()
+    this.seasonStats = stats
 
     this.attributes = {
       speed,

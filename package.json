@@ -8,7 +8,7 @@
     "electron": "npx electron .",
     "electron:dev": "npm run esbuild-electron && IS_DEV=true npm run electron",
     "electron:release": "npm run esbuild-electron && npx electron-packager --overwrite --out=release .",
-    "esbuild-electron": "esbuild main.js --format=cjs --outfile=./dist/main.js",
+    "esbuild-electron": "esbuild main.js --format=cjs --outfile=./dist/main.js && esbuild preload.js --format=cjs --outfile=./dist/preload.js",
     "lint:src": "eslint --config ./eslintrc.js --fix ./src",
     "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__ __test_utils__",
     "lint": "concurrently \"npm run lint:src\" \"npm run lint:test\"",
