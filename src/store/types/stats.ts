@@ -1,6 +1,9 @@
 import { BattingStats, PitchingStats } from '../../model'
 
 export type PlayerStats = {
+  name: string,
+  team: string,
+  games: number,
   batting: BattingStats
   pitching: PitchingStats
 }

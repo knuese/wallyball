@@ -9,6 +9,17 @@ import {
   PitchingStats
 } from './stats'
 
+type PlayerGameStats = {
+  batting: BattingStats
+  pitching: PitchingStats
+}
+
+type PlayerSeasonStats = {
+  games: number
+  batting: BattingStats
+  pitching: PitchingStats
+}
+
 type PlayerAttributes = {
   readonly speed: number
   readonly fieldingPct: number
@@ -35,7 +46,7 @@ export class Player {
   readonly battingConfig: BattingConfig
   readonly pitchingConfig?: PitchingConfig
   private gameStats: GameStats
-  private seasonStats: PlayerStats
+  private seasonStats: PlayerSeasonStats
 
   constructor({
     id,
@@ -59,6 +70,7 @@ export class Player {
     this.pitchingConfig = pitching && new PitchingConfig(pitching)
     this.gameStats = new GameStats()
     this.seasonStats = stats || {
+      games: 0,
       batting: new BattingStats(),
       pitching: new PitchingStats()
     }
@@ -95,15 +107,16 @@ export class Player {
     return this.pitchingConfig.getOutcomes()
   }
 
-  getGameStats(): PlayerStats {
+  getGameStats(): PlayerGameStats {
     return {
       batting: { ...this.gameStats.batting },
       pitching: { ...this.gameStats.pitching }
     }
   }
 
-  getSeasonStats(): PlayerStats {
+  getSeasonStats(): PlayerSeasonStats {
     return {
+      games: this.seasonStats.games,
       batting: { ...this.seasonStats.batting },
       pitching: { ...this.seasonStats.pitching }
     }
