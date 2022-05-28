@@ -5,11 +5,13 @@ import { Defense, Lineup, Player, Position } from '../../../../model'
 
 export type StarterTableProps = {
   players: Player[]
+  defaultLineup?: Record<string, string>
   onLineupChanged: (lineup: Lineup, defense: Defense) => void
 }
 
 export const StarterTable: FC<StarterTableProps> = ({
   players,
+  defaultLineup,
   onLineupChanged
 }) => {
   const [unassignedPlayers, setUnassignedPlayers] = useState(players)
@@ -28,10 +30,35 @@ export const StarterTable: FC<StarterTableProps> = ({
     onLineupChanged(lineup, defense)
   }, [hash(defense)])
 
+  const useDefault = () => {
+    if (defaultLineup) {
+      setUnassignedPlayers(players)
+
+      setLineup(
+        Object.keys(defaultLineup).reduce(
+          (acc, playerId, i) => ({
+            ...acc,
+            [i]: playerId
+          }),
+          {}
+        )
+      )
+
+      setDefense(defaultLineup as Defense)
+    }
+  }
+
+  const clear = () => {
+    setUnassignedPlayers(players)
+    setLineup({})
+    setDefense({})
+  }
+
   const starters = [...new Array(9).keys()].map((_, i) => (
     <Starter
       key={`starter:${i}`}
       index={i}
+      value={lineup[i] && { playerId: lineup[i], position: defense[lineup[i]] }}
       players={unassignedPlayers}
       selectPlayer={(playerId?: string) =>
         setLineup({
@@ -49,16 +76,24 @@ export const StarterTable: FC<StarterTableProps> = ({
   ))
 
   return (
-    <table className="starter-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Player</th>
-          <th>Pos.</th>
-        </tr>
-      </thead>
-      <tbody>{starters}</tbody>
-    </table>
+    <>
+      <table className="starter-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Pos.</th>
+          </tr>
+        </thead>
+        <tbody>{starters}</tbody>
+      </table>
+      <button disabled={!defaultLineup} onClick={useDefault}>
+        Use Default
+      </button>
+      <button onClick={clear}>
+        Clear
+      </button>
+    </>
   )
 }
 

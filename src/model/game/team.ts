@@ -28,6 +28,7 @@ export type TeamProps = {
   primaryColor: string
   secondaryColor: string
   roster: Player[]
+  defaultLineup?: Record<string, string>
 }
 
 export class Team {
@@ -35,17 +36,19 @@ export class Team {
   readonly primaryColor: string
   readonly secondaryColor: string
   private roster: Record<string, Player>
+  private defaultLineup?: Record<string, string>
   private battingOrder: string[]
   private defense: Defense
   private batterIndex: number
 
-  constructor({ name, primaryColor, secondaryColor, roster }: TeamProps) {
+  constructor({ name, primaryColor, secondaryColor, roster, defaultLineup }: TeamProps) {
     this.name = name
     this.primaryColor = primaryColor
     this.secondaryColor = secondaryColor
     this.roster = roster.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
     this.batterIndex = 0
 
+    this.defaultLineup = defaultLineup
     this.battingOrder = []
     this.defense = {} as any
   }
@@ -62,6 +65,10 @@ export class Team {
 
   getPlayer(playerId: string): Player {
     return this.roster[playerId].clone(playerId)
+  }
+
+  getDefaultLineup(): Record<string, string> | undefined {
+    return this.defaultLineup
   }
 
   setStarters(starters: Starter[]): void {

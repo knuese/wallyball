@@ -86,7 +86,18 @@ const dogs = (stats: Record<string, PlayerStats>) =>
         batting: [0.14, 0.18, 0.181, 0.257, 0.406, 0.723, 0.896, 1.0],
         stats: stats.sweetness
       })
-    ]
+    ],
+    defaultLineup: {
+      rocky: 'CF',
+      cocoa: '2B',
+      snoopy: 'RF',
+      spot: '1B',
+      sweetness: '3B',
+      cocker: 'SS',
+      stoutland: 'C',
+      puppy: 'P',
+      ralphie: 'LF'
+    }
   })
 
 export default dogs

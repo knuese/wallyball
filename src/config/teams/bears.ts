@@ -84,7 +84,18 @@ const bears = (stats: Record<string, PlayerStats>) =>
         batting: [0.214, 0.269, 0.271, 0.324, 0.456, 0.733, 0.902, 1.0],
         stats: stats.tush
       })
-    ]
+    ],
+    defaultLineup: {
+      sammy: 'LF',
+      buster: 'RF',
+      tush: 'C',
+      bobo: '1B',
+      spanky: '3B',
+      sparey: '2B',
+      cappy: 'SS',
+      cupcake: 'CF',
+      september: 'P'
+    }
   })
 
 export default bears

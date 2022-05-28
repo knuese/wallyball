@@ -84,7 +84,18 @@ const turtles = (stats: Record<string, PlayerStats>) =>
         batting: [0.23, 0.279, 0.304, 0.321, 0.367, 0.541, 0.824, 1.0],
         stats: stats.zoona
       })
-    ]
+    ],
+    defaultLineup: {
+      zoona: 'CF',
+      chan: 'LF',
+      guss: '3B',
+      browny: '1B',
+      shells: 'C',
+      glen: '2B',
+      cookie: 'RF',
+      george: 'SS',
+      gary: 'P'
+    }
   })
 
 export default turtles

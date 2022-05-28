@@ -84,7 +84,18 @@ const cats = (stats: Record<string, PlayerStats>) =>
         batting: [0.177, 0.214, 0.215, 0.261, 0.374, 0.601, 0.859, 1.0],
         stats: stats.tajee
       })
-    ]
+    ],
+    defaultLineup: {
+      bo: 'CF',
+      lars: 'SS',
+      tajee: '2B',
+      lyelye: '3B',
+      gordon: 'C',
+      bobby: '1B',
+      gina: 'LF',
+      clo: 'RF',
+      mamamac: 'P'
+    }
   })
 
 export default cats

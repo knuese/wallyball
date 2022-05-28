@@ -86,7 +86,18 @@ const seals = (stats: Record<string, PlayerStats>) =>
         batting: [0.175, 0.225, 0.228, 0.274, 0.426, 0.686, 0.843, 1.0],
         stats: stats.willy
       })
-    ]
+    ],
+    defaultLineup: {
+      hs: 'CF',
+      misty: 'LF',
+      wally: 'SS',
+      moomoo: '3B',
+      willy: '2B',
+      sue: 'C',
+      walrein: '1B',
+      bamboo: 'P',
+      bj: 'RF'
+    }
   })
 
 export default seals

@@ -33,6 +33,7 @@ export const TeamSetup: FC<TeamSetupProps> = ({ team }) => {
           <span className="sub-label">Starting Lineup</span>
           <StarterTable
             players={team.getRoster()}
+            defaultLineup={team.getDefaultLineup()}
             onLineupChanged={onLineupChanged}
           />
         </div>

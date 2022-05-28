@@ -86,7 +86,18 @@ const birds = (stats: Record<string, PlayerStats>) =>
         batting: [0.189, 0.249, 0.25, 0.292, 0.423, 0.671, 0.884, 1.0],
         stats: stats.weiser
       })
-    ]
+    ],
+    defaultLineup: {
+      quackers: 'CF',
+      quacky: 'LF',
+      eagly: '3B',
+      paz: 'P',
+      goose: '2B',
+      screech: '1B',
+      weiser: 'SS',
+      stretch: 'C',
+      wadell: 'RF'
+    }
   })
 
 export default birds
