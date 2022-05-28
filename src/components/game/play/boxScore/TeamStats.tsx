@@ -1,14 +1,17 @@
 import { FC } from 'react'
 import { BattingExtra } from '../../../../model/game/team'
 
-export type TeamStatProps = {
-  name: string
-  color: string
-  background: string
+export type TeamStatData = {
   batting: Array<string | number>[]
   battingExtra: BattingExtra
   pitching: Array<string | number>[]
 }
+
+export type TeamStatProps = {
+  name: string
+  color: string
+  background: string
+} & TeamStatData
 
 export const TeamStats: FC<TeamStatProps> = ({
   name,

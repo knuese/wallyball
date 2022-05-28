@@ -27,11 +27,6 @@ type PlayerProps = {
   stats?: PlayerStats
 }
 
-type PlayerGameStats = {
-  batting: BattingStats
-  pitching: PitchingStats
-}
-
 export class Player {
   readonly id: string
   readonly name: string
@@ -40,7 +35,7 @@ export class Player {
   readonly battingConfig: BattingConfig
   readonly pitchingConfig?: PitchingConfig
   private gameStats: GameStats
-  private seasonStats?: PlayerStats
+  private seasonStats: PlayerStats
 
   constructor({
     id,
@@ -63,7 +58,10 @@ export class Player {
     this.battingConfig = new BattingConfig(batting)
     this.pitchingConfig = pitching && new PitchingConfig(pitching)
     this.gameStats = new GameStats()
-    this.seasonStats = stats
+    this.seasonStats = stats || {
+      batting: new BattingStats(),
+      pitching: new PitchingStats()
+    }
 
     this.attributes = {
       speed,
@@ -97,10 +95,17 @@ export class Player {
     return this.pitchingConfig.getOutcomes()
   }
 
-  getGameStats(): PlayerGameStats {
+  getGameStats(): PlayerStats {
     return {
       batting: { ...this.gameStats.batting },
       pitching: { ...this.gameStats.pitching }
+    }
+  }
+
+  getSeasonStats(): PlayerStats {
+    return {
+      batting: { ...this.seasonStats.batting },
+      pitching: { ...this.seasonStats.pitching }
     }
   }
 

@@ -1,6 +1,5 @@
 import { AnyAction, Reducer } from 'redux'
 import { Bases } from '../../model'
-import { randomTeams } from './sample'
 import {
   ADD_TO_PLAY_HISTORY,
   GameState,
@@ -9,13 +8,16 @@ import {
   RECORD_OUT,
   RUN_SCORED,
   ScoreArray,
-  Scores
+  Scores,
+  SET_TEAMS
 } from '../types/game'
 
+// import { randomTeams } from './sample'
+
 export const initialState: GameState = {
-  // away: null,
-  // home: null,
-  ...randomTeams(),
+  away: null,
+  home: null,
+  // ...randomTeams(),
   inning: 1,
   isBottom: false,
   outs: 0,
@@ -76,6 +78,12 @@ const reducer: Reducer<GameState> = (
   { type, payload }: AnyAction
 ): GameState => {
   switch (type) {
+    case SET_TEAMS:
+      return {
+        ...state,
+        away: payload.away,
+        home: payload.home
+      }
     case ADD_TO_PLAY_HISTORY:
       return {
         ...state,

@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from 'redux'
 import { LOAD_STATS, StatState } from '../types/stats'
 
-export const initialState: StatState = {}
+export const initialState: StatState = null
 
 const reducer: Reducer<StatState> = (
   state = initialState,

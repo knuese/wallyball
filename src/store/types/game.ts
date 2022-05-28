@@ -19,11 +19,20 @@ export type GameState = {
   playsForInning: string[]
 }
 
+export const SET_TEAMS = 'SET_TEAMS'
 export const ADD_TO_PLAY_HISTORY = 'ADD_TO_PLAY_HISTORY'
 export const RECORD_OUT = 'RECORD_OUT'
 export const RUN_SCORED = 'RUN_SCORED'
 export const PROGRESS_INNING = 'PROGRESS_INNING'
 export const GAME_OVER = 'GAME_OVER'
+
+interface SetTeamsAction {
+  type: typeof SET_TEAMS
+  payload: {
+    away: Team
+    home: Team
+  }
+}
 
 interface AddPlayAction {
   type: typeof ADD_TO_PLAY_HISTORY
@@ -51,6 +60,7 @@ interface GameOverAction {
 }
 
 export type GameActionTypes =
+  | SetTeamsAction
   | AddPlayAction
   | OutAction
   | RunScoredAction

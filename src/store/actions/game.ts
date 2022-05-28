@@ -9,8 +9,16 @@ import {
   GAME_OVER,
   PROGRESS_INNING,
   RECORD_OUT,
-  RUN_SCORED
+  RUN_SCORED,
+  SET_TEAMS
 } from '../types/game'
+import { saveStats } from './stats'
+
+export const setTeams =
+  (away: Team, home: Team) =>
+  (dispatch: Dispatch<GameActionTypes>): void => {
+    dispatch({ type: SET_TEAMS, payload: { away, home } })
+  }
 
 const getTeams = (game: GameState) =>
   ({
@@ -133,6 +141,7 @@ export const checkEnd =
 
     if (isGameOver) {
       dispatch({ type: GAME_OVER })
+      dispatch(saveStats(game.away as Team, game.home as Team) as any)
     }
   }
 

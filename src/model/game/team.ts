@@ -1,4 +1,5 @@
 import { Player, Position } from '..'
+import { getAverage } from '../../util'
 
 export type Starter = {
   playerId: string
@@ -140,7 +141,7 @@ export class Team {
         batting.rbis,
         batting.walks,
         batting.strikeouts,
-        '.000'
+        getAverage(player)
       ]
     })
   }

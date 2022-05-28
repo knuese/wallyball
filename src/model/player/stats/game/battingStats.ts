@@ -29,4 +29,24 @@ export default class BattingStats {
     this.flies = 0
     this.grounders = 0
   }
+
+  static add(one: BattingStats, two: BattingStats): BattingStats {
+    const newStats = new BattingStats()
+
+    newStats.plateAppearances = one.plateAppearances + two.plateAppearances
+    newStats.atBats = one.atBats + two.atBats
+    newStats.runs = one.runs + two.runs
+    newStats.hits = one.hits + two.hits
+    newStats.doubles = one.doubles + two.doubles
+    newStats.triples = one.triples + two.triples
+    newStats.homeRuns = one.homeRuns + two.homeRuns
+    newStats.rbis = one.rbis + two.rbis
+    newStats.walks = one.walks + two.walks
+    newStats.hbps = one.hbps + two.hbps
+    newStats.strikeouts = one.strikeouts + two.strikeouts
+    newStats.flies = one.flies + two.flies
+    newStats.grounders = one.grounders + two.grounders
+
+    return newStats
+  }
 }

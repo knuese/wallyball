@@ -1,4 +1,5 @@
 export * from './formatters'
+export * as fs from './fs'
 export * from './game'
 export * from './outcome'
 export * from './stats'

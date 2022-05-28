@@ -14,6 +14,7 @@ const createWindow = () => {
   if (!!process.env.IS_DEV) {
     // load index.html from the vite server
     win.loadURL('http://localhost:3000')
+    win.webContents.openDevTools()
   } else {
     // load index.html from the dist folder
     win.loadURL(`file://${path.join(__dirname, '..', 'dist', 'index.html')}`)

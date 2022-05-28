@@ -1,16 +1,16 @@
-import { STATS_FILE } from "../config"
+import { Player } from '../model'
 
-export const readStatsFile = async () => {
-  let data = {}
+export const getAverage = (player: Player): string => {
+  const { batting: gameBatting } = player.getGameStats()
+  const { batting: seasonBatting } = player.getSeasonStats()
 
-  if (window.fs) {
-    if (window.fs.existsSync(STATS_FILE)) {
-      data = await window.fs.promises.readFile(STATS_FILE)
-    }
+  const atBats = gameBatting.atBats + seasonBatting.atBats
+  const hits = gameBatting.hits + seasonBatting.hits
+
+  if (atBats > 0) {
+    const avg = hits / atBats
+    return avg.toFixed(3).slice(avg < 1 ? 1 : 0)
   } else {
-    // running in Vite dev server
-    data = (await import('../../data/stats.json')).default
+    return '.000'
   }
-
-  return data
 }
