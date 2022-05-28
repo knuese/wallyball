@@ -15,6 +15,7 @@ module.exports = {
     ecmaVersion: 12
   },
   rules: {
+    "jsx-a11y/anchor-is-valid": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-decline": "off",
     "react-hooks/exhaustive-deps": "off"

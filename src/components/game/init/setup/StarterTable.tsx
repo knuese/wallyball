@@ -76,7 +76,7 @@ export const StarterTable: FC<StarterTableProps> = ({
   ))
 
   return (
-    <div className='starter-table'>
+    <div className="starter-table">
       <table>
         <thead>
           <tr>
@@ -87,7 +87,7 @@ export const StarterTable: FC<StarterTableProps> = ({
         </thead>
         <tbody>{starters}</tbody>
       </table>
-      <a className='margin-right-full' onClick={useDefault}>
+      <a className="margin-right-full" onClick={useDefault}>
         Use Default
       </a>
       <a onClick={clear}>Clear</a>

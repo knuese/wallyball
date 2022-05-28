@@ -1,5 +1,5 @@
 button {
-  background-color: #7CB9E8;
+  background-color: #ACE5EE;
   padding: 0.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -9,6 +9,6 @@ button:disabled {
   cursor: default;
 }
 
-button:active {
-  background-color: #007FFF;
+button:hover {
+  background-color: #B2FFFF;
 }

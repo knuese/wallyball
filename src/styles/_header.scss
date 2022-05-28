@@ -5,8 +5,18 @@
   padding: 0.5rem 0;
   margin-bottom: 1rem;
   user-select: none;
-}
 
-.header-title {
-  margin-left: 0.5rem;
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+
+  b {
+    cursor: pointer;
+  }
+
+  a:hover, b:hover {
+    color: cyan;
+  }
 }
