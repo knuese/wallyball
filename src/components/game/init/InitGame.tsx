@@ -69,7 +69,7 @@ export const InitGame: FC = () => {
             <TeamSetup team={home} />
           </div>
           <button className="submit-button" onClick={submit}>
-            Submit
+            SUBMIT
           </button>
         </div>
       )}

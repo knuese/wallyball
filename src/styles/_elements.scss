@@ -1,15 +1,14 @@
 button {
+  background-color: #7CB9E8;
   padding: 0.5rem;
-  border: 1px solid black;
   border-radius: 8px;
-  background-color: #EEE;
   cursor: pointer;
-}
-
-button:active {
-  background-color: #CCC;
 }
 
 button:disabled {
   cursor: default;
+}
+
+button:active {
+  background-color: #007FFF;
 }

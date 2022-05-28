@@ -7,17 +7,16 @@ html, body {
 }
 
 * {
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 @import "_bootstrap";
 @import "_box";
 @import "_dropzone";
+@import "_elements";
 @import "_field";
 @import "_gameInfo";
 @import "_header";
 @import "_init";
 @import "_layout";
-@import "_misc";
 @import "_slider";
-@import "_teamSetup";

@@ -1,6 +1,98 @@
+.team-view {
+  width: 47.5vw;
+  margin: 1rem 1rem 0.5rem 1rem;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.team-selects {
+  width: 100vw;
+  justify-content: space-evenly;
+}
+
+.team-select {
+  width: 16rem;
+  font-size: 1.25rem;
+  user-select: none;
+  background-color: lightcyan;
+  border-color: black;
+}
+
+.switch-sides {
+  cursor: pointer;
+}
+
+.player-list {
+  columns: 2;
+  text-align: left;
+  display: inline-block;
+  margin: 0.5rem;
+
+  li {
+    margin-right: 1rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.team-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+}
+
+.sub-label {
+  margin: 0.5rem;
+  font-style: italic;
+  opacity: 0.75;
+  user-select: none;
+}
+
+.starters {
+  margin: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed black;
+}
+
+.starter-table {
+  table {
+    margin: 1rem auto;
+    border: 1px solid black;
+  
+    th {
+      padding: 0.5rem;
+      border: 1px solid black;
+    }
+  
+    td {
+      border: 1px solid black;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  a:hover {
+    color: #007FFF
+  }
+  
+  a:active {
+    color: blue
+  }
+}
+
+.select-position {
+  padding: 6px 8px;
+  width: 4rem;
+  border-color: rgb(206, 212, 218);
+}
+
 .submit-button {
   width: fit-content;
-  font-size: 1.5em;
+  font-size: 1.1em;
   padding: 5px 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }

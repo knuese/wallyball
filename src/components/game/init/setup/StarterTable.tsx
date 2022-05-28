@@ -76,8 +76,8 @@ export const StarterTable: FC<StarterTableProps> = ({
   ))
 
   return (
-    <>
-      <table className="starter-table">
+    <div className='starter-table'>
+      <table>
         <thead>
           <tr>
             <th>#</th>
@@ -87,11 +87,11 @@ export const StarterTable: FC<StarterTableProps> = ({
         </thead>
         <tbody>{starters}</tbody>
       </table>
-      <button disabled={!defaultLineup} onClick={useDefault}>
+      <a className='margin-right-full' onClick={useDefault}>
         Use Default
-      </button>
-      <button onClick={clear}>Clear</button>
-    </>
+      </a>
+      <a onClick={clear}>Clear</a>
+    </div>
   )
 }
 

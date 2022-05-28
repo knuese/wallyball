@@ -17,7 +17,7 @@ export const TeamSetup: FC<TeamSetupProps> = ({ team }) => {
   }
 
   return (
-    <div className="team-view margin-1 solid-border">
+    <div className="team-view solid-border">
       <p
         className="team-title"
         style={{
