@@ -41,7 +41,13 @@ export class Team {
   private defense: Defense
   private batterIndex: number
 
-  constructor({ name, primaryColor, secondaryColor, roster, defaultLineup }: TeamProps) {
+  constructor({
+    name,
+    primaryColor,
+    secondaryColor,
+    roster,
+    defaultLineup
+  }: TeamProps) {
     this.name = name
     this.primaryColor = primaryColor
     this.secondaryColor = secondaryColor

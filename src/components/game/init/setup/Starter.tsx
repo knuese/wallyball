@@ -8,7 +8,7 @@ type TypeaheadOption = Record<string, any> | string
 export type StarterProps = {
   index: number
   players: Player[]
-  value: { playerId: string, position: string } | '' | undefined
+  value: { playerId: string; position: string } | '' | undefined
   selectPlayer: (playerId?: string) => void
   selectPosition: (playerId: string, position: string) => void
 }
@@ -32,7 +32,9 @@ export const Starter: FC<StarterProps> = ({
 
   useEffect(() => {
     if (value) {
-      setSelectedOption(playerItems.find((item) => item.value === value.playerId))
+      setSelectedOption(
+        playerItems.find((item) => item.value === value.playerId)
+      )
       setPositionOptions([value.position])
       setSelectedPosition(value.position)
     } else {

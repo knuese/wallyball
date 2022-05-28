@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { uniqBy } from 'lodash'
 import { Team } from '../../../../model'
 
@@ -17,22 +17,30 @@ export const TeamSelect: FC<TeamSelectProps> = ({
   value,
   onSelect
 }) => {
-  const allOptions = uniqBy([...teams, ...(value ? [value] : [])], 'name').sort(
-    (one, two) => one.name.localeCompare(two.name)
-  )
+  const [allOptions, setAllOptions] = useState<Team[]>([])
 
-  const options = [
-    <option key="prompt" value={PROMPT_VALUE}>
-      {prompt}
-    </option>
-  ].concat(
-    allOptions
-      .filter((t) => t)
-      .map(({ name }) => (
-        <option key={name} value={name}>
-          {name}
+  useEffect(() => {
+    setAllOptions(
+      uniqBy([...teams, ...(value ? [value] : [])], 'name')
+        .sort((one, two) => one.name.localeCompare(two.name))
+        .filter((t) => t)
+    )
+  }, [teams.length, value])
+
+  const options = useMemo(
+    () =>
+      [
+        <option key="prompt" value={PROMPT_VALUE}>
+          {prompt}
         </option>
-      ))
+      ].concat(
+        allOptions.map(({ name }) => (
+          <option key={name} value={name}>
+            {name}
+          </option>
+        ))
+      ),
+    [allOptions]
   )
 
   return (

@@ -90,9 +90,7 @@ export const StarterTable: FC<StarterTableProps> = ({
       <button disabled={!defaultLineup} onClick={useDefault}>
         Use Default
       </button>
-      <button onClick={clear}>
-        Clear
-      </button>
+      <button onClick={clear}>Clear</button>
     </>
   )
 }

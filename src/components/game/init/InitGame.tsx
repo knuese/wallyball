@@ -2,39 +2,27 @@ import { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { IconContext } from 'react-icons'
-import hash from 'object-hash'
 import { MdSwapHoriz as SwapIcon } from 'react-icons/md'
 import { TeamSelect, TeamSetup } from '.'
 import { Team } from '../../../model'
-import { getTeams } from '../../../config'
 import { RootState } from '../../../store/reducers'
-import { loadStats } from '../../../store/actions/stats'
 import { setTeams } from '../../../store/actions/game'
 
 export const InitGame: FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const stats = useSelector((state: RootState) => state.stats)
-  const [allTeams, setAllTeams] = useState<Team[]>([])
+
+  const teams = useSelector((state: RootState) => state.teams)
+
   const [availableTeams, setAvailableTeams] = useState<Team[]>([])
   const [away, setAway] = useState<Team>()
   const [home, setHome] = useState<Team>()
 
   useEffect(() => {
-    dispatch(loadStats() as any)
-  }, [])
-
-  useEffect(() => {
-    if (!allTeams.length && stats) {
-      setAllTeams(getTeams(stats))
-    }
-  }, [hash(stats)])
-
-  useEffect(() => {
     setAvailableTeams(
-      allTeams.filter((t) => ![away?.name, home?.name].includes(t.name))
+      teams.filter((t) => ![away?.name, home?.name].includes(t.name))
     )
-  }, [hash(allTeams), hash(away || {}), hash(home || {})])
+  }, [teams.length, away?.name, home?.name])
 
   const switchSides = () => {
     const tempAway = away
@@ -53,7 +41,7 @@ export const InitGame: FC = () => {
 
   return (
     <div className="flex-column center">
-      {!!allTeams.length && (
+      {!!teams.length && (
         <div className="flex-row team-selects">
           <TeamSelect
             prompt="Select the away team..."

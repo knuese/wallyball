@@ -12,7 +12,6 @@ export const loadStats =
     dispatch({ type: LOAD_STATS, payload: JSON.parse(stats) })
   }
 
-// TODO actually call this
 export const saveStats =
   (...teams: Team[]) =>
   async (
@@ -39,8 +38,11 @@ export const saveStats =
         }
       }, {})
 
-    await fs.writeFile(STATS_FILE, JSON.stringify({
-      ...stats,
-      ...data
-    }))
+    await fs.writeFile(
+      STATS_FILE,
+      JSON.stringify({
+        ...stats,
+        ...data
+      })
+    )
   }
