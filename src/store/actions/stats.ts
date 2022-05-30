@@ -21,16 +21,19 @@ export const saveStats =
     const { stats } = getState()
 
     const data = teams
-      .map((t) => t.getRoster().map((player) => ({
-        id: player.id,
-        name: player.name,
-        team: t.name,
-        games: player.getSeasonStats().games + 1,
-        batting: BattingStats.add(
-          player.getGameStats().batting,
-          player.getSeasonStats().batting),
-        pitching: new PitchingStats()
-      })))
+      .map((t) =>
+        t.getRoster().map((player) => ({
+          id: player.id,
+          name: player.name,
+          team: t.name,
+          games: player.getSeasonStats().games + 1,
+          batting: BattingStats.add(
+            player.getGameStats().batting,
+            player.getSeasonStats().batting
+          ),
+          pitching: new PitchingStats()
+        }))
+      )
       .flat()
       .reduce((acc, { id, ...stats }) => {
         return {

@@ -2,7 +2,12 @@ import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTable, useSortBy } from 'react-table'
 import { RootState } from '../../store/reducers'
-import { calculateAvg, calculateObp, calculateOps, calculateSlg } from '../../util'
+import {
+  calculateAvg,
+  calculateObp,
+  calculateOps,
+  calculateSlg
+} from '../../util'
 import getColumns from './columns'
 
 export const Stats = () => {
@@ -13,10 +18,20 @@ export const Stats = () => {
     () =>
       stats
         ? Object.entries(stats).map(([id, { name, team, games, batting }]) => {
-          const obp = calculateObp(batting)
-          const slg = calculateSlg(batting)
-          return { id, name, team, games, ...batting, avg: calculateAvg(batting), obp, slg, ops: calculateOps({ obp, slg }) }
-        })
+            const obp = calculateObp(batting)
+            const slg = calculateSlg(batting)
+            return {
+              id,
+              name,
+              team,
+              games,
+              ...batting,
+              avg: calculateAvg(batting),
+              obp,
+              slg,
+              ops: calculateOps({ obp, slg })
+            }
+          })
         : [],
     [stats]
   )
