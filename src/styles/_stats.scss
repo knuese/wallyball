@@ -8,6 +8,20 @@
 
     font-size: 0.75rem;
 
+    tr {
+      th:first-child, td:first-child {
+        border-left: 1px solid black;
+      }
+
+      td:nth-child(n+3) {
+        width: 1.75rem;
+      }
+    }
+
+    tr:hover td {
+      background-color: #ff0;
+    }
+
     th {
       padding: 0.3rem;
       border-width: 1px 1px 1px 0;
@@ -20,20 +34,8 @@
       color: #900;
       background-color: #eee;
       font-weight: bold;
-    }
 
-    tr {
-      th:first-child, td:first-child {
-        border-left: 1px solid black;
-      }
-
-      td:nth-child(n+3) {
-        width: 1.5rem;
-      }
-    }
-
-    tr:hover td {
-      background-color: #ff0;
+      user-select: none;
     }
 
     td {
@@ -44,6 +46,8 @@
 
       color: black;
       background-color: white;
+
+      cursor: default;
     }
   }
 }

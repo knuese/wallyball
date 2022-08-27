@@ -44,9 +44,10 @@ export const IndividualTable = () => {
       <thead>
         {headerGroups.map((hg) => (
           <tr {...hg.getHeaderGroupProps()}>
-            {hg.headers.map((col) => (
+            {hg.headers.map((col: any) => (
               <th {...col.getHeaderProps((col as any).getSortByToggleProps())}>
                 {col.render('header')}
+                {col.isSorted && (col.isSortedDesc ? '▼' : '▲')}
               </th>
             ))}
           </tr>
