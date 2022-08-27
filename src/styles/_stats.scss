@@ -26,6 +26,14 @@
       th:first-child, td:first-child {
         border-left: 1px solid black;
       }
+
+      td:nth-child(n+3) {
+        width: 1.5rem;
+      }
+    }
+
+    tr:hover td {
+      background-color: #ff0;
     }
 
     td {
