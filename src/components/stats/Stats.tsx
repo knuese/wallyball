@@ -1,74 +1,30 @@
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { useTable, useSortBy } from 'react-table'
-import { RootState } from '../../store/reducers'
-import {
-  calculateAvg,
-  calculateObp,
-  calculateOps,
-  calculateSlg
-} from '../../util'
-import getColumns from './columns'
+import { useState } from 'react'
+import classNames from 'classnames'
+import { IndividualTable, TeamTable } from '.'
 
 export const Stats = () => {
-  const stats = useSelector((state: RootState) => state.stats)
-
-  const columns = useMemo(() => getColumns(), []) as any
-  const tableData = useMemo(
-    () =>
-      stats
-        ? Object.entries(stats).map(([id, { name, team, games, batting }]) => {
-            const obp = calculateObp(batting)
-            const slg = calculateSlg(batting)
-            return {
-              id,
-              name,
-              team,
-              games,
-              ...batting,
-              avg: calculateAvg(batting),
-              obp,
-              slg,
-              ops: calculateOps({ obp, slg })
-            }
-          })
-        : [],
-    [stats]
-  )
-
-  const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
-    useTable({ columns, data: tableData }, useSortBy)
+  const [showIndividual, setShowIndividual] = useState(true)
 
   return (
-    <div>
+    <div className='stats'>
       <h1>Stats</h1>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((hg) => (
-            <tr {...hg.getHeaderGroupProps()}>
-              {hg.headers.map((col) => (
-                <th
-                  {...col.getHeaderProps((col as any).getSortByToggleProps())}
-                >
-                  {col.render('header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div className="flex-row center stat-types">
+        <a
+          className={classNames({ 'selected': showIndividual })}
+          onClick={() => setShowIndividual(true)}
+        >
+          Individual
+        </a>
+        <a
+          className={classNames({ 'selected': !showIndividual })}
+          onClick={() => setShowIndividual(false)}
+        >
+          Team
+        </a>
+      </div>
+      <div className='stats-table-container'>
+        {showIndividual ? <IndividualTable /> : <TeamTable />}
+      </div>
     </div>
   )
 }

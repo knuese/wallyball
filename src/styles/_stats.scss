@@ -1,0 +1,67 @@
+.stats-table-container {
+  overflow: scroll;
+  max-height: 75vh;
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+
+    font-size: 0.75rem;
+
+    th {
+      padding: 0.3rem;
+      border-width: 1px 1px 1px 0;
+      border-style: solid;
+      border-color: black;
+
+      position: sticky;
+      top: 0;
+
+      color: #900;
+      background-color: #eee;
+      font-weight: bold;
+    }
+
+    tr {
+      th:first-child, td:first-child {
+        border-left: 1px solid black;
+      }
+    }
+
+    td {
+      padding: 0.3rem;
+      border-width: 0 1px 1px 0;
+      border-style: solid;
+      border-color: black;
+
+      color: black;
+      background-color: white;
+    }
+  }
+}
+
+.stat-types {
+  margin-bottom: 1rem;
+
+  a {
+    text-decoration: underline;
+
+    cursor: pointer;
+    user-select: none;
+
+    margin-right: 0.5rem;
+  }
+
+  a:hover {
+    color: #007FFF;
+  }
+  
+  a:active {
+    color: blue;
+  }
+
+  .selected {
+    font-weight: bold;
+    color: blue;
+  }
+}
