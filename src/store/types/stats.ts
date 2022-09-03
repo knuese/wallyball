@@ -8,10 +8,20 @@ export type PlayerStats = {
   pitching: PitchingStats
 }
 
-export type StatState = Record<string, PlayerStats> | null
+export type StandingsEntry = {
+  wins: number
+  losses: number
+}
+
+export type StatState = {
+  individual: Record<string, PlayerStats> | null
+  standings: Record<string, StandingsEntry> | null
+}
 
 export const LOAD_STATS = 'LOAD_STATS'
 export const SAVE_STATS = 'SAVE_STATS'
+export const LOAD_STANDINGS = 'LOAD_STANDINGS'
+export const SAVE_STANDINGS = 'SAVE_STANDINGS'
 
 interface LoadStatsAction {
   type: typeof LOAD_STATS
@@ -23,4 +33,14 @@ interface SaveStatsAction {
   payload: Record<string, PlayerStats>
 }
 
-export type StatActionTypes = LoadStatsAction | SaveStatsAction
+interface LoadStandingsAction {
+  type: typeof LOAD_STANDINGS
+  payload: Record<string, StandingsEntry>
+}
+
+interface SaveStandingsAction {
+  type: typeof SAVE_STANDINGS
+  payload: Record<string, StandingsEntry>
+}
+
+export type StatActionTypes = LoadStatsAction | SaveStatsAction | LoadStandingsAction | SaveStandingsAction

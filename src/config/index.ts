@@ -1,3 +1,6 @@
 export { getTeams } from './teams'
 
-export const STATS_FILE = '/Users/ryanknuese/dev/wallyball/data/stats.json'
+const BASE_PATH = '/Users/ryanknuese/dev/wallyball/data/'
+
+export const STATS_FILE = BASE_PATH + 'stats.json'
+export const STANDINGS_FILE = BASE_PATH + 'standings.json'

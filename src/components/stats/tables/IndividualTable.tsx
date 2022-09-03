@@ -11,7 +11,7 @@ import {
 } from '../../../util'
 
 export const IndividualTable: FC = () => {
-  const stats = useSelector((state: RootState) => state.stats)
+  const { individual: stats } = useSelector((state: RootState) => state.stats)
 
   const columns = useMemo(() => getIndividualColumns(), []) as any
   const tableData = useMemo(
@@ -36,7 +36,7 @@ export const IndividualTable: FC = () => {
     [stats]
   )
 
-  return <BaseTable columns={columns} data={tableData} />
+  return <BaseTable columns={columns} data={tableData} className='individual-table' />
 }
 
 export default IndividualTable

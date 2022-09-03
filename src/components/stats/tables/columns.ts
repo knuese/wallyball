@@ -5,7 +5,7 @@ export type Column = {
 }
 
 export const getStandingsColumns = (): Column[] => [
-  { header: 'Team', accessor: 'name' },
+  { header: 'Team', accessor: 'team' },
   { header: 'W', accessor: 'wins', sortDescFirst: true },
   { header: 'L', accessor: 'losses', sortDescFirst: true },
   { header: 'GB', accessor: 'gamesBack', sortDescFirst: true },

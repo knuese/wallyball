@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
 import { BattingStats, PitchingStats, Team } from '../../model'
-import { STATS_FILE } from '../../config'
-import { LOAD_STATS, StatActionTypes } from '../types/stats'
+import { STANDINGS_FILE, STATS_FILE } from '../../config'
+import { LOAD_STANDINGS, LOAD_STATS, StatActionTypes } from '../types/stats'
 import { RootState } from '../reducers'
 import { fs } from '../../util'
 
@@ -50,3 +50,8 @@ export const saveStats =
       })
     )
   }
+
+export const loadStandings = () => async (dispatch: Dispatch<StatActionTypes>): Promise<void> => {
+  const standings = await fs.readFile(STANDINGS_FILE)
+  dispatch({ type: LOAD_STANDINGS, payload: JSON.parse(standings) })
+}

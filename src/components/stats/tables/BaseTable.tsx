@@ -4,15 +4,16 @@ import { Column } from './columns'
 
 type BaseTableProps = {
   columns: Column[]
-  data: Record<string, any>[]
+  data: Record<string, any>[],
+  className?: string
 }
 
-export const BaseTable: FC<BaseTableProps> = ({ columns, data }) => {
+export const BaseTable: FC<BaseTableProps> = ({ columns, data, className }) => {
   const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
     useTable({ columns, data }, useSortBy)
 
   return (
-    <table {...getTableProps()}>
+    <table {...getTableProps()} className={className}>
       <thead>
         {headerGroups.map((hg) => (
           <tr {...hg.getHeaderGroupProps()}>

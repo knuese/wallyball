@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import hash from 'object-hash'
 import Routes from './routes'
-import { loadStats } from './store/actions/stats'
+import { loadStandings, loadStats } from './store/actions/stats'
 import { RootState } from './store/reducers'
 import { getTeams } from './config'
 import { loadTeams } from './store/actions/teams'
@@ -12,13 +13,14 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(loadStats() as any)
+    dispatch(loadStandings() as any)
   }, [])
 
   useEffect(() => {
-    if (stats) {
-      dispatch(loadTeams(getTeams(stats)) as any)
+    if (stats.individual) {
+      dispatch(loadTeams(getTeams(stats.individual)) as any)
     }
-  }, [stats])
+  }, [hash(stats)])
 
   return <Routes />
 }

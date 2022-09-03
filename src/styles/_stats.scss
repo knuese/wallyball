@@ -2,19 +2,35 @@
   overflow: scroll;
   max-height: 75vh;
 
+  .individual-table {
+    font-size: 0.75rem;
+
+    tr {
+      td:nth-child(n+3) {
+        width: 1.75rem;
+      }
+    }
+  }
+
+  .standings-table {
+    tr {
+      td:first-child {
+        padding: 0 1rem;
+      }
+
+      td:nth-child(n+2) {
+        width: 1.75rem;
+      }
+    }
+  }
+
   table {
     border-collapse: separate;
     border-spacing: 0;
 
-    font-size: 0.75rem;
-
     tr {
       th:first-child, td:first-child {
         border-left: 1px solid black;
-      }
-
-      td:nth-child(n+3) {
-        width: 1.75rem;
       }
     }
 

@@ -1,7 +1,10 @@
 import { AnyAction, Reducer } from 'redux'
-import { LOAD_STATS, StatState } from '../types/stats'
+import { LOAD_STANDINGS, LOAD_STATS, StatState } from '../types/stats'
 
-export const initialState: StatState = null
+export const initialState: StatState = {
+  individual: null,
+  standings: null
+}
 
 const reducer: Reducer<StatState> = (
   state = initialState,
@@ -9,7 +12,15 @@ const reducer: Reducer<StatState> = (
 ): StatState => {
   switch (type) {
     case LOAD_STATS:
-      return payload
+      return {
+        ...state,
+        individual: payload
+      }
+    case LOAD_STANDINGS:
+      return {
+        ...state,
+        standings: payload
+      }
     default:
       return state
   }
