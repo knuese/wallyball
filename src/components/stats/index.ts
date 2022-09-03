@@ -1,2 +1,2 @@
 export { default as Stats } from './Stats'
-export { IndividualTable, TeamTable } from './tables'
+export { IndividualTable, StandingsTable, TeamTable } from './tables'

@@ -5,5 +5,10 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['data']
   },
-  plugins: [react({ include: ['src'] })]
+  plugins: [react({ include: ['src'] })],
+  server: {
+    watch: {
+      ignored: ['**/coverage/**']
+    }
+  }
 })
