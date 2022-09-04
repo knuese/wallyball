@@ -51,7 +51,9 @@ export const saveStats =
     )
   }
 
-export const loadStandings = () => async (dispatch: Dispatch<StatActionTypes>): Promise<void> => {
-  const standings = await fs.readFile(STANDINGS_FILE)
-  dispatch({ type: LOAD_STANDINGS, payload: JSON.parse(standings) })
-}
+export const loadStandings =
+  () =>
+  async (dispatch: Dispatch<StatActionTypes>): Promise<void> => {
+    const standings = await fs.readFile(STANDINGS_FILE)
+    dispatch({ type: LOAD_STANDINGS, payload: JSON.parse(standings) })
+  }

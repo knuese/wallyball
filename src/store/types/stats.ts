@@ -43,4 +43,8 @@ interface SaveStandingsAction {
   payload: Record<string, StandingsEntry>
 }
 
-export type StatActionTypes = LoadStatsAction | SaveStatsAction | LoadStandingsAction | SaveStandingsAction
+export type StatActionTypes =
+  | LoadStatsAction
+  | SaveStatsAction
+  | LoadStandingsAction
+  | SaveStandingsAction

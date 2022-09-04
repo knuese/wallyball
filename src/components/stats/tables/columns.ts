@@ -12,9 +12,7 @@ export const getStandingsColumns = (): Column[] => [
   { header: 'PCT', accessor: 'winPercentage', sortDescFirst: true }
 ]
 
-export const getIndividualColumns = (): Column[] => [
-  { header: '', accessor: 'name' },
-  { header: 'Tm', accessor: 'team' },
+const statColumns = [
   { header: 'G', accessor: 'games', sortDescFirst: true },
   { header: 'PA', accessor: 'plateAppearances', sortDescFirst: true },
   { header: 'AB', accessor: 'atBats', sortDescFirst: true },
@@ -30,4 +28,15 @@ export const getIndividualColumns = (): Column[] => [
   { header: 'OBP', accessor: 'obp', sortDescFirst: true },
   { header: 'SLG', accessor: 'slg', sortDescFirst: true },
   { header: 'OPS', accessor: 'ops', sortDescFirst: true }
+]
+
+export const getIndividualColumns = (): Column[] => [
+  { header: '', accessor: 'name' },
+  { header: 'Tm', accessor: 'team' },
+  ...statColumns
+]
+
+export const getTeamColumns = (): Column[] => [
+  { header: 'Team', accessor: 'name' },
+  ...statColumns
 ]

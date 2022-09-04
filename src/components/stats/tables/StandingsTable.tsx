@@ -22,7 +22,9 @@ export const StandingsTable: FC = () => {
     [standings]
   )
 
-  return <BaseTable columns={columns} data={tableData} className='standings-table' />
+  return (
+    <BaseTable columns={columns} data={tableData} className="standings-table" />
+  )
 }
 
 export default StandingsTable

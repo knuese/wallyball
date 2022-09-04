@@ -4,7 +4,7 @@ import { Column } from './columns'
 
 type BaseTableProps = {
   columns: Column[]
-  data: Record<string, any>[],
+  data: Record<string, any>[]
   className?: string
 }
 

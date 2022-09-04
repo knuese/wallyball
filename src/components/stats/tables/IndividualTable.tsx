@@ -36,7 +36,13 @@ export const IndividualTable: FC = () => {
     [stats]
   )
 
-  return <BaseTable columns={columns} data={tableData} className='individual-table' />
+  return (
+    <BaseTable
+      columns={columns}
+      data={tableData}
+      className="individual-table"
+    />
+  )
 }
 
 export default IndividualTable

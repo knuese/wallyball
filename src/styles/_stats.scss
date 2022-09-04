@@ -12,6 +12,18 @@
     }
   }
 
+  .team-table {
+    tr {
+      td:first-child {
+        padding: 0 1rem;
+      }
+
+      td:nth-child(n+2) {
+        width: 1.75rem;
+      }
+    }
+  }
+
   .standings-table {
     tr {
       td:first-child {
