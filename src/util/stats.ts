@@ -1,4 +1,5 @@
 import { Player } from '../model'
+import { PlayerStats } from '../store/types/stats'
 
 export const getAverage = (player: Player): string => {
   const { batting: gameBatting } = player.getGameStats()
@@ -75,3 +76,44 @@ export const calculateOps = ({
   obp: string
   slg: string
 }): string => sliced(Number(obp) + Number(slg))
+
+export const aggregateTeamStats = (players: PlayerStats[]) => {
+  const combined = players.reduce(
+    (acc, { batting: cur }) => ({
+      plateAppearances: acc.plateAppearances + cur.plateAppearances,
+      atBats: acc.atBats + cur.atBats,
+      runs: acc.runs + cur.runs,
+      hits: acc.hits + cur.hits,
+      doubles: acc.doubles + cur.doubles,
+      triples: acc.triples + cur.triples,
+      homeRuns: acc.homeRuns + cur.homeRuns,
+      rbis: acc.rbis + cur.rbis,
+      walks: acc.walks + cur.walks,
+      hbps: 0,
+      strikeouts: acc.strikeouts + cur.strikeouts
+    }),
+    {
+      plateAppearances: 0,
+      atBats: 0,
+      runs: 0,
+      hits: 0,
+      doubles: 0,
+      triples: 0,
+      homeRuns: 0,
+      rbis: 0,
+      walks: 0,
+      hbps: 0,
+      strikeouts: 0
+    }
+  )
+
+  const obp = calculateObp(combined)
+  const slg = calculateSlg(combined)
+
+  return {
+    ...combined,
+    obp,
+    slg,
+    ops: calculateOps({ obp, slg })
+  }
+}
