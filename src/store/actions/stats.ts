@@ -45,9 +45,9 @@ export const saveStats =
     await fs.writeFile(
       STATS_FILE,
       JSON.stringify({
-        ...stats,
+        ...stats.individual,
         ...data
-      })
+      }, null, 2)
     )
   }
 
