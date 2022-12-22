@@ -6,7 +6,7 @@ import { CombinedState } from 'redux'
 import thunk from 'redux-thunk'
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store'
 import { sampleState } from '../__test_data__'
-import { RootState } from '../src/store/reducers'
+import { RootState } from '../../src/store/reducers'
 
 export const createStoreWithMockDispatch = (
   initialState: any = sampleState

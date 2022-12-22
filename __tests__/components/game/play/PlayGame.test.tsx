@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
-import { renderWithRouter as render } from '../../../../__test_utils__'
+import { renderWithRouter as render } from '../../../__test_utils__'
 import { PlayGame } from '../../../../src/components'
-import { sampleState } from '../../../../__test_data__'
+import { sampleState } from '../../../__test_data__'
 
 const mockNavigate = jest.fn()
 jest.mock('react-router-dom', () => ({

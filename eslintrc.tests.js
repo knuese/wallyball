@@ -9,7 +9,7 @@ module.exports = {
     'standard-typescript-prettier'
   ],
   parserOptions: {
-    project: 'tsconfig.test.json',
+    project: '__tests__/tsconfig.json',
     ecmaVersion: 12
   },
   rules: {

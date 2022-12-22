@@ -4,7 +4,7 @@ import {
   catcher,
   players,
   pitcher
-} from '../../../__test_data__'
+} from '../../__test_data__'
 
 describe('Team', () => {
   let team: Team

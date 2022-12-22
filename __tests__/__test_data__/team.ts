@@ -1,4 +1,4 @@
-import { Player, Position, Starter, Team } from '../src/model'
+import { Player, Position, Starter, Team } from '../../src/model'
 import { players } from './player'
 
 export const buildStarters = (roster: Array<Player>): Starter[] =>

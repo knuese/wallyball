@@ -1,4 +1,4 @@
-import { Bases } from '../src/model'
+import { Bases } from '../../src/model'
 import { away, home } from './team'
 
 export default {

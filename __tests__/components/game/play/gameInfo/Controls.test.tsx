@@ -3,7 +3,7 @@ import {
   act,
   fireEvent,
   renderWithState as render
-} from '../../../../../__test_utils__'
+} from '../../../../__test_utils__'
 import { Controls } from '../../../../../src/components/game'
 
 describe('<Controls />', () => {

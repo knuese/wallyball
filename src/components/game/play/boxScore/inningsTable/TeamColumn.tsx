@@ -19,7 +19,7 @@ export const TeamColumn: FC<TeamColumnProps> = ({ away, home }) => {
       <td
         className="border-right"
         style={{
-          color: color,
+          color,
           backgroundColor: background
         }}
       >

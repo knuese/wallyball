@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { Innings } from '../../../../../src/components/game'
-import { bears, turtles } from '../../../../../__test_data__'
+import { bears, turtles } from '../../../../__test_data__'
 
 describe('<Innings />', () => {
   it('renders the component', () => {

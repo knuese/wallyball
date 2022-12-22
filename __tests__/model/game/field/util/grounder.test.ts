@@ -5,7 +5,7 @@ import {
   first,
   second,
   third
-} from '../../../../../__test_data__'
+} from '../../../../__test_data__'
 
 describe('grounder', () => {
   // only the runner on third can score on a grounder

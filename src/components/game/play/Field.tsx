@@ -1,11 +1,12 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useSelector } from 'react-redux'
-import ReactTooltip from 'react-tooltip'
+import { Tooltip } from 'react-tooltip'
 import classnames from 'classnames'
 import { RootState } from '../../../store/reducers'
 import { Position } from '../../../model'
 import { useTeams } from '../../../hooks'
 import field from '../../../assets/field.png'
+import 'react-tooltip/dist/react-tooltip.css'
 
 export const Field: FC = () => {
   const { bases } = useSelector((state: RootState) => state.game)
@@ -16,29 +17,25 @@ export const Field: FC = () => {
   const runnerSecond = second?.id && batting.getPlayer(second.id).name
   const runnerThird = third?.id && batting.getPlayer(third.id).name
 
-  useEffect(() => {
-    ReactTooltip.rebuild()
-  }, [runnerFirst, runnerSecond, runnerThird])
-
   return (
     <div className="field-container">
-      <ReactTooltip effect="solid" />
       <img id="field-img" src={field} alt="field" />
+      <Tooltip anchorId="test" content="BAR" />
       <span
         id="first-base"
         className={classnames('base', { occupied: runnerFirst })}
-        data-tip={runnerFirst}
       />
+      <Tooltip anchorId="first-base" content={runnerFirst} />
       <span
         id="second-base"
         className={classnames('base', { occupied: runnerSecond })}
-        data-tip={runnerSecond}
       />
+      <Tooltip anchorId="second-base" content={runnerSecond} />
       <span
         id="third-base"
         className={classnames('base', { occupied: runnerThird })}
-        data-tip={runnerThird}
       />
+      <Tooltip anchorId="third-base" content={runnerThird} />
       <span className="fielder" id="p">
         {fielding.defenderAt(Position.PITCHER).name}
       </span>

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { TeamSelect } from '../../../../../src/components/game/init'
-import { away, home } from '../../../../../__test_data__'
+import { away, home } from '../../../../__test_data__'
 
 describe('<TeamSelect />', () => {
   const prompt = 'Select a team'

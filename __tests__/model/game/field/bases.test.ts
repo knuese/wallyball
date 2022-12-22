@@ -11,8 +11,8 @@ import {
   first,
   second,
   third
-} from '../../../../__test_data__'
-import { pitcher } from '../../../../__test_data__/player'
+} from '../../../__test_data__'
+import { pitcher } from '../../../__test_data__/player'
 
 describe('bases', () => {
   describe('getBases', () => {

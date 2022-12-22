@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { TeamStats } from '../../../../../src/components/game'
-import { turtles } from '../../../../../__test_data__'
+import { turtles } from '../../../../__test_data__'
 
 describe('<TeamStats />', () => {
   it('renders the component', () => {

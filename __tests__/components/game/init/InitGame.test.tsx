@@ -1,11 +1,8 @@
 import '@testing-library/jest-dom'
-import {
-  fireEvent,
-  renderWithState as render
-} from '../../../../__test_utils__'
+import { fireEvent, renderWithRouter as render } from '../../../__test_utils__'
 import { InitGame } from '../../../../src/components/game/init'
 import { getTeams } from '../../../../src/config'
-import { away, home } from '../../../../__test_data__'
+import { away, home } from '../../../__test_data__'
 
 jest.mock('../../../../src/config')
 
@@ -39,7 +36,7 @@ describe('<InitGame />', () => {
     expect(homeTitle).toHaveTextContent(home.name)
 
     // switch sides
-    fireEvent.click(container.querySelector('.switch-sides'))
+    fireEvent.click(container.querySelector('.switch-sides') as Element)
 
     expect(awayTitle).toHaveTextContent(home.name)
     expect(homeTitle).toHaveTextContent(away.name)

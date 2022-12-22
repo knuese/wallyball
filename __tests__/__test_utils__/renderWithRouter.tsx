@@ -4,7 +4,7 @@ import { render, RenderResult } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 import { MockStoreEnhanced } from 'redux-mock-store'
-import { RootState } from '../src/store/reducers'
+import { RootState } from '../../src/store/reducers'
 import { createMockStore } from './renderWithState'
 import { sampleState } from '../__test_data__'
 

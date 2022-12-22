@@ -7,13 +7,14 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 
   if (!!process.env.IS_DEV) {
     // load index.html from the vite server
-    win.loadURL('http://localhost:3000')
+    win.loadURL('http://localhost:5173')
     win.webContents.openDevTools()
   } else {
     // load index.html from the dist folder

@@ -3,9 +3,9 @@ import {
   act,
   fireEvent,
   renderWithState as render
-} from '../../../../../__test_utils__'
+} from '../../../../__test_utils__'
 import { StarterTable } from '../../../../../src/components/game/init'
-import { players } from '../../../../../__test_data__'
+import { players } from '../../../../__test_data__'
 
 describe('<StarterTable />', () => {
   it('renders the component', () => {

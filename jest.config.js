@@ -1,15 +1,7 @@
 const { defaults } = require('jest-config')
 
 module.exports = {
-  preset: 'ts-jest',
-  globals: {
-    'ts-jest': {
-      compiler: 'ttypescript',
-      isolatedModules: true,
-      diagnostics: false
-    }
-  },
-  testMatch: ['**/__tests__/**/*.+(ts|tsx|js|jsx)'],
+  testMatch: ['**/__tests__/**/*test.(ts|tsx|js|jsx)'],
   testEnvironment: 'jsdom',
   collectCoverage: true,
   coveragePathIgnorePatterns: [
@@ -23,6 +15,9 @@ module.exports = {
     'src/store/types'
   ],
   moduleNameMapper: {
-    '.+\\.png$': '<rootDir>/__mocks__/png.ts'
-  }
+    '.+\\.png$': '<rootDir>/__tests__/__mocks__/png.ts',
+    '^react-tooltip$': '<rootDir>/__tests__/__mocks__/react-tooltip.ts',
+    '^react-tooltip/dist/react-tooltip.css': '<rootDir>/__tests__/__mocks__/react-tooltip-css.ts'
+  },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
 }

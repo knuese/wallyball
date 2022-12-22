@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
-import { renderWithState as render } from '../../../../__test_utils__'
+import { renderWithState as render } from '../../../__test_utils__'
 import { Bases } from '../../../../src/model'
 import { Field } from '../../../../src/components/game'
-import { away, home } from '../../../../__test_data__'
+import { away, home } from '../../../__test_data__'
 
 describe('<Field />', () => {
   it('renders the component', () => {
