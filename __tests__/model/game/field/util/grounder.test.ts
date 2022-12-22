@@ -1,11 +1,5 @@
 import { GrounderUtil } from '../../../../../src/model/game/field/util/grounder'
-import {
-  bases,
-  batter,
-  first,
-  second,
-  third
-} from '../../../../__test_data__'
+import { bases, batter, first, second, third } from '../../../../__test_data__'
 
 describe('grounder', () => {
   // only the runner on third can score on a grounder

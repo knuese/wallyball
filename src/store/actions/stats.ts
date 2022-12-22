@@ -42,17 +42,13 @@ export const saveStats =
         }
       }, {})
 
-    await fs.writeFile(
-      STATS_FILE,
-      JSON.stringify(
-        {
-          ...stats.individual,
-          ...data
-        },
-        null,
-        2
-      )
-    )
+    const newStats = {
+      ...stats.individual,
+      ...data
+    }
+
+    // save to JSON file
+    await fs.writeFile(STATS_FILE, JSON.stringify(newStats, null, 2))
   }
 
 export const loadStandings =
@@ -60,4 +56,30 @@ export const loadStandings =
   async (dispatch: Dispatch<StatActionTypes>): Promise<void> => {
     const standings = await fs.readFile(STANDINGS_FILE)
     dispatch({ type: LOAD_STANDINGS, payload: JSON.parse(standings) })
+  }
+
+export const updateStandings =
+  (winner: Team, loser: Team) =>
+  async (
+    _dispatch: Dispatch<StatActionTypes>,
+    getState: () => RootState
+  ): Promise<void> => {
+    const {
+      stats: { standings }
+    } = getState()
+
+    const newStandings = {
+      ...standings,
+      [winner.name]: {
+        wins: standings[winner.name].wins + 1,
+        losses: standings[winner.name].losses
+      },
+      [loser.name]: {
+        wins: standings[loser.name].wins,
+        losses: standings[loser.name].losses + 1
+      }
+    }
+
+    // save to JSON file
+    await fs.writeFile(STANDINGS_FILE, JSON.stringify(newStandings, null, 2))
   }

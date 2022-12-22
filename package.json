@@ -10,7 +10,7 @@
     "electron:release": "npm run esbuild-electron && npx electron-packager --overwrite --out=release .",
     "esbuild-electron": "esbuild main.js --format=cjs --outfile=./dist/main.js",
     "lint:src": "eslint --config ./eslintrc.js --fix ./src",
-    "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__ __test_data__ __test_utils__",
+    "lint:test": "eslint --config ./eslintrc.tests.js --fix __tests__",
     "lint": "concurrently \"npm run lint:src\" \"npm run lint:test\"",
     "play": "npx ts-node -O '{\"module\":\"commonjs\"}' z.ts",
     "start": "vite",

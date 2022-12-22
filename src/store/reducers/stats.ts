@@ -2,8 +2,8 @@ import { AnyAction, Reducer } from 'redux'
 import { LOAD_STANDINGS, LOAD_STATS, StatState } from '../types/stats'
 
 export const initialState: StatState = {
-  individual: null,
-  standings: null
+  individual: {},
+  standings: {}
 }
 
 const reducer: Reducer<StatState> = (

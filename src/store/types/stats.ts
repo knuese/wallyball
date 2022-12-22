@@ -14,8 +14,8 @@ export type StandingsEntry = {
 }
 
 export type StatState = {
-  individual: Record<string, PlayerStats> | null
-  standings: Record<string, StandingsEntry> | null
+  individual: Record<string, PlayerStats>
+  standings: Record<string, StandingsEntry>
 }
 
 export const LOAD_STATS = 'LOAD_STATS'

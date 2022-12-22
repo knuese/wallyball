@@ -12,7 +12,7 @@ import {
   RUN_SCORED,
   SET_TEAMS
 } from '../types/game'
-import { saveStats } from './stats'
+import { saveStats, updateStandings } from './stats'
 
 export const setTeams =
   (away: Team, home: Team) =>
@@ -127,7 +127,7 @@ export const simulateAtBat =
 
 export const checkEnd =
   () =>
-  (dispatch: Dispatch<GameActionTypes>, getState: () => RootState): void => {
+  (dispatch: Dispatch<any>, getState: () => RootState): void => {
     const { game } = getState()
     const awayScore = getTotalScore(game.scores.away)
     const homeScore = getTotalScore(game.scores.home)
@@ -142,6 +142,18 @@ export const checkEnd =
     if (isGameOver) {
       dispatch({ type: GAME_OVER })
       dispatch(saveStats(game.away as Team, game.home as Team) as any)
+
+      let winner, loser
+
+      if (homeScore > awayScore) {
+        winner = game.home
+        loser = game.away
+      } else {
+        winner = game.away
+        loser = game.home
+      }
+
+      dispatch(updateStandings(winner as Team, loser as Team))
     }
   }
 

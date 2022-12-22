@@ -1,10 +1,5 @@
 import { Team, Position } from '../../../src/model'
-import {
-  buildStarters,
-  catcher,
-  players,
-  pitcher
-} from '../../__test_data__'
+import { buildStarters, catcher, players, pitcher } from '../../__test_data__'
 
 describe('Team', () => {
   let team: Team

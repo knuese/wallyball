@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { isEmpty } from 'lodash'
 import hash from 'object-hash'
 import Routes from './routes'
 import { loadStandings, loadStats } from './store/actions/stats'
@@ -17,7 +18,7 @@ const App = (): JSX.Element => {
   }, [])
 
   useEffect(() => {
-    if (stats.individual) {
+    if (!isEmpty(stats.individual)) {
       dispatch(loadTeams(getTeams(stats.individual)) as any)
     }
   }, [hash(stats)])
