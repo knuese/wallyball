@@ -10,7 +10,9 @@ import { loadTeams } from './store/actions/teams'
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch()
-  const stats = useSelector((state: RootState) => state.stats)
+  const { individual: playerStats } = useSelector(
+    (state: RootState) => state.stats
+  )
 
   useEffect(() => {
     dispatch(loadStats() as any)
@@ -18,10 +20,10 @@ const App = (): JSX.Element => {
   }, [])
 
   useEffect(() => {
-    if (!isEmpty(stats.individual)) {
-      dispatch(loadTeams(getTeams(stats.individual)) as any)
+    if (!isEmpty(playerStats)) {
+      dispatch(loadTeams(getTeams(playerStats)) as any)
     }
-  }, [hash(stats)])
+  }, [hash(playerStats)])
 
   return <Routes />
 }

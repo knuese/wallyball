@@ -7,7 +7,7 @@ const mockLineupChange = jest.fn(() => [{}, {}])
 jest.mock(
   '../../../../src/components/game/init/setup/StarterTable',
   () =>
-    ({ onLineupChanged }) => {
+    ({ onLineupChanged }: { onLineupChanged: (...args: any[]) => any[] }) => {
       onLineupChanged(...mockLineupChange())
       return <p>Mock Starter Table</p>
     }
@@ -23,14 +23,22 @@ describe('<TeamSetup />', () => {
   })
 
   it('calls clearStarters if a valid lineup is not provided', () => {
-    const mockTeam = { clearStarters: jest.fn(), getRoster: () => [] }
+    const mockTeam = {
+      clearStarters: jest.fn(),
+      getRoster: () => [],
+      getDefaultLineup: () => []
+    }
     render(<TeamSetup team={mockTeam as any} />)
     expect(mockTeam.clearStarters).toHaveBeenCalled()
   })
 
   it('calls setStarters with a valid lineup', () => {
     mockLineupChange.mockReturnValueOnce([lineup, defense])
-    const mockTeam = { setStarters: jest.fn(), getRoster: () => [] }
+    const mockTeam = {
+      setStarters: jest.fn(),
+      getRoster: () => [],
+      getDefaultLineup: () => []
+    }
     render(<TeamSetup team={mockTeam as any} />)
     expect(mockTeam.setStarters).toHaveBeenCalled()
   })

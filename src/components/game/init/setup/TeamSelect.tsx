@@ -48,13 +48,13 @@ export const TeamSelect: FC<TeamSelectProps> = ({
       data-testid="team-select"
       className="team-select"
       value={value?.name || PROMPT_VALUE}
-      onChange={({ target: { value } }) =>
+      onChange={({ target: { value } }) => {
         onSelect(
           value === PROMPT_VALUE
             ? undefined
             : (teams.find((t) => t.name === value) as Team)
         )
-      }
+      }}
     >
       {options}
     </select>

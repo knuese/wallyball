@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import hash from 'object-hash'
 import { Starter } from '.'
 import { Defense, Lineup, Player, Position } from '../../../../model'
+import { getPlayerById } from '../../../../util'
 
 export type StarterTableProps = {
   players: Player[]
@@ -24,7 +25,7 @@ export const StarterTable: FC<StarterTableProps> = ({
         ({ id }) => !Object.values(lineup).find((playerId) => playerId === id)
       )
     )
-  }, [lineup, players])
+  }, [hash(lineup), hash(players)])
 
   useEffect(() => {
     onLineupChanged(lineup, defense)
@@ -54,24 +55,35 @@ export const StarterTable: FC<StarterTableProps> = ({
     setDefense({})
   }
 
+  const typeaheadValue = (i: number) => {
+    const player = getPlayerById(players, lineup[i])
+    return (
+      player && {
+        label: player.name,
+        value: lineup[i]
+      }
+    )
+  }
+
   const starters = [...new Array(9).keys()].map((_, i) => (
     <Starter
       key={`starter:${i}`}
       index={i}
-      value={lineup[i] && { playerId: lineup[i], position: defense[lineup[i]] }}
+      typeaheadValue={typeaheadValue(i)}
+      positionValue={defense[lineup[i]]}
       players={unassignedPlayers}
-      selectPlayer={(playerId?: string) =>
+      selectPlayer={(playerId?: string) => {
         setLineup({
           ...lineup,
           [i]: playerId || undefined
         })
-      }
-      selectPosition={(playerId: string, position: string) =>
+      }}
+      selectPosition={(playerId: string, position: string) => {
         setDefense({
           ...defense,
           [playerId]: position as Position
         })
-      }
+      }}
     />
   ))
 

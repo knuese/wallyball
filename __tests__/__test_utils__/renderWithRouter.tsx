@@ -9,14 +9,14 @@ import { createMockStore } from './renderWithState'
 import { sampleState } from '../__test_data__'
 
 type RenderProps = {
-  route: string
+  route?: string
   state?: Partial<RootState>
   store?: MockStoreEnhanced
 }
 
 export const renderWithRouter = (
   ui: JSX.Element,
-  { route, state, store }: RenderProps = { route: '/', state: sampleState }
+  { route = '/', state = sampleState, store }: RenderProps = {}
 ): RenderResult =>
   render(
     <MemoryRouter initialEntries={[route]}>

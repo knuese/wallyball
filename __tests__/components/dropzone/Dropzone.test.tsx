@@ -1,27 +1,25 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-
-const mockUseDropzone = jest.fn()
-jest.mock('react-dropzone', () => ({
-  useDropzone: mockUseDropzone
-}))
-
-/* eslint-disable-next-line */
+import { useDropzone } from 'react-dropzone'
 import { Dropzone } from '../../../src/components'
+
+jest.mock('react-dropzone')
 
 describe('<Dropzone />', () => {
   const defaultMessage = 'Select a file to upload.'
   const mockFile = { name: 'mock.json' }
 
   beforeEach(() => {
-    mockUseDropzone.mockImplementation(({ onDrop }) => ({
-      getRootProps: jest.fn(() => ({
-        onClick: jest.fn(() => {
-          onDrop([mockFile])
-        })
-      })),
-      getInputProps: jest.fn()
-    }))
+    ;(useDropzone as jest.Mock<any>).mockImplementation(
+      ({ onDrop }: { onDrop: (files: any[]) => void }) => ({
+        getRootProps: jest.fn(() => ({
+          onClick: jest.fn(() => {
+            onDrop([mockFile])
+          })
+        })),
+        getInputProps: jest.fn()
+      })
+    )
   })
 
   it.each([

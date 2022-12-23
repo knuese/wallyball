@@ -1,4 +1,4 @@
-import { Defense, Lineup, Position } from '../model'
+import { Defense, Lineup, Player } from '../model'
 
 export const isLineupFull = (lineup: Lineup): boolean =>
   Object.values(lineup).filter((v) => v).length === 9
@@ -19,3 +19,10 @@ export const buildStarters = ({
       playerId,
       position: defense[playerId]
     }))
+
+export const getPlayerById = (
+  players: Player[],
+  id: string
+): Player | undefined => {
+  return players.find((p) => p.id === id)
+}

@@ -3,12 +3,16 @@ import { Typeahead } from 'react-bootstrap-typeahead'
 import hash from 'object-hash'
 import { Player } from '../../../../model'
 
-type TypeaheadOption = Record<string, any> | string
+type TypeaheadOption = {
+  label: string
+  value: string
+}
 
 export type StarterProps = {
   index: number
   players: Player[]
-  value: { playerId: string; position: string } | '' | undefined
+  typeaheadValue: TypeaheadOption | undefined
+  positionValue: string | undefined
   selectPlayer: (playerId?: string) => void
   selectPosition: (playerId: string, position: string) => void
 }
@@ -16,7 +20,8 @@ export type StarterProps = {
 export const Starter: FC<StarterProps> = ({
   index,
   players,
-  value,
+  typeaheadValue,
+  positionValue,
   selectPlayer,
   selectPosition
 }) => {
@@ -25,24 +30,23 @@ export const Starter: FC<StarterProps> = ({
   const [positionOptions, setPositionOptions] = useState<Array<string>>([])
   const [selectedPosition, setSelectedPosition] = useState<string>()
 
-  const playerItems = players.map(({ id, name }) => ({
-    label: name,
-    value: id
-  }))
-
   useEffect(() => {
-    if (value) {
-      setSelectedOption(
-        playerItems.find((item) => item.value === value.playerId)
-      )
-      setPositionOptions([value.position])
-      setSelectedPosition(value.position)
+    if (typeaheadValue) {
+      setSelectedOption(typeaheadValue as TypeaheadOption)
     } else {
       setSelectedOption(undefined)
-      setPositionOptions([])
-      setSelectedPosition(undefined)
     }
-  }, [hash(value || null)])
+  }, [typeaheadValue && hash(typeaheadValue)])
+
+  useEffect(() => {
+    if (positionValue) {
+      setPositionOptions([positionValue])
+      setSelectedPosition(positionValue)
+    } else {
+      setPositionOptions([])
+      setSelectedPosition('')
+    }
+  }, [positionValue])
 
   // auto-select the first position since no event is fired
   // when the <select /> first becomes enabled
@@ -51,7 +55,12 @@ export const Starter: FC<StarterProps> = ({
       setPositionOptions([...selectedPlayer.eligiblePositions])
       selectPosition(selectedPlayer.id, selectedPlayer.eligiblePositions[0])
     }
-  }, [selectedPlayer])
+  }, [selectedPlayer && hash(selectedPlayer)])
+
+  const playerItems = players.map(({ id, name }) => ({
+    label: name,
+    value: id
+  }))
 
   return (
     <tr>
@@ -62,12 +71,11 @@ export const Starter: FC<StarterProps> = ({
           options={playerItems}
           size="sm"
           selected={selectedOption ? [selectedOption] : []}
-          onChange={([option]: Array<TypeaheadOption>) => {
+          onChange={([option]: Array<any>) => {
             setSelectedOption(option)
 
             if (option) {
-              const playerId =
-                typeof option === 'string' ? option : option.value
+              const playerId = option.value
               setSelectedPlayer(players.find(({ id }) => id === playerId))
               selectPlayer(playerId)
             } else {

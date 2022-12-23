@@ -1,22 +1,24 @@
 import '@testing-library/jest-dom'
 import { fireEvent, renderWithRouter as render } from '../../../__test_utils__'
 import { InitGame } from '../../../../src/components/game/init'
-import { getTeams } from '../../../../src/config'
 import { away, home } from '../../../__test_data__'
+import { Team } from '../../../../src/model'
 
-jest.mock('../../../../src/config')
+const mockNavigate = jest.fn()
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate
+}))
 
 describe('<InitGame />', () => {
-  const mockTeam = (name: string, isReady = false) => ({
-    name,
-    getRoster: () => [],
-    clearStarters: () => undefined,
-    isReady: () => isReady
-  })
-
-  beforeEach(() => {
-    ;(getTeams as jest.Mock).mockReturnValue([away, home])
-  })
+  const mockTeam = (name: string, isReady = false): Team =>
+    ({
+      name,
+      getRoster: () => [],
+      getDefaultLineup: () => [],
+      clearStarters: () => undefined,
+      isReady: () => isReady
+    } as any)
 
   it('renders the component', () => {
     const { getByText } = render(<InitGame />)
@@ -45,31 +47,36 @@ describe('<InitGame />', () => {
   it('submits', () => {
     const teamOne = mockTeam('teamOne', true)
     const teamTwo = mockTeam('teamTwo', true)
-    ;(getTeams as jest.Mock).mockReturnValue([teamOne, teamTwo])
 
-    const { getAllByTestId, getByText } = render(<InitGame />)
+    const { getAllByTestId, getByText } = render(<InitGame />, {
+      state: { teams: [teamOne, teamTwo] }
+    })
+
     const [awaySelect, homeSelect] = getAllByTestId('team-select')
-
     fireEvent.change(awaySelect, { target: { value: teamOne.name } })
     fireEvent.change(homeSelect, { target: { value: teamTwo.name } })
-    fireEvent.click(getByText('Submit'))
+    fireEvent.click(getByText('SUBMIT'))
+
+    expect(mockNavigate).toHaveBeenCalledTimes(1)
+    expect(mockNavigate).toHaveBeenCalledWith('/game/play', { replace: true })
   })
 
   it('clicks the submit button when the teams are not ready', () => {
     const teamOne = mockTeam('teamOne')
     const teamTwo = mockTeam('teamTwo')
-    ;(getTeams as jest.Mock).mockReturnValue([teamOne, teamTwo])
 
     const alertSpy = jest
       .spyOn(window, 'alert')
       .mockImplementation(() => undefined)
 
-    const { getAllByTestId, getByText } = render(<InitGame />)
+    const { getAllByTestId, getByText } = render(<InitGame />, {
+      state: { teams: [teamOne, teamTwo] }
+    })
     const [awaySelect, homeSelect] = getAllByTestId('team-select')
 
     fireEvent.change(awaySelect, { target: { value: teamOne.name } })
     fireEvent.change(homeSelect, { target: { value: teamTwo.name } })
-    fireEvent.click(getByText('Submit'))
+    fireEvent.click(getByText('SUBMIT'))
 
     expect(alertSpy).toHaveBeenCalledWith(
       'both teams must have valid lineups to start the game'
