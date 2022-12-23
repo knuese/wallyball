@@ -80,7 +80,7 @@ export const simulateAtBat =
     const batter = batting.nextBatter()
     const pitcher = fielding.defenderAt(Position.PITCHER)
 
-    const useBatterStats = Math.random() < 0.4 + calcOffset(batter, pitcher)
+    const useBatterStats = Math.random() + calcOffset(batter, pitcher) < 0.4
     const { outcome, rawValue } = useBatterStats
       ? batter.bat()
       : pitcher.pitch()

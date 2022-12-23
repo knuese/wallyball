@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { renderWithRouter as render } from '../../__test_utils__'
+import { renderWithRouter as render } from '__test_utils__'
 import { withHeader } from '../../../src/components'
 
 describe('withHeader', () => {

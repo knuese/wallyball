@@ -8,7 +8,11 @@ export default {
   isBottom: false,
   outs: 0,
   isOver: false,
-  bases: new Bases(),
+  bases: {
+    advanceRunners: jest.fn(() => ({ runnersScored: [], outs: 0 })),
+    clear: jest.fn(),
+    getBases: jest.fn(() => ({}))
+  } as any as Bases,
   scores: {
     away: [],
     home: []

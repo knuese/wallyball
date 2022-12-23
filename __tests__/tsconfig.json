@@ -20,6 +20,10 @@
     "strict": true,
     "types": ["node", "jest"],
     "typeRoots": ["../node_modules/@types"],
+    "paths": {
+      "__test_utils__": ["./__test_utils__"],
+      "__test_data__": ["./__test_data__"]
+    }
   },
   "include": ["."]
 }

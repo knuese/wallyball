@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
-import { fireEvent, renderWithRouter as render } from '../../../__test_utils__'
+import { fireEvent, renderWithRouter as render } from '__test_utils__'
 import { InitGame } from '../../../../src/components/game/init'
-import { away, home } from '../../../__test_data__'
+import { away, home } from '__test_data__'
 import { Team } from '../../../../src/model'
 
 const mockNavigate = jest.fn()

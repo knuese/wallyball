@@ -21,7 +21,7 @@ export const saveStats =
     const { stats } = getState()
 
     const data = teams
-      .map((t) =>
+      .flatMap((t) =>
         t.getRoster().map((player) => ({
           id: player.id,
           name: player.name,
@@ -34,7 +34,6 @@ export const saveStats =
           pitching: new PitchingStats()
         }))
       )
-      .flat()
       .reduce((acc, { id, ...stats }) => {
         return {
           ...acc,

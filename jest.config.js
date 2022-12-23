@@ -17,7 +17,9 @@ module.exports = {
   moduleNameMapper: {
     '.+\\.png$': '<rootDir>/__tests__/__mocks__/png.ts',
     '^react-tooltip$': '<rootDir>/__tests__/__mocks__/react-tooltip.ts',
-    '^react-tooltip/dist/react-tooltip.css': '<rootDir>/__tests__/__mocks__/react-tooltip-css.ts'
+    '^react-tooltip/dist/react-tooltip.css': '<rootDir>/__tests__/__mocks__/react-tooltip-css.ts',
+    '^__test_utils__$': '<rootDir>/__tests__/__test_utils__',
+    '^__test_data__(.*)': '<rootDir>/__tests__/__test_data__$1'
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
 }

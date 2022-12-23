@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, renderWithRouter as render } from '../../__test_utils__'
+import { fireEvent, renderWithRouter as render } from '__test_utils__'
 import { HomeScreen } from '../../../src/components'
 
 const mockNavigate = jest.fn()

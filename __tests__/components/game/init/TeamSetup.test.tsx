@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
-import { renderWithState as render } from '../../../__test_utils__'
-import { away, defense, lineup } from '../../../__test_data__'
+import { renderWithState as render } from '__test_utils__'
+import { away, defense, lineup } from '__test_data__'
 
 // mock the <StarterTable /> so we don't have to select all the starters
 const mockLineupChange = jest.fn(() => [{}, {}])

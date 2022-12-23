@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { renderWithState as render } from '../../../../__test_utils__'
+import { renderWithState as render } from '__test_utils__'
 import { GameInfo } from '../../../../../src/components/game'
 
 describe('<GameInfo />', () => {

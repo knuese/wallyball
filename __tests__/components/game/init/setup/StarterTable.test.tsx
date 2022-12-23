@@ -1,11 +1,7 @@
 import '@testing-library/jest-dom'
-import {
-  act,
-  fireEvent,
-  renderWithState as render
-} from '../../../../__test_utils__'
+import { act, fireEvent, renderWithState as render } from '__test_utils__'
+import { players } from '__test_data__'
 import { StarterTable } from '../../../../../src/components/game/init'
-import { players } from '../../../../__test_data__'
 
 describe('<StarterTable />', () => {
   it('renders the component', () => {

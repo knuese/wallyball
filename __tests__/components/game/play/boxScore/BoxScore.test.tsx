@@ -1,10 +1,7 @@
 import '@testing-library/jest-dom'
-import {
-  fireEvent,
-  renderWithState as render
-} from '../../../../__test_utils__'
+import { fireEvent, renderWithState as render } from '__test_utils__'
+import { away, home } from '__test_data__'
 import { BoxScore } from '../../../../../src/components/game'
-import { away, home } from '../../../../__test_data__'
 
 describe('<BoxScore />', () => {
   it('renders the component', () => {
