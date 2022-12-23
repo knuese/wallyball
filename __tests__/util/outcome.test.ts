@@ -1,5 +1,5 @@
 import { Outcome } from '../../src/model'
-import { isAtBat, isHit } from '../../src/util'
+import { isAtBat, isHit, isOut } from '../../src/util'
 
 describe('outcome util', () => {
   describe('isHit', () => {
@@ -31,6 +31,22 @@ describe('outcome util', () => {
       [Outcome.GROUNDER, true]
     ])('"%s" is at bat: %s', (outcome, expected) => {
       expect(isAtBat(outcome)).toBe(expected)
+    })
+  })
+
+  describe('isOut', () => {
+    it.each([
+      [Outcome.SINGLE, false],
+      [Outcome.DOUBLE, false],
+      [Outcome.TRIPLE, false],
+      [Outcome.HOME_RUN, false],
+      [Outcome.WALK, false],
+      [Outcome.HIT_BY_PITCH, false],
+      [Outcome.STRIKEOUT, true],
+      [Outcome.FLY, true],
+      [Outcome.GROUNDER, true]
+    ])('"%s" is out: %s', (outcome, expected) => {
+      expect(isOut(outcome)).toBe(expected)
     })
   })
 })

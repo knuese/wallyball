@@ -5,13 +5,15 @@ export const readFile = async (path: string): Promise<string> => {
 
   if (fs.existsSync(path)) {
     data = await fs.promises.readFile(path, 'utf8')
+  } else {
+    throw new Error('file not found!')
   }
 
-  return data || '{}'
+  return data
 }
 
 export const writeFile = async (path: string, data: string): Promise<void> => {
-  fs.writeFile(path, data, (err: any) => {
+  await fs.writeFile(path, data, (err: any) => {
     if (err) {
       alert('failed to save stats, see console for details')
       console.log(err)

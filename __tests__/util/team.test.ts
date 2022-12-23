@@ -1,5 +1,10 @@
-import { Position } from '../../src/model'
-import { buildStarters, isDefenseValid, isLineupFull } from '../../src/util'
+import { Player, Position } from '../../src/model'
+import {
+  buildStarters,
+  getPlayerById,
+  isDefenseValid,
+  isLineupFull
+} from '../../src/util'
 
 describe('teamUtil', () => {
   // object with nine key/value pairs
@@ -57,6 +62,14 @@ describe('teamUtil', () => {
         { playerId: player3.id, position: Position.PITCHER },
         { playerId: player1.id, position: Position.CATCHER }
       ])
+    })
+  })
+
+  describe('getPlayerById', () => {
+    it('returns the player', () => {
+      const player = { id: 'player123' }
+      const players = [{ id: 'p1' }, player, { id: 'p2' }] as Player[]
+      expect(getPlayerById(players, player.id)).toEqual(player)
     })
   })
 })

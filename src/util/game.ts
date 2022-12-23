@@ -14,8 +14,8 @@ export const getOrdinal = (n: number) =>
   ['', 'st', 'nd', 'rd'][(n / 10) % 10 ^ 1 && n % 10] || 'th'
 
 export const getTotalScore = (scores: ScoreArray): number =>
-  (scores.filter((x) => typeof x === 'number') as number[]).reduce(
-    (acc, cur) => acc + cur,
+  scores.reduce<number>(
+    (acc, cur) => (typeof cur === 'number' ? acc + cur : acc),
     0
   )
 

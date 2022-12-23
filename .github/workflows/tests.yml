@@ -1,4 +1,4 @@
-name: WallyBall Unit Tests
+name: WallyBall
 
 on:
   push:
