@@ -1,18 +1,5 @@
 import { FC } from 'react'
-
-export type BattingStatsSeason = {
-  H: string
-  HR: string
-  RBI: string
-  AVG: string
-}
-
-export type PitchingStatsSeason = {
-  IP: string
-  BB: string
-  K: string
-  ERA: string
-}
+import { BattingStatsSeason, PitchingStatsSeason } from '../../../../types'
 
 export type CurrentPlayerProps = {
   name: string
@@ -21,7 +8,7 @@ export type CurrentPlayerProps = {
   isBatting?: boolean
   stats: {
     today?: string
-    season: BattingStatsSeason | PitchingStatsSeason
+    season?: BattingStatsSeason | PitchingStatsSeason
   }
 }
 
@@ -30,7 +17,7 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
   color,
   background,
   isBatting,
-  stats: { today = '', season }
+  stats: { today = '', season = { H: '--', HR: '--', RBI: '--', AVG: '--' } }
 }) => (
   <div className="flex-column border-all">
     <div className="center game-info-title" style={{ color, background }}>

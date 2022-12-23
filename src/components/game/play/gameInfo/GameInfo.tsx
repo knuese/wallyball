@@ -39,12 +39,7 @@ export const GameInfo: FC = () => {
           background={batting.primaryColor}
           stats={{
             today: currentBatter?.getBattingStatLine(),
-            season: {
-              H: '--',
-              HR: '--',
-              RBI: '--',
-              AVG: '--'
-            }
+            season: currentBatter?.getBatterSeasonStats()
           }}
         />
       </div>

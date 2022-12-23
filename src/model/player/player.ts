@@ -1,5 +1,6 @@
 import { PlayerStats } from '../../store/types/stats'
-import { statToStr } from '../../util'
+import { BattingStatsSeason } from '../../types'
+import { getAverage, statToStr } from '../../util'
 import { Outcome, Position } from '../enum'
 import {
   BattingConfig,
@@ -140,6 +141,18 @@ export class Player {
 
     // chop off the last comma
     return line.replace(/, $/, '')
+  }
+
+  getBatterSeasonStats(): BattingStatsSeason {
+    const today = this.getGameStats()
+    const season = this.getSeasonStats()
+
+    return {
+      H: today.batting.hits + season.batting.hits,
+      HR: today.batting.homeRuns + season.batting.homeRuns,
+      RBI: today.batting.rbis + season.batting.rbis,
+      AVG: getAverage(this)
+    }
   }
 
   getPitchingStatLine(): string {
