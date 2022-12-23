@@ -7,6 +7,10 @@ jest.mock('react-router-dom', () => ({
   HashRouter: jest.fn(({ children }) => <>{children}</>)
 }))
 
+jest.mock('../src/util/fs', () => ({
+  readFile: () => JSON.stringify({})
+}))
+
 describe('<App />', () => {
   it('renders the component', () => {
     const { getByText } = render(<App />, { route: '/' })
