@@ -8,7 +8,7 @@ export const getStandingsColumns = (): Column[] => [
   { header: 'Team', accessor: 'team' },
   { header: 'W', accessor: 'wins', sortDescFirst: true },
   { header: 'L', accessor: 'losses', sortDescFirst: true },
-  { header: 'GB', accessor: 'gamesBack', sortDescFirst: true },
+  { header: 'GB', accessor: 'gamesBehind', sortDescFirst: true },
   { header: 'PCT', accessor: 'winPercentage', sortDescFirst: true }
 ]
 

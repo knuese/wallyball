@@ -1,6 +1,31 @@
 import { Player } from '../model'
 import { PlayerStats } from '../store/types/stats'
 
+const sliced = (x: number): string => x.toFixed(3).slice(x < 1 ? 1 : 0)
+
+export const calculateWinPct = ({
+  wins,
+  losses
+}: {
+  wins: number
+  losses: number
+}): string => {
+  if (wins === 0) {
+    return '.000'
+  } else {
+    return sliced(wins / (wins + losses))
+  }
+}
+
+export const calculateGamesBehind = (
+  leadTeam: { wins: number; losses: number },
+  teamToCalc: { wins: number; losses: number }
+): string => {
+  const diff =
+    leadTeam.wins - teamToCalc.wins + (teamToCalc.losses - leadTeam.losses)
+  return `${diff / 2}`.replace(/(?:^0)?.5$/, '½')
+}
+
 export const getAverage = (player: Player): string => {
   const { batting: gameBatting } = player.getGameStats()
   const { batting: seasonBatting } = player.getSeasonStats()
@@ -10,8 +35,6 @@ export const getAverage = (player: Player): string => {
     hits: gameBatting.hits + seasonBatting.hits
   })
 }
-
-const sliced = (x: number): string => x.toFixed(3).slice(x < 1 ? 1 : 0)
 
 export const calculateAvg = ({
   atBats,
@@ -107,11 +130,13 @@ export const aggregateTeamStats = (players: PlayerStats[]) => {
     }
   )
 
+  const avg = calculateAvg(combined)
   const obp = calculateObp(combined)
   const slg = calculateSlg(combined)
 
   return {
     ...combined,
+    avg,
     obp,
     slg,
     ops: calculateOps({ obp, slg })

@@ -3,13 +3,42 @@ import { PlayerStats } from '../../src/store/types/stats'
 import {
   aggregateTeamStats,
   calculateAvg,
+  calculateGamesBehind,
   calculateObp,
   calculateOps,
   calculateSlg,
+  calculateWinPct,
   getAverage
 } from '../../src/util'
 
 describe('stat util', () => {
+  describe('calculateWinPct', () => {
+    it.each([
+      [1, 1, '.500'],
+      [0, 1, '.000'],
+      [0, 0, '.000']
+    ])(
+      'calculates win percentage for wins: %s, losses: %s',
+      (wins, losses, expected) => {
+        expect(calculateWinPct({ wins, losses })).toEqual(expected)
+      }
+    )
+  })
+
+  describe('calculateGamesBehind', () => {
+    it.each([
+      [{ wins: 2, losses: 0 }, { wins: 1, losses: 1 }, '1'],
+      [{ wins: 1, losses: 0 }, { wins: 0, losses: 0 }, '½'],
+      [{ wins: 2, losses: 0 }, { wins: 0, losses: 1 }, '1½'],
+      [{ wins: 20, losses: 0 }, { wins: 0, losses: 1 }, '10½']
+    ])(
+      'calculates games behind for lead(%s) calced(%s)',
+      (lead, calced, expected) => {
+        expect(calculateGamesBehind(lead, calced)).toEqual(expected)
+      }
+    )
+  })
+
   describe('getAverage', () => {
     it('calculates batting average for a player', () => {
       const player = {
@@ -113,6 +142,7 @@ describe('stat util', () => {
         walks: p1.batting.walks + p2.batting.walks,
         hbps: 0,
         strikeouts: p1.batting.strikeouts + p2.batting.strikeouts,
+        avg: '.238',
         obp: '.360',
         slg: '.667',
         ops: '1.027'

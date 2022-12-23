@@ -17,6 +17,7 @@ export const Stats: FC = () => {
     StatType.TEAM
   ].map((type) => (
     <a
+      key={type}
       className={classNames({ selected: statType === type })}
       onClick={() => setStatType(type)}
     >
