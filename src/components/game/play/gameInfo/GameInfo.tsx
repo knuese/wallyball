@@ -50,12 +50,7 @@ export const GameInfo: FC = () => {
           background={fielding.primaryColor}
           stats={{
             today: currentPitcher?.getPitchingStatLine(),
-            season: {
-              IP: '--',
-              BB: '--',
-              K: '--',
-              ERA: '--'
-            }
+            season: currentPitcher?.getPitcherSeasonStats()
           }}
         />
       </div>

@@ -17,7 +17,12 @@ export const CurrentPlayer: FC<CurrentPlayerProps> = ({
   color,
   background,
   isBatting,
-  stats: { today = '', season = { H: '--', HR: '--', RBI: '--', AVG: '--' } }
+  stats: {
+    today = '',
+    season = isBatting
+      ? { H: '--', HR: '--', RBI: '--', AVG: '--' }
+      : { IP: '--', BB: '--', K: '--', ERA: '--' }
+  }
 }) => (
   <div className="flex-column border-all">
     <div className="center game-info-title" style={{ color, background }}>

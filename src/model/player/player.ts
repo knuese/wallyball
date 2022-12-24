@@ -166,6 +166,11 @@ export class Player {
     )
   }
 
+  // TODO
+  getPitcherSeasonStats() {
+    return undefined
+  }
+
   isPitcher(): boolean {
     return !!this.pitchingConfig
   }
