@@ -1,7 +1,8 @@
 import { Player } from '../model'
 import { PlayerStats } from '../store/types/stats'
 
-const sliced = (x: number): string => x.toFixed(3).slice(x < 1 ? 1 : 0)
+const sliced = (x: number, precision: number): string =>
+  x.toFixed(precision).slice(x < 1 ? 1 : 0)
 
 export const calculateWinPct = ({
   wins,
@@ -13,7 +14,7 @@ export const calculateWinPct = ({
   if (wins === 0) {
     return '.000'
   } else {
-    return sliced(wins / (wins + losses))
+    return sliced(wins / (wins + losses), 3)
   }
 }
 
@@ -26,16 +27,6 @@ export const calculateGamesBehind = (
   return `${diff / 2}`.replace(/(?:^0)?.5$/, '½')
 }
 
-export const getAverage = (player: Player): string => {
-  const { batting: gameBatting } = player.getGameStats()
-  const { batting: seasonBatting } = player.getSeasonStats()
-
-  return calculateAvg({
-    atBats: gameBatting.atBats + seasonBatting.atBats,
-    hits: gameBatting.hits + seasonBatting.hits
-  })
-}
-
 export const calculateAvg = ({
   atBats,
   hits
@@ -45,7 +36,7 @@ export const calculateAvg = ({
 }): string => {
   if (atBats > 0) {
     const avg = hits / atBats
-    return sliced(avg)
+    return sliced(avg, 3)
   } else {
     return '.000'
   }
@@ -64,7 +55,7 @@ export const calculateObp = ({
 }): string => {
   if (plateAppearances > 0) {
     const obp = (hits + walks + hbps) / plateAppearances
-    return sliced(obp)
+    return sliced(obp, 3)
   } else {
     return '.000'
   }
@@ -86,7 +77,7 @@ export const calculateSlg = ({
   if (atBats > 0) {
     const singles = hits - doubles - triples - homeRuns
     const slg = (singles + 2 * doubles + 3 * triples + 4 * homeRuns) / atBats
-    return sliced(slg)
+    return sliced(slg, 3)
   } else {
     return '.000'
   }
@@ -98,7 +89,69 @@ export const calculateOps = ({
 }: {
   obp: string
   slg: string
-}): string => sliced(Number(obp) + Number(slg))
+}): string => sliced(Number(obp) + Number(slg), 3)
+
+export const inningsPitchedToNumber = (ip: string): number => {
+  const [innings, outs] = ip.split('.')
+  return Number(innings) + Number(outs) * (1 / 3)
+}
+
+export const addInningsPitched = (one: string, two: string): string => {
+  const [oneInnings, oneOuts] = one.split('.')
+  const [twoInnings, twoOuts] = two.split('.')
+
+  let total = Number(oneInnings) + Number(twoInnings)
+  let remainingOuts = Number(oneOuts) + Number(twoOuts)
+
+  if (remainingOuts >= 3) {
+    total++
+    remainingOuts -= 3
+  }
+
+  return `${total}.${remainingOuts}`
+}
+
+export const calculateERA = ({
+  earnedRuns,
+  inningsPitched
+}: {
+  earnedRuns: number
+  inningsPitched: number
+}): string => {
+  if (earnedRuns === 0) {
+    return '0.00'
+  } else if (inningsPitched === 0) {
+    return 'INF'
+  }
+
+  const era = (earnedRuns * 9) / inningsPitched
+  return sliced(era, 2)
+}
+
+export const getAverage = (player: Player): string => {
+  const { batting: gameBatting } = player.getGameStats()
+  const { batting: seasonBatting } = player.getSeasonStats()
+
+  return calculateAvg({
+    atBats: gameBatting.atBats + seasonBatting.atBats,
+    hits: gameBatting.hits + seasonBatting.hits
+  })
+}
+
+export const getERA = (player: Player): string => {
+  const { pitching: gamePitching } = player.getGameStats()
+  const { pitching: seasonPitching } = player.getSeasonStats()
+
+  return calculateERA({
+    earnedRuns: gamePitching.earnedRuns + seasonPitching.earnedRuns,
+    inningsPitched: inningsPitchedToNumber(
+      addInningsPitched(
+        gamePitching.inningsPitched,
+        seasonPitching.inningsPitched
+      )
+    )
+  })
+}
 
 export const aggregateTeamStats = (
   players: PlayerStats[]

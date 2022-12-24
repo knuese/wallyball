@@ -1,6 +1,6 @@
 import { PlayerStats } from '../../store/types/stats'
 import { BattingStatsSeason } from '../../types'
-import { getAverage, statToStr } from '../../util'
+import { addInningsPitched, getAverage, getERA, statToStr } from '../../util'
 import { Outcome, Position } from '../enum'
 import {
   BattingConfig,
@@ -144,13 +144,13 @@ export class Player {
   }
 
   getBatterSeasonStats(): BattingStatsSeason {
-    const today = this.getGameStats()
-    const season = this.getSeasonStats()
+    const { batting: today } = this.getGameStats()
+    const { batting: season } = this.getSeasonStats()
 
     return {
-      H: today.batting.hits + season.batting.hits,
-      HR: today.batting.homeRuns + season.batting.homeRuns,
-      RBI: today.batting.rbis + season.batting.rbis,
+      H: today.hits + season.hits,
+      HR: today.homeRuns + season.homeRuns,
+      RBI: today.rbis + season.rbis,
       AVG: getAverage(this)
     }
   }
@@ -166,9 +166,16 @@ export class Player {
     )
   }
 
-  // TODO
   getPitcherSeasonStats() {
-    return undefined
+    const { pitching: today } = this.getGameStats()
+    const { pitching: season } = this.getSeasonStats()
+
+    return {
+      IP: addInningsPitched(today.inningsPitched, season.inningsPitched),
+      BB: today.walks + season.walks,
+      K: today.strikeouts + season.strikeouts,
+      ERA: getERA(this)
+    }
   }
 
   isPitcher(): boolean {

@@ -53,6 +53,8 @@ export class GameStats {
     outsRecorded: number,
     runsScored: number
   ): void {
+    this.pitching.battersFaced++
+
     if (outsRecorded > 0) {
       this.pitching.inningsPitched = incrementInningsPitched(
         this.pitching.inningsPitched,

@@ -1,14 +1,18 @@
 import { Player } from '../../src/model'
 import { PlayerStats } from '../../src/store/types/stats'
 import {
+  addInningsPitched,
   aggregateTeamStats,
   calculateAvg,
+  calculateERA,
   calculateGamesBehind,
   calculateObp,
   calculateOps,
   calculateSlg,
   calculateWinPct,
-  getAverage
+  getAverage,
+  getERA,
+  inningsPitchedToNumber
 } from '../../src/util'
 
 describe('stat util', () => {
@@ -37,21 +41,6 @@ describe('stat util', () => {
         expect(calculateGamesBehind(lead, calced)).toEqual(expected)
       }
     )
-  })
-
-  describe('getAverage', () => {
-    it('calculates batting average for a player', () => {
-      const player = {
-        getGameStats: () => ({
-          batting: { atBats: 2, hits: 1 }
-        }),
-        getSeasonStats: () => ({
-          batting: { atBats: 84, hits: 29 }
-        })
-      } as Player
-
-      expect(getAverage(player)).toEqual('.349')
-    })
   })
 
   describe('calculateAvg', () => {
@@ -95,6 +84,72 @@ describe('stat util', () => {
   describe('calculateOps', () => {
     it('calculates OPS', () => {
       expect(calculateOps({ obp: '.234', slg: '.567' })).toEqual('.801')
+    })
+  })
+
+  describe('inningsPitchedToNumber', () => {
+    it.each([
+      ['1.0', 1],
+      ['1.1', 1 + 1 / 3],
+      ['1.2', 1 + 2 / 3]
+    ])('converts %s', (ip, expected) => {
+      expect(inningsPitchedToNumber(ip)).toEqual(expected)
+    })
+  })
+
+  describe('addInningsPitched', () => {
+    it.each([
+      ['0.0', '1.0', '1.0'],
+      ['1.1', '1.1', '2.2'],
+      ['3.1', '0.2', '4.0'],
+      ['5.2', '2.2', '8.1']
+    ])('adds %s + %s', (one, two, expected) => {
+      expect(addInningsPitched(one, two)).toEqual(expected)
+    })
+  })
+
+  describe('calculateERA', () => {
+    it.each([
+      [0, 0, '0.00'],
+      [0, 3, '0.00'],
+      [1, 0, 'INF'],
+      [1, 3 + 2 / 3, '2.45'],
+      [13, 32, '3.66']
+    ])(
+      'calculates ERA for ER: %s, IP: %s',
+      (earnedRuns, inningsPitched, expected) => {
+        expect(calculateERA({ earnedRuns, inningsPitched })).toEqual(expected)
+      }
+    )
+  })
+
+  describe('getAverage', () => {
+    it('calculates batting average for a player', () => {
+      const player = {
+        getGameStats: () => ({
+          batting: { atBats: 2, hits: 1 }
+        }),
+        getSeasonStats: () => ({
+          batting: { atBats: 84, hits: 29 }
+        })
+      } as Player
+
+      expect(getAverage(player)).toEqual('.349')
+    })
+  })
+
+  describe('getERA', () => {
+    it('calculates the ERA for a player', () => {
+      const player = {
+        getGameStats: () => ({
+          pitching: { inningsPitched: '2.2', earnedRuns: 1 }
+        }),
+        getSeasonStats: () => ({
+          pitching: { inningsPitched: '29.0', earnedRuns: 8 }
+        })
+      } as Player
+
+      expect(getERA(player)).toEqual('2.56')
     })
   })
 

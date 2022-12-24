@@ -31,7 +31,10 @@ export const saveStats =
             player.getGameStats().batting,
             player.getSeasonStats().batting
           ),
-          pitching: new PitchingStats()
+          pitching: PitchingStats.add(
+            player.getGameStats().pitching,
+            player.getSeasonStats().pitching
+          )
         }))
       )
       .reduce((acc, { id, ...stats }) => {

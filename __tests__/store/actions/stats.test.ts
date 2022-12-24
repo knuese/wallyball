@@ -8,7 +8,7 @@ import {
   updateStandings
 } from '../../../src/store/actions/stats'
 import { StatActionTypes } from '../../../src/store/types/stats'
-import { PitchingStats, Team } from '../../../src/model'
+import { Team } from '../../../src/model'
 
 jest.mock('../../../src/util/fs')
 
@@ -48,7 +48,7 @@ describe('stat actions', () => {
           team: 'Bars',
           games: 1,
           batting: { hits: 1 },
-          pitching: { inningsPitched: '0.0' }
+          pitching: { battersFaced: 1, inningsPitched: '0.1' }
         }
       }
       const store = mockStore<StatActionTypes>({
@@ -63,10 +63,12 @@ describe('stat actions', () => {
             name: 'Foo',
             getSeasonStats: () => ({
               games: 1,
-              batting: { hits: 1 }
+              batting: { hits: 1 },
+              pitching: { battersFaced: 1, inningsPitched: '0.1' }
             }),
             getGameStats: () => ({
-              batting: { hits: 2 }
+              batting: { hits: 2 },
+              pitching: { battersFaced: 10, inningsPitched: '2.2' }
             })
           }
         ]
@@ -80,10 +82,12 @@ describe('stat actions', () => {
             name: 'Baz',
             getSeasonStats: () => ({
               games: 0,
-              batting: { hits: 0, runs: 0 }
+              batting: { hits: 0, runs: 0 },
+              pitching: { inningsPitched: '4.0', runs: 2, earnedRuns: 2 }
             }),
             getGameStats: () => ({
-              batting: { hits: 4, runs: 1 }
+              batting: { hits: 4, runs: 1 },
+              pitching: { inningsPitched: '0.0', runs: 1, earnedRuns: 0 }
             })
           }
         ]
@@ -99,14 +103,21 @@ describe('stat actions', () => {
           team: 'Bars',
           games: 2,
           batting: expect.objectContaining({ hits: 3 }),
-          pitching: { ...new PitchingStats() }
+          pitching: expect.objectContaining({
+            battersFaced: 11,
+            inningsPitched: '3.0'
+          })
         },
         baz: {
           name: 'Baz',
           team: 'Buzz',
           games: 1,
           batting: expect.objectContaining({ hits: 4, runs: 1 }),
-          pitching: { ...new PitchingStats() }
+          pitching: expect.objectContaining({
+            inningsPitched: '4.0',
+            runs: 3,
+            earnedRuns: 2
+          })
         }
       })
     })
