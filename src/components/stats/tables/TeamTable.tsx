@@ -6,6 +6,7 @@ import { BaseTable } from '.'
 import { RootState } from '../../../store/reducers'
 import { getTeamColumns } from './columns'
 import { aggregateTeamStats } from '../../../util'
+import { PlayerStats } from '../../../store/types/stats'
 
 export const TeamTable = () => {
   const { individual: stats } = useSelector((state: RootState) => state.stats)
@@ -16,8 +17,8 @@ export const TeamTable = () => {
       chain(stats)
         .values()
         .groupBy('team')
-        .reduce<Array<any>>(
-          (acc, players) => [
+        .reduce<Array<Record<string, string | number>>>(
+          (acc, players: PlayerStats[]) => [
             ...acc,
             {
               name: players[0].team,

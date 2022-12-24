@@ -100,7 +100,9 @@ export const calculateOps = ({
   slg: string
 }): string => sliced(Number(obp) + Number(slg))
 
-export const aggregateTeamStats = (players: PlayerStats[]) => {
+export const aggregateTeamStats = (
+  players: PlayerStats[]
+): Record<string, string | number> => {
   const combined = players.reduce(
     (acc, { batting: cur }) => ({
       plateAppearances: acc.plateAppearances + cur.plateAppearances,

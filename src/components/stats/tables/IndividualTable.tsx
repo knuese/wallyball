@@ -13,26 +13,24 @@ import {
 export const IndividualTable: FC = () => {
   const { individual: stats } = useSelector((state: RootState) => state.stats)
 
-  const columns = useMemo(() => getIndividualColumns(), []) as any
+  const columns = useMemo(() => getIndividualColumns(), [])
   const tableData = useMemo(
     () =>
-      stats
-        ? Object.entries(stats).map(([id, { name, team, games, batting }]) => {
-            const obp = calculateObp(batting)
-            const slg = calculateSlg(batting)
-            return {
-              id,
-              name,
-              team,
-              games,
-              ...batting,
-              avg: calculateAvg(batting),
-              obp,
-              slg,
-              ops: calculateOps({ obp, slg })
-            }
-          })
-        : [],
+      Object.entries(stats).map(([id, { name, team, games, batting }]) => {
+        const obp = calculateObp(batting)
+        const slg = calculateSlg(batting)
+        return {
+          id,
+          name,
+          team,
+          games,
+          ...batting,
+          avg: calculateAvg(batting),
+          obp,
+          slg,
+          ops: calculateOps({ obp, slg })
+        }
+      }),
     [stats]
   )
 

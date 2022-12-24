@@ -18,7 +18,7 @@ export const BaseTable: FC<BaseTableProps> = ({ columns, data, className }) => {
         {headerGroups.map((hg) => (
           <tr {...hg.getHeaderGroupProps()}>
             {hg.headers.map((col: any) => (
-              <th {...col.getHeaderProps((col as any).getSortByToggleProps())}>
+              <th {...col.getHeaderProps(col.getSortByToggleProps())}>
                 {col.render('header')}
                 {col.isSorted && (col.isSortedDesc ? '▼' : '▲')}
               </th>

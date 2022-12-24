@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 
 import { render, RenderResult } from '@testing-library/react'
 import { Provider } from 'react-redux'
+import { DeepPartial } from 'redux'
 import { MemoryRouter } from 'react-router-dom'
 import { MockStoreEnhanced } from 'redux-mock-store'
 import { RootState } from '../../src/store/reducers'
@@ -10,7 +11,7 @@ import { sampleState } from '../__test_data__'
 
 type RenderProps = {
   route?: string
-  state?: Partial<RootState>
+  state?: DeepPartial<RootState>
   store?: MockStoreEnhanced
 }
 

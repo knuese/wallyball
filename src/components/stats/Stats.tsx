@@ -20,6 +20,7 @@ export const Stats: FC = () => {
       key={type}
       className={classNames({ selected: statType === type })}
       onClick={() => setStatType(type)}
+      data-testid={`${type}-link`}
     >
       {type}
     </a>

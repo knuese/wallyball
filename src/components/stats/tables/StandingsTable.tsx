@@ -9,12 +9,8 @@ import { calculateGamesBehind, calculateWinPct } from '../../../util'
 export const StandingsTable: FC = () => {
   const { standings } = useSelector((state: RootState) => state.stats)
 
-  const columns = useMemo(() => getStandingsColumns(), []) as any
+  const columns = useMemo(() => getStandingsColumns(), [])
   const tableData = useMemo(() => {
-    if (!standings) {
-      return []
-    }
-
     // figure out the team with the best win-to-loss differentials
     const leadTeam = chain(standings)
       .values()
